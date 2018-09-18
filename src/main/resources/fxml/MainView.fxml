@@ -45,7 +45,8 @@
                   </TabPane>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="MainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
+          <AnchorPane fx:id="MainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
+          </AnchorPane>
          </children>
       </HBox>
    </children>
