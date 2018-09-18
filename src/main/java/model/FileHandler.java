@@ -4,13 +4,20 @@ import java.io.*;
 import java.util.Scanner;
 
 public class FileHandler {
-    private String baseDirectory = "src\\main\\resources\\conversations\\";
+    private String baseDirectory;
+
+    public FileHandler() {
+        baseDirectory = System.getProperty("user.dir")+"\\conversations\\";
+        System.out.println(baseDirectory);
+    }
+
     public File read(String fileName) {
         return new File(baseDirectory+fileName);
 
     }
     public void write(String fileName, String text) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(baseDirectory+fileName, true));
+        String path = baseDirectory + fileName;
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
         writer.write(text);
         writer.close();
     }
