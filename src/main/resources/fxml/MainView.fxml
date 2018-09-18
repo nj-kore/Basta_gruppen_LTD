@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +21,7 @@
                                  <children>
                                     <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <FlowPane prefHeight="200.0" prefWidth="200.0" />
+                                          <FlowPane fx:id="ContactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -35,7 +34,7 @@
                                  <children>
                                     <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <FlowPane prefHeight="200.0" prefWidth="200.0" />
+                                          <FlowPane fx:id="ConversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -46,7 +45,7 @@
                   </TabPane>
                </children>
             </AnchorPane>
-          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
+          <AnchorPane fx:id="MainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
