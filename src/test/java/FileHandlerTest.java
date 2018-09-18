@@ -3,9 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -13,7 +11,7 @@ public class FileHandlerTest {
 
     @Test
     public void read() {
-        /*MainModel model = new MainModel();
+        MainModel model = new MainModel();
         Conversation c = model.loadConversation(5555);
         ArrayList<Message> messages = c.getMessages();
 
@@ -23,7 +21,7 @@ public class FileHandlerTest {
 
         assertEquals("ABC", messages.get(0).getText());
         assertEquals("DFG", messages.get(1).getText());
-        assertEquals("HIJ", messages.get(2).getText());*/
+        assertEquals("HIJ", messages.get(2).getText());
 
 
     }
@@ -31,7 +29,8 @@ public class FileHandlerTest {
     @Test
     public void write() throws IOException {
         int conversationId = 2222;
-        Files.deleteIfExists(Paths.get("src\\main\\resources\\conversations\\" + conversationId));
+        String path = getClass().getResource("../main/resources/conversations/"+conversationId).getPath();
+        Files.deleteIfExists(Paths.get(path));
         MainModel model = new MainModel();
 
         User user1 = new User(1);
