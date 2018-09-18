@@ -31,7 +31,7 @@ public class FileHandlerTest {
     @Test
     public void write() throws IOException {
         int conversationId = 2222;
-        Files.deleteIfExists(Paths.get("messages\\" + conversationId));
+        Files.deleteIfExists(Paths.get("src\\main\\resources\\conversations\\" + conversationId));
         MainModel model = new MainModel();
 
         User user1 = new User(1);

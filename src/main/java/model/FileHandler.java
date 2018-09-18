@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class FileHandler {
-    private String baseDirectory = "messages\\";
+    private String baseDirectory = "src\\main\\resources\\conversations\\";
     public File read(String fileName) {
         return new File(baseDirectory+fileName);
 
