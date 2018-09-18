@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class MainModel {
     private FileHandler fh = new FileHandler();
+    private User activeUser = new User(0);
 
     public void sendMessage(int conversationId, Message message) throws IOException {
         String text = message.getSender().getId()+";"+message.getText()+"\n";
@@ -14,4 +15,7 @@ public class MainModel {
         return fh.loadConversation(conversationId);
     }
 
+    public User getActiveUser() {
+        return activeUser;
+    }
 }
