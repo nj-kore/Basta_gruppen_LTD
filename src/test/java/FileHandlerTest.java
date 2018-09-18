@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class FileHandlerTest {
 
     @Test
+    public void fileTest() {
+
+    }
+
+    @Test
     public void pathTest() {
         System.out.println(System.getProperty("user.dir"));
     }

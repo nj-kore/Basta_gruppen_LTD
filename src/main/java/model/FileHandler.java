@@ -4,20 +4,16 @@ import java.io.*;
 import java.util.Scanner;
 
 public class FileHandler {
-    private String baseDirectory;
-
-    public FileHandler() {
-        baseDirectory = System.getProperty("user.dir")+"\\conversations\\";
-        System.out.println(baseDirectory);
-    }
-
+    //private String baseDirectory = "../../../resources/conversations/";
     public File read(String fileName) {
-        return new File(baseDirectory+fileName);
+        //System.out.println(getClass().getResource(baseDirectory+fileName).getPath());
+        //return new File(getClass().getResource(baseDirectory+fileName).getPath());
+        return new File(fileName);
 
     }
     public void write(String fileName, String text) throws IOException {
-        String path = baseDirectory + fileName;
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
+        //String path = getClass().getResource(baseDirectory+fileName).getPath();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
         writer.write(text);
         writer.close();
     }
