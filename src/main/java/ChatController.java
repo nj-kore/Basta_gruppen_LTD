@@ -31,4 +31,10 @@ public class ChatController extends AnchorPane {
             throw new RuntimeException(exception);
         }
     }
+
+    @FXML
+    void sendMessage(){
+
+    }
+
 }

@@ -18,7 +18,7 @@ public class Main extends Application {
         stage.setTitle("Shat app");
         stage.setScene(scene);
         stage.setMaximized(true);
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.show();
 
     }

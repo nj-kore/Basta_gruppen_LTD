@@ -29,7 +29,7 @@
                         </TextArea>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="SendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" text="Send" />
+                  <Button fx:id="SendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
                </children>
             </HBox>
          </children>
