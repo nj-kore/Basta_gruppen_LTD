@@ -78,6 +78,7 @@ public class ChatController extends AnchorPane {
     }
 
     public void loadMessages(){
+        getChatFlowPane().getChildren().clear();
         for(Message m : getConversation().getMessages() ){
             getChatFlowPane().getChildren().add(new MessageItem(m));
         }
