@@ -11,11 +11,16 @@ public class FileHandler {
         return new File(fileName);
 
     }
-    public void write(String fileName, String text) throws IOException {
+    public void write(String fileName, String text) {
         //String path = getClass().getResource(baseDirectory+fileName).getPath();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-        writer.write(text);
-        writer.close();
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            writer.write(text);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

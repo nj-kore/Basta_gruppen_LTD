@@ -7,7 +7,7 @@ public class MainModel {
     private FileHandler fh = new FileHandler();
     private User activeUser = new User(0);
 
-    public void sendMessage(int conversationId, Message message) throws IOException {
+    public void sendMessage(int conversationId, Message message) {
         String text = message.getSender().getId()+";"+message.getText()+"\n";
         fh.write(Integer.toString(conversationId), text);
     }

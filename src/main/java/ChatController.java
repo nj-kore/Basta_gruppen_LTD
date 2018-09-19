@@ -4,12 +4,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
+import model.*;
 
 
 import java.awt.*;
 import java.io.IOException;
 
 public class ChatController extends AnchorPane {
+
+    private Conversation conversation;
+    private final MainModel mainModel = new MainModel();
+
+    final private User currentUser;
+    final private MainController parent;
 
     @FXML
     FlowPane ChatFlowPane;
@@ -20,10 +27,14 @@ public class ChatController extends AnchorPane {
     @FXML
     TextArea ChatTextArea;
 
-    public ChatController(){
+    public ChatController(MainController parent){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
+        this.parent = parent;
+        currentUser = parent.currentUser;
+        conversation = new Conversation(1);
 
         try {
             fxmlLoader.load();
@@ -31,4 +42,39 @@ public class ChatController extends AnchorPane {
             throw new RuntimeException(exception);
         }
     }
+
+    @FXML
+    public void sendMessage(){
+        System.out.println("asd");
+        mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
+        ChatTextArea.clear();
+    }
+
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public MainModel getMainModel() {
+        return mainModel;
+    }
+
+    public FlowPane getChatFlowPane() {
+        return ChatFlowPane;
+    }
+
+    public void loadMessages(){
+        getMainModel().loadConversation(getConversation().getId());
+        for(Message m : conversation.getMessages()){
+            getChatFlowPane().getChildren().add(new MessageItem(m));
+        }
+    }
+
 }
