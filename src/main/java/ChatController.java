@@ -22,6 +22,9 @@ public class ChatController extends AnchorPane {
     FlowPane ChatFlowPane;
 
     @FXML
+    ScrollPane ChatScrollPane;
+
+    @FXML
     Button SendButton;
 
     @FXML
@@ -36,18 +39,22 @@ public class ChatController extends AnchorPane {
         currentUser = parent.currentUser;
         conversation = new Conversation(1);
 
+
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
     }
 
     @FXML
     public void sendMessage(){
         System.out.println("asd");
-        mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
+        conversation.addMessage(new Message(currentUser, ChatTextArea.getText()));
+        //mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
         ChatTextArea.clear();
+        loadMessages();
     }
 
     public Conversation getConversation() {
@@ -71,10 +78,14 @@ public class ChatController extends AnchorPane {
     }
 
     public void loadMessages(){
-        getMainModel().loadConversation(getConversation().getId());
-        for(Message m : conversation.getMessages()){
+        for(Message m : getConversation().getMessages() ){
             getChatFlowPane().getChildren().add(new MessageItem(m));
         }
     }
 
 }
+
+//getMainModel().loadConversation(getConversation().getId()).getMessages()
+//for(Message m : getConversation().getMessages()){
+//            getChatFlowPane().getChildren().add(new AnchorPane());
+//        }

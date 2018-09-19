@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="68.0" prefWidth="500.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="68.0" prefWidth="500.0" style="-fx-background-color: #888888;" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="54.0" fitWidth="54.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="messageImageView" fitHeight="54.0" fitWidth="54.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pics/lukasmaly.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="76.0" layoutY="14.0" text="din b o y Lukas">
+      <Label fx:id="messageUser" layoutX="76.0" layoutY="14.0" text="din b o y Lukas">
          <font>
             <Font name="Comic Sans MS" size="12.0" />
          </font>
       </Label>
-      <TextArea layoutX="78.0" layoutY="39.0" prefHeight="35.0" prefWidth="408.0" />
+      <TextArea fx:id="messageTextArea" layoutX="78.0" layoutY="39.0" prefHeight="35.0" prefWidth="408.0" />
    </children>
 </fx:root>
