@@ -2,6 +2,9 @@ import model.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,16 +12,8 @@ import java.util.ArrayList;
 
 public class FileHandlerTest {
 
-    @Test
-    public void fileTest() {
 
-    }
-
-    @Test
-    public void pathTest() {
-        System.out.println(System.getProperty("user.dir"));
-    }
-    @Test
+    /*@Test
     public void read() {
         MainModel model = new MainModel();
         Conversation c = model.loadConversation(5555);
@@ -31,12 +26,10 @@ public class FileHandlerTest {
         assertEquals("ABC", messages.get(0).getText());
         assertEquals("DFG", messages.get(1).getText());
         assertEquals("HIJ", messages.get(2).getText());
-
-
-    }
+    }*/
 
     @Test
-    public void write() throws IOException {
+    public void writeAndRead() throws IOException {
         int conversationId = 2222;
         MainModel model = new MainModel();
 
