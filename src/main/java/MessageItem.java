@@ -4,6 +4,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import model.Message;
 
 
@@ -21,7 +23,7 @@ public class MessageItem extends AnchorPane{
     ImageView messageImageView;
 
     @FXML
-    TextArea messageTextArea;
+    TextFlow messageTextFlow;
 
     public MessageItem(Message message){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/Message.fxml"));
@@ -35,7 +37,7 @@ public class MessageItem extends AnchorPane{
         }
 
         this.message = message;
-        messageTextArea.setText(message.getText());
+        messageTextFlow.getChildren().add(new Text(message.getText()));
 
 
     }

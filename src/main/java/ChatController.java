@@ -1,5 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.TextArea;
@@ -39,7 +41,6 @@ public class ChatController extends AnchorPane {
         currentUser = parent.currentUser;
         conversation = new Conversation(1);
 
-
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -47,6 +48,8 @@ public class ChatController extends AnchorPane {
         }
 
     }
+
+
 
     @FXML
     public void sendMessage(){
