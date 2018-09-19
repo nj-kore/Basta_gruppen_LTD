@@ -53,11 +53,12 @@ public class ChatController extends AnchorPane {
 
     @FXML
     public void sendMessage(){
-        System.out.println("asd");
-        conversation.addMessage(new Message(currentUser, ChatTextArea.getText()));
-        //mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
-        ChatTextArea.clear();
-        loadMessages();
+        if(!ChatTextArea.getText().isEmpty()) {             //User should not be able to send an empty message.
+            conversation.addMessage(new Message(currentUser, ChatTextArea.getText().trim()));       //trim removes excess newlines in message
+            //mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
+            ChatTextArea.clear();
+            loadMessages();
+        }
     }
 
     public Conversation getConversation() {
@@ -89,7 +90,3 @@ public class ChatController extends AnchorPane {
 
 }
 
-//getMainModel().loadConversation(getConversation().getId()).getMessages()
-//for(Message m : getConversation().getMessages()){
-//            getChatFlowPane().getChildren().add(new AnchorPane());
-//        }
