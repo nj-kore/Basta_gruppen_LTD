@@ -1,6 +1,5 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.TextArea;
@@ -9,6 +8,7 @@ import model.*;
 
 
 import java.awt.*;
+
 import java.io.IOException;
 
 public class ChatController extends AnchorPane {
