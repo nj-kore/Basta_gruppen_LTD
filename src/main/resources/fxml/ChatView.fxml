@@ -13,7 +13,7 @@
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" minHeight="800.0" onMouseClicked="#loadMessages" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="800.0" onMouseClicked="#loadMessages" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                <content>
                   <FlowPane fx:id="ChatFlowPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWrapLength="1000.0">
                   </FlowPane>

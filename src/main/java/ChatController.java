@@ -40,12 +40,14 @@ public class ChatController extends AnchorPane {
         currentUser = parent.currentUser;
         conversation = new Conversation(1);
 
+
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
 
+        loadMessages();
     }
 
 
@@ -53,8 +55,8 @@ public class ChatController extends AnchorPane {
     @FXML
     public void sendMessage(){
         if(!ChatTextArea.getText().isEmpty()) {             //User should not be able to send an empty message.
-            conversation.addMessage(new Message(currentUser, ChatTextArea.getText().trim()));       //trim removes excess newlines in message
-            //mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText()));
+            //conversation.addMessage(new Message(currentUser, ChatTextArea.getText().trim()));       //trim removes excess newlines in message
+            mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText().trim()));
             ChatTextArea.clear();
             loadMessages();
         }
@@ -82,8 +84,11 @@ public class ChatController extends AnchorPane {
 
     public void loadMessages(){
         getChatFlowPane().getChildren().clear();
-        for(Message m : getConversation().getMessages() ){
-            getChatFlowPane().getChildren().add(new MessageItem(m));
+        //for(Message m : getConversation().getMessages() ){
+          //  getChatFlowPane().getChildren().add(new MessageItem(m));
+        //}
+        for(Message m : getMainModel().loadConversation(conversation.getId()).getMessages()){
+            ChatFlowPane.getChildren().add(new MessageItem(m));
         }
     }
 

@@ -9,10 +9,14 @@ public class FileHandler {
         return new File(baseDirectory+fileName);
 
     }
-    public void write(String fileName, String text) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(baseDirectory+fileName, true));
-        writer.write(text);
-        writer.close();
+    public void write(String fileName, String text) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(baseDirectory+fileName, true));
+            writer.write(text);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -25,6 +29,7 @@ public class FileHandler {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return c;
         }
 
         while(scanner.hasNext()) {
