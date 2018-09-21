@@ -1,5 +1,7 @@
 package view;
 
+import controller.ChatController;
+import controller.IChatController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -16,11 +18,9 @@ import java.io.IOException;
 
 public class ChatView extends AnchorPane {
 
-    private Conversation conversation;
-    private final MainModel mainModel = new MainModel();
+    private final IChatController chatController = new ChatController();
+    private IMainModel mainModel = MainModel.getInstance();
 
-    final private User currentUser;
-    final private MainView parent;
 
     @FXML
     FlowPane ChatFlowPane;
@@ -34,14 +34,10 @@ public class ChatView extends AnchorPane {
     @FXML
     TextArea ChatTextArea;
 
-    public ChatView(MainView parent){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/ChatView.fxml"));
+    public ChatView(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
-        this.parent = parent;
-        currentUser = parent.currentUser;
-        conversation = new Conversation(1);
 
 
         try {
@@ -50,7 +46,7 @@ public class ChatView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        loadMessages();
+        //loadMessages();
     }
 
 
@@ -58,27 +54,9 @@ public class ChatView extends AnchorPane {
     @FXML
     public void sendMessage(){
         if(!ChatTextArea.getText().isEmpty()) {             //User should not be able to send an empty message.
-            //conversation.addMessage(new Message(currentUser, ChatTextArea.getText().trim()));       //trim removes excess newlines in message
-            mainModel.sendMessage(conversation.getId(), new Message(currentUser, ChatTextArea.getText().trim()));
+            chatController.sendMessage(ChatTextArea.getText().trim());
             ChatTextArea.clear();
-            loadMessages();
         }
-    }
-
-    public Conversation getConversation() {
-        return conversation;
-    }
-
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public MainModel getMainModel() {
-        return mainModel;
     }
 
     public FlowPane getChatFlowPane() {
@@ -90,9 +68,9 @@ public class ChatView extends AnchorPane {
         //for(Message m : getConversation().getMessages() ){
           //  getChatFlowPane().getChildren().add(new view.MessageItem(m));
         //}
-        for(Message m : getMainModel().loadConversation(conversation.getId()).getMessages()){
+        /*for(Message m : getMainModel().loadConversation(conversation.getId()).getMessages()){
             ChatFlowPane.getChildren().add(new MessageItem(m));
-        }
+        }*/
     }
 
 }
