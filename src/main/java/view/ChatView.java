@@ -1,3 +1,5 @@
+package view;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -5,19 +7,20 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import model.*;
+import view.MainView;
 
 
 import java.awt.*;
 
 import java.io.IOException;
 
-public class ChatController extends AnchorPane {
+public class ChatView extends AnchorPane {
 
     private Conversation conversation;
     private final MainModel mainModel = new MainModel();
 
     final private User currentUser;
-    final private MainController parent;
+    final private MainView parent;
 
     @FXML
     FlowPane ChatFlowPane;
@@ -31,7 +34,7 @@ public class ChatController extends AnchorPane {
     @FXML
     TextArea ChatTextArea;
 
-    public ChatController(MainController parent){
+    public ChatView(MainView parent){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -85,7 +88,7 @@ public class ChatController extends AnchorPane {
     public void loadMessages(){
         getChatFlowPane().getChildren().clear();
         //for(Message m : getConversation().getMessages() ){
-          //  getChatFlowPane().getChildren().add(new MessageItem(m));
+          //  getChatFlowPane().getChildren().add(new view.MessageItem(m));
         //}
         for(Message m : getMainModel().loadConversation(conversation.getId()).getMessages()){
             ChatFlowPane.getChildren().add(new MessageItem(m));

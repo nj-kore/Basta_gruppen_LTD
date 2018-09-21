@@ -1,3 +1,5 @@
+package view;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -7,9 +9,9 @@ import model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController extends AnchorPane implements Initializable{
+public class MainView extends AnchorPane implements Initializable{
 
-    ChatController chatController;
+    ChatView chatController;
 
     User currentUser = new User(1);
 
@@ -24,7 +26,7 @@ public class MainController extends AnchorPane implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        chatController = new ChatController(this);
+        chatController = new ChatView(this);
         MainViewAnchorPane.getChildren().add(chatController);
     }
 

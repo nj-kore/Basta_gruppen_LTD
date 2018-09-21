@@ -89,7 +89,7 @@ public class databaseHandler {
 
             // loop through the result set
             while (rs.next()) {
-                messages.add(new Message(rs.getInt("id"),rs.getInt("sender_id"),rs.getInt("conversation_id"),rs.getString("message"),rs.getString("time_sent")));
+                //messages.add(new Message(rs.getInt("id"),rs.getInt("sender_id"),rs.getInt("conversation_id"),rs.getString("message"),rs.getString("time_sent")));
                 System.out.println("Messages has been appended");
             }
         } catch (SQLException e) {
