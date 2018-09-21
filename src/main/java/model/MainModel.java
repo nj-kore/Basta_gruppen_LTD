@@ -3,7 +3,7 @@ package model;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class MainModel {
+public class MainModel implements MainModelinterface, DataBaseHandlerinterface {
     private FileHandler fh = new FileHandler();
     private User activeUser = new User(0);
 
