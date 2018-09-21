@@ -1,15 +1,15 @@
 package model;
 
-import javafx.fxml.Initializable;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class databaseHandler {
+public class databaseHandler implements IDataHandler {
     /**
      * Connect to a sample database
      */
+
+    DatabaseResultConverter converter = new DatabaseResultConverter();
 
     private Connection connect() {
         // SQLite connection string
@@ -41,7 +41,6 @@ public class databaseHandler {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS messages (\n"
                 + "	id integer PRIMARY KEY,\n"
-                + "	conversation_id integer NOT NULL,\n"
                 + "	sender_id integer NOT NULL,\n"
                 + "	message text NOT NULL,\n"
                 + "	time_sent text\n"
@@ -63,8 +62,8 @@ public class databaseHandler {
      * @param message
      * @param time_sent
      */
-    public void insert(int sender_id,int conversation_id, String message, String time_sent) {
-        String sql = "INSERT INTO messages(sender_id,conversation_id,message,time_sent) VALUES(?,?,?,?)";
+    public void insert(int sender_id, int conversation_id, String message, String time_sent) {
+        String sql = "INSERT INTO messages(sender_id, conversation_id message, time_sent) VALUES(?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -89,7 +88,7 @@ public class databaseHandler {
 
             // loop through the result set
             while (rs.next()) {
-                //messages.add(new Message(rs.getInt("id"),rs.getInt("sender_id"),rs.getInt("conversation_id"),rs.getString("message"),rs.getString("time_sent")));
+                converter.convertMessage(rs);
                 System.out.println("Messages has been appended");
             }
         } catch (SQLException e) {
@@ -109,5 +108,45 @@ public class databaseHandler {
         db.insert(2,1,"hallå eller","6");
         db.loadConversationMessages(1);
 
+    }
+
+    @Override
+    public void saveMessage(int conversationId, Message m) {
+        insert(m.getId(), conversationId, m.getText(), "0");
+    }
+
+    @Override
+    public void saveUser(User u) {
+
+    }
+
+    @Override
+    public void saveConversation(Conversation c) {
+
+    }
+
+    @Override
+    public Conversation loadConversation(int conversationId) {
+        /*String sql = "SELECT id, time_sent FROM messages WHERE conversation_id=" + conversation;
+        ArrayList<Message> messages = new ArrayList<>();
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                converter.convertMessage(rs);
+                System.out.println("Messages has been appended");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return converter.convertConversation();*/
+        return null;
+    }
+
+    @Override
+    public User loadUser(int userId) {
+        return null;
     }
 }
