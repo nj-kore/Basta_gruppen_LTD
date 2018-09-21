@@ -16,6 +16,15 @@ public class MainModel implements IMainModel {
         return mainModel;
     }
 
+    @Override
+    public void sendMessage(String text) {
+        text = activeUser.getId() + ";" + text+"\n";
+        fh.write(Integer.toString(activeConversation.getId()), text);
+    }
+    public Conversation loadConversation(int conversationId) {
+        return fh.loadConversation(conversationId);
+    }
+
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
     }
@@ -30,15 +39,6 @@ public class MainModel implements IMainModel {
 
     public Conversation getActiveConversation() {
         return activeConversation;
-    }
-
-    @Override
-    public void sendMessage(String text) {
-        Message message = new Message(activeUser, text);
-        fh.write(Integer.toString(activeConversation.getId()), text);
-    }
-    public Conversation loadConversation(int conversationId) {
-        return fh.loadConversation(conversationId);
     }
 
 }

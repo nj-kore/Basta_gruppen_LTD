@@ -5,9 +5,8 @@ import model.MainModel;
 
 public class MainController implements IMainController {
 
-    IMainModel mainModel;
+    IMainModel mainModel = MainModel.getInstance();
 
-    public MainController(IMainModel mainModel){
-        this.mainModel = mainModel;
+    public MainController(){
     }
 }

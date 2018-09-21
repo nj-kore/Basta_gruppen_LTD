@@ -46,7 +46,7 @@ public class ChatView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        //loadMessages();
+        loadMessages();
     }
 
 
@@ -57,6 +57,7 @@ public class ChatView extends AnchorPane {
             chatController.sendMessage(ChatTextArea.getText().trim());
             ChatTextArea.clear();
         }
+        loadMessages();
     }
 
     public FlowPane getChatFlowPane() {
@@ -68,9 +69,9 @@ public class ChatView extends AnchorPane {
         //for(Message m : getConversation().getMessages() ){
           //  getChatFlowPane().getChildren().add(new view.MessageItem(m));
         //}
-        /*for(Message m : getMainModel().loadConversation(conversation.getId()).getMessages()){
+        for(Message m : mainModel.loadConversation(mainModel.getActiveConversation().getId()).getMessages()){
             ChatFlowPane.getChildren().add(new MessageItem(m));
-        }*/
+        }
     }
 
 }

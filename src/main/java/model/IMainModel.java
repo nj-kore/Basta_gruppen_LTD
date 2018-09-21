@@ -1,12 +1,10 @@
 package model;
 
-import javafx.beans.Observable;
 
-import java.util.Observer;
-
-interface IMainModel extends Observer {
-    void sendMessage(int conversationId, Message message);
+public interface IMainModel {
+    void sendMessage(String text);
     Conversation loadConversation(int conversationId);
     User getActiveUser();
+    Conversation getActiveConversation();
 
 }

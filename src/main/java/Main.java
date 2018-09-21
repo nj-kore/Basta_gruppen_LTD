@@ -19,6 +19,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        MainModel.getInstance().setActiveUser(new User(1));
+        MainModel.getInstance().setActiveConversation(new Conversation(1));
+
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
@@ -29,8 +32,7 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
-        MainModel.getInstance().setActiveUser(new User(1));
-        MainModel.getInstance().setActiveConversation(new Conversation(1));
+
 
     }
 
