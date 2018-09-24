@@ -1,3 +1,5 @@
+package view;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -26,7 +28,7 @@ public class MessageItem extends AnchorPane{
     TextFlow messageTextFlow;
 
     public MessageItem(Message message){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/Message.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
