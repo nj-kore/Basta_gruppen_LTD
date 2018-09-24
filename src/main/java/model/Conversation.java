@@ -7,6 +7,7 @@ import java.util.List;
 public class Conversation {
     private int id;
     private ArrayList<Message> messages = new ArrayList();
+    private ArrayList<User> participants = new ArrayList<>();
 
     public Conversation(int id) {
         this.id = id;

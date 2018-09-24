@@ -1,7 +1,5 @@
 package model;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class MainModel implements IMainModel {
     private FileHandler fh = new FileHandler();
