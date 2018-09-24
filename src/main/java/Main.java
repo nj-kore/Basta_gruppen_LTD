@@ -20,7 +20,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         MainModel.getInstance().setActiveUser(new User(1));
-        MainModel.getInstance().setActiveConversation(new Conversation(1));
+        MainModel.getInstance().addConversation(new Conversation(1));
+        MainModel.getInstance().setActiveConversation(1);
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 

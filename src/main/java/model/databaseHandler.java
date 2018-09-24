@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//PLEASE NOTE, this class does not work yet, for a while
 public class databaseHandler implements IDataHandler {
     /**
      * Connect to a sample database
@@ -207,6 +208,16 @@ public class databaseHandler implements IDataHandler {
 
     @Override
     public void saveConversation(Conversation c) {
+
+    }
+
+    @Override
+    public void updateUser(User u) {
+
+    }
+
+    @Override
+    public void updateConversation(Conversation c) {
 
     }
 

@@ -25,6 +25,10 @@ public class Conversation {
         messages.add(m);
     }
 
+    public void addParticipant(User u) {
+        participants.add(u);
+    }
+
     public ArrayList<Message> getMessages() {
         return messages;
     }
