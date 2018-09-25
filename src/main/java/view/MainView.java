@@ -10,7 +10,7 @@ import model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainView extends AnchorPane implements Initializable{
+public class MainView extends AnchorPane implements Initializable, IMainController{
 
     ChatView chatView = new ChatView();
     IMainController mainController;
