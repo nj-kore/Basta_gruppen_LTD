@@ -14,7 +14,7 @@ import model.User;
 
 import java.util.ResourceBundle;
 
-public class Main extends Application {
+public class    Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {

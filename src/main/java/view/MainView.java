@@ -15,8 +15,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     ChatView chatView = new ChatView();
     IMainController mainController;
 
-    User currentUser = new User(1);
-
     @FXML
     AnchorPane MainViewAnchorPane;
 
