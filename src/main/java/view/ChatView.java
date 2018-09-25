@@ -16,9 +16,9 @@ import java.awt.*;
 
 import java.io.IOException;
 
-public class ChatView extends AnchorPane {
+public class ChatView extends AnchorPane implements IChatController {
 
-    private final IChatController chatController = new ChatController();
+
     private IMainModel mainModel = MainModel.getInstance();
 
 
@@ -54,7 +54,7 @@ public class ChatView extends AnchorPane {
     @FXML
     public void sendMessage(){
         if(!ChatTextArea.getText().isEmpty()) {             //User should not be able to send an empty message.
-            chatController.sendMessage(ChatTextArea.getText().trim());
+            sendMessage(ChatTextArea.getText().trim());
             ChatTextArea.clear();
         }
         loadMessages();
@@ -74,5 +74,9 @@ public class ChatView extends AnchorPane {
         }
     }
 
+    @Override
+    public void sendMessage(String text) {
+        MainModel.getInstance().sendMessage(text);
+    }
 }
 
