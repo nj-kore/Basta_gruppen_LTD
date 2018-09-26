@@ -1,0 +1,20 @@
+.mainViewHBox{
+    -fx-background-color: white;
+}
+#loginButton{
+    -fx-background-color: dodgerblue;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+#loginButton:hover{
+    -fx-border-color: gray;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+}
+#loginButton:pressed{
+    -fx-background-color: rgba(0,150,230,50);
+    -fx-border-color: gray;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}

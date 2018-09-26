@@ -55,4 +55,16 @@ public class MainModel implements IMainModel {
         return activeConversation;
     }
 
+    @Override
+    public boolean login(String username, String password) {
+        User user = dataHandler.loadUser(username);
+        if(!user.equals(null)){
+            if(user.confirmPassword(password)){
+                this.activeUser = user;
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

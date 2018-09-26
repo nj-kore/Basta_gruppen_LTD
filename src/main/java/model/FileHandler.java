@@ -35,8 +35,8 @@ public class FileHandler {
         while(scanner.hasNext()) {
             String s = scanner.nextLine();
             String[] parts = s.split(";");
-            Message m = new Message(new User(Integer.parseInt(parts[0])), parts[1]);
-            c.addMessage(m);
+            //Message m = new Message(new User(Integer.parseInt(parts[0])), parts[1]);
+            //c.addMessage(m);
         }
         return c;
     }
