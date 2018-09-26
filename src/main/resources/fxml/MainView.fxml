@@ -12,7 +12,7 @@
    <children>
       <StackPane fx:id="mainViewStackPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="loginHBox" prefHeight="100.0" prefWidth="200.0" styleClass="mainViewHBox" />
+            <HBox fx:id="loginHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mainViewHBox" />
             <HBox fx:id="mainViewHBox" styleClass="mainViewHBox">
                <children>
                 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="250.0" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="50.0" HBox.hgrow="ALWAYS">
