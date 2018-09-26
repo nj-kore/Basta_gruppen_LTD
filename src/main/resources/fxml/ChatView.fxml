@@ -9,28 +9,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #00dab0;" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="800.0" onMouseClicked="#loadMessages" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" minHeight="500.0" onMouseClicked="#loadMessages" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                <content>
-                  <FlowPane fx:id="ChatFlowPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWrapLength="1000.0">
-                  </FlowPane>
+                  <FlowPane fx:id="ChatFlowPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWrapLength="1000.0" />
                </content>
             </ScrollPane>
-            <HBox maxWidth="1.7976931348623157E308" minHeight="200.0" VBox.vgrow="ALWAYS">
+            <HBox maxWidth="1.7976931348623157E308" style="-fx-background-color: #00dab0;" VBox.vgrow="ALWAYS">
                <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0">
                      <content>
-                        <TextArea fx:id="ChatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Type a message..." wrapText="true">
+                        <TextArea fx:id="ChatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" promptText="Type a message..." wrapText="true">
                            <font>
                               <Font name="Comic Sans MS" size="41.0" />
                            </font>
                         </TextArea>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="SendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
+                  <Button fx:id="SendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="200.0" text="Send" />
                </children>
             </HBox>
          </children>
