@@ -8,7 +8,7 @@ public interface IMainModel {
     Conversation loadConversation(int conversationId);
     User getActiveUser();
     Conversation getActiveConversation();
-    void login(String username, String password);
+    boolean login(String username, String password);
 
 
 }

@@ -56,8 +56,14 @@ public class MainModel implements IMainModel {
     }
 
     @Override
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
+        User user = dataHandler.loadUser(username);
+        if(!user.equals(null)){
+            if(user.confirmPassword(password)){
 
+            }
+        }
+        return false;
     }
 
 }
