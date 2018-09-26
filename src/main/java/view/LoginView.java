@@ -29,6 +29,8 @@ public class LoginView extends AnchorPane implements ILoginController {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        //userNameTextField.requestFocus(); //Gives focus to userNameTextField
     }
 
     @FXML
