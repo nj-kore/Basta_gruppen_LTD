@@ -34,7 +34,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public void getContacts(){
-      //  for User u
+      for (User u :mainModel.getContacts()){
+            //ConversationsFlowPane.getChildren().add(new ContactListItem u);
+      }
     }
 
 }
