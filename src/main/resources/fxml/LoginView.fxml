@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" />
+      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" />
+      <Button id="loginButton" fx:id="logInButton" layoutX="225.0" layoutY="240.0" mnemonicParsing="false" onAction="#login" prefHeight="51.0" prefWidth="149.0" text="Log In" />
       <Label focusTraversable="false" layoutX="169.0" layoutY="122.0" text="Username:" textAlignment="RIGHT" />
       <Label focusTraversable="false" layoutX="171.0" layoutY="183.0" text="Password:" textAlignment="RIGHT" />
-      <Label layoutX="195.0" layoutY="37.0" text="Welcome, please log in!">
+      <Label focusTraversable="false" layoutX="195.0" layoutY="37.0" text="Welcome, please log in!">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" />
-      <Button id="loginButton" fx:id="logInButton" layoutX="225.0" layoutY="240.0" mnemonicParsing="false" onAction="#login" prefHeight="51.0" prefWidth="149.0" text="Log In" />
-      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" />
    </children>
 </fx:root>
