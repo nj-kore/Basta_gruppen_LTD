@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 public class MainView extends AnchorPane implements Initializable, IMainController{
 
     ChatView chatView = new ChatView();
-    LoginView loginView = new LoginView();
+    LoginView loginView = new LoginView(this);
 
     @FXML
     AnchorPane mainViewAnchorPane;
@@ -44,6 +44,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
+    }
+
+    public void moveLoginToBack(){
+        loginHBox.toBack();
     }
 
 }

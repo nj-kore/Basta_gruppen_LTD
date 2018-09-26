@@ -19,7 +19,10 @@ public class LoginView extends AnchorPane implements ILoginController {
     @FXML
     Button loginButton;
 
-    public LoginView() {
+    MainView parentView;
+
+    public LoginView(MainView parentView) {
+        this.parentView = parentView;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -34,7 +37,7 @@ public class LoginView extends AnchorPane implements ILoginController {
     @FXML
     public void login(){
         if (MainModel.getInstance().login(userNameTextField.getText(), passwordField.getText())){
-            System.out.println("ree");
+            parentView.moveLoginToBack();
         }
     }
 }
