@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainModel implements IMainModel {
@@ -9,6 +10,7 @@ public class MainModel implements IMainModel {
     private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private static MainModel mainModel = new MainModel();
+    private ArrayList<User> contacts = new ArrayList<>();
 
     private MainModel(){
     }
@@ -34,6 +36,10 @@ public class MainModel implements IMainModel {
         }
         return c;
     }
+
+    public void addContact(User u){activeUser.addContact(u);}
+
+    public ArrayList<User> getContacts(){return activeUser.getContacts();}
 
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
