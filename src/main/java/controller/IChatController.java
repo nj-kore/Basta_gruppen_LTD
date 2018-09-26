@@ -1,5 +1,5 @@
 package controller;
 
 public interface IChatController {
-    void sendMessage(String text);
+    void sendMessage();
 }

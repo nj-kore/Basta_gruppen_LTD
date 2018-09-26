@@ -23,7 +23,7 @@
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="200.0">
                      <content>
-                        <TextArea fx:id="ChatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Type a message..." wrapText="true">
+                        <TextArea fx:id="chatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#keyPressed" promptText="Type a message..." wrapText="true">
                            <font>
                               <Font name="Comic Sans MS" size="41.0" />
                            </font>

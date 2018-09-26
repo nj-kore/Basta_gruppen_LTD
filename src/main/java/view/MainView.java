@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 public class MainView extends AnchorPane implements Initializable, IMainController{
 
     ChatView chatView = new ChatView();
-    IMainController mainController;
 
     @FXML
     AnchorPane MainViewAnchorPane;
