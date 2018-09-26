@@ -21,7 +21,7 @@
                                  <children>
                                     <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <FlowPane fx:id="ContactsFlowPane" />
+                                          <FlowPane fx:id="contactsFlowPane" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -34,7 +34,7 @@
                                  <children>
                                     <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <FlowPane fx:id="ConversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
+                                          <FlowPane fx:id="conversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -45,7 +45,7 @@
                   </TabPane>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="MainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
+          <AnchorPane fx:id="mainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
           </AnchorPane>
          </children>
       </HBox>
