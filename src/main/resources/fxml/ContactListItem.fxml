@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="contactListItemProfileImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../../../../Pictures/häger.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="contactListItemNameLabel" layoutX="55.0" layoutY="6.0" text="HÅGER, Göstav">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="contactListItemStatusLabel" layoutX="55.0" layoutY="28.0" text="Active">
+         <font>
+            <Font name="Comic Sans MS Italic" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="contactListItemStatusImageView" fitHeight="10.0" fitWidth="10.0" layoutX="98.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Desktop/grönprick.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
