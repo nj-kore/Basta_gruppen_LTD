@@ -7,7 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import model.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,17 +14,16 @@ import java.util.ResourceBundle;
 public class MainView extends AnchorPane implements Initializable, IMainController{
 
     ChatView chatView = new ChatView();
-    IMainController mainController;
     LoginView loginView = new LoginView();
 
     @FXML
-    AnchorPane MainViewAnchorPane;
+    AnchorPane mainViewAnchorPane;
 
     @FXML
-    FlowPane ContactsFlowPane;
+    FlowPane contactsFlowPane;
 
     @FXML
-    FlowPane ConversationsFlowPane;
+    FlowPane conversationsFlowPane;
 
     @FXML
     HBox mainViewHBox;
@@ -41,10 +39,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        MainViewAnchorPane.getChildren().add(chatView);
-        mainViewStackPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(chatView);
         mainViewHBox.toBack();
         loginHBox.toFront();
+        loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
     }
 
