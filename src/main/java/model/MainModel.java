@@ -60,7 +60,8 @@ public class MainModel implements IMainModel {
         User user = dataHandler.loadUser(username);
         if(!user.equals(null)){
             if(user.confirmPassword(password)){
-
+                this.activeUser = user;
+                return true;
             }
         }
         return false;

@@ -18,6 +18,6 @@
       </Label>
       <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" />
       <Button fx:id="logInButton" layoutX="225.0" layoutY="240.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="149.0" style="-fx-background-color: #FF7777;" text="Log In" />
-      <PasswordField fx:id="passwordPasswordField" layoutX="226.0" layoutY="179.0" />
+      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" />
    </children>
 </AnchorPane>

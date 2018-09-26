@@ -38,6 +38,6 @@ public class DataHandlerDummy implements IDataHandler {
 
     @Override
     public User loadUser(String username) {
-        return null;
+        return new User(77, username, "123");
     }
 }
