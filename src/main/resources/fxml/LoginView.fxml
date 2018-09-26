@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginView">
    <children>
-      <Label layoutX="169.0" layoutY="122.0" text="Username:" textAlignment="RIGHT" />
-      <Label layoutX="171.0" layoutY="183.0" text="Password:" textAlignment="RIGHT" />
+      <Label focusTraversable="false" layoutX="169.0" layoutY="122.0" text="Username:" textAlignment="RIGHT" />
+      <Label focusTraversable="false" layoutX="171.0" layoutY="183.0" text="Password:" textAlignment="RIGHT" />
       <Label layoutX="195.0" layoutY="37.0" text="Welcome, please log in!">
          <font>
             <Font size="20.0" />

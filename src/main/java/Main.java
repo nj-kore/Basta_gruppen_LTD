@@ -23,7 +23,7 @@ public class    Main extends Application {
         MainModel.getInstance().addConversation(new Conversation(1));
         MainModel.getInstance().setActiveConversation(1);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
 
