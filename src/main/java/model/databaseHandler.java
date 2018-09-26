@@ -276,4 +276,9 @@ public class databaseHandler implements IDataHandler {
 
         return user;
     }
+
+    @Override
+    public User loadUser(String username) {
+        return null;
+    }
 }
