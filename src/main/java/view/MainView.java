@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import model.IMainModel;
+import model.MainModel;
 import model.User;
 
 import java.net.URL;
@@ -14,6 +16,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     ChatView chatView = new ChatView();
     IMainController mainController;
+    private IMainModel mainModel = MainModel.getInstance();
 
     @FXML
     AnchorPane MainViewAnchorPane;
@@ -28,6 +31,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void initialize(URL location, ResourceBundle resources) {
 
         MainViewAnchorPane.getChildren().add(chatView);
+    }
+
+    public void getContacts(){
+      //  for User u
     }
 
 }

@@ -18,7 +18,7 @@ public class User {
         this.id = id;
     }
 
-    public void addContact(User usertoadd){contacts.add(usertoadd);}
+    protected void addContact(User usertoadd){contacts.add(usertoadd);}
 
     public ArrayList<User> getContacts(){return contacts;}
 
