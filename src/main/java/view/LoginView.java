@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.MainModel;
 
@@ -35,6 +37,15 @@ public class LoginView extends AnchorPane implements ILoginController {
 
         //userNameTextField.requestFocus(); //Gives focus to userNameTextField
     }
+
+
+    @FXML
+    public void keyPressed(KeyEvent e) {
+        if(e.getCode().equals(KeyCode.ENTER)) {
+            login();
+            e.consume();
+            }
+        }
 
     @FXML
     public void login(){
