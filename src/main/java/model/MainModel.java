@@ -55,4 +55,9 @@ public class MainModel implements IMainModel {
         return activeConversation;
     }
 
+    @Override
+    public void login(String username, String password) {
+
+    }
+
 }
