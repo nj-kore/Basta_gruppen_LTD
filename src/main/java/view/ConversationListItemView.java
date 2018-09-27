@@ -4,30 +4,31 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import model.Conversation;
 import model.User;
 
 import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 
-public class ContactListItemView extends AnchorPane {
-
-    @FXML
-    ImageView contactProfileImageView;
+public class ConversationListItemView extends AnchorPane{
 
     @FXML
-    ImageView contactStatusImageView;
+    ImageView conversationProfileImageView;
 
     @FXML
-    Label contactNameLabel;
+    ImageView conversationStatusImageView;
 
     @FXML
-    Label contactStatusLabel;
+    Label conversationNameLabel;
+
+    @FXML
+    Label conversationStatusLabel;
 
 
-    public ContactListItemView(User user) {
+    public ConversationListItemView(HashMap<Integer, Conversation> conversationUsers) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ContactListItemView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -38,4 +39,5 @@ public class ContactListItemView extends AnchorPane {
         }
 
     }
+
 }
