@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import model.MainModel;
+import model.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,6 +50,12 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     public void moveLoginToBack(){
         loginHBox.toBack();
+    }
+
+    public void loadContacts(){
+        for(User u: MainModel.getInstance().getContacts()){
+            //contactsFlowPane.getChildren().add()
+        }
     }
 
 }
