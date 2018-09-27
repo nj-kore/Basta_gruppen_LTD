@@ -15,7 +15,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     ChatView chatView = new ChatView();
     IMainController mainController;
-    //ContactListItemView contactlist = new ContactListItemView();
+    //ContactListItem contactlist = new ContactListItem();
+    private IMainModel mainModel = MainModel.getInstance();
+
 
     @FXML
     AnchorPane mainViewAnchorPane;
@@ -30,6 +32,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void initialize(URL location, ResourceBundle resources) {
 
         mainViewAnchorPane.getChildren().add(chatView);
+        loadContactItems();
+    }
+
+    public void loadContactItems(){
+        for(User u: mainModel.getContacts()){
+            contactsFlowPane.getChildren().add(new ContactListItem(u));
+        }
     }
 
 
