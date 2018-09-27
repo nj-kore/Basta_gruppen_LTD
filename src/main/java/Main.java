@@ -11,10 +11,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        User activeUser = new User(1, "admin", "123");
+        User activeUser = new User(1, "admin", "123", "eva");
+        User contactUser=new User(2, "contact", "222", "olle" );
+        User contactUser2=new User(3, "contact2", "222", "kalle" );
 
         MainModel.getInstance().setActiveUser(activeUser);
-        //MainModel.getInstance().addContact();
+        MainModel.getInstance().addContact(contactUser);
+        MainModel.getInstance().addContact(contactUser2);
         MainModel.getInstance().addConversation(new Conversation(1));
         MainModel.getInstance().setActiveConversation(1);
 
