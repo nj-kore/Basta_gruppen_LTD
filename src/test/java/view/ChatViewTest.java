@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class ChatViewTest {
 
     //I don't know the right way to test this, since our ChatView tries to load
-    ChatView chatViewTest = new ChatView();
+    //ChatView chatViewTest = new ChatView();
 
     @Test
     public void keyPressed() {
