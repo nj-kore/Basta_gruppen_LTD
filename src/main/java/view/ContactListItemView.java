@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import model.IMainModel;
+import model.MainModel;
 import model.User;
 
 import javax.swing.text.html.ImageView;
@@ -16,6 +19,9 @@ public class ContactListItemView extends AnchorPane {
     ImageView contactListItemProfileImageView;
 
     @FXML
+    FlowPane contactFlowPane;
+
+    @FXML
     ImageView contactListItemStatusImageView;
 
     @FXML
@@ -23,6 +29,8 @@ public class ContactListItemView extends AnchorPane {
 
     @FXML
     Label contacListItemStatusLabel;
+
+    private IMainModel mainModel = MainModel.getInstance();
 
 
     public ContactListItemView(User user) {
@@ -38,4 +46,11 @@ public class ContactListItemView extends AnchorPane {
         }
 
     }
+    public void getContacts(){
+        for (User u :mainModel.getContacts()){
+           contactListItemNameLabel.setText(u.getName());
+            contactFlowPane.getChildren().add(contactListItemNameLabel);
+        }
+    }
+
 }
