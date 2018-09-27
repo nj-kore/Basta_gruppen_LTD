@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" onKeyPressed="#keyPressed" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" onKeyPressed="#keyPressed" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" onKeyPressed="#keyPressed" />
       <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" onKeyPressed="#keyPressed" />
@@ -19,5 +19,6 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Label id="passwordErrorText" fx:id="wrongPasswordLabel" layoutX="213.0" layoutY="81.0" stylesheets="@style.css" text="Incorrect username or password." />
    </children>
 </fx:root>

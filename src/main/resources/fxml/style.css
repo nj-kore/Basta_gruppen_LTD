@@ -18,3 +18,14 @@
     -fx-text-fill: white;
     -fx-border-radius: 5px;
 }
+
+#passwordErrorText{
+    -fx-text-fill: red;
+}
+
+#chatNameTextField{
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0px;
+}

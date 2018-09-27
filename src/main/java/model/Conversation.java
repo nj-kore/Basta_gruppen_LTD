@@ -8,6 +8,15 @@ public class Conversation {
     private int id;
     private ArrayList<Message> messages = new ArrayList();
     private ArrayList<User> participants = new ArrayList<>();
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Conversation(int id) {
         this.id = id;
