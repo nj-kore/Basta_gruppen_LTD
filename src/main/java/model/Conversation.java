@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Conversation {
     private int id;
-    private ArrayList<Message> messages = new ArrayList();
-    private ArrayList<User> participants = new ArrayList<>();
+    private List<Message> messages = new ArrayList<Message>();
+    private List<User> participants = new ArrayList<User>();
     private String name;
 
     public String getName() {
@@ -38,7 +38,7 @@ public class Conversation {
         participants.add(u);
     }
 
-    public ArrayList<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 }
