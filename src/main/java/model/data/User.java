@@ -1,5 +1,7 @@
 package model.data;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 public class User {
@@ -8,6 +10,9 @@ public class User {
     private String username;
     private ArrayList<User> contacts = new ArrayList<>();
     private String name;
+    private String status;
+    private Image statusImage;
+    private Image profileImage;
 
 
     public User(int id, String username, String password, String name) {
@@ -17,14 +22,40 @@ public class User {
         this.name = name;
     }
 
+
+    //Getters
     public int getId() {
         return id;
     }
 
+    public Image getStatusImage(){return statusImage;}
+
+    public String getName(){return name;}
+
+    public ArrayList<User> getContacts(){return contacts;}
+
+    public Image getProfileImage(){return profileImage;}
+
+    public String getStatus(){return status;}
+
+
+    //Setters
     public void setId(int id) {
         this.id = id;
     }
 
+    public void setStatus(String status){this.status=status;}
+
+    public void setStatusImage(Image statusImage){
+        this.statusImage = statusImage;
+    }
+
+    public void setProfileImage(Image profileImage){
+        this.profileImage=profileImage;
+    }
+
+
+    //Functionality
     public boolean confirmPassword(String password){
         if (this.password.equals(password)){
             return true;
@@ -37,6 +68,6 @@ public class User {
 
     public void addContact(User userToAdd){contacts.add(userToAdd);}
 
-    public ArrayList<User> getContacts(){return contacts;}
+
 
 }

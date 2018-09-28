@@ -38,10 +38,9 @@ public class ContactListItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
         contactNameLabel.setText(user.getName());
-        //TODO Add functionality for the three functions below
-        //contactListItemStatusImageView.getImage(user.getStatusimage());
-        //contactListItemProfileImageView.getImage(user.getProfileImage());
-        //contactListItemStatusLabel.setText(user.getStatus());
+        contactStatusImageView.setImage(user.getStatusImage());
+        contactProfileImageView.setImage(user.getProfileImage());
+        contactStatusLabel.setText(user.getStatus());
     }
 
 
