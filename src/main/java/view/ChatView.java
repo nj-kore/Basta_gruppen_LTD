@@ -77,7 +77,7 @@ public class ChatView extends AnchorPane implements IChatController {
     //If shift in combination with enter is pressed, it adds a new line to the message.
     //The function only gets called if the chatTextArea is focused
     @FXML
-    public void keyPressed(KeyEvent e) {
+    public void chatAreaKeyPressed(KeyEvent e) {
         if (e.getCode().equals(KeyCode.ENTER)) {
             if (e.isShiftDown()) {
                 chatTextArea.setText(chatTextArea.getText() + "\n");
@@ -108,7 +108,8 @@ public class ChatView extends AnchorPane implements IChatController {
     @FXML
     public void chatNameChanged() {
         mainModel.getActiveConversation().setName(chatNameTextField.getText());
-        chatNameTextField.setEditable(true);
+        System.out.println("reeeeee");
+        chatNameTextField.setEditable(false);
     }
 
 
@@ -117,8 +118,32 @@ public class ChatView extends AnchorPane implements IChatController {
         chatNameTextField.setEditable(true);
         chatNameTextField.setStyle("-fx-background-insets: 2px;");
         chatNameTextField.requestFocus();
-        //TODO lägga till listener så att chatNameChanged körs när chatNameTextField tappar focus
 
+        //Starts a thread that waits for the convo name to lose focus.
+        //When this happens, it calls on changeChatName
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(chatNameTextField.isFocused()) {
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                chatNameChanged();
+            }
+        });
+        t.start();
+    }
+
+    //when enter is pressed, the chatTextArea gains focus, which makes the chatNameTextArea lose focus, which saves
+    //the chatName
+    @FXML
+    public void conversationNameKeyPressed(KeyEvent e) {
+        if (e.getCode().equals(KeyCode.ENTER)) {
+            chatTextArea.requestFocus();
+        }
     }
 }
 

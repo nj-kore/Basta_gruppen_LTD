@@ -212,6 +212,11 @@ public class databaseHandler implements IDataHandler {
     }
 
     @Override
+    public void createConversation() {
+
+    }
+
+    @Override
     public void updateUser(User u) {
 
     }
