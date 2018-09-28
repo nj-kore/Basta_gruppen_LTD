@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        MainModel.getInstance().setActiveUser(new User(1));
+        MainModel.getInstance().setActiveUser(new User(1, "admin", "123"));
         MainModel.getInstance().addConversation(new Conversation(1));
         MainModel.getInstance().setActiveConversation(1);
 

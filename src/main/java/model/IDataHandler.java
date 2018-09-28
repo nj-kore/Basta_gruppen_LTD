@@ -9,4 +9,5 @@ public interface IDataHandler {
     void updateConversation(Conversation c);
     Conversation loadConversation(int conversationId);
     User loadUser(int userId);
+    User loadUser(String username);
 }

@@ -5,7 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import model.User;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,20 +14,40 @@ import java.util.ResourceBundle;
 public class MainView extends AnchorPane implements Initializable, IMainController{
 
     ChatView chatView = new ChatView();
+    LoginView loginView = new LoginView(this);
 
     @FXML
-    AnchorPane MainViewAnchorPane;
+    AnchorPane mainViewAnchorPane;
 
     @FXML
-    FlowPane ContactsFlowPane;
+    FlowPane contactsFlowPane;
 
     @FXML
-    FlowPane ConversationsFlowPane;
+    FlowPane conversationsFlowPane;
+
+    @FXML
+    HBox mainViewHBox;
+
+    @FXML
+    HBox loginHBox;
+
+    @FXML
+    StackPane mainViewStackPane;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        MainViewAnchorPane.getChildren().add(chatView);
+
+        mainViewAnchorPane.getChildren().add(chatView);
+        mainViewHBox.toBack();
+        loginHBox.toFront();
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(loginView);
+    }
+
+    public void moveLoginToBack(){
+        loginHBox.toBack();
     }
 
 }
