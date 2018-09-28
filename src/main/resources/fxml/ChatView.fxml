@@ -19,7 +19,7 @@
          <children>
             <AnchorPane prefHeight="71.0" prefWidth="800.0">
                <children>
-                  <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="14.0" maxWidth="1.7976931348623157E308" onAction="#chatNameChanged" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
+                  <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="14.0" maxWidth="1.7976931348623157E308" onAction="#chatNameChanged" onKeyPressed="#conversationNameKeyPressed" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
                     <items>
                       <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" onAction="#changeChatName" text="Change chat name" />
@@ -43,7 +43,7 @@
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0">
                      <content>
-                        <TextArea fx:id="chatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#keyPressed" promptText="Type a message..." wrapText="true">
+                        <TextArea fx:id="chatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#chatAreaKeyPressed" promptText="Type a message..." wrapText="true">
                            <font>
                               <Font name="Comic Sans MS" size="41.0" />
                            </font>

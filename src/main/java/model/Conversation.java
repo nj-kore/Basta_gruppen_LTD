@@ -9,7 +9,6 @@ public class Conversation {
     private String name;
     private ArrayList<Message> messages = new ArrayList();
     private ArrayList<User> participants = new ArrayList<>();
-    private String name;
 
     public String getName() {
         return name;
@@ -37,14 +36,6 @@ public class Conversation {
 
     public void addParticipant(User u) {
         participants.add(u);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public ArrayList<Message> getMessages() {
