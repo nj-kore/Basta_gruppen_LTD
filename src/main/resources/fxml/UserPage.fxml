@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="794.0" styleClass="dark4" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="TOP_CENTER" layoutX="314.0" layoutY="14.0" stylesheets="@style.css" text="My account">
+         <styleClass>
+            <String fx:value="titleText" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <AnchorPane layoutX="107.0" layoutY="87.0" prefHeight="218.0" prefWidth="580.0" styleClass="dark3" stylesheets="@style.css">
+         <children>
+            <ImageView fx:id="profilePicImageView" fitHeight="165.0" fitWidth="165.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pics/marten2.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="editUserInfoButton" layoutX="535.0" layoutY="179.0" mnemonicParsing="false" text="Edit" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+            <TextField fx:id="usernameTextField" editable="false" layoutX="175.0" layoutY="32.0" text="Username">
+               <styleClass>
+                  <String fx:value="textFieldNoBorder" />
+                  <String fx:value="smallBigText" />
+               </styleClass>
+            </TextField>
+            <TextField fx:id="emailTextField" editable="false" layoutX="175.0" layoutY="83.0" text="email">
+               <styleClass>
+                  <String fx:value="textFieldNoBorder" />
+                  <String fx:value="smallBigText" />
+               </styleClass>
+            </TextField>
+            <Button fx:id="changePictureButton" layoutX="14.0" layoutY="184.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="Change Picture">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <AnchorPane layoutX="106.0" layoutY="313.0" minWidth="-Infinity" prefHeight="247.0" prefWidth="580.0" styleClass="dark3">
+         <children>
+            <Button layoutX="455.0" layoutY="194.0" mnemonicParsing="false" text="Change Password" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+            <Label layoutX="113.0" layoutY="95.0" styleClass="text16" text="Old Password:" />
+            <Label layoutX="106.0" layoutY="149.0" styleClass="text16" text="New Password:" />
+            <TextField fx:id="oldPasswordTextField" layoutX="215.0" layoutY="95.0" styleClass="dark1" />
+            <TextField fx:id="newPasswordTextField" layoutX="216.0" layoutY="149.0" styleClass="dark1" />
+            <Label layoutX="211.0" layoutY="35.0" styleClass="smallBigText" text="Change Password" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
