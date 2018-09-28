@@ -9,6 +9,7 @@ public class MainModel implements IMainModel {
     private Conversation activeConversation;
     private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
+    private HashMap<Integer, User> users = new HashMap<>();
     private static MainModel mainModel = new MainModel();
     private ArrayList<User> contacts = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class MainModel implements IMainModel {
             dataHandler.updateConversation(c);
         } else {
             c = dataHandler.loadConversation(conversationId);
-            conversations.put(conversationId, c);
+            addConversation(c);
         }
         return c;
     }
@@ -51,6 +52,23 @@ public class MainModel implements IMainModel {
 
     public void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
+    }
+
+    /*public void createConversation(String name, int[] participants) {
+        //The dataHandler is going to create a blank conversation, with a valid ID that we can use.
+        // For now, the Id is just a random int between 0 and 100000
+        Conversation c = dataHandler.createConversation();
+        for(int i = 0; i < participants.length; i++)
+            c.addParticipant(users.get(participants[i]));
+        c.setName(name);
+        dataHandler.saveConversation(c);
+        addConversation(c);
+
+    }*/
+
+    //Is going to be used while testing
+    public void addUser(User u) {
+        users.put(u.getId(), u);
     }
 
     public User getActiveUser() {
