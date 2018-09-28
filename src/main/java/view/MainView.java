@@ -13,6 +13,7 @@ import model.MainModel;
 import model.User;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -50,7 +51,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
-        loadContacts();
+        updateContactsList(mainModel.getContacts());
+        updateConversationsList(mainModel.getConversations());
         //loadConversations();
     }
 
@@ -58,26 +60,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
-    public void loadContacts(){
-        if (!mainModel.getContacts().isEmpty()) {
-            for (User u : MainModel.getInstance().getContacts()) {
-                contactsFlowPane.getChildren().add(new ContactListItem(u));
-            }
-        }
-    }
-    public void loadConversation(){
-        //for(User u: MainModel.getInstance().getConversations()){
-
-        //}
-    }
-
-    public void updateContactsList(HashMap<Integer, User> contacts) {
+    public void updateContactsList(ArrayList<User> contacts) {
 
         contactsFlowPane.getChildren().clear();
 
-        for (Map.Entry<Integer, User> user : contacts.entrySet()) {
+        for (User user : contacts) {
 
-            ContactListItem contactListItemView = new ContactListItem(user.getValue());
+            ContactListItem contactListItemView = new ContactListItem(user);
             contactsFlowPane.getChildren().add(contactListItemView);
         }
 
@@ -86,8 +75,11 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateConversationsList(HashMap<Integer, Conversation> conversations) {
 
         conversationsFlowPane.getChildren().clear();
-        ConversationListItem conversationListItem = new ConversationListItem(conversations);
-        contactsFlowPane.getChildren().add(conversationListItem);
+        for (Map.Entry<Integer, Conversation> conversation : conversations.entrySet()) {
+
+            ConversationListItem conversationListItem = new ConversationListItem(conversation.getValue());
+            conversationsFlowPane.getChildren().add(conversationListItem);
+        }
 
     }
 

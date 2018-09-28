@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="conversationProfileImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="conversationNameLabel" layoutX="55.0" layoutY="6.0" text="convoName">
@@ -20,4 +20,4 @@
       </Label>
       <ImageView fx:id="conversationStatusImageView" fitHeight="10.0" fitWidth="10.0" layoutX="98.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
    </children>
-</AnchorPane>
+</fx:root>

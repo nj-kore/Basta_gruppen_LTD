@@ -43,6 +43,10 @@ public class MainModel implements IMainModel {
 
     public ArrayList<User> getContacts(){return activeUser.getContacts();}
 
+    public HashMap<Integer, User> getUsers() {
+        return users;
+    }
+
     public void setActiveUser(User activeUser) {
         this.activeUser = activeUser;
     }
@@ -53,6 +57,10 @@ public class MainModel implements IMainModel {
 
     public void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
+    }
+
+    public HashMap<Integer, Conversation> getConversations() {
+        return conversations;
     }
 
     /*public void createConversation(String name, int[] participants) {
