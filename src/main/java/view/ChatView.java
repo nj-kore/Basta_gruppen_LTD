@@ -135,7 +135,6 @@ public class ChatView extends AnchorPane implements IChatController {
             }
         });
         t.start();
-        //TODO lägga till listener så att chatNameChanged körs när chatNameTextField tappar focus
     }
 
     //when enter is pressed, the chatTextArea gains focus, which makes the chatNameTextArea lose focus, which saves
