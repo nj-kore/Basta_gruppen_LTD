@@ -9,8 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="794.0" styleClass="dark4" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="794.0" styleClass="dark4" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="TOP_CENTER" layoutX="314.0" layoutY="14.0" stylesheets="@style.css" text="My account">
          <styleClass>
@@ -18,6 +17,7 @@
             <String fx:value="whiteText" />
          </styleClass>
       </Label>
+      <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <AnchorPane layoutX="107.0" layoutY="87.0" prefHeight="218.0" prefWidth="580.0" styleClass="dark3" stylesheets="@style.css">
          <children>
             <ImageView fx:id="profilePicImageView" fitHeight="165.0" fitWidth="165.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <AnchorPane layoutX="106.0" layoutY="313.0" minWidth="-Infinity" prefHeight="247.0" prefWidth="580.0" styleClass="dark3">
          <children>
             <Button layoutX="455.0" layoutY="194.0" mnemonicParsing="false" text="Change Password" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
@@ -57,4 +56,4 @@
          </children>
       </AnchorPane>
    </children>
-</AnchorPane>
+</fx:root>
