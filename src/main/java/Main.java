@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Conversation;
 import model.MainModel;
@@ -14,12 +15,14 @@ public class Main extends Application {
         User activeUser = new User(1, "admin", "123", "eva");
         User contactUser=new User(2, "contact", "222", "olle" );
         User contactUser2=new User(3, "contact2", "222", "kalle" );
+        Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
 
         MainModel.getInstance().setActiveUser(activeUser);
         MainModel.getInstance().addContact(contactUser);
         MainModel.getInstance().addContact(contactUser2);
         MainModel.getInstance().addConversation(new Conversation(1));
         MainModel.getInstance().setActiveConversation(1);
+        contactUser.setStatusImage(statusImage);
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
