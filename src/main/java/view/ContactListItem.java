@@ -18,18 +18,18 @@ public class ContactListItem extends AnchorPane {
 
 
     @FXML
-    ImageView contactListItemProfileImageView;
+    ImageView contactProfileImageView;
 
 
 
     @FXML
-    ImageView contactListItemStatusImageView;
+    ImageView contactStatusImageView;
 
     @FXML
-    Label contactListItemNameLabel;
+    Label contactNameLabel;
 
     @FXML
-    Label contacListItemStatusLabel;
+    Label contactStatusLabel;
 
 
 
