@@ -3,6 +3,7 @@ package view;
 import controller.IMainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -24,6 +25,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     LoginView loginView = new LoginView(this);
     IMainController mainController;
     private IMainModel mainModel = MainModel.getInstance();
+    UserPageView userPage = new UserPageView(this);
 
     @FXML
     AnchorPane mainViewAnchorPane;
@@ -43,6 +45,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     StackPane mainViewStackPane;
 
+    @FXML
+    ImageView currentUserImageView;
+
+    @FXML
+    ImageView statusImageView;
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayChat();
@@ -56,7 +67,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         //loadConversations();
     }
 
-    public void moveLoginToBack(){
+    public void toMainView(){
         loginHBox.toBack();
     }
 
@@ -72,6 +83,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         }
 
     }
+    @FXML
+    public void toUserPage(){
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(userPage);
+        loginHBox.toFront();
+    }
+
 
     public void updateConversationsList() {
 

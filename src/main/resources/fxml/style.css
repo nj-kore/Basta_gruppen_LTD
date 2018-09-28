@@ -29,3 +29,60 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0px;
 }
+
+.titleText{
+    -fx-font-size: 32px;
+}
+
+.smallBigText{
+    -fx-font-size: 20px;
+    -fx-text-fill: rgb(250,250,250);
+    -fx-font-color: rgb(250,250,250);
+}
+
+.text16{
+    -fx-font-size: 16px;
+    -fx-text-fill: rgb(250,250,250);
+    -fx-font-color: rgb(250,250,250);
+}
+
+
+.dark1{
+    -fx-background-color: rgb(70,73,78);
+}
+.dark2{
+    -fx-background-color: rgb(66,69,73);
+}
+.dark3{
+    -fx-background-color: rgb(54,57,62);
+}
+.dark4{
+    -fx-background-color: rgb(40,43,48);
+}
+
+.whiteText{
+    -fx-text-fill: rgb(250,250,250);
+    -fx-font-color: rgb(250,250,250);
+}
+
+.button{
+    -fx-background-color: rgb(114,137,218);
+    -fx-text-fill: rgb(250,250,250);
+}
+.button:hover{
+    -fx-background-color: rgb(103,123,196);
+    -fx-text-fill: rgb(250,250,250);
+    -fx-cursor: hand;
+}
+
+/*.buttonNonProminent{
+    -fx-background-color: transparent;
+    -fx-border-width: 3px;
+    -fx-border-color: rgb(114,137,218);
+    -fx-text-fill: rgb(250,250,250);
+}*/
+
+.textFieldNoBorder{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0px;
+}
