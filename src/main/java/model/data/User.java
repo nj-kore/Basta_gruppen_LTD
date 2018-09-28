@@ -64,8 +64,6 @@ public class User {
         }
     }
 
-    public String getName(){return name;}
-
     public void addContact(User userToAdd){contacts.add(userToAdd);}
 
 
