@@ -10,7 +10,9 @@ public class User {
     private String username;
     private ArrayList<User> contacts = new ArrayList<>();
     private String name;
+    private String status;
     private Image statusImage;
+    private Image profileImage;
 
 
     public User(int id, String username, String password, String name) {
@@ -26,13 +28,15 @@ public class User {
         return id;
     }
 
-    public Image getStatusImage(){
-        return statusImage;
-    }
+    public Image getStatusImage(){return statusImage;}
 
     public String getName(){return name;}
 
     public ArrayList<User> getContacts(){return contacts;}
+
+    public Image getProfileImage(){return profileImage;}
+
+    public String getStatus(){return status;}
 
 
     //Setters
@@ -40,8 +44,14 @@ public class User {
         this.id = id;
     }
 
+    public void setStatus(String status){this.status=status;}
+
     public void setStatusImage(Image statusImage){
         this.statusImage = statusImage;
+    }
+
+    public void setProfileImage(Image profileImage){
+        this.profileImage=profileImage;
     }
 
 

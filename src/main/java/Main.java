@@ -16,6 +16,7 @@ public class Main extends Application {
         User contactUser=new User(2, "contact", "222", "olle" );
         User contactUser2=new User(3, "contact2", "222", "kalle" );
         Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
+        Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
 
         MainModel.getInstance().setActiveUser(activeUser);
         MainModel.getInstance().addContact(contactUser);
@@ -23,6 +24,8 @@ public class Main extends Application {
         MainModel.getInstance().addConversation(new Conversation(1));
         MainModel.getInstance().setActiveConversation(1);
         contactUser.setStatusImage(statusImage);
+        contactUser.setProfileImage(profileImage);
+        contactUser.setStatus("Matematisk");
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
