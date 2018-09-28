@@ -33,7 +33,8 @@ public class MainModel implements IMainModel {
             dataHandler.updateConversation(c);
         } else {
             c = dataHandler.loadConversation(conversationId);
-            addConversation(c);
+            if(c != null)
+                addConversation(c);
         }
         return c;
     }
