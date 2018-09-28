@@ -5,10 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import model.Conversation;
-import model.User;
+import model.data.Conversation;
+
 import java.io.IOException;
-import java.util.HashMap;
 
 public class ConversationListItem extends AnchorPane{
 

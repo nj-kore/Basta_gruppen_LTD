@@ -1,6 +1,9 @@
 package model;
 
 
+import model.data.Conversation;
+import model.data.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

@@ -1,4 +1,8 @@
-package model;
+package infrastructure;
+
+import model.data.Conversation;
+import model.data.Message;
+import model.data.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

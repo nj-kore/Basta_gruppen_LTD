@@ -1,4 +1,4 @@
-package model;
+package model.data;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class User {
 
     public String getName(){return name;}
 
-    protected void addContact(User userToAdd){contacts.add(userToAdd);}
+    public void addContact(User userToAdd){contacts.add(userToAdd);}
 
     public ArrayList<User> getContacts(){return contacts;}
 

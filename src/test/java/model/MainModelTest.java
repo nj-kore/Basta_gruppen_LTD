@@ -1,5 +1,7 @@
 package model;
 
+import model.data.Conversation;
+import model.data.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

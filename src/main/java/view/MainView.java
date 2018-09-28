@@ -7,10 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import model.Conversation;
+import model.data.Conversation;
 import model.IMainModel;
 import model.MainModel;
-import model.User;
+import model.data.User;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class MainView extends AnchorPane implements Initializable, IMainController{
+public class MainView extends AnchorPane implements Initializable, IMainController, IMainView{
 
     ChatView chatView = new ChatView();
     LoginView loginView = new LoginView(this);
@@ -45,14 +45,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        mainViewAnchorPane.getChildren().add(chatView);
+        displayChat();
         mainViewHBox.toBack();
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
-        updateContactsList(mainModel.getContacts());
-        updateConversationsList(mainModel.getConversations());
+
+        updateContactsList();
+        updateConversationsList();
         //loadConversations();
     }
 
@@ -60,11 +60,12 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
-    public void updateContactsList(ArrayList<User> contacts) {
+    public void updateContactsList() {
+
 
         contactsFlowPane.getChildren().clear();
 
-        for (User user : contacts) {
+        for (User user : mainModel.getContacts()) {
 
             ContactListItem contactListItemView = new ContactListItem(user);
             contactsFlowPane.getChildren().add(contactListItemView);
@@ -72,15 +73,37 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     }
 
-    public void updateConversationsList(HashMap<Integer, Conversation> conversations) {
+    public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        for (Map.Entry<Integer, Conversation> conversation : conversations.entrySet()) {
-
-            ConversationListItem conversationListItem = new ConversationListItem(conversation.getValue());
-            conversationsFlowPane.getChildren().add(conversationListItem);
+        for (Map.Entry<Integer, Conversation> conversation : MainModel.getInstance().getConversations().entrySet()) {
+            conversationsFlowPane.getChildren().add(new ConversationListItem(conversation.getValue()));
         }
 
     }
 
+    @Override
+    public void displayContacts() {
+        updateContactsList();
+    }
+
+    @Override
+    public void displayConversations() {
+        updateConversationsList();
+    }
+
+    @Override
+    public void displayChat() {
+        mainViewAnchorPane.getChildren().add(chatView);
+    }
+
+    @Override
+    public void displaySettings() {
+
+    }
+
+    @Override
+    public void displayUserPage() {
+
+    }
 }

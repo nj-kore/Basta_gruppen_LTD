@@ -1,6 +1,12 @@
 package model;
 
 
+import infrastructure.DataHandlerDummy;
+import infrastructure.IDataHandler;
+import model.data.Conversation;
+import model.data.Message;
+import model.data.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

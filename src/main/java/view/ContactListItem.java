@@ -5,12 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import model.IMainModel;
-import model.MainModel;
-import model.User;
+import model.data.User;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class ContactListItem extends AnchorPane {

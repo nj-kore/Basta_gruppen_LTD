@@ -1,4 +1,6 @@
-package model;
+package infrastructure;
+
+import model.data.Conversation;
 
 import java.io.*;
 import java.util.Scanner;

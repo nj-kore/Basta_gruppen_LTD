@@ -1,15 +1,6 @@
 package view;
 
-import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import model.Conversation;
-import model.MainModel;
 import org.junit.Test;
-
-import java.awt.*;
-
-import static org.junit.Assert.*;
 
 public class ChatViewTest {
 

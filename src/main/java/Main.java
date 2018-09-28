@@ -3,9 +3,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Conversation;
+import model.data.Conversation;
 import model.MainModel;
-import model.User;
+import model.data.User;
 
 public class Main extends Application {
 
