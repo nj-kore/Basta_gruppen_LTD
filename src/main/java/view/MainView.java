@@ -3,7 +3,6 @@ package view;
 import controller.IMainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -12,6 +11,7 @@ import model.Conversation;
 import model.IMainModel;
 import model.MainModel;
 import model.User;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,8 +59,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public void loadContacts(){
-        for(User u: MainModel.getInstance().getContacts()){
-            contactsFlowPane.getChildren().add(new ContactListItem(u));
+        if (!mainModel.getContacts().isEmpty()) {
+            for (User u : MainModel.getInstance().getContacts()) {
+                contactsFlowPane.getChildren().add(new ContactListItem(u));
+            }
         }
     }
     public void loadConversation(){
@@ -84,8 +86,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateConversationsList(HashMap<Integer, Conversation> conversations) {
 
         conversationsFlowPane.getChildren().clear();
-        ConversationListItemView conversationListItemView = new ConversationListItemView(conversations);
-        contactsFlowPane.getChildren().add(conversationListItemView);
+        ConversationListItem conversationListItem = new ConversationListItem(conversations);
+        contactsFlowPane.getChildren().add(conversationListItem);
 
     }
 

@@ -20,8 +20,6 @@ public class ContactListItem extends AnchorPane {
     @FXML
     ImageView contactProfileImageView;
 
-
-
     @FXML
     ImageView contactStatusImageView;
 
@@ -44,7 +42,7 @@ public class ContactListItem extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        contactListItemNameLabel.setText(user.getName());
+        contactNameLabel.setText(user.getName());
         //TODO Add functionality for the three functions below
         //contactListItemStatusImageView.getImage(user.getStatusimage());
         //contactListItemProfileImageView.getImage(user.getProfileImage());

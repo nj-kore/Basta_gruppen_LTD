@@ -11,7 +11,7 @@ import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ConversationListItemView extends AnchorPane{
+public class ConversationListItem extends AnchorPane{
 
     @FXML
     ImageView conversationProfileImageView;
@@ -26,7 +26,7 @@ public class ConversationListItemView extends AnchorPane{
     Label conversationStatusLabel;
 
 
-    public ConversationListItemView(HashMap<Integer, Conversation> conversationUsers) {
+    public ConversationListItem(HashMap<Integer, Conversation> conversationUsers) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
