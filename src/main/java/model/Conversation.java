@@ -1,6 +1,8 @@
 package model;
 
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,27 +11,14 @@ public class Conversation {
     private List<Message> messages = new ArrayList<Message>();
     private List<User> participants = new ArrayList<User>();
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Image picture;
 
     public Conversation(int id) {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    //functionality
     public void addMessage(Message m) {
         messages.add(m);
     }
@@ -38,7 +27,41 @@ public class Conversation {
         participants.add(u);
     }
 
+
+    //getters
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public List<Message> getMessages() {
         return messages;
     }
+
+    public Image getPicture() {
+        return picture;
+    }
+
+    //setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

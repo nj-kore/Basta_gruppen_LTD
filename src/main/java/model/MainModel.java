@@ -55,6 +55,10 @@ public class MainModel implements IMainModel {
         this.activeConversation = conversations.get(conversationId);
     }
 
+    public void createConversation(ArrayList<User> users) {
+
+    }
+
     public void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
     }
