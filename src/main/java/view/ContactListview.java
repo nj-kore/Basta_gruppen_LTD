@@ -13,10 +13,5 @@ public class ContactListview {
     @FXML
     FlowPane contactFlowPane;
 
-    public void loadContacts(){
-        for (User u:mainModel.getActiveUser().getContacts()){
-            //ContactListItem
-        }
-    }
 
 }

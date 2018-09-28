@@ -47,6 +47,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
         loadContacts();
+        //loadConversations();
     }
 
     public void moveLoginToBack(){
@@ -57,6 +58,11 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         for(User u: MainModel.getInstance().getContacts()){
             contactsFlowPane.getChildren().add(new ContactListItem(u));
         }
+    }
+    public void loadConversation(){
+        //for(User u: MainModel.getInstance().getConversations()){
+
+        //}
     }
 
 }
