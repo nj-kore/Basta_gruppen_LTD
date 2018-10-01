@@ -84,6 +84,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     break;
             }
         }
+        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage());
     }
 
     public void toMainView(){
@@ -97,12 +98,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
             contactsFlowPane.getChildren().add(new ContactListItem(iterator.next()));
         }
     }
+
     @FXML
     public void toUserPage(){
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(userPage);
         loginHBox.toFront();
     }
+
 
     public void updateConversationsList() {
 
@@ -146,4 +149,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
+
+    public void updateCurrentUserInfo(){
+        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage()); //TODO denna fungerar tydligen inte
+    }
 }

@@ -23,6 +23,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        profileImage = new Image("pics/userIcon.png");
     }
 
 
