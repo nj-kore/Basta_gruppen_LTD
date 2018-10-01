@@ -93,9 +93,6 @@ public class ChatView extends AnchorPane implements IChatController {
 
     public void loadMessages() {
         getChatFlowPane().getChildren().clear();
-        //for(Message m : getConversation().getMessages() ){
-        //  getChatFlowPane().getChildren().add(new view.MessageItem(m));
-        //}
         for (Message m : mainModel.loadConversation(mainModel.getActiveConversation().getId()).getMessages()) {
             ChatFlowPane.getChildren().add(new MessageItem(m));
         }
@@ -104,8 +101,14 @@ public class ChatView extends AnchorPane implements IChatController {
 
     @FXML
     public void chatNameChanged() {
-        mainModel.getActiveConversation().setName(chatNameTextField.getText());
-        System.out.println("reeeeee");
+        if(chatNameTextField.getText().length() > 0 && chatNameTextField.getText().length() < 30) {
+            mainModel.getActiveConversation().setName(chatNameTextField.getText());
+        }
+        else {
+            // TODO: 01/10/2018
+            //ladda in chatnamnet igen
+        }
+        chatNameTextField.setStyle("-fx-background-color: white");
         chatNameTextField.setEditable(false);
     }
 
@@ -113,7 +116,7 @@ public class ChatView extends AnchorPane implements IChatController {
     @FXML
     void changeChatName() {
         chatNameTextField.setEditable(true);
-        chatNameTextField.setStyle("-fx-background-insets: 2px;");
+        chatNameTextField.setStyle("-fx-background-color: cyan;");
         chatNameTextField.requestFocus();
 
         //Starts a thread that waits for the convo name to lose focus.

@@ -69,23 +69,6 @@ public class MainModel implements IMainModel {
         return conversations;
     }
 
-    /*public void createConversation(String name, int[] participants) {
-        //The dataHandler is going to create a blank conversation, with a valid ID that we can use.
-        // For now, the Id is just a random int between 0 and 100000
-        Conversation c = dataHandler.createConversation();
-        for(int i = 0; i < participants.length; i++)
-            c.addParticipant(users.get(participants[i]));
-        c.setName(name);
-        dataHandler.saveConversation(c);
-        addConversation(c);
-
-    }*/
-
-    //Is going to be used while testing
-    public void addUser(User u) {
-        users.put(u.getId(), u);
-    }
-
     public User getActiveUser() {
         return activeUser;
     }
