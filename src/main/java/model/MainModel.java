@@ -24,9 +24,9 @@ public class MainModel extends Observable implements IMainModel{
     private ArrayList<User> contacts = new ArrayList<>();
 
     public MainModel(){
-        User activeUser = new User(1, "admin", "123", "eva");
-        User contactUser=new User(2, "contact", "222", "olle" );
-        User contactUser2=new User(3, "contact2", "222", "kalle" );
+        User activeUser = new User(1, "admin", "123", "eva", "olsson");
+        User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
+        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
         Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
         Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
         setActiveUser(activeUser);

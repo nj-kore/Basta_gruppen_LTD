@@ -86,3 +86,8 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0px;
 }
+
+.redSmallText{
+    -fx-text-fill: rgba(255,70,70, 0.8);
+    -fx-font-size: 14px;
+}
