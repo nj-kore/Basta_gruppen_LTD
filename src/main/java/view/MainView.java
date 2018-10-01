@@ -66,8 +66,24 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
         //the interface? which seems wrong.
         ((MainModel)mainModel).addObserver(this);
-        //loadConversations();
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof IMainModel) {
+            switch((String)arg) {
+                case "ACTIVE_CONVERSATION":
+                    chatView.loadMessages();
+                    break;
+                case "CONTACTS":
+                    updateContactsList();
+                    break;
+                case "CONVERSATIONS":
+                    updateConversationsList();
+                    break;
+            }
+        }
     }
 
 
@@ -125,8 +141,4 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("homie");
-    }
 }

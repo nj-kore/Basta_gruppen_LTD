@@ -3,7 +3,6 @@ package model;
 
 import infrastructure.DataHandlerDummy;
 import infrastructure.IDataHandler;
-import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import model.data.Conversation;
 import model.data.Message;
@@ -12,7 +11,6 @@ import model.data.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
 
 
 public class MainModel extends Observable implements IMainModel{
@@ -21,7 +19,9 @@ public class MainModel extends Observable implements IMainModel{
     private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
-    private ArrayList<User> contacts = new ArrayList<>();
+    private enum UpdateTypes {
+        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS
+    }
 
     public MainModel(){
         User activeUser = new User(1, "admin", "123", "eva");
@@ -37,6 +37,8 @@ public class MainModel extends Observable implements IMainModel{
         contactUser.setStatusImage(statusImage);
         contactUser.setProfileImage(profileImage);
         contactUser.setStatus("Matematisk");
+
+
     }
 
 
@@ -45,7 +47,26 @@ public class MainModel extends Observable implements IMainModel{
         Message m = new Message(activeUser, text);
         activeConversation.addMessage(m);
         dataHandler.saveMessage(activeConversation.getId(), m);
+        update(UpdateTypes.ACTIVE_CONVERSATION);
     }
+
+    private void update(UpdateTypes u) {
+        String update = "";
+        switch(u) {
+            case ACTIVE_CONVERSATION:
+                update = UpdateTypes.ACTIVE_CONVERSATION.toString();
+                break;
+            case CONVERSATIONS:
+                update = UpdateTypes.CONVERSATIONS.toString();
+                break;
+            case CONTACTS:
+                update = UpdateTypes.CONTACTS.toString();
+                break;
+        }
+        setChanged();
+        notifyObservers(update);
+    }
+
     public Conversation loadConversation(int conversationId) {
         Conversation c;
         if(conversations.containsKey(conversationId)) {
