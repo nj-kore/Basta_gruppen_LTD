@@ -28,10 +28,6 @@ public class Message {
         return sender;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
     public String getText() {
         return text;
     }
