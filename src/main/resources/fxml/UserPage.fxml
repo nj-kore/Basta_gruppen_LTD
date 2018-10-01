@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -21,11 +20,7 @@
       <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <AnchorPane layoutX="106.0" layoutY="88.0" prefHeight="218.0" prefWidth="580.0" styleClass="dark3" stylesheets="@style.css">
          <children>
-            <ImageView fx:id="profilePicImageView" fitHeight="157.0" fitWidth="148.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-               <image>
-                  <Image url="@../pics/marten2.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="profilePicImageView" fitHeight="157.0" fitWidth="148.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
             <Button fx:id="editUserInfoButton" layoutX="535.0" layoutY="179.0" mnemonicParsing="false" onAction="#editInfo" text="Edit" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <Button fx:id="saveChangesButton" disable="true" layoutX="450.0" layoutY="178.0" mnemonicParsing="false" onAction="#saveInfoChange" text="Save Changes" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <TextField fx:id="firstNameTextField" editable="false" layoutX="175.0" layoutY="14.0" prefHeight="44.0" prefWidth="390.0" promptText="First Name" AnchorPane.rightAnchor="15.0">
@@ -46,7 +41,7 @@
                   <String fx:value="textFieldNoBorder" />
                </styleClass>
             </TextField>
-            <Button fx:id="changePictureButton" disable="true" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" text="Change Picture" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0">
+            <Button fx:id="changePictureButton" disable="true" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" onAction="#changePicture" prefHeight="26.0" prefWidth="141.0" text="Change Picture" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="14.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -73,7 +68,7 @@
             </PasswordField>
             <Label fx:id="passwordChangedLabel" layoutX="181.0" layoutY="194.0" styleClass="text16" text="Password successfully changed" visible="false" />
             <Label fx:id="passwordChangedLabel1" layoutX="191.0" layoutY="204.0" styleClass="text16" text="Password successfully changed" visible="false" />
-            <Label fx:id="wrongPasswordLabel" layoutX="371.0" layoutY="99.0" styleClass="redSmallText" text="Wrong Password" visible="false" />
+            <Label fx:id="wrongPasswordLabel" layoutX="409.0" layoutY="98.0" styleClass="redSmallText" text="Wrong Password" visible="false" />
          </children>
       </AnchorPane>
    </children>

@@ -1,16 +1,27 @@
 package view;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import model.IMainModel;
 import model.MainModel;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserPageView extends AnchorPane {
 
@@ -46,6 +57,9 @@ public class UserPageView extends AnchorPane {
 
     @FXML
     Label wrongPasswordLabel;
+
+    @FXML
+    ImageView profilePicImageView;
 
     public UserPageView(MainView parentView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserPage.fxml"));
@@ -83,6 +97,12 @@ public class UserPageView extends AnchorPane {
         mainModel.getActiveUser().setLastName(lastNameTextField.getText());
         mainModel.getActiveUser().setEmail(emailTextField.getText());
         enableInfoTextFields(false);
+
+        changePictureButton.setVisible(false);
+        changePictureButton.setDisable(true);
+        saveChangesButton.setDisable(true);
+        saveChangesButton.setVisible(false);
+        parent.updateCurrentUserInfo();
     }
 
     private void enableInfoTextFields(boolean enableEdit){
@@ -127,4 +147,22 @@ public class UserPageView extends AnchorPane {
             }
         } else wrongPasswordLabel.setVisible(true);
     }
+
+    @FXML
+    private void changePicture(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if(selectedFile != null){
+            mainModel.getActiveUser().setProfileImage(
+                    new Image(selectedFile.toURI().toString()));   //selectedFile.getPath();
+            profilePicImageView.setImage(mainModel.getActiveUser().getProfileImage());       //"../../resources/" + selectedFile.getName())
+        }else System.out.println("Invalid image ");
+
+
+
+    }
+
 }

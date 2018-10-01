@@ -104,6 +104,8 @@ public class MainModel extends Observable implements IMainModel{
         return activeConversation;
     }
 
+
+
     @Override
     public boolean login(String username, String password) {
         User user = dataHandler.loadUser(username);

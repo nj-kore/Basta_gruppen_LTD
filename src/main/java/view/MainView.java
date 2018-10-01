@@ -67,6 +67,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         //the interface? which seems wrong.
         ((MainModel)mainModel).addObserver(this);
         //loadConversations();
+        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage());
     }
 
     public void toMainView(){
@@ -134,5 +135,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("homie");
+    }
+
+    public void updateCurrentUserInfo(){
+        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage()); //TODO denna fungerar tydligen inte
     }
 }
