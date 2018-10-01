@@ -24,45 +24,67 @@ import java.util.List;
 public class JsonHandler implements  IDataHandler {
 
     @Override
-    public void saveMessage(int conversationId, Message m) {
-        try (Writer writer = new FileWriter("c" + conversationId +".json")) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(m, writer);
-        } catch (IOException e){
-            throw new RuntimeException(e);
+    public void saveMessage(int conversationId, Message messageToSave) {
+        List<Conversation> conversations = new ArrayList<Conversation>();
+        if (!fileExists("src/main/java/infrastructure/conversations.json")){
+            Conversation conversation = new Conversation(conversationId);
+            conversation.addMessage(messageToSave);
+            conversations.add(conversation);
+            writeConversations(conversations);
+        }else{
+            conversations = loadConversations();
+            for (Conversation conversation: conversations){
+                if (conversation.getId() == conversationId){
+                    conversation.addMessage(messageToSave);
+                    writeConversations(conversations);
+                }
+            }
         }
+
+
+        /*
+        boolean add = false;
+
+        conversations = loadConversations();
+        if (conversations != null){
+            for(Conversation conversation : conversations){
+                if (conversation.getId() == conversationId){
+                    for (Message message: conversation.getMessages()){
+                        if(message.getId()==messageToSave.getId()){
+                            add = false;
+                            break;
+                        }else{
+                            add = true;
+                        }
+                    }
+                    if(add){
+                        conversation.addMessage(messageToSave);
+                        writeConversations(conversations);
+                    }
+                }
+            }
+        }*/
     }
+
 
     /**
-     * Writes the inputted list of User to users.json.
-     * Will overwrite any existing users; use filExists before calling.
-     * @param users
+     * Saves User u to users.json using Gson
+     * @param userToSave the User to be saved
      */
-    private void writeUsers(List<User> users){
-        try (Writer writer = new FileWriter("src/main/java/infrastructure/users.json")) {
-            Gson gson = new GsonBuilder().serializeNulls().create();
-            gson.toJson(users, writer);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
-    public void saveUser(User u) {
+    public void saveUser(User userToSave) {
         List<User> users = new ArrayList<User>();
         if (!fileExists("src/main/java/infrastructure/users.json")){
-            users.add(u);
+            users.add(userToSave);
             writeUsers(users);
         }
 
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<User>>() {}.getType();
         boolean add = false;
 
         users = loadUsers();
         if (users != null){
             for(User user : users){
-                if(user.getId()==u.getId()){
+                if(user.getId()==userToSave.getId()){
                     add = false;
                     break;
                 }else{
@@ -71,8 +93,23 @@ public class JsonHandler implements  IDataHandler {
             }
         }
         if(add){
-            users.add(u);
+            users.add(userToSave);
             writeUsers(users);
+        }
+    }
+
+    /**
+     * Writes the inputted list of User to users.json.
+     * Will overwrite any existing users; use fileExists before calling.
+     * @param users
+     */
+    private void writeUsers(List<User> users){
+        try (Writer writer = new FileWriter("src/main/java/infrastructure/users.json")) {
+            Gson gson = new GsonBuilder().serializeNulls().create();
+            gson.toJson(users, writer);
+            writer.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -94,6 +131,10 @@ public class JsonHandler implements  IDataHandler {
         return null;
     }
 
+    /**
+     * @param username the username of the user to be loaded
+     * @return the user loaded from users.json
+     */
     @Override
     public User loadUser(String username) {
         List<User> users = loadUsers();
@@ -120,7 +161,7 @@ public class JsonHandler implements  IDataHandler {
 
         if (fileExists("src/main/java/infrastructure/users.json")){
             try (JsonReader reader = new JsonReader(new FileReader("src/main/java/infrastructure/users.json"))){
-                return users = gson.fromJson(reader, listType);
+                return gson.fromJson(reader, listType);
 
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -139,22 +180,28 @@ public class JsonHandler implements  IDataHandler {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Conversation>>() {}.getType();
         List<Conversation> conversations = new ArrayList<Conversation>();
-
-        try (JsonReader reader = new JsonReader(new FileReader("src/main/java/infrastructure/conversations.json"))){
-            conversations = gson.fromJson(reader, listType);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (fileExists("src/main/java/infrastructure/conversations.json")){
+            try (JsonReader reader = new JsonReader(new FileReader("src/main/java/infrastructure/conversations.json"))){
+                return gson.fromJson(reader, listType);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        return conversations;
-    }
+        return null;
 
-    private void writeConversation(List<Conversation> conversations){
-        Gson gson = new Gson();
+    }
+    /**
+     * Writes the inputted list of User to conversations.json.
+     * Will overwrite any existing users; use fileExists before calling.
+     * @param conversations the conversations to write to file
+     */
+    private void writeConversations(List<Conversation> conversations){
         try (Writer writer = new FileWriter("src/main/java/infrastructure/conversations.json")) {
-            gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new GsonBuilder().serializeNulls().create();
             gson.toJson(conversations, writer);
+            writer.close();
         } catch (IOException e){
             throw new RuntimeException(e);
         }
@@ -162,25 +209,29 @@ public class JsonHandler implements  IDataHandler {
 
     @Override
     public void saveConversation(Conversation conversationToSave) {
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<Conversation>>() {}.getType();
         List<Conversation> conversations = new ArrayList<Conversation>();
-        boolean add = true;
-        //if conversations.json exists: add conversation to the list of conversations
-        if(fileExists("src/main/java/infrastructure/conversations.json")) {
-            conversations = loadConversations();
+        if (!fileExists("src/main/java/infrastructure/conversations.json")){
+            conversations.add(conversationToSave);
+            writeConversations(conversations);
+        }
+
+        boolean add = false;
+
+        conversations = loadConversations();
+        if (conversations != null){
             for(Conversation conversation : conversations){
                 if(conversation.getId()==conversationToSave.getId()){
                     add = false;
+                    break;
+                }else{
+                    add = true;
                 }
             }
         }
-
         if(add){
             conversations.add(conversationToSave);
+            writeConversations(conversations);
         }
-
-        writeConversation(conversations);
 
     }
 
@@ -196,9 +247,23 @@ public class JsonHandler implements  IDataHandler {
 
     @Override
     public Conversation loadConversation(int conversationId) {
+        List<Conversation> conversations = loadConversations();
+        if(conversations.equals(null)){
+            return null;
+        }
+        for(Conversation conversation: conversations){
+            if (conversation.getId() == conversationId){
+                return conversation;
+            }
+        }
         return null;
     }
 
+    /**
+     * Checks to see if a file exists at the inputted path
+     * @param path the path to the file in question
+     * @return boolean
+     */
     private boolean fileExists(String path){
         File f = new File(path);
         if(f.exists() && !f.isDirectory()) {

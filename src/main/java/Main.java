@@ -8,18 +8,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.data.Conversation;
 import model.MainModel;
+import model.data.Message;
 import model.data.User;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        IDataHandler dh = new JsonHandler();
-        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
-        dh.saveUser(new User(2,"Bert","hej","hej","hejsson"));
-        dh.saveUser(new User(3,"Bert","hej","hej","hejsson"));
-        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
@@ -30,9 +25,6 @@ public class Main extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
-
-
-
 
     }
 
