@@ -14,10 +14,7 @@ import model.MainModel;
 import model.data.User;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView{
 
@@ -72,17 +69,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public void updateContactsList() {
-
-
         contactsFlowPane.getChildren().clear();
-
-        for (User user : mainModel.getContacts()) {
-
-            ContactListItem contactListItemView = new ContactListItem(user);
-            contactsFlowPane.getChildren().add(contactListItemView);
+        Iterator<User> iterator = mainModel.getContacts();
+        while (iterator.hasNext()){
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next()));
         }
-
     }
+
     @FXML
     public void toUserPage(){
         loginHBox.getChildren().clear();
@@ -94,8 +87,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        for (Map.Entry<Integer, Conversation> conversation : MainModel.getInstance().getConversations().entrySet()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(conversation.getValue()));
+        Iterator<Conversation> iterator = mainModel.getConversations();
+        while(iterator.hasNext()) {
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
 
     }

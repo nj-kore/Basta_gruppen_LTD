@@ -7,8 +7,7 @@ import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class MainModel implements IMainModel {
     private User activeUser;
@@ -18,6 +17,8 @@ public class MainModel implements IMainModel {
     private HashMap<Integer, User> users = new HashMap<>();
     private static MainModel mainModel = new MainModel();
     private ArrayList<User> contacts = new ArrayList<>();
+    private Iterator<Conversation> conversationIterator;
+    private Iterator<Message> messageIterator;
 
     private MainModel(){
     }
@@ -45,9 +46,18 @@ public class MainModel implements IMainModel {
         return c;
     }
 
+    public Iterator<Message> loadMessagesInConversation(){
+        Conversation c=loadConversation(getActiveConversation().getId());
+        messageIterator = c.getMessages().iterator();
+        return messageIterator;
+    }
+
     public void addContact(User u){activeUser.addContact(u);}
 
-    public ArrayList<User> getContacts(){return activeUser.getContacts();}
+    public Iterator<User> getContacts(){
+
+
+        return activeUser.getContacts().iterator();}
 
     public HashMap<Integer, User> getUsers() {
         return users;
@@ -65,8 +75,9 @@ public class MainModel implements IMainModel {
         conversations.put(c.getId(), c);
     }
 
-    public HashMap<Integer, Conversation> getConversations() {
-        return conversations;
+    public Iterator<Conversation> getConversations() {
+        conversationIterator = conversations.values().iterator();
+        return conversationIterator;
     }
 
     public User getActiveUser() {
