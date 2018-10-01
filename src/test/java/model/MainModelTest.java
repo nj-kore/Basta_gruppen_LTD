@@ -15,7 +15,7 @@ public class MainModelTest {
         c.addParticipant(user1);
         c.addParticipant(user2);
 
-        IMainModel model = MainModel.getInstance();
+        IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
         ((MainModel) model).setActiveUser(user1);
         ((MainModel) model).setActiveConversation(1);
@@ -31,7 +31,7 @@ public class MainModelTest {
         c.addParticipant(user1);
         c.addParticipant(user2);
 
-        IMainModel model = MainModel.getInstance();
+        IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
         ((MainModel) model).setActiveUser(user1);
         ((MainModel) model).setActiveConversation(1);
@@ -48,7 +48,7 @@ public class MainModelTest {
     public void loadConversation() {
         Conversation c = new Conversation(1);
 
-        IMainModel model = MainModel.getInstance();
+        IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
 
         assertNotNull(model.loadConversation(1));
