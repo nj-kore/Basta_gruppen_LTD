@@ -37,7 +37,7 @@ public class ContactListItem extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        contactNameLabel.setText(user.getName());
+        contactNameLabel.setText(user.getFullName());
         contactStatusImageView.setImage(user.getStatusImage());
         contactProfileImageView.setImage(user.getProfileImage());
         contactStatusLabel.setText(user.getStatus());
