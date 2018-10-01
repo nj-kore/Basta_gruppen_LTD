@@ -1,3 +1,5 @@
+import infrastructure.IDataHandler;
+import infrastructure.JsonHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -6,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.data.Conversation;
 import model.MainModel;
+import model.data.Message;
 import model.data.User;
 
 public class Main extends Application {
@@ -22,8 +25,6 @@ public class Main extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
-
-
 
     }
 

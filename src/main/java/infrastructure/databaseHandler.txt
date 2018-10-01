@@ -1,4 +1,8 @@
-package model;
+package infrastructure;
+
+import model.data.Conversation;
+import model.data.Message;
+import model.data.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +18,7 @@ public class databaseHandler implements IDataHandler {
 
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -25,7 +29,7 @@ public class databaseHandler implements IDataHandler {
     }
 
     private void createMessageDb(){
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -37,7 +41,7 @@ public class databaseHandler implements IDataHandler {
 
     public static void createNewMessageTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS messages (\n"
@@ -58,7 +62,7 @@ public class databaseHandler implements IDataHandler {
 
     public static void createNewConversationTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS conversations (\n"
@@ -78,7 +82,7 @@ public class databaseHandler implements IDataHandler {
 
     public static void createNewUserTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/users.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS users (\n"
@@ -99,7 +103,7 @@ public class databaseHandler implements IDataHandler {
 
     public static void createNewContactListTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS contact_lists (\n"
@@ -119,7 +123,7 @@ public class databaseHandler implements IDataHandler {
 
     public static void createNewParticipantListTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/main/java/model/messages.db";
+        String url = "jdbc:sqlite:src/main/java/infrastructure/messages.db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS participant_lists (\n"
@@ -208,11 +212,6 @@ public class databaseHandler implements IDataHandler {
 
     @Override
     public void saveConversation(Conversation c) {
-
-    }
-
-    @Override
-    public void createConversation() {
 
     }
 
