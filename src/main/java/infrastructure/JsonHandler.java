@@ -72,8 +72,6 @@ public class JsonHandler implements  IDataHandler {
         if(add){
             users.add(u);
         }
-
-
         try (Writer writer = new FileWriter("src/main/java/infrastructure/users.json")) {
             gson = new GsonBuilder().serializeNulls().create();
             gson.toJson(users, writer);
@@ -82,11 +80,47 @@ public class JsonHandler implements  IDataHandler {
         }
     }
 
+    /**
+     * Cannot run if there is no conversations.json
+     * @return conversations
+     */
+    private List<Conversation> loadConversations(){
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Conversation>>() {}.getType();
+        List<Conversation> conversations = new ArrayList<Conversation>();
+
+        try (JsonReader reader = new JsonReader(new FileReader("src/main/java/infrastructure/conversations.json"))){
+            conversations = gson.fromJson(reader, listType);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return conversations;
+    }
+
     @Override
     public void saveConversation(Conversation c) {
-        try (Writer writer = new FileWriter("c" + c.getId() +".json")) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(c, writer);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Conversation>>() {}.getType();
+        List<Conversation> conversations = new ArrayList<Conversation>();
+        boolean add = true;
+
+        File f = new File("src/main/java/infrastructure/conversations.json");
+        if(f.exists() && !f.isDirectory()) {
+            for(Conversation conversation : loadConversations()){
+                if(conversation.getId()==c.getId()){
+                    add = false;
+                }
+            }
+        }
+
+        if(add){
+            conversations.add(c);
+        }
+        try (Writer writer = new FileWriter("src/main/java/infrastructure/conversations.json")) {
+            gson = new GsonBuilder().serializeNulls().create();
+            gson.toJson(conversations, writer);
         } catch (IOException e){
             throw new RuntimeException(e);
         }
