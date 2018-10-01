@@ -39,6 +39,6 @@ public class UserPageView extends AnchorPane {
 
     @FXML
     public void backToMain(){
-        parent.toMainView();
+        parent.displayMainView();
     }
 }

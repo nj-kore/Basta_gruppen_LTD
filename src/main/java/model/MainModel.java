@@ -3,28 +3,42 @@ package model;
 
 import infrastructure.DataHandlerDummy;
 import infrastructure.IDataHandler;
+import javafx.beans.InvalidationListener;
+import javafx.scene.image.Image;
 import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainModel implements IMainModel {
+
+public class MainModel extends Observable implements IMainModel{
     private User activeUser;
     private Conversation activeConversation;
     private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
-    private static MainModel mainModel = new MainModel();
     private ArrayList<User> contacts = new ArrayList<>();
 
-    private MainModel(){
+    public MainModel(){
+        User activeUser = new User(1, "admin", "123", "eva");
+        User contactUser=new User(2, "contact", "222", "olle" );
+        User contactUser2=new User(3, "contact2", "222", "kalle" );
+        Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
+        Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
+        setActiveUser(activeUser);
+        addContact(contactUser);
+        addContact(contactUser2);
+        addConversation(new Conversation(1));
+        setActiveConversation(1);
+        contactUser.setStatusImage(statusImage);
+        contactUser.setProfileImage(profileImage);
+        contactUser.setStatus("Matematisk");
     }
 
-    public static MainModel getInstance() {
-        return mainModel;
-    }
 
     @Override
     public void sendMessage(String text) {

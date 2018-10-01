@@ -15,11 +15,12 @@ import model.data.Message;
 
 
 import java.io.IOException;
+import java.util.Observable;
 
 public class ChatView extends AnchorPane implements IChatController {
 
 
-    private IMainModel mainModel = MainModel.getInstance();
+    private IMainModel mainModel;
 
 
     @FXML
@@ -44,7 +45,7 @@ public class ChatView extends AnchorPane implements IChatController {
     MenuItem changeChatNameMenuItem;
 
 
-    public ChatView() {
+    public ChatView(IMainView parentView, IMainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -55,6 +56,7 @@ public class ChatView extends AnchorPane implements IChatController {
             throw new RuntimeException(exception);
         }
 
+        this.mainModel = mainModel;
         loadMessages();
 
     }
@@ -145,5 +147,6 @@ public class ChatView extends AnchorPane implements IChatController {
             chatTextArea.requestFocus();
         }
     }
+
 }
 

@@ -11,11 +11,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.IMainModel;
 import model.MainModel;
 
 import java.io.IOException;
 
 public class LoginView extends AnchorPane implements ILoginController {
+
+    private IMainModel mainModel;
     @FXML
     TextField userNameTextField;
     @FXML
@@ -25,10 +28,9 @@ public class LoginView extends AnchorPane implements ILoginController {
     @FXML
     Label wrongPasswordLabel;
 
-    MainView parentView;
+    private IMainView parentView;
 
-    public LoginView(MainView parentView) {
-        this.parentView = parentView;
+    public LoginView(IMainView parentView, IMainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -39,6 +41,8 @@ public class LoginView extends AnchorPane implements ILoginController {
             throw new RuntimeException(exception);
         }
         //userNameTextField.requestFocus(); //Gives focus to userNameTextField
+        this.parentView = parentView;
+        this.mainModel = mainModel;
         wrongPasswordLabel.setVisible(false);
 
     }
@@ -54,8 +58,8 @@ public class LoginView extends AnchorPane implements ILoginController {
 
     @FXML
     public void login(){
-        if (MainModel.getInstance().login(userNameTextField.getText(), passwordField.getText())){
-            parentView.toMainView();
+        if (mainModel.login(userNameTextField.getText(), passwordField.getText())){
+            parentView.displayMainView();
         } else{
             wrongPasswordLabel.setVisible(true);
         }

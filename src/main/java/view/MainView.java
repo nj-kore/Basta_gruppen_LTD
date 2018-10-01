@@ -3,6 +3,7 @@ package view;
 import controller.IMainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -14,17 +15,14 @@ import model.MainModel;
 import model.data.User;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class MainView extends AnchorPane implements Initializable, IMainController, IMainView{
+public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
-    ChatView chatView = new ChatView();
-    LoginView loginView = new LoginView(this);
     IMainController mainController;
-    private IMainModel mainModel = MainModel.getInstance();
+    private IMainModel mainModel = new MainModel();
+    ChatView chatView = new ChatView(this, mainModel);
+    LoginView loginView = new LoginView(this, mainModel);
     UserPageView userPage = new UserPageView(this);
 
     @FXML
@@ -64,12 +62,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         updateContactsList();
         updateConversationsList();
+
+        //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
+        //the interface? which seems wrong.
+        ((MainModel)mainModel).addObserver(this);
         //loadConversations();
+
     }
 
-    public void toMainView(){
-        loginHBox.toBack();
-    }
 
     public void updateContactsList() {
 
@@ -83,18 +83,11 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         }
 
     }
-    @FXML
-    public void toUserPage(){
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(userPage);
-        loginHBox.toFront();
-    }
-
 
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        for (Map.Entry<Integer, Conversation> conversation : MainModel.getInstance().getConversations().entrySet()) {
+        for (Map.Entry<Integer, Conversation> conversation : mainModel.getConversations().entrySet()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(conversation.getValue()));
         }
 
@@ -119,9 +112,21 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void displaySettings() {
 
     }
-
+    @FXML
     @Override
     public void displayUserPage() {
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(userPage);
+        loginHBox.toFront();
+    }
 
+    @Override
+    public void displayMainView() {
+        loginHBox.toBack();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("homie");
     }
 }
