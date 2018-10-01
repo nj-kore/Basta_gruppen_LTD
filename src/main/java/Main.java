@@ -15,6 +15,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        IDataHandler dh = new JsonHandler();
+        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
+        dh.saveUser(new User(2,"Bert","hej","hej","hejsson"));
+        dh.saveUser(new User(3,"Bert","hej","hej","hejsson"));
+        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
+
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 
         Scene scene = new Scene(root, 1280, 720);
@@ -26,10 +32,6 @@ public class Main extends Application {
         stage.show();
 
 
-        IDataHandler dh = new JsonHandler();
-        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
-        dh.saveUser(new User(2,"Bert","hej","hej","hejsson"));
-        dh.saveUser(new User(3,"Bert","hej","hej","hejsson"));
 
 
     }
