@@ -16,10 +16,13 @@ public class DataHandlerDummy implements IDataHandler {
 
     }
 
+
+              //TODO this method currently returns null
     @Override
     public Conversation createConversation() {
-        return new Conversation((int) (Math.random() * 100000));
+        return null;
     }
+
 
     @Override
     public void updateUser(User u) {

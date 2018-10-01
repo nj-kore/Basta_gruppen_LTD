@@ -29,3 +29,27 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0px;
 }
+
+#background-lightbox{
+    -fx-background-color: rgba(0,0,0,0.75);
+}
+
+.boldText{
+    -fx-font-weight: bold;
+}
+
+.detailViewBigText{
+    -fx-font-size: 45px;
+}
+
+.detailViewMediumText{
+    -fx-font-size: 25px;
+}
+
+#conversationListItemName{
+    -fx-font-size: 17px;
+}
+
+#conversationListItemStatus{
+    //TODO ITALIC
+}

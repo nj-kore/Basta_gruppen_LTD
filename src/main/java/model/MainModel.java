@@ -1,17 +1,23 @@
 package model;
 
 
+import view.ConversationListItem;
+import view.MainView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainModel implements IMainModel {
     private User activeUser;
     private Conversation activeConversation;
     private IDataHandler dataHandler = new DataHandlerDummy();
+    ArrayList<User> newConvoUsers = new ArrayList();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
     private static MainModel mainModel = new MainModel();
     private ArrayList<User> contacts = new ArrayList<>();
+    private User detailedUser;
 
     private MainModel(){
     }
@@ -56,7 +62,10 @@ public class MainModel implements IMainModel {
     }
 
     public void createConversation(ArrayList<User> users) {
-
+        Conversation conversation = new Conversation(conversations.size(), users);
+        conversations.put(conversation.getId(), conversation);
+        dataHandler.saveConversation(conversation);
+        //TODO update view conversationlist
     }
 
     public void addConversation(Conversation c) {
@@ -95,6 +104,13 @@ public class MainModel implements IMainModel {
     @Override
     public boolean login(String username, String password) {
         User user = dataHandler.loadUser(username);
+
+        //TODO remove this once database works, this is for testing purpose
+        for (User tempUser : getContacts()) {
+            user.addContact(tempUser);
+        }
+        //TODO
+
         if(!user.equals(null)){
             if(user.confirmPassword(password)){
                 this.activeUser = user;

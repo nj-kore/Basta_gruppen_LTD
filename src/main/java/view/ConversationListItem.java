@@ -39,4 +39,9 @@ public class ConversationListItem extends AnchorPane{
 
     }
 
+    @FXML
+    public void conversationListItemClicked() {
+
+    }
+
 }

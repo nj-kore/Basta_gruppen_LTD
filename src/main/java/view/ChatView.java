@@ -108,7 +108,6 @@ public class ChatView extends AnchorPane implements IChatController {
     @FXML
     public void chatNameChanged() {
         mainModel.getActiveConversation().setName(chatNameTextField.getText());
-        System.out.println("reeeeee");
         chatNameTextField.setEditable(false);
     }
 

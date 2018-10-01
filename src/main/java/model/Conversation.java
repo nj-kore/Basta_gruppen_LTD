@@ -9,12 +9,13 @@ import java.util.List;
 public class Conversation {
     private int id;
     private List<Message> messages = new ArrayList<Message>();
-    private List<User> participants = new ArrayList<User>();
+    private ArrayList<User> participants = new ArrayList<User>();
     private String name;
     private Image picture;
 
-    public Conversation(int id) {
+    public Conversation(int id, ArrayList<User> participants) {
         this.id = id;
+        this.participants = participants;
     }
 
 

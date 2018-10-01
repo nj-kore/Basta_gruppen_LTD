@@ -7,6 +7,7 @@ import java.util.HashMap;
 public interface IMainModel {
     void sendMessage(String text);
     Conversation loadConversation(int conversationId);
+    void createConversation(ArrayList<User> users);
     User getActiveUser();
     Conversation getActiveConversation();
     ArrayList<User> getContacts();
