@@ -10,8 +10,8 @@ public class MainModelTest {
     @Test
     public void sendMessage() {
         Conversation c = new Conversation(1);
-        User user1 = new User(1,"hej","123", "bengt");
-        User user2 = new User(2,"hej","123", "bengt2");
+        User user1 = new User(1,"hej","123", "bengt", "testsson");
+        User user2 = new User(2,"hej","123", "bengt2", "testsson");
         c.addParticipant(user1);
         c.addParticipant(user2);
 
@@ -26,8 +26,8 @@ public class MainModelTest {
     @Test
     public void readMessages() {
         Conversation c = new Conversation(1);
-        User user1 = new User(1,"hej","123", "bengt");
-        User user2 = new User(2,"hej","123", "bengt2");
+        User user1 = new User(1,"hej","123", "bengt", "testsson");
+        User user2 = new User(2,"hej","123", "bengt2", "testsson");
         c.addParticipant(user1);
         c.addParticipant(user2);
 
