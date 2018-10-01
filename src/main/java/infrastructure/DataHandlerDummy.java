@@ -1,5 +1,6 @@
 package infrastructure;
 
+import javafx.scene.image.Image;
 import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
@@ -47,6 +48,8 @@ public class DataHandlerDummy implements IDataHandler {
 
     @Override
     public User loadUser(String username) {
-        return new User(77, username, "123", "Greta", "Garbo");
+        User u = new User(77, username, "123", "Greta", "Garbo");
+        u.setProfileImage(new Image((getClass().getClassLoader().getResourceAsStream("pics/greta.jpg"))));
+        return u;
     }
 }

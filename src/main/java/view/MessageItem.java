@@ -18,7 +18,7 @@ public class MessageItem extends AnchorPane{
 
 
     @FXML
-    Label messageNameLabel;
+    Label messageUserNameLabel;
 
     @FXML
     ImageView messageImageView;
@@ -38,6 +38,8 @@ public class MessageItem extends AnchorPane{
         }
 
         this.message = message;
+        messageImageView.setImage(message.getSender().getProfileImage());
+        messageUserNameLabel.setText(message.getSender().getFullName());
         messageTextFlow.getChildren().add(new Text(message.getText()));
 
 
