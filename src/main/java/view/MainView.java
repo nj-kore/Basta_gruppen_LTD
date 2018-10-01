@@ -91,6 +91,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
+    //Clears the contactflowpane and fills it with new contacts.
+    //Gets an iterator from mainModel with all contacts of currentUser in the form of Users
+    //Each User then gets conoverted into a ContactListItem
     public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
