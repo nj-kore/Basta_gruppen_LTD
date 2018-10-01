@@ -1,3 +1,5 @@
+import infrastructure.IDataHandler;
+import infrastructure.JsonHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +25,11 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
+
+        IDataHandler dh = new JsonHandler();
+        dh.saveUser(new User(1,"hej","hej","hej","hejsson"));
+        dh.saveUser(new User(2,"Bert","hej","hej","hejsson"));
+        dh.saveUser(new User(3,"Bert","hej","hej","hejsson"));
 
 
     }

@@ -21,11 +21,6 @@ public class DataHandlerDummy implements IDataHandler {
     }
 
     @Override
-    public Conversation createConversation() {
-        return new Conversation((int) (Math.random() * 100000));
-    }
-
-    @Override
     public void updateUser(User u) {
 
     }

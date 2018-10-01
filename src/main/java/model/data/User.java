@@ -71,6 +71,9 @@ public class User {
 
     public String getStatus(){return status;}
 
+    public String getUsername() {
+        return username;
+    }
 
     //Setters
     public void setId(int id) {
