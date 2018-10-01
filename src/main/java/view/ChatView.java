@@ -58,6 +58,7 @@ public class ChatView extends AnchorPane implements IChatController {
         }
 
         this.mainModel = mainModel;
+
         loadMessages();
 
     }
@@ -69,7 +70,6 @@ public class ChatView extends AnchorPane implements IChatController {
             mainModel.sendMessage(chatTextArea.getText().trim());
             chatTextArea.clear();
         }
-        loadMessages();
     }
 
 

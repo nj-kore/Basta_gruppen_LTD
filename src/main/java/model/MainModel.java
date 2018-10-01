@@ -22,6 +22,9 @@ public class MainModel extends Observable implements IMainModel{
     private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
+    private enum UpdateTypes {
+        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS
+    }
     private ArrayList<User> contacts = new ArrayList<>();
     private Iterator<Conversation> conversationIterator;
     private Iterator<Message> messageIterator;
@@ -48,7 +51,26 @@ public class MainModel extends Observable implements IMainModel{
         Message m = new Message(activeUser, text);
         activeConversation.addMessage(m);
         dataHandler.saveMessage(activeConversation.getId(), m);
+        update(UpdateTypes.ACTIVE_CONVERSATION);
     }
+
+    private void update(UpdateTypes u) {
+        String update = "";
+        switch(u) {
+            case ACTIVE_CONVERSATION:
+                update = UpdateTypes.ACTIVE_CONVERSATION.toString();
+                break;
+            case CONVERSATIONS:
+                update = UpdateTypes.CONVERSATIONS.toString();
+                break;
+            case CONTACTS:
+                update = UpdateTypes.CONTACTS.toString();
+                break;
+        }
+        setChanged();
+        notifyObservers(update);
+    }
+
     public Conversation loadConversation(int conversationId) {
         Conversation c;
         if(conversations.containsKey(conversationId)) {
