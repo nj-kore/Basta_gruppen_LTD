@@ -54,4 +54,19 @@ public class MainModelTest {
         assertNotNull(model.loadConversation(1));
         assertNull(model.loadConversation(2));
     }
+
+    //This test asserts that getContacts returns the users contacts
+    @Test
+    public void getContacts(){
+
+        IMainModel model = new MainModel();
+        User activeUser = new User(1, "admin", "123", "eva", "olsson");
+        User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
+        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
+        ((MainModel) model).setActiveUser(activeUser);
+        assertFalse(model.getContacts().hasNext());
+        ((MainModel) model).addContact(contactUser);
+        assertNotNull(model.getContacts().next());
+
+    }
 }
