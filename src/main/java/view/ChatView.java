@@ -16,6 +16,7 @@ import model.data.Message;
 
 import java.io.IOException;
 import java.util.Observable;
+import java.util.Iterator;
 
 public class ChatView extends AnchorPane implements IChatController {
 
@@ -89,14 +90,15 @@ public class ChatView extends AnchorPane implements IChatController {
     }
 
 
-    public FlowPane getChatFlowPane() {
-        return ChatFlowPane;
+    public FlowPane getChatFlowPane() { return ChatFlowPane;
     }
 
     public void loadMessages() {
         getChatFlowPane().getChildren().clear();
-        for (Message m : mainModel.loadConversation(mainModel.getActiveConversation().getId()).getMessages()) {
-            ChatFlowPane.getChildren().add(new MessageItem(m));
+        Iterator<Message> itr= mainModel.loadMessagesInConversation();
+            while (itr.hasNext()) {
+                Message m = itr.next();
+                ChatFlowPane.getChildren().add(new MessageItem(m));
         }
     }
 
@@ -147,6 +149,5 @@ public class ChatView extends AnchorPane implements IChatController {
             chatTextArea.requestFocus();
         }
     }
-
 }
 

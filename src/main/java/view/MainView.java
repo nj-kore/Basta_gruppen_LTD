@@ -67,28 +67,34 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         //the interface? which seems wrong.
         ((MainModel)mainModel).addObserver(this);
         //loadConversations();
-
     }
 
+    public void toMainView(){
+        loginHBox.toBack();
+    }
 
     public void updateContactsList() {
-
-
         contactsFlowPane.getChildren().clear();
-
-        for (User user : mainModel.getContacts()) {
-
-            ContactListItem contactListItemView = new ContactListItem(user);
-            contactsFlowPane.getChildren().add(contactListItemView);
+        Iterator<User> iterator = mainModel.getContacts();
+        while (iterator.hasNext()){
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next()));
         }
-
     }
+
+    @FXML
+    public void toUserPage(){
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(userPage);
+        loginHBox.toFront();
+    }
+
 
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        for (Map.Entry<Integer, Conversation> conversation : mainModel.getConversations().entrySet()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(conversation.getValue()));
+        Iterator<Conversation> iterator = mainModel.getConversations();
+        while(iterator.hasNext()) {
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
 
     }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.*;
 
 
 public class MainModel extends Observable implements IMainModel{
@@ -22,6 +23,8 @@ public class MainModel extends Observable implements IMainModel{
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
     private ArrayList<User> contacts = new ArrayList<>();
+    private Iterator<Conversation> conversationIterator;
+    private Iterator<Message> messageIterator;
 
     public MainModel(){
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
@@ -59,9 +62,18 @@ public class MainModel extends Observable implements IMainModel{
         return c;
     }
 
+    public Iterator<Message> loadMessagesInConversation(){
+        Conversation c=loadConversation(getActiveConversation().getId());
+        messageIterator = c.getMessages().iterator();
+        return messageIterator;
+    }
+
     public void addContact(User u){activeUser.addContact(u);}
 
-    public ArrayList<User> getContacts(){return activeUser.getContacts();}
+    public Iterator<User> getContacts(){
+
+
+        return activeUser.getContacts().iterator();}
 
     public HashMap<Integer, User> getUsers() {
         return users;
@@ -79,8 +91,9 @@ public class MainModel extends Observable implements IMainModel{
         conversations.put(c.getId(), c);
     }
 
-    public HashMap<Integer, Conversation> getConversations() {
-        return conversations;
+    public Iterator<Conversation> getConversations() {
+        conversationIterator = conversations.values().iterator();
+        return conversationIterator;
     }
 
     public User getActiveUser() {
