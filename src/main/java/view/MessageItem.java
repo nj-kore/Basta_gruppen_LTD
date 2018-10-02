@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -38,7 +39,7 @@ public class MessageItem extends AnchorPane{
         }
 
         this.message = message;
-        messageImageView.setImage(message.getSender().getProfileImage());
+        messageImageView.setImage(new Image(message.getSender().getProfileImagePath()));
         messageUserNameLabel.setText(message.getSender().getFullName());
         messageTextFlow.getChildren().add(new Text(message.getText()));
 

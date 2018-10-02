@@ -13,8 +13,8 @@ public class User {
     private String lastName;
     private String email;
     private String status;
-    private Image statusImage;
-    private Image profileImage;
+    private String statusImagePath;
+    private String profileImagePath;
 
 
     public User(int id, String username, String password, String firstName, String lastName) {
@@ -23,7 +23,8 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        profileImage = new Image("pics/userIcon.png");
+        profileImagePath = "pics/userIcon.png";
+        statusImagePath = "pics/userIcon.png";
     }
 
 
@@ -32,7 +33,7 @@ public class User {
         return id;
     }
 
-    public Image getStatusImage(){return statusImage;}
+    public String getStatusImagePath(){return statusImagePath;}
 
     public String getFirstName(){return firstName;}
 
@@ -68,7 +69,7 @@ public class User {
 
     public ArrayList<User> getContacts(){return contacts;}
 
-    public Image getProfileImage(){return profileImage;}
+    public String getProfileImagePath(){return profileImagePath;}
 
     public String getStatus(){return status;}
 
@@ -83,12 +84,12 @@ public class User {
 
     public void setStatus(String status){this.status=status;}
 
-    public void setStatusImage(Image statusImage){
-        this.statusImage = statusImage;
+    public void setStatusImage(String statusImagePath){
+        this.statusImagePath = statusImagePath;
     }
 
-    public void setProfileImage(Image profileImage){
-        this.profileImage=profileImage;
+    public void setProfileImagePath(String profileImagePath){
+        this.profileImagePath=profileImagePath;
     }
 
 

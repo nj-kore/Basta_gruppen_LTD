@@ -84,7 +84,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     break;
             }
         }
-        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage());
+        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 
     public void toMainView(){
@@ -154,6 +154,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
 
     public void updateCurrentUserInfo(){
-        currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage()); //TODO denna fungerar tydligen inte
+        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath())); //TODO denna fungerar tydligen inte
     }
 }

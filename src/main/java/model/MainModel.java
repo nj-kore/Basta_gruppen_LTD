@@ -3,6 +3,7 @@ package model;
 
 import infrastructure.DataHandlerDummy;
 import infrastructure.IDataHandler;
+import infrastructure.JsonHandler;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import model.data.Conversation;
@@ -28,11 +29,13 @@ public class MainModel extends Observable implements IMainModel{
     private ArrayList<User> contacts = new ArrayList<>();
     private Iterator<Conversation> conversationIterator;
     private Iterator<Message> messageIterator;
+    private IDataHandler jsonHandler = new JsonHandler();
 
     public MainModel(){
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
         User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
+
         Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
         Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
         setActiveUser(activeUser);
@@ -40,9 +43,10 @@ public class MainModel extends Observable implements IMainModel{
         addContact(contactUser2);
         addConversation(new Conversation(1));
         setActiveConversation(1);
-        contactUser.setStatusImage(statusImage);
-        contactUser.setProfileImage(profileImage);
+        //contactUser.setStatusImage(statusImage);
+        //contactUser.setProfileImage(profileImage);
         contactUser.setStatus("Matematisk");
+        jsonHandler.saveUser(activeUser);
     }
 
 

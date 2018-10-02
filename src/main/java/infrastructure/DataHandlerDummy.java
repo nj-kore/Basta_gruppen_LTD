@@ -44,7 +44,7 @@ public class DataHandlerDummy implements IDataHandler {
     @Override
     public User loadUser(String username) {
         User u = new User(77, username, "123", "Greta", "Garbo");
-        u.setProfileImage(new Image((getClass().getClassLoader().getResourceAsStream("pics/greta.jpg"))));
+        //u.setProfileImagePath((getClass().getClassLoader().getResourceAsStream("pics/greta.jpg")));
         return u;
     }
 }

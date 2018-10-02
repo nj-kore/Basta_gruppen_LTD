@@ -105,7 +105,7 @@ public class JsonHandler implements  IDataHandler {
      */
     private void writeUsers(List<User> users){
         try (Writer writer = new FileWriter("src/main/java/infrastructure/users.json")) {
-            Gson gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
             gson.toJson(users, writer);
             writer.close();
         } catch (IOException e){
@@ -199,7 +199,7 @@ public class JsonHandler implements  IDataHandler {
      */
     private void writeConversations(List<Conversation> conversations){
         try (Writer writer = new FileWriter("src/main/java/infrastructure/conversations.json")) {
-            Gson gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
             gson.toJson(conversations, writer);
             writer.close();
         } catch (IOException e){

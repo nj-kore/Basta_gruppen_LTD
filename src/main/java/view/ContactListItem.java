@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.data.User;
@@ -38,8 +39,8 @@ public class ContactListItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
         contactNameLabel.setText(user.getFullName());
-        contactStatusImageView.setImage(user.getStatusImage());
-        contactProfileImageView.setImage(user.getProfileImage());
+        contactStatusImageView.setImage(new Image(user.getStatusImagePath()));
+        contactProfileImageView.setImage(new Image(user.getProfileImagePath()));
         contactStatusLabel.setText(user.getStatus());
     }
 
