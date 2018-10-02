@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ */
 public class UserPageView extends AnchorPane {
 
     MainView parent;
@@ -75,12 +78,20 @@ public class UserPageView extends AnchorPane {
         this.parent = parentView;
     }
 
+    /**
+     * Calls upon a function in the parentView to return to the mainView.
+     * Hides feedback labels so that they are not shown the next time the user enters.
+     */
     @FXML
     public void backToMain(){
         passwordChangedLabel.setVisible(false);
+        wrongPasswordLabel.setVisible(false);
         parent.displayMainView();
     }
 
+    /**
+     *Shows and enables the Change Picture button to enable the user to change picture and "switches" the Edit button to Save Changes
+     */
     @FXML
     private void editInfo(){
         enableInfoTextFields(true);
@@ -91,6 +102,10 @@ public class UserPageView extends AnchorPane {
         saveChangesButton.setDisable(false);
     }
 
+
+    /**
+     * Updates the model with info inserted into firstName-, lastName- and emailTextFields.
+     */
     @FXML
     private void saveInfoChange(){
         mainModel.getActiveUser().setFirstName(firstNameTextField.getText());
@@ -105,6 +120,12 @@ public class UserPageView extends AnchorPane {
         parent.updateCurrentUserInfo();
     }
 
+    /**
+     * Enables firstName-, lastName- and emailTextField to be edited and changes their style to show the user that they can be edited.
+     * @param enableEdit
+     * true to enable edit
+     * false to disable
+     */
     private void enableInfoTextFields(boolean enableEdit){
         if(enableEdit){
             firstNameTextField.setEditable(true);
@@ -137,6 +158,9 @@ public class UserPageView extends AnchorPane {
 
     }
 
+    /**
+     * Changes the users password.
+     */
     @FXML
     private void changePassword(){
         if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
@@ -148,6 +172,9 @@ public class UserPageView extends AnchorPane {
         } else wrongPasswordLabel.setVisible(true);
     }
 
+    /**
+     * Opens a FileChooser to allow the user to change profile picture.
+     */
     @FXML
     private void changePicture(){
         FileChooser fileChooser = new FileChooser();

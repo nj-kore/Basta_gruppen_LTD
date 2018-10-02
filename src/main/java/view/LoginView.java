@@ -48,6 +48,11 @@ public class LoginView extends AnchorPane implements ILoginController {
     }
 
 
+    /**
+     * When one of the textFields or Login button is focused, the enter key fires the login method.
+     * @param e
+     * A keystroke
+     */
     @FXML
     public void keyPressed(KeyEvent e) {
         if(e.getCode().equals(KeyCode.ENTER)) {
@@ -56,6 +61,9 @@ public class LoginView extends AnchorPane implements ILoginController {
             }
         }
 
+    /**
+     * Calls login function in mainModel. If the password and username matches, mainView is displayed.
+     */
     @FXML
     public void login(){
         if (mainModel.login(userNameTextField.getText(), passwordField.getText())){
