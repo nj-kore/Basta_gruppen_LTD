@@ -16,6 +16,9 @@ import java.util.Observer;
 import java.util.*;
 
 
+/**
+ * The facade for the model package.
+ */
 public class MainModel extends Observable implements IMainModel{
     private User activeUser;
     private Conversation activeConversation;
@@ -46,6 +49,13 @@ public class MainModel extends Observable implements IMainModel{
     }
 
 
+    /**
+     * @param text
+     *
+     * Sends a text to the active conversation from the active user
+     *
+     * Tells the view to update itself
+     */
     @Override
     public void sendMessage(String text) {
         Message m = new Message(activeUser, text);
@@ -54,6 +64,12 @@ public class MainModel extends Observable implements IMainModel{
         update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
+
+    /**
+     * @param u the type of "update" that the observers should do
+     *
+     * Notifies the observers with the String update as an argument
+     */
     private void update(UpdateTypes u) {
         String update = "";
         switch(u) {
@@ -70,6 +86,7 @@ public class MainModel extends Observable implements IMainModel{
         setChanged();
         notifyObservers(update);
     }
+
 
     public Conversation loadConversation(int conversationId) {
         Conversation c;
@@ -127,7 +144,14 @@ public class MainModel extends Observable implements IMainModel{
     }
 
 
-
+    /**
+     *
+     * @param username
+     * @param password
+     * @return if the login was successfull or not
+     *
+     * Checks if a User was found with the corresponding username and password
+     */
     @Override
     public boolean login(String username, String password) {
         User user = dataHandler.loadUser(username);
