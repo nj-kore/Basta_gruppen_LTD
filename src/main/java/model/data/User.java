@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
+
 public class User {
     private int id;
     private String password;
@@ -93,6 +94,7 @@ public class User {
 
 
     //Functionality
+    // TODO: 02/10/2018  Move this
     public boolean confirmPassword(String password){
         if (this.password.equals(password)){
             return true;
