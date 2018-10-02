@@ -1,18 +1,31 @@
-import infrastructure.IDataHandler;
-import infrastructure.JsonHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.data.Conversation;
-import model.MainModel;
-import model.data.Message;
-import model.data.User;
+
+/**
+ * The Shat App is a messaging desktop application for business. The app allows you to chat with contacts at work
+ *
+ * @author Filip Andréasson
+ * @author Gustav Häger
+ * @author Jonathan Köre
+ * @author Gustaf Spjut
+ * @author Benjamin Vinnerholt
+ *
+ * @version 0.5
+ * @since 2018-09-09
+ */
 
 public class Main extends Application {
 
+
+    /**
+     * @param stage
+     * @throws Exception
+     *
+     * Starts the program and sets the scene to MainView.fxml
+     */
     @Override
     public void start(Stage stage) throws Exception {
 

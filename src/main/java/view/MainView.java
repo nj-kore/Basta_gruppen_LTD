@@ -17,6 +17,11 @@ import model.data.User;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * The MainView is the main class of the view package. Linking all the different views together and forwards info
+ * given to the class from the model package via the observer class.
+ */
+
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
     IMainController mainController;
@@ -50,18 +55,20 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     ImageView statusImageView;
 
 
-
-
+    /**
+     * @param location
+     * @param resources
+     *
+     * Initializes the class and loads the views that makes out the complete mainView.
+     * Proceeds to show the loginpage to the user
+     * Finally it adds itself as an observer to the model
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayChat();
-        mainViewHBox.toBack();
-        loginHBox.toFront();
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(loginView);
-
         updateContactsList();
         updateConversationsList();
+        displayLoginPage();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
         //the interface? which seems wrong.
@@ -69,31 +76,36 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     }
 
+
+    /**
+     * @param o is the observable class that called the update method
+     * @param arg
+     *
+     * Decodes the arg to see what kind of task the view should do
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof IMainModel) {
-            switch((String)arg) {
-                case "ACTIVE_CONVERSATION":
-                    chatView.loadMessages();
-                    break;
-                case "CONTACTS":
-                    updateContactsList();
-                    break;
-                case "CONVERSATIONS":
-                    updateConversationsList();
-                    break;
+            if(arg instanceof String) {
+                switch((String)arg) {
+                    case "ACTIVE_CONVERSATION":
+                        chatView.loadMessages();
+                        break;
+                    case "CONTACTS":
+                        updateContactsList();
+                        break;
+                    case "CONVERSATIONS":
+                        updateConversationsList();
+                        break;
+                }
             }
         }
         currentUserImageView.setImage(mainModel.getActiveUser().getProfileImage());
     }
 
-    public void toMainView(){
-        loginHBox.toBack();
-    }
-
-    //Clears the contactflowpane and fills it with new contacts.
-    //Gets an iterator from mainModel with all contacts of currentUser in the form of Users
-    //Each User then gets conoverted into a ContactListItem
+    /**
+     * Clears the contactFlowPane and fills it with new ContactListItems corresponding to different Users
+     */
     public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
@@ -102,14 +114,12 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         }
     }
 
-    @FXML
-    public void toUserPage(){
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(userPage);
-        loginHBox.toFront();
-    }
 
 
+    /**
+     * Clears the conversationsFlowPane and fills it with new ConversationListItems corresponding to
+     * different Conversations.
+     */
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
@@ -118,6 +128,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
 
+    }
+
+    @Override
+    public void displayLoginPage() {
+        mainViewHBox.toBack();
+        loginHBox.toFront();
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(loginView);
     }
 
     @Override
