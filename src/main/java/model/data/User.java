@@ -92,6 +92,13 @@ public class User {
     }
 
 
+    /**
+     * Checks if parameter password equals the users password.
+     * @param password
+     * @return
+     * true if password matches
+     * false otherwise
+     */
     //Functionality
     public boolean confirmPassword(String password){
         if (this.password.equals(password)){
@@ -101,6 +108,10 @@ public class User {
         }
     }
 
+    /**
+     * adds userToAdd to contacts.
+     * @param userToAdd
+     */
     public void addContact(User userToAdd){contacts.add(userToAdd);}
 
 
