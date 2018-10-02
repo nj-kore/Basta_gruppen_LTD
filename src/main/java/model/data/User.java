@@ -25,6 +25,7 @@ public class User {
         this.lastName = lastName;
         profileImagePath = "pics/userIcon.png";
         statusImagePath = "pics/userIcon.png";
+
     }
 
 

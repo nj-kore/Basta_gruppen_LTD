@@ -4,23 +4,21 @@ package model;
 import infrastructure.DataHandlerDummy;
 import infrastructure.IDataHandler;
 import infrastructure.JsonHandler;
-import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.*;
 
 
 public class MainModel extends Observable implements IMainModel{
     private User activeUser;
     private Conversation activeConversation;
-    private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
     private enum UpdateTypes {
@@ -47,14 +45,32 @@ public class MainModel extends Observable implements IMainModel{
         //contactUser.setProfileImage(profileImage);
         contactUser.setStatus("Matematisk");
         jsonHandler.saveUser(activeUser);
+        jsonHandler.saveUser(contactUser);
+        jsonHandler.saveUser(contactUser);
+
     }
 
 
     @Override
     public void sendMessage(String text) {
-        Message m = new Message(activeUser, text);
+
+        int newMessageId = 0;
+        int oldHighestId;
+
+        while(loadMessagesInConversation().hasNext()){
+            oldHighestId = loadMessagesInConversation().next().getId();
+            if(oldHighestId >= newMessageId){
+                newMessageId = oldHighestId + 1;
+            }
+        }
+
+        jsonHandler.loadConversation(activeConversation.getId()).getMessages();
+
+        Message m = new Message(newMessageId,activeUser.getId(), text, LocalDateTime.now());
+
         activeConversation.addMessage(m);
-        dataHandler.saveMessage(activeConversation.getId(), m);
+
+        jsonHandler.saveMessage(activeConversation.getId(), m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
@@ -79,9 +95,9 @@ public class MainModel extends Observable implements IMainModel{
         Conversation c;
         if(conversations.containsKey(conversationId)) {
             c = conversations.get(conversationId);
-            dataHandler.updateConversation(c);
+            jsonHandler.updateConversation(c);
         } else {
-            c = dataHandler.loadConversation(conversationId);
+            c = jsonHandler.loadConversation(conversationId);
             if(c != null)
                 addConversation(c);
         }
@@ -134,8 +150,8 @@ public class MainModel extends Observable implements IMainModel{
 
     @Override
     public boolean login(String username, String password) {
-        User user = dataHandler.loadUser(username);
-        if(!user.equals(null)){
+        User user = jsonHandler.loadUser(username);
+        if(user != null){
             if(user.confirmPassword(password)){
                 this.activeUser = user;
                 return true;

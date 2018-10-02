@@ -38,6 +38,19 @@ public class Conversation {
         participants.add(u);
     }
 
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public User getParticipant(int id) {
+        for (User u : participants) {
+            if (u.getId() == id) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     public List<Message> getMessages() {
         return messages;
     }
