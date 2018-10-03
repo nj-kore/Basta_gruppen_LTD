@@ -30,10 +30,18 @@ public class Conversation {
         this.id = id;
     }
 
+    /**
+     * Adds message m to conversation
+     * @param m
+     */
     public void addMessage(Message m) {
         messages.add(m);
     }
 
+    /**
+     * Adds user u to the conversation
+     * @param u
+     */
     public void addParticipant(User u) {
         participants.add(u);
     }

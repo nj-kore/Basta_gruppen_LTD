@@ -9,4 +9,5 @@ public interface IMainView {
     void displaySettings();
     void displayUserPage();
     void displayMainView();
+    void displayLoginPage();
 }

@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 public class Message {
     private int id;
     private String text;
-    private int sender_id;
+    private int senderId;
+    private int conversationId;
     private LocalDateTime time;
 
-    public Message(int id, int sender_id, String text, LocalDateTime time){
-        this.sender_id = sender_id;
-        this.text = text;
+    public Message(int id, int senderId, String text, LocalDateTime time) {
         this.id = id;
+        this.senderId = senderId;
+        this.text = text;
         this.time = time;
     }
 
@@ -19,10 +20,12 @@ public class Message {
         return id;
     }
 
-    public int getSender_id(){return sender_id;}
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSenderId() {
+        return senderId;
     }
 
     public String getText() {

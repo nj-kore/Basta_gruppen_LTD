@@ -13,16 +13,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.*;
 
 
+/**
+ * The facade for the model package.
+ */
 public class MainModel extends Observable implements IMainModel{
     private User activeUser;
     private Conversation activeConversation;
+    private IDataHandler dataHandler = new DataHandlerDummy();
     private HashMap<Integer, Conversation> conversations = new HashMap<>();
     private HashMap<Integer, User> users = new HashMap<>();
     private enum UpdateTypes {
-        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS
+        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
     private ArrayList<User> contacts = new ArrayList<>();
     private Iterator<Conversation> conversationIterator;
@@ -30,15 +35,22 @@ public class MainModel extends Observable implements IMainModel{
     private IDataHandler jsonHandler = new JsonHandler();
 
     public MainModel(){
+
+    }
+
+
+    public void initFillers() {
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
         User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
-
+        users.put(activeUser.getId(), activeUser);
+        users.put(contactUser.getId(), contactUser);
+        users.put(contactUser2.getId(), contactUser2);
         Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
         Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
-        setActiveUser(activeUser);
-        addContact(contactUser);
-        addContact(contactUser2);
+        //setActiveUser(activeUser);
+        addContact(contactUser.getId());
+        addContact(contactUser2.getId());
         addConversation(new Conversation(1));
         setActiveConversation(1);
         //contactUser.setStatusImage(statusImage);
@@ -49,8 +61,13 @@ public class MainModel extends Observable implements IMainModel{
         jsonHandler.saveUser(contactUser);
 
     }
-
-
+    /**
+     * @param text
+     *
+     * Sends a text to the active conversation from the active user
+     *
+     * Tells the view to update itself
+     */
     @Override
     public void sendMessage(String text) {
 
@@ -74,6 +91,12 @@ public class MainModel extends Observable implements IMainModel{
         update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
+
+    /**
+     * @param u the type of "update" that the observers should do
+     *
+     * Notifies the observers with the String update as an argument
+     */
     private void update(UpdateTypes u) {
         String update = "";
         switch(u) {
@@ -85,6 +108,9 @@ public class MainModel extends Observable implements IMainModel{
                 break;
             case CONTACTS:
                 update = UpdateTypes.CONTACTS.toString();
+                break;
+            case INIT:
+                update = UpdateTypes.INIT.toString();
                 break;
         }
         setChanged();
@@ -110,12 +136,22 @@ public class MainModel extends Observable implements IMainModel{
         return messageIterator;
     }
 
-    public void addContact(User u){activeUser.addContact(u);}
+    public void addContact(int userId){activeUser.addContact(userId);}
+
+
 
     public Iterator<User> getContacts(){
+        List<User> list = new ArrayList<>();
+        for(int id : activeUser.getContacts()) {
+            list.add(getUser(id));
+        }
+        return list.iterator();
+    }
 
-
-        return activeUser.getContacts().iterator();}
+    @Override
+    public User getUser(int userId) {
+        return users.get(userId);
+    }
 
     public HashMap<Integer, User> getUsers() {
         return users;
@@ -147,13 +183,24 @@ public class MainModel extends Observable implements IMainModel{
     }
 
 
-
+    /**
+     *
+     * @param username
+     * @param password
+     * @return if the login was successfull or not
+     *
+     * Checks if a User was found with the corresponding username and password
+     */
     @Override
     public boolean login(String username, String password) {
         User user = jsonHandler.loadUser(username);
         if(user != null){
             if(user.confirmPassword(password)){
-                this.activeUser = user;
+                setActiveUser(user);
+                users.put(user.getId(), user);
+                initFillers();
+                update(UpdateTypes.INIT);
+
                 return true;
             }
         }

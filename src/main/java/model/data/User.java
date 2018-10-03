@@ -4,11 +4,12 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
+
 public class User {
     private int id;
     private String password;
     private String username;
-    private ArrayList<User> contacts = new ArrayList<>();
+    private ArrayList<Integer> contacts = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
@@ -68,7 +69,7 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<User> getContacts(){return contacts;}
+    public ArrayList<Integer> getContacts(){return contacts;}
 
     public String getProfileImagePath(){return profileImagePath;}
 
@@ -94,7 +95,15 @@ public class User {
     }
 
 
+    /**
+     * Checks if parameter password equals the users password.
+     * @param password
+     * @return
+     * true if password matches
+     * false otherwise
+     */
     //Functionality
+    // TODO: 02/10/2018  Move this
     public boolean confirmPassword(String password){
         if (this.password.equals(password)){
             return true;
@@ -103,7 +112,11 @@ public class User {
         }
     }
 
-    public void addContact(User userToAdd){contacts.add(userToAdd);}
+    /**
+     * adds userToAdd to contacts.
+     * @param userToAdd
+     */
+    public void addContact(int userToAdd){contacts.add(userToAdd);}
 
 
 
