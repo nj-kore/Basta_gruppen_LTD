@@ -65,11 +65,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ((MainModel)mainModel).addObserver(this);
         displayLoginPage();
+        mainModel.login("admin", "123");
+        //chatView.startTiming();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
         //the interface? which seems wrong.
-        ((MainModel)mainModel).addObserver(this);
 
     }
 
@@ -95,6 +97,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         updateConversationsList();
                         break;
                     case "INIT":
+                        displayMainView();
                         displayChat();
                         chatView.loadMessages();
                         updateContactsList();

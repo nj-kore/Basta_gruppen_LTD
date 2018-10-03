@@ -73,6 +73,10 @@ public class User {
 
     public String getProfileImagePath(){return profileImagePath;}
 
+    public Image getProfileImage() {
+        return new Image(profileImagePath);
+    }
+
     public String getStatus(){return status;}
 
     public String getUsername() {
@@ -86,7 +90,7 @@ public class User {
 
     public void setStatus(String status){this.status=status;}
 
-    public void setStatusImage(String statusImagePath){
+    public void setStatusImagePath(String statusImagePath){
         this.statusImagePath = statusImagePath;
     }
 

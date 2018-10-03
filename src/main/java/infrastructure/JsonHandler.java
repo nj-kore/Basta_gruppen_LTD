@@ -138,7 +138,7 @@ public class JsonHandler implements  IDataHandler {
     @Override
     public User loadUser(String username) {
         List<User> users = loadUsers();
-        if(users.equals(null)){
+        if(users == null){
             return null;
         }
         for(User u: users){
@@ -247,12 +247,16 @@ public class JsonHandler implements  IDataHandler {
 
     @Override
     public Conversation loadConversation(int conversationId) {
+        long t = System.currentTimeMillis();
         List<Conversation> conversations = loadConversations();
-        if(conversations.equals(null)){
-            return null;
+        if(conversations == null){
+            Conversation c = new Conversation(conversationId);
+            saveConversation(c);
+            return c;
         }
         for(Conversation conversation: conversations){
             if (conversation.getId() == conversationId){
+                System.out.println(System.currentTimeMillis() - t);
                 return conversation;
             }
         }

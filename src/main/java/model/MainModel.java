@@ -35,28 +35,24 @@ public class MainModel extends Observable implements IMainModel{
     private IDataHandler jsonHandler = new JsonHandler();
 
     public MainModel(){
-
+        User activeUser = new User(1, "admin", "123", "eva", "olsson");
+        users.put(activeUser.getId(), activeUser);
+        jsonHandler.saveUser(activeUser);
     }
 
 
     public void initFillers() {
-        User activeUser = new User(1, "admin", "123", "eva", "olsson");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
         User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
-        users.put(activeUser.getId(), activeUser);
         users.put(contactUser.getId(), contactUser);
         users.put(contactUser2.getId(), contactUser2);
-        Image statusImage = new Image(getClass().getClassLoader().getResourceAsStream("pics/activeStatus.png"));
-        Image profileImage = new Image((getClass().getClassLoader().getResourceAsStream("pics/lukasmaly.jpg")));
-        //setActiveUser(activeUser);
         addContact(contactUser.getId());
         addContact(contactUser2.getId());
         addConversation(new Conversation(1));
         setActiveConversation(1);
-        //contactUser.setStatusImage(statusImage);
-        //contactUser.setProfileImage(profileImage);
+        contactUser.setStatusImagePath("pics/activeStatus.png");
+        contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus("Matematisk");
-        jsonHandler.saveUser(activeUser);
         jsonHandler.saveUser(contactUser);
         jsonHandler.saveUser(contactUser);
 
@@ -74,18 +70,17 @@ public class MainModel extends Observable implements IMainModel{
         int newMessageId = 0;
         int oldHighestId;
 
-        while(loadMessagesInConversation().hasNext()){
-            oldHighestId = loadMessagesInConversation().next().getId();
+        Iterator<Message> itr = loadMessagesInConversation();
+        while(itr.hasNext()){
+            oldHighestId = itr.next().getId();
             if(oldHighestId >= newMessageId){
                 newMessageId = oldHighestId + 1;
             }
         }
+        Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
+        //jsonHandler.loadConversation(activeConversation.getId()).getMessages();
 
-        jsonHandler.loadConversation(activeConversation.getId()).getMessages();
-
-        Message m = new Message(newMessageId,activeUser.getId(), text, LocalDateTime.now());
-
-        activeConversation.addMessage(m);
+        //activeConversation.addMessage(m);
 
         jsonHandler.saveMessage(activeConversation.getId(), m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
@@ -118,16 +113,7 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public Conversation loadConversation(int conversationId) {
-        Conversation c;
-        if(conversations.containsKey(conversationId)) {
-            c = conversations.get(conversationId);
-            jsonHandler.updateConversation(c);
-        } else {
-            c = jsonHandler.loadConversation(conversationId);
-            if(c != null)
-                addConversation(c);
-        }
-        return c;
+        return jsonHandler.loadConversation(conversationId);
     }
 
     public Iterator<Message> loadMessagesInConversation(){
