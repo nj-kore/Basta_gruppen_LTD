@@ -65,9 +65,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        displayChat();
-        updateContactsList();
-        updateConversationsList();
         displayLoginPage();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
@@ -96,6 +93,11 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         break;
                     case "CONVERSATIONS":
                         updateConversationsList();
+                        break;
+                    case "INIT":
+                        displayChat();
+                        chatView.loadMessages();
+                        updateContactsList();
                         break;
                 }
             }

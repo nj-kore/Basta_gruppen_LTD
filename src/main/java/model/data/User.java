@@ -9,7 +9,7 @@ public class User {
     private int id;
     private String password;
     private String username;
-    private ArrayList<User> contacts = new ArrayList<>();
+    private ArrayList<Integer> contacts = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
@@ -67,7 +67,7 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<User> getContacts(){return contacts;}
+    public ArrayList<Integer> getContacts(){return contacts;}
 
     public Image getProfileImage(){return profileImage;}
 
@@ -114,7 +114,7 @@ public class User {
      * adds userToAdd to contacts.
      * @param userToAdd
      */
-    public void addContact(User userToAdd){contacts.add(userToAdd);}
+    public void addContact(int userToAdd){contacts.add(userToAdd);}
 
 
 

@@ -2,13 +2,12 @@ package model.data;
 
 public class Message {
     private int id;
-    private User sender;
     private String text;
-    private int sender_id;
-    private int conversation_id;
+    private int senderId;
+    private int conversationId;
 
-    public Message(User sender, String text) {
-        this.sender = sender;
+    public Message(int senderId, String text) {
+        this.senderId = senderId;
         this.text = text;
     }
 
@@ -24,8 +23,8 @@ public class Message {
         this.id = id;
     }
 
-    public User getSender() {
-        return sender;
+    public int getSenderId() {
+        return senderId;
     }
 
     public String getText() {

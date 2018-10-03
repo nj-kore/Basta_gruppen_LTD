@@ -19,6 +19,7 @@ public interface IMainModel {
     Iterator<Conversation> getConversations();
     boolean login(String username, String password);
     Iterator<Message> loadMessagesInConversation();
+    User getUser(int userId);
 
 
 }

@@ -8,13 +8,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.data.Message;
-
+import model.data.User;
 
 
 import java.io.IOException;
 
 public class MessageItem extends AnchorPane{
-    private Message message;
 
 
     @FXML
@@ -26,7 +25,7 @@ public class MessageItem extends AnchorPane{
     @FXML
     TextFlow messageTextFlow;
 
-    public MessageItem(Message message){
+    public MessageItem(Message message, User concreteUser){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -37,9 +36,8 @@ public class MessageItem extends AnchorPane{
             throw new RuntimeException(exception);
         }
 
-        this.message = message;
-        messageImageView.setImage(message.getSender().getProfileImage());
-        messageUserNameLabel.setText(message.getSender().getFullName());
+        messageImageView.setImage(concreteUser.getProfileImage());
+        messageUserNameLabel.setText(concreteUser.getFullName());
         messageTextFlow.getChildren().add(new Text(message.getText()));
 
 
