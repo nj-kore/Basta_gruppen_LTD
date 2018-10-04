@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -16,6 +19,9 @@ import model.data.User;
 
 import java.net.URL;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
@@ -29,7 +35,46 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     ChatView chatView = new ChatView(this, mainModel);
     LoginView loginView = new LoginView(this, mainModel);
     UserPageView userPage = new UserPageView(this);
+    ArrayList<NewConvoContactListItem> newConvoListItems = new ArrayList<>();
+    User detailedUser;
 
+    //contactDetailView
+    @FXML
+    AnchorPane contactDetailView;
+
+    @FXML
+    ImageView contactDetailViewProfilemageView;
+
+    @FXML
+    ImageView contactDetailViewStatusImageView;
+
+    @FXML
+    Label contactDetailViewStatusLabel;
+
+    @FXML
+    Label contactDetailViewNameLabel;
+
+    //newConversationView
+    @FXML
+    AnchorPane createConvoView;
+
+    @FXML
+    FlowPane newConvoContactPane;
+
+    @FXML
+    FlowPane newConvoConvoPane;
+
+    @FXML
+    Button newConvoCreateConvoButton;
+
+    @FXML
+    Button newConvoMoveUsersButton;
+
+    @FXML
+    Button newConvoCloseButton;
+
+
+    //mainView
     @FXML
     AnchorPane mainViewAnchorPane;
 
@@ -67,6 +112,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void initialize(URL location, ResourceBundle resources) {
         ((MainModel)mainModel).addObserver(this);
         displayLoginPage();
+        updateCreateNewConvoLists();
         mainModel.login("admin", "123");
         //chatView.startTiming();
 
@@ -120,7 +166,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
 
-
     /**
      * Clears the conversationsFlowPane and fills it with new ConversationListItems corresponding to
      * different Conversations.
@@ -137,10 +182,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @Override
     public void displayLoginPage() {
-        mainViewHBox.toBack();
-        loginHBox.toFront();
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(loginView);
     }
 
     @Override
@@ -156,7 +197,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @Override
     public void displayChat() {
         mainViewAnchorPane.getChildren().add(chatView);
-    }
 
     @Override
     public void displaySettings() {
@@ -175,8 +215,110 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toBack();
     }
 
+    public void updateContactsList(ArrayList<User> contacts) {
+
+        contactsFlowPane.getChildren().clear();
+
+        for (User user : contacts) {
+
+            ContactListItem contactListItemView = new ContactListItem(user);
+            contactsFlowPane.getChildren().add(contactListItemView);
+        }
 
     public void updateCurrentUserInfo(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath())); //TODO denna fungerar tydligen inte
     }
+
+    public void updateConversationsList() {
+
+        conversationsFlowPane.getChildren().clear();
+        for (Map.Entry<Integer, Conversation> conversation : mainModel.getConversations().entrySet()) {
+
+            ConversationListItem conversationListItem = new ConversationListItem(conversation.getValue());
+            conversationsFlowPane.getChildren().add(conversationListItem);
+        }
+    }
+
+    private void updateCreateNewConvoLists() {
+        newConvoContactPane.getChildren().clear();
+        newConvoConvoPane.getChildren().clear();
+        for (User user : mainModel.getContacts()) {
+            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(user);
+            newConvoContactPane.getChildren().add(newConvoContact);
+            newConvoListItems.add(newConvoContact);
+        }
+    }
+
+
+    //createNewConvo functionality
+    @FXML
+    private void newConvoMoveUsersButtonClicked() {
+        ArrayList<NewConvoContactListItem> newConvoListItemsCopy = new ArrayList<>(newConvoListItems);
+
+        for (NewConvoContactListItem newConvoContactListItem : newConvoListItemsCopy) {
+
+            if(newConvoContactListItem.isFocused) {
+
+                if (newConvoContactListItem.isAdded) {
+
+                    newConvoListItems.remove(newConvoContactListItem);
+                    newConvoConvoPane.getChildren().remove(newConvoContactListItem);
+                    newConvoContactPane.getChildren().add(newConvoContactListItem);
+                    newConvoContactListItem.isAdded = false;
+                } else {
+
+                    newConvoContactPane.getChildren().remove(newConvoContactListItem);
+                    newConvoListItems.add(newConvoContactListItem);
+                    newConvoConvoPane.getChildren().add(newConvoContactListItem);
+                    newConvoContactListItem.isAdded = true;
+                }
+                newConvoContactListItem.isFocused = false;
+                newConvoContactListItem.setStyle("-fx-background-color: #f7efef");
+            }
+        }
+    }
+
+    @FXML
+    private void newConvoCreateConvoButtonClicked() {
+        ArrayList<User> users = new ArrayList<>();
+        for (NewConvoContactListItem newConvoContactListItem : newConvoListItems) {
+            User user = newConvoContactListItem.getUser();
+            users.add(user);
+        }
+        mainModel.createConversation(users);
+    }
+
+    @FXML
+    private void newConvoButtonClicked() {
+        createConvoView.toFront();
+        updateCreateNewConvoLists();
+    }
+
+    @FXML
+    public void newConvoCloseButtonClicked() {
+        createConvoView.toBack();
+    }
+
+    //contactDetailView functionality
+    @FXML
+    public void contactDetailViewCloseButtonClicked() {
+        contactDetailView.toBack();
+    }
+
+    @FXML
+    public void contactDetailViewCreateConvoButtonClicked() {
+        ArrayList<User> users = new ArrayList<>();
+        users.add(detailedUser);
+        mainModel.createConversation(users);
+    }
+
+    public void loadDetailView(User user) {
+        this.contactDetailViewNameLabel.setText(user.getName());
+        this.contactDetailViewProfilemageView.setImage(null); //TODO setImage from user
+        this.contactDetailViewStatusImageView.setImage(null); //TODO setImage from user
+        this.contactDetailViewStatusLabel.setText("active"); //TODO setText from user
+        contactDetailView.toFront();
+    }
+
+
 }

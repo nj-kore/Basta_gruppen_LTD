@@ -91,3 +91,26 @@
     -fx-text-fill: rgba(255,70,70, 0.8);
     -fx-font-size: 14px;
 }
+#background-lightbox{
+    -fx-background-color: rgba(0,0,0,0.75);
+}
+
+.boldText{
+    -fx-font-weight: bold;
+}
+
+.detailViewBigText{
+    -fx-font-size: 45px;
+}
+
+.detailViewMediumText{
+    -fx-font-size: 25px;
+}
+
+#conversationListItemName{
+    -fx-font-size: 17px;
+}
+
+#conversationListItemStatus{
+    //TODO ITALIC
+}

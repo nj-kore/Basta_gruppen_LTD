@@ -21,6 +21,14 @@ public class DataHandlerDummy implements IDataHandler {
 
     }
 
+
+              //TODO this method currently returns null
+    @Override
+    public Conversation createConversation() {
+        return null;
+    }
+
+
     @Override
     public void updateUser(User u) {
 

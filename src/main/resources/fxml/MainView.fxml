@@ -2,6 +2,8 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -12,9 +14,71 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
    <children>
+      <AnchorPane id="background-lightbox" fx:id="contactDetailView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="200.0">
+               <children>
+                  <ImageView fx:id="contactDetailViewProfilemageView" fitHeight="208.0" fitWidth="223.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pics/lukasmaly.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="contactDetailViewNameLabel" layoutX="223.0" layoutY="36.0" styleClass="detailViewBigText" text="Mattegud, Jesus" />
+                  <ImageView fx:id="contactDetailViewStatusImageView" fitHeight="17.0" fitWidth="15.0" layoutX="223.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pics/activeStatus.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="contactDetailViewStatusLabel" layoutX="257.0" layoutY="142.0" styleClass="detailViewMediumText" text="Active" />
+                  <Button layoutX="332.0" layoutY="244.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCreateConvoButtonClicked" styleClass="detailViewMediumText" text="Create new conversation" />
+                  <Button layoutX="654.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCloseButtonClicked" styleClass="boldText" text="X" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="background-lightbox" fx:id="createConvoView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="350.0" layoutY="150.0" prefHeight="400.0" prefWidth="600.0" snapToPixel="false" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="150.0">
+               <children>
+                  <Label layoutX="159.0" layoutY="11.0" text="Create new conversation">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="103.0" text="Choose contact(s)" />
+                  <AnchorPane layoutX="14.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0">
+                     <children>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <FlowPane fx:id="newConvoContactPane" prefHeight="275.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="384.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0">
+                     <children>
+                        <ScrollPane prefHeight="275.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <FlowPane fx:id="newConvoConvoPane" prefHeight="275.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="newConvoMoveUsersButton" layoutX="248.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#newConvoMoveUsersButtonClicked" text="Move user(s)" />
+                  <Button fx:id="newConvoCreateConvoButton" layoutX="220.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#newConvoCreateConvoButtonClicked" styleClass="boldText" text="Create conversation">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="newConvoCloseButton" layoutX="554.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#newConvoCloseButtonClicked" styleClass="boldText" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <StackPane fx:id="mainViewStackPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox fx:id="loginHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mainViewHBox" />
@@ -22,57 +86,48 @@
                <children>
                   <VBox maxWidth="250.0" prefHeight="600.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                      <children>
-                      <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="250.0">
+                        <TabPane layoutX="18.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab text="Conversations">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <FlowPane fx:id="conversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Contacts">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <content>
+                                                <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                        <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <TabPane layoutX="18.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <tabs>
-                                  <Tab text="Contacts">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <content>
-                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                                   </content>
-                                                </ScrollPane>
-                                             </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </Tab>
-                                  <Tab text="Conversations">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                             <children>
-                                                <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <content>
-                                                      <FlowPane fx:id="conversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                                   </content>
-                                                </ScrollPane>
-                                             </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </Tab>
-                                </tabs>
-                              </TabPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane maxHeight="120.0" maxWidth="250.0" minHeight="60.0" prefHeight="55.0" prefWidth="250.0" VBox.vgrow="NEVER">
-                           <children>
-                              <ImageView fx:id="currentUserImageView" fitHeight="42.0" fitWidth="42.0" layoutX="14.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="13.0" fitWidth="14.0" layoutX="46.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../pics/statusGreen.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="208.0" layoutY="9.0" onMouseClicked="#displayUserPage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
-                                 <image>
-                                    <Image url="@../pics/optionsIcon.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label layoutX="65.0" layoutY="14.0" text="currentUser" />
+                              <Button fx:id="newConvoButton" layoutX="159.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#newConvoButtonClicked" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutY="13.0" text="Create new conversation">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>

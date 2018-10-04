@@ -1,6 +1,8 @@
 package model.data;
 
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,27 +11,15 @@ public class Conversation {
     private List<Message> messages = new ArrayList<Message>();
     private List<User> participants = new ArrayList<User>();
     private String name;
+    private Image picture;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Conversation(int id) {
+    public Conversation(int id, ArrayList<User> participants) {
         this.id = id;
+        this.participants = participants;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    //functionality
     /**
      * Adds message m to conversation
      * @param m
@@ -44,6 +34,16 @@ public class Conversation {
      */
     public void addParticipant(User u) {
         participants.add(u);
+    }
+
+
+    //getters
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public List<User> getParticipants() {
@@ -62,4 +62,28 @@ public class Conversation {
     public List<Message> getMessages() {
         return messages;
     }
+
+    public Image getPicture() {
+        return picture;
+    }
+
+    //setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

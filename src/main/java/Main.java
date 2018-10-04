@@ -17,6 +17,7 @@ import javafx.stage.Stage;
  * @since 2018-09-09
  */
 
+
 public class Main extends Application {
 
 
@@ -38,6 +39,8 @@ public class Main extends Application {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.show();
+
+
 
     }
 

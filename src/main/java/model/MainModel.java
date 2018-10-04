@@ -18,7 +18,7 @@ import java.util.*;
 
 
 /**
- * The facade for the model package.
+ * The façade for the model package.
  */
 public class MainModel extends Observable implements IMainModel{
     private User activeUser;
@@ -26,10 +26,12 @@ public class MainModel extends Observable implements IMainModel{
     private enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
-    private ArrayList<User> contacts = new ArrayList<>();
+    private IDataHandler dataHandler = new DataHandlerDummy();
+    ArrayList<User> newConvoUsers = new ArrayList();
     private Iterator<Conversation> conversationIterator;
     private Iterator<Message> messageIterator;
     private IDataHandler jsonHandler = new JsonHandler();
+    private User detailedUser;
 
     public MainModel(){
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
@@ -148,6 +150,13 @@ public class MainModel extends Observable implements IMainModel{
 
     public void setActiveConversation(int conversationId) {
         this.activeConversation = jsonHandler.loadConversation(conversationId);
+    }
+
+    public void createConversation(ArrayList<User> users) {
+        Conversation conversation = new Conversation(conversations.size(), users);
+        conversations.put(conversation.getId(), conversation);
+        dataHandler.saveConversation(conversation);
+        //TODO update view conversationlist
     }
 
     public void addConversation(Conversation c) {
