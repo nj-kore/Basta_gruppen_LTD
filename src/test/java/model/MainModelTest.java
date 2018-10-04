@@ -4,11 +4,14 @@ import model.data.Conversation;
 import model.data.User;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MainModelTest {
     @Test
     public void sendMessage() {
+        ArrayList<>
         Conversation c = new Conversation(1);
         User user1 = new User(1,"hej","123", "bengt", "testsson");
         User user2 = new User(2,"hej","123", "bengt2", "testsson");

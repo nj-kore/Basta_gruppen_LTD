@@ -156,7 +156,7 @@ public class MainModel extends Observable implements IMainModel{
         this.activeConversation = jsonHandler.loadConversation(conversationId);
     }
 
-    public void createConversation(ArrayList<User> users) {
+    public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
         int oldConversationId;
 
@@ -183,7 +183,7 @@ public class MainModel extends Observable implements IMainModel{
 
     public Iterator<Conversation> getConversations() {
         //conversationIterator = jsonHandler.
-        return null;
+        return null;            //TODO returns null
     }
 
     public void createUser(User u) {

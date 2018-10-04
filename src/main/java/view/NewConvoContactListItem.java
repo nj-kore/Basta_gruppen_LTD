@@ -16,16 +16,14 @@ public class NewConvoContactListItem extends AnchorPane {
 
 
     @FXML
-    Label newConvoContactNameLabel;
+    private Label newConvoContactNameLabel;
 
     @FXML
-    ImageView newConvoContactProfileImageView;
+    private ImageView newConvoContactProfileImageView;
 
-    boolean isAdded;
+    private boolean isClicked;
 
-    boolean isFocused;
-
-    User user;
+    private User user;
 
 
     public NewConvoContactListItem(User user) {
@@ -39,8 +37,7 @@ public class NewConvoContactListItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        isAdded = false;
-        isFocused = false;
+        isClicked = false;
 
         this.user = user;
         this.newConvoContactNameLabel.setText(user.getFirstName());
@@ -50,11 +47,11 @@ public class NewConvoContactListItem extends AnchorPane {
     @FXML
     public void newConvoContactClicked() {
         //this.setBackground(new Background(new BackgroundFill(Color.web("#ada9a9"), CornerRadii.EMPTY, Insets.EMPTY)));
-        if (this.isFocused) {
-            this.isFocused = false;
+        if (this.isClicked) {
+            this.isClicked = false;
             this.setStyle("-fx-background-color: #f7efef");
         } else {
-            this.isFocused = true;
+            this.isClicked = true;
             this.setStyle("-fx-background-color: #ada9a9");
         }
 
@@ -62,5 +59,13 @@ public class NewConvoContactListItem extends AnchorPane {
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 }

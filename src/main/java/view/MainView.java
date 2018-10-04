@@ -2,13 +2,13 @@ package view;
 
 import controller.IMainController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -18,11 +18,9 @@ import model.IMainModel;
 import model.MainModel;
 import model.data.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -73,6 +71,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     Button newConvoCloseButton;
+
+    @FXML
+    Button newConvoSaveNameButton;
+
+    @FXML
+    TextField newConvoSaveNameTextField;
+
+    @FXML
+    Label newConvoSaveNameLabel;
 
 
     //mainView
@@ -248,26 +255,27 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     //createNewConvo functionality
     @FXML
     private void newConvoMoveUsersButtonClicked() {
-        ArrayList<NewConvoContactListItem> newConvoListItemsCopy = new ArrayList<>(newConvoListItems);
 
-        for (NewConvoContactListItem newConvoContactListItem : newConvoListItemsCopy) {
+        ArrayList<Node> paneList = new ArrayList<>();
+        paneList.addAll(newConvoConvoPane.getChildren());
+        paneList.addAll(newConvoContactPane.getChildren());
 
-            if (newConvoContactListItem.isFocused) {
+        for (Node node : paneList) {
 
-                if (newConvoContactListItem.isAdded) {
+            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
 
-                    newConvoListItems.remove(newConvoContactListItem);
-                    newConvoConvoPane.getChildren().remove(newConvoContactListItem);
-                    newConvoContactPane.getChildren().add(newConvoContactListItem);
-                    newConvoContactListItem.isAdded = false;
+            if (newConvoContactListItem.isClicked()) {
+
+                if (newConvoContactPane.getChildren().contains(node)) {
+
+                    newConvoContactPane.getChildren().remove(node);
+                    newConvoConvoPane.getChildren().add(newConvoContactListItem);
                 } else {
 
-                    newConvoContactPane.getChildren().remove(newConvoContactListItem);
-                    newConvoListItems.add(newConvoContactListItem);
-                    newConvoConvoPane.getChildren().add(newConvoContactListItem);
-                    newConvoContactListItem.isAdded = true;
+                    newConvoConvoPane.getChildren().remove(node);
+                    newConvoContactPane.getChildren().add(newConvoContactListItem);
                 }
-                newConvoContactListItem.isFocused = false;
+                newConvoContactListItem.setClicked(false);
                 newConvoContactListItem.setStyle("-fx-background-color: #f7efef");
             }
         }
@@ -276,15 +284,31 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     private void newConvoCreateConvoButtonClicked() {
         ArrayList<User> users = new ArrayList<>();
-        for (NewConvoContactListItem newConvoContactListItem : newConvoListItems) {
-            User user = newConvoContactListItem.getUser();
-            users.add(user);
+        for (Node node : newConvoContactPane.getChildren()) {
+            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
+            users.add(newConvoContactListItem.getUser());
         }
-        mainModel.createConversation(users);
+        users.add(mainModel.getActiveUser());
+        mainModel.createConversation(users, newConvoSaveNameTextField.getText());
+        createConvoView.toBack();
+        updateConversationsList();
+    }
+
+    @FXML
+    private void newConvoSaveNameButtonClicked() {
+        if(!newConvoSaveNameTextField.getText().isEmpty()) {
+            newConvoCreateConvoButton.setDisable(false);
+        } else {
+            newConvoSaveNameLabel.setText("Conversation needs to have a name");
+            newConvoSaveNameLabel.setStyle("-fx-background-color: #FF0000");
+        }
     }
 
     @FXML
     private void newConvoButtonClicked() {
+        newConvoCreateConvoButton.setDisable(true);
+        newConvoSaveNameLabel.setText("Choose a name for the conversation:");
+        newConvoSaveNameLabel.setStyle("");
         createConvoView.toFront();
         updateCreateNewConvoLists();
     }
@@ -304,7 +328,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void contactDetailViewCreateConvoButtonClicked() {
         ArrayList<User> users = new ArrayList<>();
         users.add(detailedUser);
-        mainModel.createConversation(users);
+        users.add(mainModel.getActiveUser());
+        mainModel.createConversation(users, detailedUser.getFullName());
     }
 
     public void loadDetailView(User user) {

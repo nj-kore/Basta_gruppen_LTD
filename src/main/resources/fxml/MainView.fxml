@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,45 +36,6 @@
                   <Label fx:id="contactDetailViewStatusLabel" layoutX="257.0" layoutY="142.0" styleClass="detailViewMediumText" text="Active" />
                   <Button layoutX="332.0" layoutY="244.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCreateConvoButtonClicked" styleClass="detailViewMediumText" text="Create new conversation" />
                   <Button layoutX="654.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCloseButtonClicked" styleClass="boldText" text="X" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="background-lightbox" fx:id="createConvoView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutX="350.0" layoutY="150.0" prefHeight="400.0" prefWidth="600.0" snapToPixel="false" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="150.0">
-               <children>
-                  <Label layoutX="159.0" layoutY="11.0" text="Create new conversation">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="30.0" layoutY="103.0" text="Choose contact(s)" />
-                  <AnchorPane layoutX="14.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0">
-                     <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <FlowPane fx:id="newConvoContactPane" prefHeight="275.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="384.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0">
-                     <children>
-                        <ScrollPane prefHeight="275.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <FlowPane fx:id="newConvoConvoPane" prefHeight="275.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-                  <Button fx:id="newConvoMoveUsersButton" layoutX="248.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#newConvoMoveUsersButtonClicked" text="Move user(s)" />
-                  <Button fx:id="newConvoCreateConvoButton" layoutX="220.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#newConvoCreateConvoButtonClicked" styleClass="boldText" text="Create conversation">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="newConvoCloseButton" layoutX="554.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#newConvoCloseButtonClicked" styleClass="boldText" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
                </children>
             </AnchorPane>
          </children>
@@ -156,5 +118,47 @@
             </HBox>
          </children>
       </StackPane>
+      <AnchorPane id="background-lightbox" fx:id="createConvoView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="350.0" layoutY="150.0" prefHeight="400.0" prefWidth="600.0" snapToPixel="false" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <Label layoutX="219.0" layoutY="10.0" text="Create new conversation">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="103.0" text="Choose contact(s)" />
+                  <AnchorPane layoutX="14.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0">
+                     <children>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <FlowPane fx:id="newConvoContactPane" prefHeight="275.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="384.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0">
+                     <children>
+                        <ScrollPane prefHeight="275.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <FlowPane fx:id="newConvoConvoPane" prefHeight="275.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="newConvoMoveUsersButton" layoutX="308.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#newConvoMoveUsersButtonClicked" text="Move user(s)" />
+                  <Button fx:id="newConvoCreateConvoButton" layoutX="280.0" layoutY="357.0" mnemonicParsing="false" onMouseClicked="#newConvoCreateConvoButtonClicked" styleClass="boldText" text="Create conversation">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="newConvoCloseButton" layoutX="554.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#newConvoCloseButtonClicked" styleClass="boldText" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <TextField fx:id="newConvoSaveNameTextField" layoutX="253.0" layoutY="302.0" />
+                  <Label fx:id="newConvoSaveNameLabel" layoutX="253.0" layoutY="285.0" text="Choose a name for the conversation:" />
+                  <Button fx:id="newConvoSaveNameButton" layoutX="406.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#newConvoSaveNameButtonClicked" text="Save" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

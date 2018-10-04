@@ -13,7 +13,7 @@ import java.util.Map;
 public interface IMainModel {
     void sendMessage(String text);
     Conversation loadConversation(int conversationId);
-    void createConversation(ArrayList<User> users);
+    void createConversation(ArrayList<User> users, String name);
     User getActiveUser();
     Conversation getActiveConversation();
     Iterator<User> getContacts();

@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "password": "123",
+    "username": "admin",
+    "contacts": [
+      2,
+      3
+    ],
+    "firstName": "eva",
+    "lastName": "olsson",
+    "email": null,
+    "status": null,
+    "statusImagePath": "pics/userIcon.png",
+    "profileImagePath": "pics/userIcon.png"
+  },
+  {
+    "id": 2,
+    "password": "222",
+    "username": "contact",
+    "contacts": [],
+    "firstName": "olle",
+    "lastName": "innebandysson",
+    "email": null,
+    "status": "Matematisk",
+    "statusImagePath": "pics/activeStatus.png",
+    "profileImagePath": "pics/lukasmaly.jpg"
+  },
+  {
+    "id": 3,
+    "password": "222",
+    "username": "contact2",
+    "contacts": [],
+    "firstName": "kalle",
+    "lastName": "kuling",
+    "email": null,
+    "status": null,
+    "statusImagePath": "pics/userIcon.png",
+    "profileImagePath": "pics/userIcon.png"
+  }
+]
