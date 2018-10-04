@@ -64,6 +64,8 @@ public class MainModelTest {
         IMainModel model = new MainModel();
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
+        ((MainModel) model).createUser(activeUser);
+        ((MainModel) model).createUser(contactUser);
         ((MainModel) model).setActiveUser(activeUser);
         assertFalse(model.getContacts().hasNext());
         ((MainModel) model).addContact(contactUser.getId());
