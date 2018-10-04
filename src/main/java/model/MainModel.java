@@ -46,8 +46,6 @@ public class MainModel extends Observable implements IMainModel{
         createUser(contactUser2);
         addContact(contactUser.getId());
         addContact(contactUser2.getId());
-        addConversation(new Conversation(1));
-        setActiveConversation(1);
         contactUser.setStatusImagePath("pics/activeStatus.png");
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus("Matematisk");
@@ -115,9 +113,15 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public Iterator<Message> loadMessagesInConversation(){
-        Conversation c=loadConversation(getActiveConversation().getId());
-        messageIterator = c.getMessages().iterator();
-        return messageIterator;
+
+        try {
+            Conversation c=loadConversation(getActiveConversation().getId());
+            messageIterator = c.getMessages().iterator();
+            return messageIterator;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void addContact(int userId){
@@ -153,9 +157,24 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public void createConversation(ArrayList<User> users) {
-        Conversation conversation = new Conversation(conversations.size(), users);
-        conversations.put(conversation.getId(), conversation);
-        dataHandler.saveConversation(conversation);
+        int newConversationId = 0;
+        int oldConversationId;
+
+
+        List<Conversation> list = jsonHandler.loadConversations();
+        if (list != null) {
+            Iterator<Conversation> itr = list.iterator();
+            while(itr.hasNext()){
+                oldConversationId = itr.next().getId();
+                if(oldConversationId >= newConversationId){
+                    newConversationId = oldConversationId + 1;
+                }
+            }
+        }
+        Conversation conversation = new Conversation(newConversationId, users);
+        //conversations.put(conversation.getId(), conversation);
+        jsonHandler.saveConversation(conversation);
+        activeConversation = conversation;
         //TODO update view conversationlist
     }
 

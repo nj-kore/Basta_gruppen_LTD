@@ -4,6 +4,8 @@ import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 
+import java.util.List;
+
 public interface IDataHandler {
     void saveMessage(int conversationId, Message m);
     void saveUser(User u);
@@ -13,4 +15,5 @@ public interface IDataHandler {
     Conversation loadConversation(int conversationId);
     User loadUser(int userId);
     User loadUser(String username);
+    List<Conversation> loadConversations();
 }

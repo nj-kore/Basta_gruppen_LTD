@@ -5,6 +5,8 @@ import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 
+import java.util.List;
+
 public class DataHandlerDummy implements IDataHandler {
     @Override
     public void saveMessage(int conversationId, Message m) {
@@ -21,12 +23,11 @@ public class DataHandlerDummy implements IDataHandler {
 
     }
 
-
-              //TODO this method currently returns null
     @Override
-    public Conversation createConversation() {
-        return null;
+    public List<Conversation> loadConversations(){
+     return null;
     }
+
 
 
     @Override

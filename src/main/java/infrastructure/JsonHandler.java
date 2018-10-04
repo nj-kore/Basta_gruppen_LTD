@@ -27,10 +27,7 @@ public class JsonHandler implements  IDataHandler {
     public void saveMessage(int conversationId, Message messageToSave) {
         List<Conversation> conversations = new ArrayList<Conversation>();
         if (!fileExists("src/main/java/infrastructure/conversations.json")){
-            Conversation conversation = new Conversation(conversationId);
-            conversation.addMessage(messageToSave);
-            conversations.add(conversation);
-            writeConversations(conversations);
+            writeConversations(null);
         }else{
             conversations = loadConversations();
             for (Conversation conversation: conversations){
@@ -178,7 +175,8 @@ public class JsonHandler implements  IDataHandler {
      * Cannot run if there is no conversations.json
      * @return conversations
      */
-    private List<Conversation> loadConversations(){
+    @Override
+    public List<Conversation> loadConversations(){
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Conversation>>() {}.getType();
         List<Conversation> conversations = new ArrayList<Conversation>();
@@ -194,6 +192,7 @@ public class JsonHandler implements  IDataHandler {
         return null;
 
     }
+
     /**
      * Writes the inputted list of User to conversations.json.
      * Will overwrite any existing users; use fileExists before calling.
@@ -251,15 +250,13 @@ public class JsonHandler implements  IDataHandler {
     public Conversation loadConversation(int conversationId) {
         long t = System.currentTimeMillis();
         List<Conversation> conversations = loadConversations();
-        if(conversations == null){
-            Conversation c = new Conversation(conversationId);
-            saveConversation(c);
-            return c;
-        }
-        for(Conversation conversation: conversations){
-            if (conversation.getId() == conversationId){
-                System.out.println(System.currentTimeMillis() - t);
-                return conversation;
+
+        if (conversations!=null) {
+            for(Conversation conversation: conversations){
+                if (conversation.getId() == conversationId){
+                    System.out.println(System.currentTimeMillis() - t);
+                    return conversation;
+                }
             }
         }
         return null;

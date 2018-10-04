@@ -2,6 +2,7 @@ package view;
 
 import controller.IMainController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ import model.IMainModel;
 import model.MainModel;
 import model.data.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.ArrayList;
@@ -101,18 +103,18 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     /**
      * @param location
-     * @param resources
-     *
-     * Initializes the class and loads the views that makes out the complete mainView.
-     * Proceeds to show the loginpage to the user
-     * Finally it adds itself as an observer to the model
+     * @param resources Initializes the class and loads the views that makes out the complete mainView.
+     *                  Proceeds to show the loginpage to the user
+     *                  Finally it adds itself as an observer to the model
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ((MainModel)mainModel).addObserver(this);
+
+
+        ((MainModel) mainModel).addObserver(this);
         displayLoginPage();
-        updateCreateNewConvoLists();
         mainModel.login("admin", "123");
+
         //chatView.startTiming();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
@@ -122,16 +124,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
 
     /**
-     * @param o is the observable class that called the update method
-     * @param arg
-     *
-     * Decodes the arg to see what kind of task the view should do
+     * @param o   is the observable class that called the update method
+     * @param arg Decodes the arg to see what kind of task the view should do
      */
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof IMainModel) {
-            if(arg instanceof String) {
-                switch((String)arg) {
+        if (o instanceof IMainModel) {
+            if (arg instanceof String) {
+                switch ((String) arg) {
                     case "ACTIVE_CONVERSATION":
                         chatView.loadMessages();
                         break;
@@ -146,6 +146,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         displayChat();
                         chatView.loadMessages();
                         updateContactsList();
+                        //updateCreateNewConvoLists();
                         break;
                 }
             }
@@ -160,7 +161,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
         while (iterator.hasNext()) {
-            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next()));
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
         }
     }
 
@@ -173,7 +174,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         conversationsFlowPane.getChildren().clear();
         Iterator<Conversation> iterator = mainModel.getConversations();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
 
@@ -196,11 +197,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @Override
     public void displayChat() {
         mainViewAnchorPane.getChildren().add(chatView);
+    }
 
     @Override
     public void displaySettings() {
 
     }
+
     @FXML
     @Override
     public void displayUserPage() {
@@ -220,29 +223,22 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         for (User user : contacts) {
 
-            ContactListItem contactListItemView = new ContactListItem(user);
+            ContactListItem contactListItemView = new ContactListItem(user, this);
             contactsFlowPane.getChildren().add(contactListItemView);
         }
+    }
 
-    public void updateCurrentUserInfo(){
+    public void updateCurrentUserInfo() {
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath())); //TODO denna fungerar tydligen inte
     }
 
-    public void updateConversationsList() {
-
-        conversationsFlowPane.getChildren().clear();
-        for (Map.Entry<Integer, Conversation> conversation : mainModel.getConversations().entrySet()) {
-
-            ConversationListItem conversationListItem = new ConversationListItem(conversation.getValue());
-            conversationsFlowPane.getChildren().add(conversationListItem);
-        }
-    }
 
     private void updateCreateNewConvoLists() {
         newConvoContactPane.getChildren().clear();
         newConvoConvoPane.getChildren().clear();
-        for (User user : mainModel.getContacts()) {
-            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(user);
+        Iterator<User> itr = mainModel.getContacts();
+        while (itr.hasNext()) {
+            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
             newConvoContactPane.getChildren().add(newConvoContact);
             newConvoListItems.add(newConvoContact);
         }
@@ -256,7 +252,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         for (NewConvoContactListItem newConvoContactListItem : newConvoListItemsCopy) {
 
-            if(newConvoContactListItem.isFocused) {
+            if (newConvoContactListItem.isFocused) {
 
                 if (newConvoContactListItem.isAdded) {
 
@@ -312,7 +308,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public void loadDetailView(User user) {
-        this.contactDetailViewNameLabel.setText(user.getName());
+        this.contactDetailViewNameLabel.setText(user.getFullName());
         this.contactDetailViewProfilemageView.setImage(null); //TODO setImage from user
         this.contactDetailViewStatusImageView.setImage(null); //TODO setImage from user
         this.contactDetailViewStatusLabel.setText("active"); //TODO setText from user

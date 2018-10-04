@@ -7,14 +7,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.IMainModel;
 import model.MainModel;
-import model.User;
+import model.data.User;
 
 import java.io.IOException;
 
 
 public class NewConvoContactListItem extends AnchorPane {
 
-    private IMainModel mainModel = MainModel.getInstance();
 
     @FXML
     Label newConvoContactNameLabel;
@@ -44,7 +43,7 @@ public class NewConvoContactListItem extends AnchorPane {
         isFocused = false;
 
         this.user = user;
-        this.newConvoContactNameLabel.setText(user.getName());
+        this.newConvoContactNameLabel.setText(user.getFirstName());
         this.newConvoContactProfileImageView.setImage(null); //TODO add image
     }
 
