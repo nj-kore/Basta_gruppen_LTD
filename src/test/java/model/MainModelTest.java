@@ -4,16 +4,21 @@ import model.data.Conversation;
 import model.data.User;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MainModelTest {
     @Test
     public void sendMessage() {
-        Conversation c = new Conversation(1);
-        User user1 = new User(1,"hej","123", "bengt", "testsson");
-        User user2 = new User(2,"hej","123", "bengt2", "testsson");
-        c.addParticipant(user1);
-        c.addParticipant(user2);
+
+        User user1 = new User(1, "hej", "123", "bengt", "testsson");
+        User user2 = new User(2, "hej", "123", "bengt2", "testsson");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        Conversation c = new Conversation(1, users);
+
 
         IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
@@ -25,11 +30,12 @@ public class MainModelTest {
 
     @Test
     public void readMessages() {
-        Conversation c = new Conversation(1);
-        User user1 = new User(1,"hej","123", "bengt", "testsson");
-        User user2 = new User(2,"hej","123", "bengt2", "testsson");
-        c.addParticipant(user1);
-        c.addParticipant(user2);
+        User user1 = new User(1, "hej", "123", "bengt", "testsson");
+        User user2 = new User(2, "hej", "123", "bengt2", "testsson");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        Conversation c = new Conversation(1, users);
 
         IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
@@ -48,7 +54,8 @@ public class MainModelTest {
     //The test should try to load conversation number 2 from the dataHandlerDummy, which only returns null
     @Test
     public void loadConversation() {
-        Conversation c = new Conversation(1);
+        ArrayList<User> users = new ArrayList<>();
+        Conversation c = new Conversation(1, users);
 
         IMainModel model = new MainModel();
         ((MainModel) model).addConversation(c);
@@ -59,11 +66,11 @@ public class MainModelTest {
 
     //This test asserts that getContacts returns the users contacts
     @Test
-    public void getContacts(){
+    public void getContacts() {
 
         IMainModel model = new MainModel();
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
-        User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson");
         ((MainModel) model).createUser(activeUser);
         ((MainModel) model).createUser(contactUser);
         ((MainModel) model).setActiveUser(activeUser);
