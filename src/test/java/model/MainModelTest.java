@@ -1,10 +1,14 @@
 package model;
 
 import model.data.Conversation;
+import model.data.Message;
 import model.data.User;
 import org.junit.Test;
+import view.MessageItem;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -78,5 +82,24 @@ public class MainModelTest {
         ((MainModel) model).addContact(contactUser.getId());
         assertNotNull(model.getContacts().next());
 
+    }
+    @Test
+    public void loadMessageInConversation(){
+        User user1 = new User(1, "hej", "123", "bengt", "testsson");
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
+        Conversation c = new Conversation(1, users);
+        IMainModel model = new MainModel();
+        ((MainModel) model).addConversation(c);
+        ((MainModel) model).setActiveConversation(1);
+        ((MainModel) model).setActiveUser(user1);
+        String testmessage = "If this works I'll have a beer";
+        model.sendMessage(testmessage);
+        Iterator<Message> itr = model.loadMessagesInConversation();
+        String result;
+        result=itr.next().getText();
+        assertEquals(testmessage, result);
+        testmessage="blip";
+        assertNotEquals(testmessage, result);
     }
 }
