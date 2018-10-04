@@ -1,19 +1,19 @@
 package model.data;
 
+import java.time.LocalDateTime;
+
 public class Message {
     private int id;
-    private User sender;
     private String text;
-    private int sender_id;
-    private int conversation_id;
+    private int senderId;
+    private int conversationId;
+    private LocalDateTime time;
 
-    public Message(User sender, String text) {
-        this.sender = sender;
+    public Message(int id, int senderId, String text, LocalDateTime time) {
+        this.id = id;
+        this.senderId = senderId;
         this.text = text;
-    }
-
-    public Message(int id, int sender_id, int conversation_id, String text, String time_sent){
-
+        this.time = time;
     }
 
     public int getId() {
@@ -24,8 +24,8 @@ public class Message {
         this.id = id;
     }
 
-    public User getSender() {
-        return sender;
+    public int getSenderId() {
+        return senderId;
     }
 
     public String getText() {

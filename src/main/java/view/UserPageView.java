@@ -1,8 +1,5 @@
 package view;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -16,12 +13,8 @@ import javafx.stage.FileChooser;
 import model.IMainModel;
 import model.MainModel;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -183,9 +176,9 @@ public class UserPageView extends AnchorPane {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if(selectedFile != null){
-            mainModel.getActiveUser().setProfileImage(
-                    new Image(selectedFile.toURI().toString()));   //selectedFile.getPath();
-            profilePicImageView.setImage(mainModel.getActiveUser().getProfileImage());       //"../../resources/" + selectedFile.getName())
+            mainModel.getActiveUser().setProfileImagePath(
+                    selectedFile.toURI().toString());   //selectedFile.getPath();
+            profilePicImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));       //"../../resources/" + selectedFile.getName())
         }else System.out.println("Invalid image ");
 
 

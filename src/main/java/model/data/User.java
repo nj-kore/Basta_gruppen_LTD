@@ -9,13 +9,13 @@ public class User {
     private int id;
     private String password;
     private String username;
-    private ArrayList<User> contacts = new ArrayList<>();
+    private ArrayList<Integer> contacts = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
     private String status;
-    private Image statusImage;
-    private Image profileImage;
+    private String statusImagePath;
+    private String profileImagePath;
 
 
     public User(int id, String username, String password, String firstName, String lastName) {
@@ -24,7 +24,9 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        profileImage = new Image("pics/userIcon.png");
+        profileImagePath = "pics/userIcon.png";
+        statusImagePath = "pics/userIcon.png";
+
     }
 
 
@@ -33,7 +35,7 @@ public class User {
         return id;
     }
 
-    public Image getStatusImage(){return statusImage;}
+    public String getStatusImagePath(){return statusImagePath;}
 
     public String getFirstName(){return firstName;}
 
@@ -67,9 +69,13 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<User> getContacts(){return contacts;}
+    public ArrayList<Integer> getContacts(){return contacts;}
 
-    public Image getProfileImage(){return profileImage;}
+    public String getProfileImagePath(){return profileImagePath;}
+
+    public Image getProfileImage() {
+        return new Image(profileImagePath);
+    }
 
     public String getStatus(){return status;}
 
@@ -84,12 +90,12 @@ public class User {
 
     public void setStatus(String status){this.status=status;}
 
-    public void setStatusImage(Image statusImage){
-        this.statusImage = statusImage;
+    public void setStatusImagePath(String statusImagePath){
+        this.statusImagePath = statusImagePath;
     }
 
-    public void setProfileImage(Image profileImage){
-        this.profileImage=profileImage;
+    public void setProfileImagePath(String profileImagePath){
+        this.profileImagePath=profileImagePath;
     }
 
 
@@ -114,7 +120,7 @@ public class User {
      * adds userToAdd to contacts.
      * @param userToAdd
      */
-    public void addContact(User userToAdd){contacts.add(userToAdd);}
+    public void addContact(int userToAdd){contacts.add(userToAdd);}
 
 
 

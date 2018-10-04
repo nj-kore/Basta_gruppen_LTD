@@ -46,6 +46,7 @@ public class ChatView extends AnchorPane implements IChatController {
     MenuItem changeChatNameMenuItem;
 
 
+
     public ChatView(IMainView parentView, IMainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
@@ -59,9 +60,8 @@ public class ChatView extends AnchorPane implements IChatController {
 
         this.mainModel = mainModel;
 
-        loadMessages();
-
     }
+
 
 
     @FXML
@@ -98,7 +98,7 @@ public class ChatView extends AnchorPane implements IChatController {
         Iterator<Message> itr= mainModel.loadMessagesInConversation();
         while (itr.hasNext()) {
             Message m = itr.next();
-            ChatFlowPane.getChildren().add(new MessageItem(m));
+            ChatFlowPane.getChildren().add(new MessageItem(m, mainModel.getUser(m.getSenderId())));
         }
     }
 

@@ -36,11 +36,13 @@ public class MainModelTest {
         ((MainModel) model).setActiveUser(user1);
         ((MainModel) model).setActiveConversation(1);
 
+        int oldSize = model.loadConversation(1).getMessages().size();
+
         model.sendMessage("hejsan");
 
         Conversation c1 = model.loadConversation(1);
-        assertEquals(c1.getMessages().size(), 1);
-        assertEquals(c1.getMessages().get(0).getText(), "hejsan");
+        assertEquals(c1.getMessages().size() - oldSize, 1);
+        assertEquals(c1.getMessages().get(c1.getMessages().size() - 1).getText(), "hejsan");
     }
 
     //The test should try to load conversation number 2 from the dataHandlerDummy, which only returns null
@@ -62,10 +64,11 @@ public class MainModelTest {
         IMainModel model = new MainModel();
         User activeUser = new User(1, "admin", "123", "eva", "olsson");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
-        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
+        ((MainModel) model).createUser(activeUser);
+        ((MainModel) model).createUser(contactUser);
         ((MainModel) model).setActiveUser(activeUser);
         assertFalse(model.getContacts().hasNext());
-        ((MainModel) model).addContact(contactUser);
+        ((MainModel) model).addContact(contactUser.getId());
         assertNotNull(model.getContacts().next());
 
     }
