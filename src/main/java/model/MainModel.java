@@ -122,7 +122,10 @@ public class MainModel extends Observable implements IMainModel{
         return messageIterator;
     }
 
-    public void addContact(int userId){activeUser.addContact(userId);}
+    public void addContact(int userId){
+        activeUser.addContact(userId);
+        jsonHandler.saveUser(activeUser);
+    }
 
 
 
@@ -136,7 +139,7 @@ public class MainModel extends Observable implements IMainModel{
 
     @Override
     public User getUser(int userId) {
-        return users.get(userId);
+        return jsonHandler.loadUser(userId);
     }
 
     public HashMap<Integer, User> getUsers() {

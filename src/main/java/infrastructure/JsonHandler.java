@@ -86,6 +86,8 @@ public class JsonHandler implements  IDataHandler {
             for(User user : users){
                 if(user.getId()==userToSave.getId()){
                     add = false;
+                    users.set(users.indexOf(user), userToSave);
+                    writeUsers(users);
                     break;
                 }else{
                     add = true;
