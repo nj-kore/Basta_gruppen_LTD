@@ -67,7 +67,7 @@ public class LoginView extends AnchorPane implements ILoginController {
     @FXML
     public void login(){
         if (mainModel.login(userNameTextField.getText(), passwordField.getText())){
-            parentView.displayMainView();
+            parentView.displayMainView();           //TODO
         } else{
             wrongPasswordLabel.setVisible(true);
         }

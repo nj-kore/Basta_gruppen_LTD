@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
-    IMainController mainController;
     private IMainModel mainModel = new MainModel();
     ChatView chatView = new ChatView(this, mainModel);
     LoginView loginView = new LoginView(this, mainModel);
