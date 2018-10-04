@@ -178,7 +178,7 @@ public class MainModel extends Observable implements IMainModel{
         //TODO update view conversationlist
     }
 
-    //Exists for testingpurposes,
+    //Exists for testing purposes
     public void addConversation(Conversation c) {
         jsonHandler.saveConversation(c);
     }
