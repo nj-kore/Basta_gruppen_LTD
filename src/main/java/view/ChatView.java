@@ -11,11 +11,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.*;
-import model.data.Message;
+import model.Message;
 
 
 import java.io.IOException;
-import java.util.Observable;
 import java.util.Iterator;
 
 public class ChatView extends AnchorPane implements IChatController {

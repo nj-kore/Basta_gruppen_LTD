@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import model.data.Message;
-import model.data.User;
+import model.Message;
+import model.User;
 
 
 import java.io.IOException;

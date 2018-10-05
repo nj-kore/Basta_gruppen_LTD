@@ -10,15 +10,14 @@ package infrastructure;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import model.data.Conversation;
-import model.data.Message;
-import model.data.User;
+import model.Conversation;
+import model.Message;
+import model.User;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class JsonHandler implements  IDataHandler {

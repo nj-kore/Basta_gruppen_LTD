@@ -1,9 +1,8 @@
 package infrastructure;
 
-import javafx.scene.image.Image;
-import model.data.Conversation;
-import model.data.Message;
-import model.data.User;
+import model.Conversation;
+import model.Message;
+import model.User;
 
 import java.util.List;
 
