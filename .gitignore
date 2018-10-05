@@ -111,3 +111,6 @@ gradle-app.setting
 .idea
 Basta_gruppen_LTD.iml
 .gradle
+
+# Extra adds by Basta_gruppen_LTD
+*.json
