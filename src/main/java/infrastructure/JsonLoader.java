@@ -70,7 +70,7 @@ public class JsonLoader implements IDataLoader {
                 throw new RuntimeException(e);
             }
         }
-        return null;
+        return new HashMap<Integer,Conversation>();
     }
 
     /**

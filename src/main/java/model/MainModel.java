@@ -25,7 +25,6 @@ public class MainModel extends Observable implements IMainModel{
     public MainModel(HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
-        //initFillers();
     }
 
     public void initData(List<User> users, List<Conversation> conversations) {
@@ -54,7 +53,10 @@ public class MainModel extends Observable implements IMainModel{
         contactUser.setStatusImagePath("pics/activeStatus.png");
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus("Matematisk");
-
+        users.put(admin.getId(),admin);
+        users.put(contactUser.getId(),contactUser);
+        users.put(contactUser2.getId(),contactUser2);
+        update(UpdateTypes.INIT);
     }
     /**
      * @param text
@@ -102,14 +104,13 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public Iterator<Message> loadMessagesInConversation(){
-
-        try {
+        /*try {
             Iterator<Message> messageIterator = activeConversation.getMessages().iterator();
             return messageIterator;
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        return activeConversation.getMessages().iterator();
     }
 
     public void addContact(int userId){
@@ -188,6 +189,7 @@ public class MainModel extends Observable implements IMainModel{
      */
     @Override
     public boolean login(String username, String password) {
+
         for(User u : users.values()) {
             if(u.getUsername().equals(username)) {
                 if(u.getPassword().equals(password)) {
@@ -195,6 +197,7 @@ public class MainModel extends Observable implements IMainModel{
                     //setActiveConversation(conversations.get(0).getId());
                     //initFillers();
                     update(UpdateTypes.INIT);
+                    return true;
                 }
             }
         }

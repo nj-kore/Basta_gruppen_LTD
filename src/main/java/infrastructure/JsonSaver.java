@@ -22,6 +22,7 @@ public class JsonSaver implements IDataSaver, Observer {
 
     public JsonSaver(IMainModel model) {
         this.model = model;
+        saveModel();
     }
 
 

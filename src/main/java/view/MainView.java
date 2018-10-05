@@ -31,10 +31,10 @@ import java.util.ResourceBundle;
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
     private IMainModel mainModel;
-    ChatView chatView = new ChatView(this, mainModel);
-    LoginView loginView = new LoginView(this, mainModel);
-    UserPageView userPage = new UserPageView(this, mainModel);
-    ArrayList<NewConvoContactListItem> newConvoListItems = new ArrayList<>();
+    ChatView chatView;
+    LoginView loginView;
+    UserPageView userPage;
+    ArrayList<NewConvoContactListItem> newConvoListItems;
     User detailedUser;
 
     //contactDetailView
@@ -129,7 +129,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public MainView(IMainModel mainModel){
+
         this.mainModel = mainModel;
+        this.chatView = new ChatView(this, mainModel);
+        this.loginView = new LoginView(this, mainModel);
+        this.userPage = new UserPageView(this, mainModel);
+        this.newConvoListItems = new ArrayList<>();
+
     }
 
 

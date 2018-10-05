@@ -43,13 +43,14 @@ public class Main extends Application {
         IDataLoader dataLoader = new JsonLoader();
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
         IMainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
+
+        //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
+        ((MainModel) mainModel).initFillers();
         //Creates an instance of datasaver which can be used to save data
         IDataSaver dataSaver = new JsonSaver(mainModel);
         //adds datasaver to mainmodels observers
         ((MainModel) mainModel).addObserver((JsonSaver)dataSaver);
         //tries to log in as user with username admin and password 123
-        //mainModel.login("admin", "123");
-
         IMainView mainView = new MainView(mainModel);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/MainView.fxml"));
