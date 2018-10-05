@@ -276,7 +276,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     newConvoContactPane.getChildren().add(newConvoContactListItem);
                 }
                 newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color: #f7efef");
+                newConvoContactListItem.setStyle("-fx-background-color:");
             }
         }
     }
@@ -330,6 +330,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         users.add(detailedUser);
         users.add(mainModel.getActiveUser());
         mainModel.createConversation(users, detailedUser.getFullName());
+        contactDetailView.toBack();
     }
 
     public void loadDetailView(User user) {

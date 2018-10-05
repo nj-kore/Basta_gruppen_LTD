@@ -41,7 +41,7 @@ public class NewConvoContactListItem extends AnchorPane {
         isClicked = false;
 
         this.user = user;
-        this.newConvoContactNameLabel.setText(user.getFirstName());
+        this.newConvoContactNameLabel.setText(user.getFullName());
         this.newConvoContactProfileImageView.setImage(user.getProfileImage());
     }
 
