@@ -189,6 +189,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @Override
     public void displayLoginPage() {
+        mainViewHBox.toBack();
+        loginHBox.toFront();
+        loginHBox.getChildren().clear();
+        loginHBox.getChildren().add(loginView);
     }
 
     @Override
