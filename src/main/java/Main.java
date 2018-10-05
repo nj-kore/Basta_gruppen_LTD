@@ -1,5 +1,7 @@
-import infrastructure.IDataHandler;
-import infrastructure.JsonHandler;
+import infrastructure.IDataLoader;
+import infrastructure.IDataSaver;
+import infrastructure.JsonSaver;
+import infrastructure.JsonLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.IMainModel;
 import model.MainModel;
+import view.IMainView;
+import view.MainView;
+
+import java.io.IOException;
 
 /**
  * The Shat App is a messaging desktop application for business. The app allows you to chat with contacts at work
@@ -33,25 +39,35 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        //Creates an instance of dataloader that can be used to load data
+        IDataLoader dataLoader = new JsonLoader();
+        //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
+        IMainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
+        //Creates an instance of datasaver which can be used to save data
+        IDataSaver dataSaver = new JsonSaver(mainModel);
+        //adds datasaver to mainmodels observers
+        ((MainModel) mainModel).addObserver((JsonSaver)dataSaver);
+        //tries to log in as user with username admin and password 123
+        //mainModel.login("admin", "123");
 
-        IDataHandler dataHandler = new JsonHandler();
+        IMainView mainView = new MainView(mainModel);
 
-        IMainModel mainModel =  new MainModel();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/MainView.fxml"));
+        fxmlLoader.setController(mainView);
 
-        ((MainModel) mainModel).addObserver((JsonHandler)dataHandler);
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root, 1280, 720);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
+            stage.setTitle("Shat app");
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.setResizable(false);
+            stage.show();
 
-        Scene scene = new Scene(root, 1280, 720);
-
-        stage.setTitle("Shat app");
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setResizable(false);
-        stage.show();
-
-
-
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
 

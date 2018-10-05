@@ -1,7 +1,6 @@
 package view;
 
 import controller.IMainController;
-import infrastructure.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -121,13 +120,16 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         ((MainModel) mainModel).addObserver(this);
         displayLoginPage();
-        mainModel.login("admin", "123");
 
         //chatView.startTiming();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
         //the interface? which seems wrong.
 
+    }
+
+    public MainView(IMainModel mainModel){
+        this.mainModel = mainModel;
     }
 
 
@@ -181,7 +183,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        Iterator<Conversation> iterator = mainModel.getConversations();
+        Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
@@ -340,7 +342,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     public void loadDetailView(User user) {
         this.contactDetailViewNameLabel.setText(user.getFullName());
-        this.contactDetailViewProfilemageView.setImage(user.getProfileImage());
+        Image profileImage = new Image(user.getProfileImagePath());
+        this.contactDetailViewProfilemageView.setImage(profileImage);
         this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
         this.contactDetailViewStatusLabel.setText(user.getStatus());
         contactDetailView.toFront();

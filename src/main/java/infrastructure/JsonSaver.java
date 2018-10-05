@@ -1,33 +1,27 @@
 /***
  * @author          Gustav Hager
- * responsibility:  To load and save data from "database" (json files).
+ * responsibility:  To save data to "database" (json files).
  * used by:         MainModel
- * used for:        Loading data that has been stored in the "database" (json files).
+ * used for:        Saving data to the "database" (json files).
  */
 
 package infrastructure;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import model.Conversation;
-import model.Message;
-import model.User;
-import model.MainModel;
+import model.*;
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 
-public class JsonHandler implements  IDataHandler, Observer {
+public class JsonSaver implements IDataSaver, Observer {
 
-    private MainModel model;
-    public JsonHandler(MainModel model) {
+    private IMainModel model;
+
+    public JsonSaver(IMainModel model) {
         this.model = model;
-        loadModel();
     }
 
 
@@ -38,38 +32,10 @@ public class JsonHandler implements  IDataHandler, Observer {
         if (!fileExists("src/main/java/infrastructure/conversations.json")){
             writeConversations(null);
         }else{
-            conversations = loadConversations();
-            for (Conversation conversation: conversations){
-                if (conversation.getId() == conversationId){
-                    conversation.addMessage(messageToSave);
-                    writeConversations(conversations);
-                }
-            }
+            Conversation conversation = model.loadConversation(conversationId);
+            conversation.addMessage(messageToSave);
+            writeConversations(conversations);
         }
-
-
-        /*
-        boolean add = false;
-
-        conversations = loadConversations();
-        if (conversations != null){
-            for(Conversation conversation : conversations){
-                if (conversation.getId() == conversationId){
-                    for (Message message: conversation.getMessages()){
-                        if(message.getId()==messageToSave.getId()){
-                            add = false;
-                            break;
-                        }else{
-                            add = true;
-                        }
-                    }
-                    if(add){
-                        conversation.addMessage(messageToSave);
-                        writeConversations(conversations);
-                    }
-                }
-            }
-        }*/
     }
 
 
@@ -85,9 +51,18 @@ public class JsonHandler implements  IDataHandler, Observer {
             writeUsers(users);
         }
 
+        HashMap<Integer, User> userMap = model.getUsers();
+        if(!userMap.containsKey(userToSave.getId())){
+            userMap.put(userToSave.getId(),userToSave);
+            users = new ArrayList<User>(userMap.values());
+            writeUsers(users);
+        }
+
+
+        /*
         boolean add = false;
 
-        users = loadUsers();
+
         if (users != null){
             for(User user : users){
                 if(user.getId()==userToSave.getId()){
@@ -103,7 +78,7 @@ public class JsonHandler implements  IDataHandler, Observer {
         if(add){
             users.add(userToSave);
             writeUsers(users);
-        }
+        }*/
     }
 
     /**
@@ -120,7 +95,6 @@ public class JsonHandler implements  IDataHandler, Observer {
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * Writes the inputted list of User to conversations.json.
@@ -145,6 +119,14 @@ public class JsonHandler implements  IDataHandler, Observer {
             writeConversations(conversations);
         }
 
+        HashMap<Integer, Conversation> conversationMap = model.getConversations();
+        if(!conversationMap.containsKey(conversationToSave.getId())){
+            conversationMap.put(conversationToSave.getId(),conversationToSave);
+            conversations = new ArrayList<Conversation>(conversationMap.values());
+            writeConversations(conversations);
+        }
+
+        /*
         boolean add = false;
 
         conversations = loadConversations();
@@ -161,7 +143,7 @@ public class JsonHandler implements  IDataHandler, Observer {
         if(add){
             conversations.add(conversationToSave);
             writeConversations(conversations);
-        }
+        }*/
 
     }
 
@@ -173,22 +155,6 @@ public class JsonHandler implements  IDataHandler, Observer {
     @Override
     public void updateConversation(Conversation c) {
 
-    }
-
-    @Override
-    public Conversation loadConversation(int conversationId) {
-        long t = System.currentTimeMillis();
-        List<Conversation> conversations = loadConversations();
-
-        if (conversations!=null) {
-            for(Conversation conversation: conversations){
-                if (conversation.getId() == conversationId){
-                    System.out.println(System.currentTimeMillis() - t);
-                    return conversation;
-                }
-            }
-        }
-        return null;
     }
 
     /**
@@ -211,6 +177,7 @@ public class JsonHandler implements  IDataHandler, Observer {
     }
 
     private void saveModel() {
+        /*
         Iterator<Conversation> conversationIterator = model.getConversations();
         List<Conversation> convoList = new ArrayList<>();
         while(conversationIterator.hasNext()) {
@@ -224,11 +191,8 @@ public class JsonHandler implements  IDataHandler, Observer {
             userList.add(userIterator.next());
         }
         writeUsers(userList);
-    }
-
-    private void loadModel() {
-        List<User> users = loadUsers();
-        List<Conversation> conversations = loadConversations();
-        model.initData(users, conversations);
+        */
+        writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
+        writeUsers(new ArrayList<User>(model.getUsers().values()));
     }
 }

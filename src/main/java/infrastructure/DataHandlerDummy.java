@@ -6,7 +6,7 @@ import model.User;
 
 import java.util.List;
 
-public class DataHandlerDummy implements IDataHandler {
+public class DataHandlerDummy implements IDataSaver {
     @Override
     public void saveMessage(int conversationId, Message m) {
 
@@ -22,11 +22,12 @@ public class DataHandlerDummy implements IDataHandler {
 
     }
 
+    /*
     @Override
     public List<Conversation> loadConversations(){
      return null;
     }
-
+    */
 
 
     @Override
@@ -39,6 +40,7 @@ public class DataHandlerDummy implements IDataHandler {
 
     }
 
+    /*
     @Override
     public Conversation loadConversation(int conversationId) {
         return null;
@@ -55,4 +57,5 @@ public class DataHandlerDummy implements IDataHandler {
         //u.setProfileImagePath((getClass().getClassLoader().getResourceAsStream("pics/greta.jpg")));
         return u;
     }
+    */
 }

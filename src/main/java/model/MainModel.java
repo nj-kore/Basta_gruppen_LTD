@@ -22,8 +22,7 @@ public class MainModel extends Observable implements IMainModel{
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
 
-    public MainModel(User activeUser, HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
-        this.activeUser = activeUser;
+    public MainModel(HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
         //initFillers();
@@ -156,12 +155,14 @@ public class MainModel extends Observable implements IMainModel{
         conversations.put(c.getId(), c);
     }
 
-    public Iterator<Conversation> getConversations() {
-        return conversations.values().iterator();            //TODO returns null
+    @Override
+    public HashMap<Integer,Conversation> getConversations() {
+        return conversations;            //TODO returns null
     }
 
-    public Iterator<User> getUsers() {
-        return users.values().iterator();
+    @Override
+    public HashMap<Integer, User> getUsers() {
+        return users;
     }
 
     public void createUser(User u) {
