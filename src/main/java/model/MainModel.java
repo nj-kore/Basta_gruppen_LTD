@@ -25,6 +25,7 @@ public class MainModel extends Observable implements IMainModel{
     public MainModel(HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
+        activeConversation = new Conversation(-1, null);
     }
 
     public void initData(List<User> users, List<Conversation> conversations) {
@@ -148,6 +149,7 @@ public class MainModel extends Observable implements IMainModel{
         Conversation conversation = new Conversation(newConversationId, users);
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
+        update(UpdateTypes.ACTIVE_CONVERSATION);
         //TODO update view conversationlist
     }
 

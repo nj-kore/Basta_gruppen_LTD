@@ -159,6 +159,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         break;
                     case "INIT":
                         displayMainView();
+                        //Cant be run in Init since there are no conversations yet
                         displayChat();
                         chatView.loadMessages();
                         updateContactsList();
