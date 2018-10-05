@@ -334,9 +334,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     public void loadDetailView(User user) {
         this.contactDetailViewNameLabel.setText(user.getFullName());
-        this.contactDetailViewProfilemageView.setImage(null); //TODO setImage from user
-        this.contactDetailViewStatusImageView.setImage(null); //TODO setImage from user
-        this.contactDetailViewStatusLabel.setText("active"); //TODO setText from user
+        this.contactDetailViewProfilemageView.setImage(user.getProfileImage());
+        this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
+        this.contactDetailViewStatusLabel.setText(user.getStatus());
         contactDetailView.toFront();
     }
 
