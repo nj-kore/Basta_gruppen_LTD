@@ -163,6 +163,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         displayChat();
                         chatView.loadMessages();
                         updateContactsList();
+                        updateConversationsList();
                         //updateCreateNewConvoLists();
                         break;
                 }

@@ -28,19 +28,6 @@ public class MainModel extends Observable implements IMainModel{
         activeConversation = new Conversation(-1, null);
     }
 
-    public void initData(List<User> users, List<Conversation> conversations) {
-        if(users != null) {
-            for(User u : users) {
-                this.users.put(u.getId(), u);
-            }
-        }
-        if (conversations != null) {
-            for(Conversation c : conversations) {
-                this.conversations.put(c.getId(), c);
-            }
-        }
-    }
-
 
     public void initFillers() {
         User admin = new User(1, "admin", "123", "Admin", "Boy");
@@ -68,7 +55,7 @@ public class MainModel extends Observable implements IMainModel{
      */
     @Override
     public void sendMessage(String text) {
-        int newMessageId = Collections.max(users.keySet());
+        int newMessageId = Collections.max(users.keySet()) + 1;
         Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
         activeConversation.addMessage(m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
@@ -142,7 +129,7 @@ public class MainModel extends Observable implements IMainModel{
     public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
         try {
-            newConversationId = Collections.max(conversations.keySet());
+            newConversationId = Collections.max(conversations.keySet()) + 1;
         } catch (Exception e) {
 
         }
