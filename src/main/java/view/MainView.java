@@ -33,7 +33,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     private IMainModel mainModel = new MainModel();
     ChatView chatView = new ChatView(this, mainModel);
     LoginView loginView = new LoginView(this, mainModel);
-    UserPageView userPage = new UserPageView(this);
+    UserPageView userPage = new UserPageView(this, mainModel);
     ArrayList<NewConvoContactListItem> newConvoListItems = new ArrayList<>();
     User detailedUser;
 
@@ -276,7 +276,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     newConvoContactPane.getChildren().add(newConvoContactListItem);
                 }
                 newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color:");
+                newConvoContactListItem.setStyle("-fx-background-color: aqua");
             }
         }
     }

@@ -22,7 +22,7 @@ import java.io.IOException;
 public class UserPageView extends AnchorPane {
 
     MainView parent;
-    IMainModel mainModel = new MainModel();
+    IMainModel mainModel;
 
     @FXML
     TextField firstNameTextField;
@@ -57,7 +57,7 @@ public class UserPageView extends AnchorPane {
     @FXML
     ImageView profilePicImageView;
 
-    public UserPageView(MainView parentView) {
+    public UserPageView(MainView parentView, IMainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -69,6 +69,7 @@ public class UserPageView extends AnchorPane {
         }
 
         this.parent = parentView;
+        this.mainModel = mainModel;
     }
 
     /**
@@ -125,6 +126,10 @@ public class UserPageView extends AnchorPane {
             lastNameTextField.setEditable(true);
             emailTextField.setEditable(true);
 
+            firstNameTextField.setFocusTraversable(true);
+            lastNameTextField.setFocusTraversable(true);
+            emailTextField.setFocusTraversable(true);
+
             firstNameTextField.setStyle("-fx-border-insets: 2px");
             emailTextField.setStyle("-fx-border-insets: 2px");
             lastNameTextField.setStyle("-fx-border-insets: 2px");
@@ -139,6 +144,10 @@ public class UserPageView extends AnchorPane {
             firstNameTextField.setEditable(false);
             lastNameTextField.setEditable(false);
             emailTextField.setEditable(false);
+
+            firstNameTextField.setFocusTraversable(false);
+            lastNameTextField.setFocusTraversable(false);
+            emailTextField.setFocusTraversable(false);
 
             firstNameTextField.setStyle("-fx-border-insets: 0px");
             emailTextField.setStyle("-fx-border-insets: 0px");
