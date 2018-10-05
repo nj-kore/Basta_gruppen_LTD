@@ -15,10 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import model.data.Conversation;
+import model.Conversation;
 import model.IMainModel;
 import model.MainModel;
-import model.data.User;
+import model.User;
 
 import java.net.URL;
 import java.util.*;

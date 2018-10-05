@@ -4,16 +4,11 @@ package model;
 import infrastructure.DataHandlerDummy;
 import infrastructure.IDataHandler;
 import infrastructure.JsonHandler;
-import javafx.scene.image.Image;
-import model.data.Conversation;
-import model.data.Message;
-import model.data.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.*;
 
 

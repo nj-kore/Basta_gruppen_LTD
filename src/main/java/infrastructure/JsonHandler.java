@@ -10,15 +10,16 @@ package infrastructure;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import model.Conversation;
+import model.Message;
+import model.User;
 import model.MainModel;
-import model.data.Conversation;
-import model.data.Message;
-import model.data.User;
 import com.google.gson.Gson;
-import sun.applet.Main;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.*;
 
 public class JsonHandler implements  IDataHandler, Observer {
@@ -243,7 +244,6 @@ public class JsonHandler implements  IDataHandler, Observer {
         }
 
     }
-
 
     @Override
     public void updateUser(User u) {
