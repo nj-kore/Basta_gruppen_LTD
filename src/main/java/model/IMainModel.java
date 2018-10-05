@@ -2,6 +2,7 @@ package model;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public interface IMainModel {
@@ -11,7 +12,8 @@ public interface IMainModel {
     User getActiveUser();
     Conversation getActiveConversation();
     Iterator<User> getContacts();
-    Iterator<Conversation> getConversations();
+    HashMap<Integer,User> getUsers();
+    HashMap<Integer,Conversation> getConversations();
     boolean login(String username, String password);
     Iterator<Message> loadMessagesInConversation();
     User getUser(int userId);

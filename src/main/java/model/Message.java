@@ -32,8 +32,4 @@ public class Message {
         this.text = text;
     }
 
-    protected void setId(int id) {
-        this.id = id;
-    }
-
 }

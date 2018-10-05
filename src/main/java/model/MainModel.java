@@ -1,10 +1,6 @@
 package model;
 
 
-import infrastructure.DataHandlerDummy;
-import infrastructure.IDataHandler;
-import infrastructure.JsonHandler;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,13 +17,15 @@ public class MainModel extends Observable implements IMainModel{
     private enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
-    private HashMap<Integer, Conversation>  conversations = new HashMap<>();
+    private HashMap<Integer, Conversation>  conversations;
     private HashMap<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
 
-    public MainModel(){
-        //initFillers();
+    public MainModel(HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
+        this.users = users;
+        this.conversations = conversations;
+        activeConversation = new Conversation(-1, null);
     }
 
     public void initData(List<User> users, List<Conversation> conversations) {
@@ -56,7 +54,10 @@ public class MainModel extends Observable implements IMainModel{
         contactUser.setStatusImagePath("pics/activeStatus.png");
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus("Matematisk");
-
+        users.put(admin.getId(),admin);
+        users.put(contactUser.getId(),contactUser);
+        users.put(contactUser2.getId(),contactUser2);
+        update(UpdateTypes.INIT);
     }
     /**
      * @param text
@@ -104,14 +105,13 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public Iterator<Message> loadMessagesInConversation(){
-
-        try {
+        /*try {
             Iterator<Message> messageIterator = activeConversation.getMessages().iterator();
             return messageIterator;
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        return activeConversation.getMessages().iterator();
     }
 
     public void addContact(int userId){
@@ -135,7 +135,7 @@ public class MainModel extends Observable implements IMainModel{
         this.activeUser = activeUser;
     }
 
-    public void setActiveConversation(int conversationId) {
+    private void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
     }
 
@@ -149,6 +149,7 @@ public class MainModel extends Observable implements IMainModel{
         Conversation conversation = new Conversation(newConversationId, users);
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
+        update(UpdateTypes.ACTIVE_CONVERSATION);
         //TODO update view conversationlist
     }
 
@@ -157,12 +158,14 @@ public class MainModel extends Observable implements IMainModel{
         conversations.put(c.getId(), c);
     }
 
-    public Iterator<Conversation> getConversations() {
-        return conversations.values().iterator();            //TODO returns null
+    @Override
+    public HashMap<Integer,Conversation> getConversations() {
+        return conversations;            //TODO returns null
     }
 
-    public Iterator<User> getUsers() {
-        return users.values().iterator();
+    @Override
+    public HashMap<Integer, User> getUsers() {
+        return users;
     }
 
     public void createUser(User u) {
@@ -188,6 +191,7 @@ public class MainModel extends Observable implements IMainModel{
      */
     @Override
     public boolean login(String username, String password) {
+
         for(User u : users.values()) {
             if(u.getUsername().equals(username)) {
                 if(u.getPassword().equals(password)) {
@@ -195,6 +199,7 @@ public class MainModel extends Observable implements IMainModel{
                     //setActiveConversation(conversations.get(0).getId());
                     //initFillers();
                     update(UpdateTypes.INIT);
+                    return true;
                 }
             }
         }

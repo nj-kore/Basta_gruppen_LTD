@@ -1,8 +1,6 @@
 package view;
 
 import controller.IMainController;
-import infrastructure.IDataHandler;
-import infrastructure.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -32,13 +30,12 @@ import java.util.ResourceBundle;
 
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
-    private IMainModel mainModel = new MainModel();
-    ChatView chatView = new ChatView(this, mainModel);
-    LoginView loginView = new LoginView(this, mainModel);
-    UserPageView userPage = new UserPageView(this, mainModel);
-    ArrayList<NewConvoContactListItem> newConvoListItems = new ArrayList<>();
+    private IMainModel mainModel;
+    ChatView chatView;
+    LoginView loginView;
+    UserPageView userPage;
+    ArrayList<NewConvoContactListItem> newConvoListItems;
     User detailedUser;
-    IDataHandler dataHandler = new JsonHandler((MainModel)mainModel);
 
     //contactDetailView
     @FXML
@@ -122,14 +119,22 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
 
         ((MainModel) mainModel).addObserver(this);
-        ((MainModel) mainModel).addObserver((JsonHandler)dataHandler);
         displayLoginPage();
-        mainModel.login("admin", "123");
 
         //chatView.startTiming();
 
         //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
         //the interface? which seems wrong.
+
+    }
+
+    public MainView(IMainModel mainModel){
+
+        this.mainModel = mainModel;
+        this.chatView = new ChatView(this, mainModel);
+        this.loginView = new LoginView(this, mainModel);
+        this.userPage = new UserPageView(this, mainModel);
+        this.newConvoListItems = new ArrayList<>();
 
     }
 
@@ -154,6 +159,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         break;
                     case "INIT":
                         displayMainView();
+                        //Cant be run in Init since there are no conversations yet
                         displayChat();
                         chatView.loadMessages();
                         updateContactsList();
@@ -184,7 +190,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateConversationsList() {
 
         conversationsFlowPane.getChildren().clear();
-        Iterator<Conversation> iterator = mainModel.getConversations();
+        Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
         }
@@ -343,7 +349,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     public void loadDetailView(User user) {
         this.contactDetailViewNameLabel.setText(user.getFullName());
-        this.contactDetailViewProfilemageView.setImage(user.getProfileImage());
+        Image profileImage = new Image(user.getProfileImagePath());
+        this.contactDetailViewProfilemageView.setImage(profileImage);
         this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
         this.contactDetailViewStatusLabel.setText(user.getStatus());
         contactDetailView.toFront();

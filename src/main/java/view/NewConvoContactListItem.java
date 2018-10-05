@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.User;
@@ -39,7 +40,8 @@ public class NewConvoContactListItem extends AnchorPane {
 
         this.user = user;
         this.newConvoContactNameLabel.setText(user.getFullName());
-        this.newConvoContactProfileImageView.setImage(user.getProfileImage());
+        Image profileImage = new Image(user.getProfileImagePath());
+        this.newConvoContactProfileImageView.setImage(profileImage);
     }
 
     @FXML
