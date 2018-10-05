@@ -1,4 +1,4 @@
-package model.data;
+package model;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,6 @@ public class Message {
     private int id;
     private String text;
     private int senderId;
-    private int conversationId;
     private LocalDateTime time;
 
     public Message(int id, int senderId, String text, LocalDateTime time) {
@@ -15,13 +14,9 @@ public class Message {
         this.text = text;
         this.time = time;
     }
-
+    //Getters
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getSenderId() {
@@ -32,7 +27,13 @@ public class Message {
         return text;
     }
 
-    public void setText(String text) {
+    //Setters
+    protected void setText(String text) {
         this.text = text;
     }
+
+    protected void setId(int id) {
+        this.id = id;
+    }
+
 }

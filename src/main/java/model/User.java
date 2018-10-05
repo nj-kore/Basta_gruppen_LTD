@@ -1,4 +1,4 @@
-package model.data;
+package model;
 
 import javafx.scene.image.Image;
 
@@ -37,39 +37,17 @@ public class User {
 
     public String getStatusImagePath(){return statusImagePath;}
 
-    public String getFirstName(){return firstName;}
-
-    public String getLastName(){return lastName;}
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getFullName(){
         return firstName + " " + lastName;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public ArrayList<Integer> getContacts(){return contacts;}
+    protected ArrayList<Integer> getContacts(){return contacts;}
 
     public String getProfileImagePath(){return profileImagePath;}
 
@@ -84,8 +62,24 @@ public class User {
     }
 
     //Setters
-    public void setId(int id) {
-        this.id = id;
+    //Todo make proctected when possible
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    //Todo make proctected when possible
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    //Todo make proctected when possible
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    //Todo make proctected when possible
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setStatus(String status){this.status=status;}

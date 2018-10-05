@@ -1,14 +1,8 @@
 package model;
 
 
-import model.data.Conversation;
-import model.data.Message;
-import model.data.User;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 public interface IMainModel {
     void sendMessage(String text);
