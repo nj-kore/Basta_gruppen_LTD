@@ -1,7 +1,6 @@
 package view;
 
 import controller.IMainController;
-import infrastructure.IDataHandler;
 import infrastructure.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,13 +31,12 @@ import java.util.ResourceBundle;
 
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
-    private IMainModel mainModel = new MainModel();
+    private IMainModel mainModel;
     ChatView chatView = new ChatView(this, mainModel);
     LoginView loginView = new LoginView(this, mainModel);
     UserPageView userPage = new UserPageView(this, mainModel);
     ArrayList<NewConvoContactListItem> newConvoListItems = new ArrayList<>();
     User detailedUser;
-    IDataHandler dataHandler = new JsonHandler((MainModel)mainModel);
 
     //contactDetailView
     @FXML
@@ -122,7 +120,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
 
         ((MainModel) mainModel).addObserver(this);
-        ((MainModel) mainModel).addObserver((JsonHandler)dataHandler);
         displayLoginPage();
         mainModel.login("admin", "123");
 

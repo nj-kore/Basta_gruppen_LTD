@@ -1,8 +1,12 @@
+import infrastructure.IDataHandler;
+import infrastructure.JsonHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.IMainModel;
+import model.MainModel;
 
 /**
  * The Shat App is a messaging desktop application for business. The app allows you to chat with contacts at work
@@ -29,6 +33,12 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+
+        IDataHandler dataHandler = new JsonHandler();
+
+        IMainModel mainModel =  new MainModel();
+
+        ((MainModel) mainModel).addObserver((JsonHandler)dataHandler);
 
         Parent root = FXMLLoader.load(getClass().getResource("../resources/fxml/MainView.fxml"));
 

@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 
 
@@ -50,10 +48,6 @@ public class User {
     protected ArrayList<Integer> getContacts(){return contacts;}
 
     public String getProfileImagePath(){return profileImagePath;}
-
-    public Image getProfileImage() {
-        return new Image(profileImagePath);
-    }
 
     public String getStatus(){return status;}
 

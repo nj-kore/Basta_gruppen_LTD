@@ -1,10 +1,6 @@
 package model;
 
 
-import infrastructure.DataHandlerDummy;
-import infrastructure.IDataHandler;
-import infrastructure.JsonHandler;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +17,15 @@ public class MainModel extends Observable implements IMainModel{
     private enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
-    private HashMap<Integer, Conversation>  conversations = new HashMap<>();
+    private HashMap<Integer, Conversation>  conversations;
     private HashMap<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
 
-    public MainModel(){
+    public MainModel(User activeUser, HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
+        this.activeUser = activeUser;
+        this.users = users;
+        this.conversations = conversations;
         //initFillers();
     }
 
@@ -135,7 +134,7 @@ public class MainModel extends Observable implements IMainModel{
         this.activeUser = activeUser;
     }
 
-    public void setActiveConversation(int conversationId) {
+    private void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
     }
 
