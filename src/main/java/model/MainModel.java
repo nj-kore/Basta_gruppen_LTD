@@ -192,7 +192,7 @@ public class MainModel extends Observable implements IMainModel{
             if(u.getUsername().equals(username)) {
                 if(u.getPassword().equals(password)) {
                     setActiveUser(u);
-                    setActiveConversation(conversations.get(0).getId());
+                    //setActiveConversation(conversations.get(0).getId());
                     //initFillers();
                     update(UpdateTypes.INIT);
                 }
