@@ -10,18 +10,26 @@ package infrastructure;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import model.MainModel;
 import model.data.Conversation;
 import model.data.Message;
 import model.data.User;
 import com.google.gson.Gson;
+import sun.applet.Main;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class JsonHandler implements  IDataHandler {
+public class JsonHandler implements  IDataHandler, Observer {
+
+    private MainModel model;
+    public JsonHandler(MainModel model) {
+        this.model = model;
+        loadModel();
+    }
+
+
 
     @Override
     public void saveMessage(int conversationId, Message messageToSave) {
@@ -236,6 +244,7 @@ public class JsonHandler implements  IDataHandler {
 
     }
 
+
     @Override
     public void updateUser(User u) {
 
@@ -276,4 +285,30 @@ public class JsonHandler implements  IDataHandler {
         }
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        saveModel();
+    }
+
+    private void saveModel() {
+        Iterator<Conversation> conversationIterator = model.getConversations();
+        List<Conversation> convoList = new ArrayList<>();
+        while(conversationIterator.hasNext()) {
+            convoList.add(conversationIterator.next());
+        }
+        writeConversations(convoList);
+
+        Iterator<User> userIterator = model.getUsers();
+        List<User> userList = new ArrayList<>();
+        while(userIterator.hasNext()) {
+            userList.add(userIterator.next());
+        }
+        writeUsers(userList);
+    }
+
+    private void loadModel() {
+        List<User> users = loadUsers();
+        List<Conversation> conversations = loadConversations();
+        model.initData(users, conversations);
+    }
 }

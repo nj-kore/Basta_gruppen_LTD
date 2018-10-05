@@ -26,31 +26,41 @@ public class MainModel extends Observable implements IMainModel{
     private enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
-    private IDataHandler dataHandler = new DataHandlerDummy();
+    private HashMap<Integer, Conversation>  conversations = new HashMap<>();
+    private HashMap<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
-    private Iterator<Conversation> conversationIterator;
-    private Iterator<Message> messageIterator;
-    private IDataHandler jsonHandler = new JsonHandler();
     private User detailedUser;
 
     public MainModel(){
-        User activeUser = new User(1, "admin", "123", "eva", "olsson");
-        jsonHandler.saveUser(activeUser);
+        //initFillers();
+    }
+
+    public void initData(List<User> users, List<Conversation> conversations) {
+        if(users != null) {
+            for(User u : users) {
+                this.users.put(u.getId(), u);
+            }
+        }
+        if (conversations != null) {
+            for(Conversation c : conversations) {
+                this.conversations.put(c.getId(), c);
+            }
+        }
     }
 
 
     public void initFillers() {
+        User admin = new User(1, "admin", "123", "Admin", "Boy");
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
         User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
+        admin.addContact(contactUser.getId());
+        admin.addContact(contactUser2.getId());
+        createUser(admin);
         createUser(contactUser);
         createUser(contactUser2);
-        addContact(contactUser.getId());
-        addContact(contactUser2.getId());
         contactUser.setStatusImagePath("pics/activeStatus.png");
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus("Matematisk");
-        jsonHandler.saveUser(contactUser);
-        jsonHandler.saveUser(contactUser);
 
     }
     /**
@@ -62,23 +72,9 @@ public class MainModel extends Observable implements IMainModel{
      */
     @Override
     public void sendMessage(String text) {
-
-        int newMessageId = 0;
-        int oldHighestId;
-
-        Iterator<Message> itr = loadMessagesInConversation();
-        while(itr.hasNext()){
-            oldHighestId = itr.next().getId();
-            if(oldHighestId >= newMessageId){
-                newMessageId = oldHighestId + 1;
-            }
-        }
+        int newMessageId = Collections.max(users.keySet());
         Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
-        //jsonHandler.loadConversation(activeConversation.getId()).getMessages();
-
-        //activeConversation.addMessage(m);
-
-        jsonHandler.saveMessage(activeConversation.getId(), m);
+        activeConversation.addMessage(m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
@@ -109,14 +105,13 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public Conversation loadConversation(int conversationId) {
-        return jsonHandler.loadConversation(conversationId);
+        return conversations.get(conversationId);
     }
 
     public Iterator<Message> loadMessagesInConversation(){
 
         try {
-            Conversation c=loadConversation(getActiveConversation().getId());
-            messageIterator = c.getMessages().iterator();
+            Iterator<Message> messageIterator = activeConversation.getMessages().iterator();
             return messageIterator;
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,10 +121,7 @@ public class MainModel extends Observable implements IMainModel{
 
     public void addContact(int userId){
         activeUser.addContact(userId);
-        jsonHandler.saveUser(activeUser);
     }
-
-
 
     public Iterator<User> getContacts(){
         List<User> list = new ArrayList<>();
@@ -141,11 +133,7 @@ public class MainModel extends Observable implements IMainModel{
 
     @Override
     public User getUser(int userId) {
-        return jsonHandler.loadUser(userId);
-    }
-
-    public HashMap<Integer, User> getUsers() {
-        return null;
+        return users.get(userId);
     }
 
     public void setActiveUser(User activeUser) {
@@ -153,43 +141,37 @@ public class MainModel extends Observable implements IMainModel{
     }
 
     public void setActiveConversation(int conversationId) {
-        this.activeConversation = jsonHandler.loadConversation(conversationId);
+        this.activeConversation = conversations.get(conversationId);
     }
 
     public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
-        int oldConversationId;
+        try {
+            newConversationId = Collections.max(conversations.keySet());
+        } catch (Exception e) {
 
-
-        List<Conversation> list = jsonHandler.loadConversations();
-        if (list != null) {
-            Iterator<Conversation> itr = list.iterator();
-            while(itr.hasNext()){
-                oldConversationId = itr.next().getId();
-                if(oldConversationId >= newConversationId){
-                    newConversationId = oldConversationId + 1;
-                }
-            }
         }
         Conversation conversation = new Conversation(newConversationId, users);
-        //conversations.put(conversation.getId(), conversation);
-        jsonHandler.saveConversation(conversation);
-        activeConversation = conversation;
+        conversations.put(conversation.getId(), conversation);
+        setActiveConversation(conversation.getId());
         //TODO update view conversationlist
     }
 
     //Exists for testing purposes
     public void addConversation(Conversation c) {
-        jsonHandler.saveConversation(c);
+        conversations.put(c.getId(), c);
     }
 
     public Iterator<Conversation> getConversations() {
-        //conversationIterator = jsonHandler.
-        return null;            //TODO returns null
+        return conversations.values().iterator();            //TODO returns null
+    }
+
+    public Iterator<User> getUsers() {
+        return users.values().iterator();
     }
 
     public void createUser(User u) {
-        jsonHandler.saveUser(u);
+        users.put(u.getId(), u);
     }
 
     public User getActiveUser() {
@@ -211,15 +193,14 @@ public class MainModel extends Observable implements IMainModel{
      */
     @Override
     public boolean login(String username, String password) {
-        User user = jsonHandler.loadUser(username);
-        if(user != null){
-            if(user.confirmPassword(password)){
-                createUser(user);
-                setActiveUser(user);
-                initFillers();
-                update(UpdateTypes.INIT);
-
-                return true;
+        for(User u : users.values()) {
+            if(u.getUsername().equals(username)) {
+                if(u.getPassword().equals(password)) {
+                    setActiveUser(u);
+                    setActiveConversation(conversations.get(0).getId());
+                    //initFillers();
+                    update(UpdateTypes.INIT);
+                }
             }
         }
         return false;
