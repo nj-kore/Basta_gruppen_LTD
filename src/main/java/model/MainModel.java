@@ -11,10 +11,10 @@ import java.util.*;
 /**
  * The façade for the model package.
  */
-public class MainModel extends Observable implements IMainModel{
+public class MainModel extends Observable{
     private User activeUser;
     private Conversation activeConversation;
-    private enum UpdateTypes {
+    public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
     private HashMap<Integer, Conversation>  conversations;
@@ -53,7 +53,6 @@ public class MainModel extends Observable implements IMainModel{
      *
      * Tells the view to update itself
      */
-    @Override
     public void sendMessage(String text) {
         int newMessageId = Collections.max(users.keySet()) + 1;
         Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
@@ -68,23 +67,8 @@ public class MainModel extends Observable implements IMainModel{
      * Notifies the observers with the String update as an argument
      */
     private void update(UpdateTypes u) {
-        String update = "";
-        switch(u) {
-            case ACTIVE_CONVERSATION:
-                update = UpdateTypes.ACTIVE_CONVERSATION.toString();
-                break;
-            case CONVERSATIONS:
-                update = UpdateTypes.CONVERSATIONS.toString();
-                break;
-            case CONTACTS:
-                update = UpdateTypes.CONTACTS.toString();
-                break;
-            case INIT:
-                update = UpdateTypes.INIT.toString();
-                break;
-        }
         setChanged();
-        notifyObservers(update);
+        notifyObservers(u);
     }
 
     public Conversation loadConversation(int conversationId) {
@@ -113,7 +97,6 @@ public class MainModel extends Observable implements IMainModel{
         return list.iterator();
     }
 
-    @Override
     public User getUser(int userId) {
         return users.get(userId);
     }
@@ -145,12 +128,10 @@ public class MainModel extends Observable implements IMainModel{
         conversations.put(c.getId(), c);
     }
 
-    @Override
     public HashMap<Integer,Conversation> getConversations() {
         return conversations;            //TODO returns null
     }
 
-    @Override
     public HashMap<Integer, User> getUsers() {
         return users;
     }
@@ -176,7 +157,6 @@ public class MainModel extends Observable implements IMainModel{
      *
      * Checks if a User was found with the corresponding username and password
      */
-    @Override
     public boolean login(String username, String password) {
 
         for(User u : users.values()) {

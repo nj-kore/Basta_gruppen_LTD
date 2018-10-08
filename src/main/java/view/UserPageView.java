@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import model.IMainModel;
 import model.MainModel;
 
 import java.io.File;
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class UserPageView extends AnchorPane {
 
     MainView parent;
-    IMainModel mainModel;
+    MainModel mainModel;
 
     @FXML
     TextField firstNameTextField;
@@ -57,7 +56,7 @@ public class UserPageView extends AnchorPane {
     @FXML
     ImageView profilePicImageView;
 
-    public UserPageView(MainView parentView, IMainModel mainModel) {
+    public UserPageView(MainView parentView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

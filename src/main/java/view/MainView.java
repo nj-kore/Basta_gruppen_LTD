@@ -14,7 +14,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import model.Conversation;
-import model.IMainModel;
 import model.MainModel;
 import model.User;
 
@@ -30,12 +29,12 @@ import java.util.ResourceBundle;
 
 public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
-    private IMainModel mainModel;
-    ChatView chatView;
-    LoginView loginView;
-    UserPageView userPage;
-    ArrayList<NewConvoContactListItem> newConvoListItems;
-    User detailedUser;
+    private MainModel mainModel;
+    private ChatView chatView;
+    private LoginView loginView;
+    private UserPageView userPage;
+    private ArrayList<NewConvoContactListItem> newConvoListItems;
+    private User detailedUser;
 
     //contactDetailView
     @FXML
@@ -116,9 +115,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
-        ((MainModel) mainModel).addObserver(this);
         displayLoginPage();
 
         //chatView.startTiming();
@@ -128,7 +124,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     }
 
-    public MainView(IMainModel mainModel){
+    public MainView(MainModel mainModel){
 
         this.mainModel = mainModel;
         this.chatView = new ChatView(this, mainModel);
@@ -145,28 +141,26 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
      */
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof IMainModel) {
-            if (arg instanceof String) {
-                switch ((String) arg) {
-                    case "ACTIVE_CONVERSATION":
-                        chatView.loadMessages();
-                        break;
-                    case "CONTACTS":
-                        updateContactsList();
-                        break;
-                    case "CONVERSATIONS":
-                        updateConversationsList();
-                        break;
-                    case "INIT":
-                        displayMainView();
-                        //Cant be run in Init since there are no conversations yet
-                        displayChat();
-                        chatView.loadMessages();
-                        updateContactsList();
-                        updateConversationsList();
-                        //updateCreateNewConvoLists();
-                        break;
-                }
+        if (o instanceof MainModel) {
+            switch ((MainModel.UpdateTypes)arg) {
+                case ACTIVE_CONVERSATION:
+                    chatView.loadMessages();
+                    break;
+                case CONTACTS:
+                    updateContactsList();
+                    break;
+                case CONVERSATIONS:
+                    updateConversationsList();
+                    break;
+                case INIT:
+                    displayMainView();
+                    //Cant be run in Init since there are no conversations yet
+                    displayChat();
+                    chatView.loadMessages();
+                    updateContactsList();
+                    updateConversationsList();
+                    //updateCreateNewConvoLists();
+                    break;
             }
         }
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));

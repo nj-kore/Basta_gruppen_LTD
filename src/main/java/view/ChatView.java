@@ -20,7 +20,7 @@ import java.util.Iterator;
 public class ChatView extends AnchorPane implements IChatController {
 
 
-    private IMainModel mainModel;
+    private MainModel mainModel;
 
 
     @FXML
@@ -46,7 +46,7 @@ public class ChatView extends AnchorPane implements IChatController {
 
 
 
-    public ChatView(IMainView parentView, IMainModel mainModel) {
+    public ChatView(IMainView parentView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

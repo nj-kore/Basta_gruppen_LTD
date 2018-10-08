@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.IMainModel;
 import model.MainModel;
 import view.IMainView;
 import view.MainView;
@@ -42,16 +41,19 @@ public class Main extends Application {
         //Creates an instance of dataloader that can be used to load data
         IDataLoader dataLoader = new JsonLoader();
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
-        IMainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
+        MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
         //((MainModel) mainModel).initFillers();
         //Creates an instance of datasaver which can be used to save data
         IDataSaver dataSaver = new JsonSaver(mainModel);
-        //adds datasaver to mainmodels observers
-        ((MainModel) mainModel).addObserver((JsonSaver)dataSaver);
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel);
+
+        //adds datasaver to mainmodels observers
+        mainModel.addObserver((JsonSaver)dataSaver);
+        //adds mainView to mainmodels observers
+        mainModel.addObserver((MainView)mainView);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/MainView.fxml"));
         fxmlLoader.setController(mainView);

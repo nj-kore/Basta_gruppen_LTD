@@ -10,15 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import model.IMainModel;
 import model.MainModel;
 
 import java.io.IOException;
 
 public class LoginView extends AnchorPane implements ILoginController {
 
-    private IMainModel mainModel;
+    private MainModel mainModel;
     @FXML
     TextField userNameTextField;
     @FXML
@@ -30,7 +28,7 @@ public class LoginView extends AnchorPane implements ILoginController {
 
     private IMainView parentView;
 
-    public LoginView(IMainView parentView, IMainModel mainModel) {
+    public LoginView(IMainView parentView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

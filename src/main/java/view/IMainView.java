@@ -1,7 +1,5 @@
 package view;
 
-import model.IMainModel;
-
 public interface IMainView {
     void displayContacts();
     void displayConversations();

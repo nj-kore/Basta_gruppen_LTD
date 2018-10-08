@@ -18,9 +18,9 @@ import java.util.*;
 
 public class JsonSaver implements IDataSaver, Observer {
 
-    private IMainModel model;
+    private MainModel model;
 
-    public JsonSaver(IMainModel model) {
+    public JsonSaver(MainModel model) {
         this.model = model;
         saveModel();
     }
