@@ -1,11 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Conversation {
     private int id;
-    private List<Message> messages = new ArrayList<Message>();
+    private Map<Integer, Message> messages = new HashMap<>();
     private List<User> participants = new ArrayList<User>();
     private String name;
 
@@ -21,7 +23,7 @@ public class Conversation {
      * @param m
      */
     public void addMessage(Message m) {
-        messages.add(m);
+        messages.put(m.getId(), m);
     }
 
 
@@ -35,7 +37,7 @@ public class Conversation {
     }
 
 
-    public List<Message> getMessages() {
+    public Map<Integer, Message> getMessages() {
         return messages;
     }
 

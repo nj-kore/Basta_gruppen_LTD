@@ -5,8 +5,9 @@ import model.User;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface IDataLoader {
-    HashMap<Integer, User> loadUsers();
-    HashMap<Integer, Conversation> loadConversations();
+    Map<Integer, User> loadUsers();
+    Map<Integer, Conversation> loadConversations();
 }

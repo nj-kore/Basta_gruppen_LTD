@@ -2,9 +2,6 @@ package model;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
 import java.util.*;
 
 
@@ -17,12 +14,12 @@ public class MainModel extends Observable{
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
     }
-    private HashMap<Integer, Conversation>  conversations;
-    private HashMap<Integer, User>  users = new HashMap<>();
+    private Map<Integer, Conversation>  conversations;
+    private Map<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
 
-    public MainModel(HashMap<Integer, User>  users, HashMap<Integer, Conversation>  conversations){
+    public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
         activeConversation = new Conversation(-1, null);
@@ -54,7 +51,13 @@ public class MainModel extends Observable{
      * Tells the view to update itself
      */
     public void sendMessage(String text) {
-        int newMessageId = Collections.max(users.keySet()) + 1;
+        //The new ID is going to be one more than the current highest message id in the conversation
+        int newMessageId = 0;
+        try {
+            newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
         activeConversation.addMessage(m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
@@ -76,13 +79,7 @@ public class MainModel extends Observable{
     }
 
     public Iterator<Message> loadMessagesInConversation(){
-        /*try {
-            Iterator<Message> messageIterator = activeConversation.getMessages().iterator();
-            return messageIterator;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        return activeConversation.getMessages().iterator();
+        return activeConversation.getMessages().values().iterator();
     }
 
     public void addContact(int userId){
@@ -128,11 +125,11 @@ public class MainModel extends Observable{
         conversations.put(c.getId(), c);
     }
 
-    public HashMap<Integer,Conversation> getConversations() {
+    public Map<Integer,Conversation> getConversations() {
         return conversations;            //TODO returns null
     }
 
-    public HashMap<Integer, User> getUsers() {
+    public Map<Integer, User> getUsers() {
         return users;
     }
 
