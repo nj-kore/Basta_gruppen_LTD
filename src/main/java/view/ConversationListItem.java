@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import model.MainModel;
 import model.Conversation;
 
 import java.io.IOException;
@@ -13,6 +14,9 @@ import java.io.IOException;
  * ConversationListItem is view that displays one conversation as an item
  */
 public class ConversationListItem extends AnchorPane{
+
+    private MainModel mainModel;
+    private Conversation conversation;
 
     @FXML
     ImageView conversationProfileImageView;
@@ -27,7 +31,7 @@ public class ConversationListItem extends AnchorPane{
     Label conversationStatusLabel;
 
 
-    public ConversationListItem(Conversation conversation) {
+    public ConversationListItem(Conversation conversation, MainModel mainModel) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
@@ -39,11 +43,14 @@ public class ConversationListItem extends AnchorPane{
             throw new RuntimeException(exception);
         }
 
+        this.mainModel = mainModel;
+        this.conversation = conversation;
+
     }
 
     @FXML
     public void conversationListItemClicked() {
-
+        mainModel.setActiveConversation(this.conversation.getId());
     }
 
 }

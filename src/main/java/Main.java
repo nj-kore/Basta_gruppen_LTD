@@ -44,7 +44,7 @@ public class Main extends Application {
         MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
-        //((MainModel) mainModel).initFillers();
+        //mainModel.initFillers();
         //Creates an instance of datasaver which can be used to save data
         IDataSaver dataSaver = new JsonSaver(mainModel);
         //tries to log in as user with username admin and password 123

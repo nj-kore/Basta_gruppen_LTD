@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JsonLoader implements IDataLoader {
 
@@ -24,10 +25,11 @@ public class JsonLoader implements IDataLoader {
      * Loads all Users.
      * @return List of User or null
      */
-    public HashMap<Integer, User> loadUsers(){
+    @Override
+    public Map<Integer, User> loadUsers(){
         Gson gson = new Gson();
         List<User> users;
-        HashMap<Integer,User> usersMap = new HashMap<Integer,User>();
+        Map<Integer,User> usersMap = new HashMap<Integer,User>();
         Type listType = new TypeToken<List<User>>() {}.getType();
 
         if (fileExists("src/main/java/infrastructure/users.json")){
@@ -51,10 +53,10 @@ public class JsonLoader implements IDataLoader {
      * @return conversations
      */
     @Override
-    public HashMap<Integer, Conversation> loadConversations(){
+    public Map<Integer, Conversation> loadConversations(){
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Conversation>>() {}.getType();
-        HashMap<Integer, Conversation> conversationsMap = new HashMap<Integer, Conversation>();
+        Map<Integer, Conversation> conversationsMap = new HashMap<Integer, Conversation>();
         List<Conversation> conversations = new ArrayList<Conversation>();
 
         if (fileExists("src/main/java/infrastructure/conversations.json")){

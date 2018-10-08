@@ -52,7 +52,7 @@ public class JsonSaver implements IDataSaver, Observer {
             writeUsers(users);
         }
 
-        HashMap<Integer, User> userMap = model.getUsers();
+        Map<Integer, User> userMap = model.getUsers();
         if(!userMap.containsKey(userToSave.getId())){
             userMap.put(userToSave.getId(),userToSave);
             users = new ArrayList<User>(userMap.values());
@@ -120,7 +120,7 @@ public class JsonSaver implements IDataSaver, Observer {
             writeConversations(conversations);
         }
 
-        HashMap<Integer, Conversation> conversationMap = model.getConversations();
+        Map<Integer, Conversation> conversationMap = model.getConversations();
         if(!conversationMap.containsKey(conversationToSave.getId())){
             conversationMap.put(conversationToSave.getId(),conversationToSave);
             conversations = new ArrayList<Conversation>(conversationMap.values());
