@@ -1,14 +1,14 @@
 package view;
 
 import controller.IMainController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +19,7 @@ import model.MainModel;
 import model.User;
 
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -52,6 +53,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     Label contactDetailViewNameLabel;
+
 
     //newConversationView
     @FXML
@@ -107,6 +109,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     ImageView statusImageView;
 
+    @FXML
+    MenuButton statusMenu;
+
 
     /**
      * @param location
@@ -128,13 +133,14 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     }
 
-    public MainView(IMainModel mainModel){
+    public MainView(IMainModel mainModel) {
 
         this.mainModel = mainModel;
         this.chatView = new ChatView(this, mainModel);
         this.loginView = new LoginView(this, mainModel);
         this.userPage = new UserPageView(this, mainModel);
         this.newConvoListItems = new ArrayList<>();
+
 
     }
 
@@ -164,12 +170,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                         chatView.loadMessages();
                         updateContactsList();
                         updateConversationsList();
+                        addPremadeStatuses();
                         //updateCreateNewConvoLists();
                         break;
                 }
             }
         }
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+
+
     }
 
     /**
@@ -238,6 +247,24 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void displayMainView() {
         loginHBox.toBack();
     }
+
+    @FXML
+    public void addPremadeStatuses(){
+        //statusMenu.setText(mainModel.getActiveUser().getStatus());
+        for (String status : mainModel.getActiveUser().getPremadeStatuses()){
+            MenuItem m = new MenuItem(status);
+            statusMenu.getItems().add(m);
+            m.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    statusMenu.setText(m.getText());
+                    //Todo store clicked status in json or user
+                    mainModel.getActiveUser().setStatus(m.getText());
+                }
+            });
+        }
+    }
+
 
     public void updateContactsList(ArrayList<User> contacts) {
 
@@ -311,7 +338,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     private void newConvoSaveNameButtonClicked() {
-        if(!newConvoSaveNameTextField.getText().isEmpty()) {
+        if (!newConvoSaveNameTextField.getText().isEmpty()) {
             newConvoCreateConvoButton.setDisable(false);
         } else {
             newConvoSaveNameLabel.setText("Conversation needs to have a name");
@@ -327,6 +354,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         createConvoView.toFront();
         updateCreateNewConvoLists();
     }
+
 
     @FXML
     public void newConvoCloseButtonClicked() {

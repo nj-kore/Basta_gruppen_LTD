@@ -45,7 +45,7 @@ public class Main extends Application {
         IMainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
-        //((MainModel) mainModel).initFillers();
+        ((MainModel) mainModel).initFillers();
         //Creates an instance of datasaver which can be used to save data
         IDataSaver dataSaver = new JsonSaver(mainModel);
         //adds datasaver to mainmodels observers

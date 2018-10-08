@@ -12,6 +12,8 @@ public class User {
     private String lastName;
     private String email;
     private String status;
+    private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"};
+    private ArrayList<String> statuses = new ArrayList<>();
     private String statusImagePath;
     private String profileImagePath;
 
@@ -43,7 +45,9 @@ public class User {
         return password;
     }
 
-
+    public String[] getPremadeStatuses(){
+        return premadeStatuses;
+    }
 
     protected ArrayList<Integer> getContacts(){return contacts;}
 
@@ -54,6 +58,7 @@ public class User {
     public String getUsername() {
         return username;
     }
+
 
     //Setters
     //Todo make proctected when possible
