@@ -102,7 +102,7 @@ public class MainModel extends Observable{
         this.activeUser = activeUser;
     }
 
-    private void setActiveConversation(int conversationId) {
+    public void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
     }
 
@@ -126,7 +126,7 @@ public class MainModel extends Observable{
     }
 
     public Map<Integer,Conversation> getConversations() {
-        return conversations;            //TODO returns null
+        return conversations;
     }
 
     public Map<Integer, User> getUsers() {
