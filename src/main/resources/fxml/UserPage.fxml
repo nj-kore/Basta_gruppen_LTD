@@ -9,15 +9,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="794.0" styleClass="dark4" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="904.0" prefWidth="794.0" styleClass="dark4" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="TOP_CENTER" layoutX="314.0" layoutY="14.0" stylesheets="@style.css" text="My account">
+      <Label alignment="TOP_CENTER" layoutX="314.0" layoutY="14.0" stylesheets="@style.css" text="My account" AnchorPane.leftAnchor="314.0" AnchorPane.rightAnchor="314.0">
          <styleClass>
             <String fx:value="titleText" />
             <String fx:value="whiteText" />
          </styleClass>
       </Label>
-      <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="696.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToChat" prefHeight="47.0" prefWidth="83.0" text="Done" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
       <AnchorPane layoutX="106.0" layoutY="88.0" prefHeight="218.0" prefWidth="580.0" styleClass="dark3" stylesheets="@style.css">
          <children>
             <ImageView fx:id="profilePicImageView" fitHeight="157.0" fitWidth="148.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
@@ -48,7 +48,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="106.0" layoutY="313.0" minWidth="-Infinity" prefHeight="247.0" prefWidth="580.0" styleClass="dark3">
+      <AnchorPane layoutX="106.0" layoutY="313.0" minWidth="-Infinity" prefHeight="218.0" prefWidth="580.0" styleClass="dark3">
          <children>
             <Button layoutX="455.0" layoutY="194.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
             <Label layoutX="113.0" layoutY="95.0" styleClass="text16" text="Old Password:" />
@@ -69,6 +69,11 @@
             <Label fx:id="passwordChangedLabel" layoutX="181.0" layoutY="194.0" styleClass="text16" text="Password successfully changed" visible="false" />
             <Label fx:id="passwordChangedLabel1" layoutX="191.0" layoutY="204.0" styleClass="text16" text="Password successfully changed" visible="false" />
             <Label fx:id="wrongPasswordLabel" layoutX="409.0" layoutY="98.0" styleClass="redSmallText" text="Wrong Password" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="549.0" prefHeight="218.0" prefWidth="580.0" styleClass="dark3">
+         <children>
+            <Button layoutX="240.0" layoutY="87.0" mnemonicParsing="false" onAction="#logOut" styleClass="redButton" text="Log Out" />
          </children>
       </AnchorPane>
    </children>

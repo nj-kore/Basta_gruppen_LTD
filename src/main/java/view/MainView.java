@@ -223,15 +223,23 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     @Override
     public void displayUserPage() {
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(userPage);
-        loginHBox.toFront();
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(userPage);
+        userPage.prefWidthProperty().bind(mainViewAnchorPane.widthProperty());
+        userPage.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
+
     }
 
     @Override
     public void displayMainView() {
         loginHBox.toBack();
     }
+
+    public void backToChat(){
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(chatView);
+    }
+
 
     public void updateContactsList(ArrayList<User> contacts) {
 

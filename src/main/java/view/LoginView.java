@@ -67,6 +67,9 @@ public class LoginView extends AnchorPane implements ILoginController {
         boolean login = mainModel.login(userNameTextField.getText(), passwordField.getText());
         if (login){
             parentView.displayMainView();           //TODO
+
+            userNameTextField.clear();
+            passwordField.clear();
         } else{
             wrongPasswordLabel.setVisible(true);
         }

@@ -72,14 +72,14 @@ public class UserPageView extends AnchorPane {
     }
 
     /**
-     * Calls upon a function in the parentView to return to the mainView.
+     * Calls upon a function in the parentView to return to the chatView.
      * Hides feedback labels so that they are not shown the next time the user enters.
      */
     @FXML
-    public void backToMain(){
+    public void backToChat(){
         passwordChangedLabel.setVisible(false);
         wrongPasswordLabel.setVisible(false);
-        parent.displayMainView();
+        parent.backToChat();
     }
 
     /**
@@ -93,6 +93,12 @@ public class UserPageView extends AnchorPane {
 
         saveChangesButton.setVisible(true);
         saveChangesButton.setDisable(false);
+    }
+
+    @FXML
+    private void logOut(){
+        mainModel.setActiveUser(null);
+        parent.displayLoginPage();
     }
 
 
