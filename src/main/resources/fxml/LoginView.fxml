@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" onKeyPressed="#keyPressed" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="loginAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" onKeyPressed="#keyPressed" />
-      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" onKeyPressed="#keyPressed" />
-      <Button id="loginButton" fx:id="logInButton" layoutX="225.0" layoutY="240.0" mnemonicParsing="false" onAction="#login" onKeyPressed="#keyPressed" prefHeight="51.0" prefWidth="149.0" text="Log In" />
+      <TextField fx:id="userNameTextField" layoutX="226.0" layoutY="118.0" />
+      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="179.0" />
+      <Button id="loginButton" fx:id="logInButton" layoutX="225.0" layoutY="240.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="149.0" text="Log In" />
       <Label focusTraversable="false" layoutX="156.0" layoutY="122.0" text="Username:" textAlignment="RIGHT" />
       <Label focusTraversable="false" layoutX="158.0" layoutY="183.0" text="Password:" textAlignment="RIGHT" />
       <Label focusTraversable="false" layoutX="195.0" layoutY="37.0" text="Welcome, please log in!">
