@@ -161,9 +161,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     updateConversationsList();
                     //updateCreateNewConvoLists();
                     break;
+                case USER_INFO:
+                    updateUserInfoTextFields();
             }
         }
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+    }
+
+    private void updateUserInfoTextFields() {
+        userPage.updateUserInfoTextFields();
     }
 
     /**
@@ -227,6 +233,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         mainViewAnchorPane.getChildren().add(userPage);
         userPage.prefWidthProperty().bind(mainViewAnchorPane.widthProperty());
         userPage.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
+        updateUserInfoTextFields();
 
     }
 

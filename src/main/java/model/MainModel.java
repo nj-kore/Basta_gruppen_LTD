@@ -11,14 +11,16 @@ import java.util.*;
 public class MainModel extends Observable{
     private User activeUser;
     private Conversation activeConversation;
+
+
+
     public enum UpdateTypes {
-        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT
+        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
     private Map<Integer, Conversation>  conversations;
     private Map<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
-
     public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
@@ -43,6 +45,7 @@ public class MainModel extends Observable{
         users.put(contactUser2.getId(),contactUser2);
         update(UpdateTypes.INIT);
     }
+
     /**
      * @param text
      *
@@ -61,6 +64,12 @@ public class MainModel extends Observable{
         Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
         activeConversation.addMessage(m);
         update(UpdateTypes.ACTIVE_CONVERSATION);
+    }
+    public void setUserInfo(String firstName, String lastName, String email) {
+        activeUser.setFirstName(firstName);
+        activeUser.setLastName(lastName);
+        activeUser.setEmail(email);
+        update(UpdateTypes.USER_INFO);
     }
 
 
