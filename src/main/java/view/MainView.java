@@ -171,6 +171,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     break;
                 case USER_INFO:
                     updateUserInfoTextFields();
+                    updateCurrentUserInfo();
             }
         }
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
@@ -272,8 +273,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                 public void handle(ActionEvent event) {
                     statusMenu.setText(m.getText());
                     //Todo store clicked status in json or user
-                    mainModel.getActiveUser().setStatus(m.getText());
-                    mainModel.saveStatus(m.getText());
+                    //mainModel.getActiveUser().setStatus(m.getText());
+                    mainModel.setStatus(m.getText());
+
                 }
             });
             counter++;
@@ -299,7 +301,8 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     public void updateCurrentUserInfo() {
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath())); //TODO denna fungerar tydligen inte
+        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));//TODO denna fungerar tydligen inte
+        statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
     }
 
 

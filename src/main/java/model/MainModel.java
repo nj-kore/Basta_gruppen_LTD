@@ -1,6 +1,7 @@
 package model;
 
 
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -12,8 +13,6 @@ public class MainModel extends Observable{
     private User activeUser;
     private Conversation activeConversation;
 
-
-
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
@@ -21,6 +20,8 @@ public class MainModel extends Observable{
     private Map<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
     private User detailedUser;
+
+
     public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
@@ -103,6 +104,7 @@ public class MainModel extends Observable{
         return list.iterator();
     }
 
+
     public User getUser(int userId) {
         return users.get(userId);
     }
@@ -136,14 +138,28 @@ public class MainModel extends Observable{
 
     public Map<Integer,Conversation> getConversations() {
         return conversations;}
-    public void saveStatus(String s){
+
+
+    public void setStatus(String s){
+        switch (s){
+            case"AVAILABLE":
+                activeUser.setStatusImagePath("pics/statusGreen.png");
+                break;
+            case "BUSY":
+                activeUser.setStatusImagePath("pics/statusOrange.png");
+                break;
+            case "MATEMATISK":
+                activeUser.setStatusImagePath("pics/statusRed.png");
+                break;
+        }
         activeUser.setStatus(s);
+        update(UpdateTypes.USER_INFO);
     }
 
-    @Override
-    public HashMap<Integer,Conversation> getConversations() {
-        return conversations;            //TODO returns null
-    }
+    //@Override
+    //public HashMap<Integer,Conversation> getConversations() {
+       // return conversations;            //TODO returns null
+  //  }
 
     public Map<Integer, User> getUsers() {
         return users;

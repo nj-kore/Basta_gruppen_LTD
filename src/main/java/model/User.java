@@ -16,6 +16,7 @@ public class User {
     private ArrayList<String> statuses = new ArrayList<>();
     private String statusImagePath;
     private String profileImagePath;
+    private String[] statusPaths = new String[3];
 
 
     public User(int id, String username, String password, String firstName, String lastName) {
@@ -26,6 +27,9 @@ public class User {
         this.lastName = lastName;
         profileImagePath = "pics/userIcon.png";
         statusImagePath = "pics/userIcon.png";
+        statusPaths[0] = "pics/statusGreen.png";
+        statusPaths[1] = "pics/statusOrange.png";
+        statusPaths[2] = "pics/statusRed.png";
 
     }
 
@@ -91,7 +95,9 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setStatus(String status){this.status=status;}
+    public void setStatus(String status){this.status=status;
+
+    }
 
     public void setStatusImagePath(String statusImagePath){
         this.statusImagePath = statusImagePath;
