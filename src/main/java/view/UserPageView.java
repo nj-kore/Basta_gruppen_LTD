@@ -71,6 +71,12 @@ public class UserPageView extends AnchorPane {
         this.mainModel = mainModel;
     }
 
+    void updateUserInfoTextFields() {
+        firstNameTextField.setText(mainModel.getActiveUser().getFirstName());
+        lastNameTextField.setText(mainModel.getActiveUser().getLastName());
+        emailTextField.setText(mainModel.getActiveUser().getEmail());
+    }
+
     /**
      * Calls upon a function in the parentView to return to the chatView.
      * Hides feedback labels so that they are not shown the next time the user enters.
@@ -107,9 +113,12 @@ public class UserPageView extends AnchorPane {
      */
     @FXML
     private void saveInfoChange(){
+        /*REWORKING
         mainModel.getActiveUser().setFirstName(firstNameTextField.getText());
         mainModel.getActiveUser().setLastName(lastNameTextField.getText());
         mainModel.getActiveUser().setEmail(emailTextField.getText());
+        */
+        mainModel.setUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText()); //TODO
         enableInfoTextFields(false);
 
         changePictureButton.setVisible(false);
