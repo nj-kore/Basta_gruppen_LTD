@@ -135,7 +135,14 @@ public class MainModel extends Observable{
     }
 
     public Map<Integer,Conversation> getConversations() {
-        return conversations;
+        return conversations;}
+    public void saveStatus(String s){
+        activeUser.setStatus(s);
+    }
+
+    @Override
+    public HashMap<Integer,Conversation> getConversations() {
+        return conversations;            //TODO returns null
     }
 
     public Map<Integer, User> getUsers() {

@@ -12,6 +12,8 @@ public class User {
     private String lastName;
     private String email;
     private String status;
+    private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"};
+    private ArrayList<String> statuses = new ArrayList<>();
     private String statusImagePath;
     private String profileImagePath;
 
@@ -43,6 +45,9 @@ public class User {
         return password;
     }
 
+    public String[] getPremadeStatuses(){
+        return premadeStatuses;
+    }
     public String getFirstName() {
         return firstName;
     }
