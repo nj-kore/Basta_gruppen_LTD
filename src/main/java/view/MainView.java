@@ -134,7 +134,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
         this.mainModel = mainModel;
         this.chatView = new ChatView(this, mainModel);
-        this.loginView = new LoginView(this, mainModel);
+        this.loginView = new LoginView(mainModel);
         this.userPage = new UserPageView(this, mainModel);
         this.newConvoListItems = new ArrayList<>();
 

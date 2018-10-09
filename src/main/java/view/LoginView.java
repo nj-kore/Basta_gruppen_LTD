@@ -1,6 +1,9 @@
 package view;
 
 import controller.ILoginController;
+import controller.LoginController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,21 +17,26 @@ import model.MainModel;
 
 import java.io.IOException;
 
-public class LoginView extends AnchorPane implements ILoginController {
+public class LoginView extends AnchorPane {
 
-    private MainModel mainModel;
     @FXML
-    TextField userNameTextField;
+    private AnchorPane loginAnchorPane;
     @FXML
-    PasswordField passwordField;
+    private TextField userNameTextField;
     @FXML
-    Button loginButton;
+    private PasswordField passwordField;
     @FXML
-    Label wrongPasswordLabel;
+    private Button logInButton;
+    @FXML
+    private Label wrongPasswordLabel;
 
-    private IMainView parentView;
-
-    public LoginView(IMainView parentView, MainModel mainModel) {
+    /**
+     *
+     * @param mainModel
+     *
+     * Loads the fxml document and assigns the LoginController to handle the relevant input
+     */
+    public LoginView(MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -38,41 +46,38 @@ public class LoginView extends AnchorPane implements ILoginController {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+
+        //The following lines creates a controller that we can temporarily use to assign functions to
+        ILoginController c = new LoginController(this, mainModel);
+
+        logInButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                c.onLoginButtonClicked();
+            }
+        });
+        loginAnchorPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                c.onKeyPressed(event);
+            }
+        });
         //userNameTextField.requestFocus(); //Gives focus to userNameTextField
-        this.parentView = parentView;
-        this.mainModel = mainModel;
         wrongPasswordLabel.setVisible(false);
 
     }
 
+    public void showWrongPasswordLabel() {
+        wrongPasswordLabel.setVisible(true);
+    }
 
-    /**
-     * When one of the textFields or Login button is focused, the enter key fires the login method.
-     * @param e
-     * A keystroke
-     */
-    @FXML
-    public void keyPressed(KeyEvent e) {
-        if(e.getCode().equals(KeyCode.ENTER)) {
-            login();
-            e.consume();
-            }
-        }
+    public String getPassword() {
+        return passwordField.getText();
+    }
 
-    /**
-     * Calls login function in mainModel. If the password and username matches, mainView is displayed.
-     */
-    @FXML
-    public void login(){
-        boolean login = mainModel.login(userNameTextField.getText(), passwordField.getText());
-        if (login){
-            parentView.displayMainView();           //TODO
-
-            userNameTextField.clear();
-            passwordField.clear();
-        } else{
-            wrongPasswordLabel.setVisible(true);
-        }
+    public String getUsername() {
+        return userNameTextField.getText();
     }
 
 }
