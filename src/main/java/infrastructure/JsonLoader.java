@@ -10,7 +10,6 @@ import model.Conversation;
 import model.User;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -39,8 +38,6 @@ public class JsonLoader implements IDataLoader {
                     usersMap.put(u.getId(),u);
                 }
                 return usersMap;
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -66,8 +63,6 @@ public class JsonLoader implements IDataLoader {
                     conversationsMap.put(c.getId(),c);
                 }
                 return conversationsMap;
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -82,10 +77,6 @@ public class JsonLoader implements IDataLoader {
      */
     private boolean fileExists(String path){
         File f = new File(path);
-        if(f.exists() && !f.isDirectory()) {
-            return true;
-        }else{
-            return false;
-        }
+        return f.exists() && !f.isDirectory();
     }
 }

@@ -8,12 +8,13 @@
 package infrastructure;
 
 import com.google.gson.GsonBuilder;
-import model.*;
 import com.google.gson.Gson;
+import model.Conversation;
+import model.MainModel;
+import model.Message;
+import model.User;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 
 public class JsonSaver implements IDataSaver, Observer {
@@ -165,11 +166,7 @@ public class JsonSaver implements IDataSaver, Observer {
      */
     private boolean fileExists(String path){
         File f = new File(path);
-        if(f.exists() && !f.isDirectory()) {
-            return true;
-        }else{
-            return false;
-        }
+        return f.exists() && !f.isDirectory();
     }
 
     @Override
