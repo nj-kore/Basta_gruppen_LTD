@@ -145,6 +145,10 @@ public class MainModel extends Observable implements IMainModel{
         conversations.put(c.getId(), c);
     }
 
+    public void saveStatus(String s){
+        activeUser.setStatus(s);
+    }
+
     @Override
     public HashMap<Integer,Conversation> getConversations() {
         return conversations;            //TODO returns null

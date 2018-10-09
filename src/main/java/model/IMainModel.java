@@ -17,6 +17,7 @@ public interface IMainModel {
     boolean login(String username, String password);
     Iterator<Message> loadMessagesInConversation();
     User getUser(int userId);
+    void saveStatus(String s);
 
 
 }
