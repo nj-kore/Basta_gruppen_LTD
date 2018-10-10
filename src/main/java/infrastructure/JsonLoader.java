@@ -1,5 +1,11 @@
 /**
- * @author Gustav Hager
+ *
+ * A class that loads data from JSON.
+ *
+ * @author          Gustav Hager
+ * responsibility:  To load data from "database" (json files).
+ * used by:         main
+ * used for:        Loading data from the "database" (json files).
  */
 package infrastructure;
 
