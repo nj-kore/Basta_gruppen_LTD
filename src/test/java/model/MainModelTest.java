@@ -22,7 +22,7 @@ public class MainModelTest {
         userMap.put(2, user2);
         ArrayList<User> userList = new ArrayList<>();
         userList.addAll(userMap.values());
-        Conversation c = new Conversation(1, userList);
+        Conversation c = new Conversation(1, "", userList);
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
 
 
@@ -43,7 +43,7 @@ public class MainModelTest {
         userMap.put(2, user2);
         ArrayList<User> userList = new ArrayList<>();
         userList.addAll(userMap.values());
-        Conversation c = new Conversation(1, userList);
+        Conversation c = new Conversation(1, "", userList);
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
 
 
@@ -65,7 +65,7 @@ public class MainModelTest {
     @Test
     public void loadConversation() {
         ArrayList<User> users = new ArrayList<>();
-        Conversation c = new Conversation(1, users);
+        Conversation c = new Conversation(1, "", users);
 
         HashMap<Integer, User> userMap = new HashMap<>();
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
@@ -103,7 +103,7 @@ public class MainModelTest {
         User user1 = new User(1, "hej", "123", "bengt", "testsson");
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
-        Conversation c = new Conversation(1, users);
+        Conversation c = new Conversation(1, "", users);
 
         HashMap<Integer, User> userMap = new HashMap<>();
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();

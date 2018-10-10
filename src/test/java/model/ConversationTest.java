@@ -12,7 +12,7 @@ public class ConversationTest {
     @Test
     public void addMessage() {
         ArrayList<User> userList = new ArrayList<>();
-        Conversation c = new Conversation(1, userList);
+        Conversation c = new Conversation(1, "", userList);
 
         assertTrue(c.getMessages().isEmpty());
         Message message = new Message(1, 1,"baby shark do-do-do", LocalDateTime.now());
