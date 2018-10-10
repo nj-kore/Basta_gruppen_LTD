@@ -27,7 +27,8 @@ import java.util.Map;
 public class JsonLoader implements IDataLoader {
 
     /**
-     * Loads all Users.
+     * Loads all Users from JSON file at specified path
+     * @param path The path to the JSON file that contains the Users to load
      * @return List of User or null
      */
     @Override
@@ -52,7 +53,8 @@ public class JsonLoader implements IDataLoader {
     }
 
     /**
-     * Cannot run if there is no conversations.json
+     * Loads all Conversations from JSON file at specified path
+     * @param path the path to the JSON file that contains the Conversations to load
      * @return conversations
      */
     @Override
