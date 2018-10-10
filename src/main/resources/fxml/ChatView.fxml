@@ -19,10 +19,10 @@
          <children>
             <AnchorPane prefHeight="71.0" prefWidth="800.0" style="-fx-background-color: white;">
                <children>
-                  <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="14.0" maxWidth="1.7976931348623157E308" onAction="#chatNameChanged" onKeyPressed="#conversationNameKeyPressed" onMouseClicked="#changeChatName" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
+                  <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="14.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
                     <items>
-                      <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" onAction="#changeChatName" text="Change chat name" />
+                      <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
                     </items>
                      <contextMenu>
                         <ContextMenu>
@@ -34,23 +34,23 @@
                   </MenuButton>
                </children>
             </AnchorPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" minHeight="500.0" onMouseClicked="#loadMessages" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" minHeight="500.0" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                <content>
-                  <FlowPane fx:id="ChatFlowPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWrapLength="1000.0" />
+                  <FlowPane fx:id="chatFlowPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWrapLength="1000.0" />
                </content>
             </ScrollPane>
             <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="195.0" prefHeight="195.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0">
                      <content>
-                        <TextArea fx:id="chatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#chatAreaKeyPressed" promptText="Type a message..." wrapText="true">
+                        <TextArea fx:id="chatTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Type a message..." wrapText="true">
                            <font>
                               <Font name="Comic Sans MS" size="41.0" />
                            </font>
                         </TextArea>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="SendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="200.0" text="Send" />
+                  <Button fx:id="sendButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" prefHeight="200.0" text="Send" />
                </children>
             </HBox>
          </children>
