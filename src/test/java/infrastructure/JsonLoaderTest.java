@@ -59,9 +59,9 @@ public class JsonLoaderTest {
         users.add(user1);
         users.add(user2);
         //Create conversations
-        Conversation conversation1 = new Conversation(1, users);
+        Conversation conversation1 = new Conversation(1,"Convo1", users);
         conversation1.setName("business_convo");
-        Conversation conversation2= new Conversation(2, users);
+        Conversation conversation2= new Conversation(2,"Convo2", users);
         conversation2.setName("business_convo_2");
         //Add conversations to Map
         HashMap<Integer,Conversation> conversationsMap = new HashMap<Integer, Conversation>();
