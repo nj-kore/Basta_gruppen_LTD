@@ -1,4 +1,7 @@
-/***
+/**
+ *
+ * A class that saves data to JSON.
+ *
  * @author          Gustav Hager
  * responsibility:  To save data to "database" (json files).
  * used by:         MainModel
@@ -146,16 +149,6 @@ public class JsonSaver implements IDataSaver, Observer {
             conversations.add(conversationToSave);
             writeConversations(conversations);
         }*/
-
-    }
-
-    @Override
-    public void updateUser(User u) {
-
-    }
-
-    @Override
-    public void updateConversation(Conversation c) {
 
     }
 

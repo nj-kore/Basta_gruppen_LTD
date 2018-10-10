@@ -1,3 +1,6 @@
+/**
+ * @author          Gustav Hager
+ */
 package infrastructure;
 
 import model.Conversation;
