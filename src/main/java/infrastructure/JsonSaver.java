@@ -16,7 +16,6 @@ import model.Conversation;
 import model.MainModel;
 import model.Message;
 import model.User;
-
 import java.io.*;
 import java.util.*;
 
@@ -62,28 +61,6 @@ public class JsonSaver implements IDataSaver, Observer {
             users = new ArrayList<User>(userMap.values());
             writeUsers(users);
         }
-
-
-        /*
-        boolean add = false;
-
-
-        if (users != null){
-            for(User user : users){
-                if(user.getId()==userToSave.getId()){
-                    add = false;
-                    users.set(users.indexOf(user), userToSave);
-                    writeUsers(users);
-                    break;
-                }else{
-                    add = true;
-                }
-            }
-        }
-        if(add){
-            users.add(userToSave);
-            writeUsers(users);
-        }*/
     }
 
     /**
@@ -130,26 +107,6 @@ public class JsonSaver implements IDataSaver, Observer {
             conversations = new ArrayList<Conversation>(conversationMap.values());
             writeConversations(conversations);
         }
-
-        /*
-        boolean add = false;
-
-        conversations = loadConversations();
-        if (conversations != null){
-            for(Conversation conversation : conversations){
-                if(conversation.getId()==conversationToSave.getId()){
-                    add = false;
-                    break;
-                }else{
-                    add = true;
-                }
-            }
-        }
-        if(add){
-            conversations.add(conversationToSave);
-            writeConversations(conversations);
-        }*/
-
     }
 
     /**
@@ -168,21 +125,6 @@ public class JsonSaver implements IDataSaver, Observer {
     }
 
     private void saveModel() {
-        /*
-        Iterator<Conversation> conversationIterator = model.getConversations();
-        List<Conversation> convoList = new ArrayList<>();
-        while(conversationIterator.hasNext()) {
-            convoList.add(conversationIterator.next());
-        }
-        writeConversations(convoList);
-
-        Iterator<User> userIterator = model.getUsers();
-        List<User> userList = new ArrayList<>();
-        while(userIterator.hasNext()) {
-            userList.add(userIterator.next());
-        }
-        writeUsers(userList);
-        */
         writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
         writeUsers(new ArrayList<User>(model.getUsers().values()));
     }
