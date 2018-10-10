@@ -41,7 +41,7 @@ public class Main extends Application {
         //Creates an instance of dataloader that can be used to load data
         IDataLoader dataLoader = new JsonLoader();
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
-        MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
+        MainModel mainModel =  new MainModel(dataLoader.loadUsers("src/main/java/infrastructure/users.json"),dataLoader.loadConversations("src/main/java/infrastructure/conversations.json"));
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
         //mainModel.initFillers();

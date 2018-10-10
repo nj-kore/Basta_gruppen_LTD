@@ -131,6 +131,33 @@ public class User {
      */
     public void addContact(int userToAdd){contacts.add(userToAdd);}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
 
+        if (id != user.id) return false;
+        if (!password.equals(user.password)) return false;
+        if (!username.equals(user.username)) return false;
+        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (!lastName.equals(user.lastName)) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return status != null ? status.equals(user.status) : user.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + password.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }
