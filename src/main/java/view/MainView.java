@@ -127,7 +127,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public MainView(MainModel mainModel){
 
         this.mainModel = mainModel;
-        this.chatView = new ChatView(this, mainModel);
+        this.chatView = new ChatView(mainModel);
         this.loginView = new LoginView(mainModel);
         this.userPage = new UserPageView(this, mainModel);
         this.newConvoListItems = new ArrayList<>();
@@ -144,7 +144,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         if (o instanceof MainModel) {
             switch ((MainModel.UpdateTypes)arg) {
                 case ACTIVE_CONVERSATION:
-                    chatView.loadMessages();
+                    chatView.update();
                     break;
                 case CONTACTS:
                     updateContactsList();
@@ -156,7 +156,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     displayMainView();
                     //Cant be run in Init since there are no conversations yet
                     displayChat();
-                    chatView.loadMessages();
+                    chatView.update();
                     updateContactsList();
                     updateConversationsList();
                     //updateCreateNewConvoLists();

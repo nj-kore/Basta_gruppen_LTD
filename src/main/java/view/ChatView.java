@@ -1,6 +1,9 @@
 package view;
 
+import controller.ChatController;
 import controller.IChatController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -8,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.*;
@@ -17,36 +21,36 @@ import model.Message;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ChatView extends AnchorPane implements IChatController {
+public class ChatView extends AnchorPane{
 
 
     private MainModel mainModel;
 
 
     @FXML
-    FlowPane ChatFlowPane;
+    private FlowPane chatFlowPane;
 
     @FXML
-    ScrollPane ChatScrollPane;
+    private ScrollPane chatScrollPane;
 
     @FXML
-    Button SendButton;
+    private Button sendButton;
 
     @FXML
-    TextArea chatTextArea;
+    private TextArea chatTextArea;
 
     @FXML
-    TextField chatNameTextField;
+    private TextField chatNameTextField;
 
     @FXML
-    MenuButton optionsMenuButton = new MenuButton("Options", new ImageView(new Image("pics/optionsIcon.png")));
+    private MenuButton optionsMenuButton = new MenuButton("Options", new ImageView(new Image("pics/optionsIcon.png")));
 
     @FXML
-    MenuItem changeChatNameMenuItem;
+    private MenuItem changeChatNameMenuItem;
 
 
 
-    public ChatView(IMainView parentView, MainModel mainModel) {
+    public ChatView(MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -57,98 +61,94 @@ public class ChatView extends AnchorPane implements IChatController {
             throw new RuntimeException(exception);
         }
 
+
         this.mainModel = mainModel;
 
-    }
+        IChatController chatController = new ChatController(this, mainModel);
 
-
-
-    @FXML
-    public void sendMessage() {
-        if (!chatTextArea.getText().trim().isEmpty()) {             //User should not be able to send an empty message.
-            mainModel.sendMessage(chatTextArea.getText().trim());
-            chatTextArea.clear();
-        }
-    }
-
-
-    //Function takes in a KeyEvent. If enter is pressed, the message written in the chatTextArea gets sent.
-    //If shift in combination with enter is pressed, it adds a new line to the message.
-    //The function only gets called if the chatTextArea is focused
-    @FXML
-    public void chatAreaKeyPressed(KeyEvent e) {
-        if (e.getCode().equals(KeyCode.ENTER)) {
-            if (e.isShiftDown()) {
-                chatTextArea.setText(chatTextArea.getText() + "\n");
-                chatTextArea.end();
-            } else {
-                sendMessage();
-                e.consume();
+        sendButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                chatController.onSendButtonClicked();
             }
-        }
+        });
+
+        chatTextArea.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                chatController.onChatAreaKeyPressed(event);
+            }
+        });
+
+        chatNameTextField.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                chatController.onChangeChatNameClicked();
+            }
+        });
+
+        chatNameTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                chatController.onConversationNameKeyPressed(event);
+            }
+        });
+
+        changeChatNameMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                chatController.onChangeChatNameClicked();
+            }
+        });
     }
-
-
-    public FlowPane getChatFlowPane() { return ChatFlowPane;
-    }
-
     public void loadMessages() {
-        getChatFlowPane().getChildren().clear();
+        chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
         if (itr != null) {
             while (itr.hasNext()) {
                 Message m = itr.next();
-                ChatFlowPane.getChildren().add(new MessageItem(m, mainModel.getUser(m.getSenderId())));
+                chatFlowPane.getChildren().add(new MessageItem(m, mainModel.getUser(m.getSenderId())));
             }
         }
     }
+    public void update() {
+        loadMessages();
+        chatNameTextField.setText(mainModel.getActiveConversation().getName());
+    }
+    public String getInputText() {
+        return chatTextArea.getText();
+    }
 
+    public void createNewLine() {
+        chatTextArea.setText(chatTextArea.getText() + "\n");
+        chatTextArea.end();
+    }
 
-    @FXML
-    public void chatNameChanged() {
-        if(chatNameTextField.getText().length() > 0 && chatNameTextField.getText().length() < 30) {
-            mainModel.getActiveConversation().setName(chatNameTextField.getText());
+    public void clearInputField() {
+        chatTextArea.clear();
+    }
+
+    public String getChatNameText() {
+        return chatNameTextField.getText();
+    }
+
+    public boolean chatNameIsFocused() {
+        return chatNameTextField.isFocused();
+    }
+
+    public void setChatNameEditable(boolean editable) {
+        chatNameTextField.setEditable(editable);
+        if(editable) {
+            chatNameTextField.setStyle("-fx-background-color: cyan;");
+            chatNameTextField.requestFocus();
         }
         else {
-            // TODO: 01/10/2018
-            //ladda in chatnamnet igen
+            chatNameTextField.setStyle("-fx-background-color: white;");
         }
-        chatNameTextField.setStyle("-fx-background-color: white");
-        chatNameTextField.setEditable(false);
+
     }
-
-
-    @FXML
-    void changeChatName() {
-        chatNameTextField.setEditable(true);
-        chatNameTextField.setStyle("-fx-background-color: cyan;");
-        chatNameTextField.requestFocus();
-
-        //Starts a thread that waits for the convo name to lose focus.
-        //When this happens, it calls on changeChatName
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(chatNameTextField.isFocused()) {
-                    try {
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                chatNameChanged();
-            }
-        });
-        t.start();
-    }
-
-    //when enter is pressed, the chatTextArea gains focus, which makes the chatNameTextArea lose focus, which saves
-    //the chatName
-    @FXML
-    public void conversationNameKeyPressed(KeyEvent e) {
-        if (e.getCode().equals(KeyCode.ENTER)) {
-            chatTextArea.requestFocus();
-        }
+    public void setChatAreaFocused() {
+        chatTextArea.requestFocus();
     }
 }
 

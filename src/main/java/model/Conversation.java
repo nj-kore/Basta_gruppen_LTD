@@ -11,8 +11,9 @@ public class Conversation {
     private List<User> participants = new ArrayList<User>();
     private String name;
 
-    public Conversation(int id, ArrayList<User> participants) {
+    public Conversation(int id, String name, ArrayList<User> participants) {
         this.id = id;
+        this.name = name;
         this.participants = participants;
     }
 

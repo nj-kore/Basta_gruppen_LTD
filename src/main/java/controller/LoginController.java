@@ -17,7 +17,7 @@ public class LoginController implements ILoginController {
     @Override
     public void onLoginButtonClicked() {
         if(!mainModel.login(loginView.getUsername(), loginView.getPassword()))
-            loginView.showWrongPasswordLabel();
+            loginView.showWrongInputLabel();
     }
 
     @Override

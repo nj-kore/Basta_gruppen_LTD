@@ -22,7 +22,7 @@ public class MainModel extends Observable{
     public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
         this.users = users;
         this.conversations = conversations;
-        activeConversation = new Conversation(-1, null);
+        activeConversation = new Conversation(-1, "", null);
     }
 
 
@@ -51,16 +51,18 @@ public class MainModel extends Observable{
      * Tells the view to update itself
      */
     public void sendMessage(String text) {
-        //The new ID is going to be one more than the current highest message id in the conversation
-        int newMessageId = 0;
-        try {
-            newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(text.length() > 0) {
+            //The new ID is going to be one more than the current highest message id in the conversation
+            int newMessageId = 0;
+
+            if(!activeConversation.getMessages().keySet().isEmpty())
+                newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
+
+            Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
+            activeConversation.addMessage(m);
+            update(UpdateTypes.ACTIVE_CONVERSATION);
         }
-        Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
-        activeConversation.addMessage(m);
-        update(UpdateTypes.ACTIVE_CONVERSATION);
+
     }
 
 
@@ -108,12 +110,10 @@ public class MainModel extends Observable{
 
     public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
-        try {
+        if(!conversations.keySet().isEmpty())
             newConversationId = Collections.max(conversations.keySet()) + 1;
-        } catch (Exception e) {
 
-        }
-        Conversation conversation = new Conversation(newConversationId, users);
+        Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
         update(UpdateTypes.ACTIVE_CONVERSATION);
@@ -123,6 +123,12 @@ public class MainModel extends Observable{
     //Exists for testing purposes
     public void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
+    }
+
+    public void setConversationName(String name) {
+        if(name.length() > 0 && name.length() < 30) {
+            activeConversation.setName(name);
+        }
     }
 
     public Map<Integer,Conversation> getConversations() {

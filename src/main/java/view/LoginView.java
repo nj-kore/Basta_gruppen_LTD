@@ -68,7 +68,7 @@ public class LoginView extends AnchorPane {
 
     }
 
-    public void showWrongPasswordLabel() {
+    public void showWrongInputLabel() {
         wrongPasswordLabel.setVisible(true);
     }
 
