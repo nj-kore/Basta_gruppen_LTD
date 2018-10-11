@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import model.*;
 import model.Message;
 
@@ -153,9 +155,39 @@ public class ChatView extends AnchorPane implements IChatView{
         }
 
     }
+
     @Override
     public void setChatAreaFocused() {
         chatTextArea.requestFocus();
     }
+
+    private class MessageItem extends AnchorPane {
+
+        @FXML
+        private Label messageUserNameLabel;
+
+        @FXML
+        private ImageView messageImageView;
+
+        @FXML
+        private TextFlow messageTextFlow;
+
+        public MessageItem(Message message, User concreteUser){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+
+            try {
+                fxmlLoader.load();
+            } catch (IOException exception) {
+                throw new RuntimeException(exception);
+            }
+            Image profileImage = new Image(concreteUser.getProfileImagePath());
+            messageImageView.setImage(profileImage);
+            messageUserNameLabel.setText(concreteUser.getFullName());
+            messageTextFlow.getChildren().add(new Text(message.getText()));
+        }
+    }
+
 }
 
