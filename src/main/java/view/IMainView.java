@@ -8,4 +8,5 @@ public interface IMainView {
     void displayUserPage();
     void displayMainView();
     void displayLoginPage();
+    void displayCurrentUser();
 }
