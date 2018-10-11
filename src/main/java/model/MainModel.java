@@ -13,6 +13,8 @@ public class MainModel extends Observable{
     private User activeUser;
     private Conversation activeConversation;
 
+
+
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
@@ -222,6 +224,20 @@ public class MainModel extends Observable{
             }
         }
         return contactsToShow.iterator();
+    }
+
+    public Iterator<Conversation> searchConversations(String conversationSearchString) {
+        Iterator<Conversation> iterator = getConversations().values().iterator();
+        ArrayList<Conversation> conversationsToShow = new ArrayList<>();
+        Conversation next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
+                conversationsToShow.add(next);
+            }
+        }
+        return conversationsToShow.iterator();
     }
 
 }

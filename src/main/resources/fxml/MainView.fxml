@@ -101,7 +101,7 @@
                                                 <HBox>
                                                    <children>
                                                       <TextField fx:id="searchConversationsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a conversation.." />
-                                                      <ImageView fx:id="searchConversationsImageView" fitHeight="25.0" fitWidth="28.0" onMouseClicked="#searchConversations" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="searchConversationsImageView" fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../pics/searchIcon.png" />
                                                          </image>

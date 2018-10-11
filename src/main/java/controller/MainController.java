@@ -2,6 +2,7 @@ package controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Conversation;
 import model.MainModel;
 import model.User;
 import view.MainView;
@@ -20,7 +21,6 @@ public class MainController implements IMainController {
     }
     @Override
     public void searchConversation(){
-        mainView.searchConversations();
     }
     @Override
     public void searchConversationsKeyPressed(KeyEvent event) {
@@ -35,6 +35,11 @@ public class MainController implements IMainController {
 
     }
 
+    @Override
+    public void searchContacts(String input) {
+
+    }
+
 /*    @Override
     public void searchContactsKeyPressed(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER)) {
@@ -43,15 +48,36 @@ public class MainController implements IMainController {
         }
     }*/
 
-    @Override
+/*    @Override
     public void searchContacts(String input){
         Iterator<User> iterator = mainModel.searchContacts(input);
         mainView.updateContactList(iterator);
-    }
+    }*/
 
     @Override
     public void searchContactsClicked() {
+        System.out.println("ebola");
         Iterator<User> contacts = mainModel.searchContacts(mainView.getContactSearchString());
         mainView.updateContactList(contacts);
+    }
+
+    @Override
+    public void onSearchContactsTextFieldKeyPressed(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)){
+            searchContactsClicked();
+        }
+    }
+
+    @Override
+    public void searchConversationsClicked() {
+        Iterator<Conversation> conversations = mainModel.searchConversations(mainView.getConversationSearchString());
+        mainView.updateConversationsList(conversations);
+    }
+
+    @Override
+    public void onSearchConversationsTextFieldKeyPressed(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER)) {
+            searchConversationsClicked();
+        }
     }
 }

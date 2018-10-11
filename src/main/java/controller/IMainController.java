@@ -14,4 +14,10 @@ public interface IMainController {
     void searchContacts(String input);
 
     void searchContactsClicked();
+
+    void onSearchContactsTextFieldKeyPressed(KeyEvent event);
+
+    void searchConversationsClicked();
+
+    void onSearchConversationsTextFieldKeyPressed(KeyEvent event);
 }

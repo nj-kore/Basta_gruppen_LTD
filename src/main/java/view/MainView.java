@@ -138,6 +138,34 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayLoginPage();
+        IMainController c = new MainController(this, mainModel);
+        searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.searchContactsClicked();
+            }
+        });
+
+        searchContactsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                c.onSearchContactsTextFieldKeyPressed(event);
+            }
+        });
+
+        searchConversationsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.searchConversationsClicked();
+            }
+        });
+
+        searchConversationsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                c.onSearchConversationsTextFieldKeyPressed(event);
+            }
+        });
 
         //chatView.startTiming();
 
@@ -154,21 +182,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         this.userPage = new UserPageView(this, mainModel);
         this.newConvoListItems = new ArrayList<>();
 
-        IMainController c = new MainController(this, mainModel);
-
-/*        searchContactsImageView.setOnMouseClicked(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                c.searchContacts(searchContactsTextField.getText());
-            }
-        });*/
-
-/*        searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                c.searchContactsClicked();
-            }
-        });*/
     }
 
 
@@ -237,8 +250,16 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
      */
     public void updateConversationsList() {
 
+            conversationsFlowPane.getChildren().clear();
+            Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+            while (iterator.hasNext()) {
+                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+            }
+
+    }
+
+    public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
-        Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
         }
@@ -450,7 +471,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         return searchContactsTextField.getText();
     }
 
-    @FXML
+    public String getConversationSearchString() {
+        return searchConversationsTextField.getText();
+    }
+
+    /*@FXML
     public void searchConversations(){
         ArrayList<Conversation> conversationsToShow = new ArrayList<Conversation>();
         for(Conversation c : mainModel.getConversations().values()){
@@ -462,16 +487,16 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         for(Conversation c2 : mainModel.getConversations().values()){
             conversationsFlowPane.getChildren().add(new ConversationListItem(c2, mainModel));
         }
-    }
-/*
-    //@FXML
+    }*/
+
+/*    @FXML
     public void searchContacts(){
         Iterator<User> iterator = mainModel.searchContacts(searchContactsTextField.getText());
         contactsFlowPane.getChildren().clear();
         while(iterator.hasNext()){
-            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));*/
         }
-*/
+
 
         /*        Iterator<User> iterator = mainModel.getContacts();
         ArrayList<User> contactsToShow = new ArrayList<User>();
@@ -503,4 +528,3 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
 
 
-}
