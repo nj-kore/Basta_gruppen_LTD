@@ -1,8 +1,6 @@
 package view;
 
 import controller.IMainController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -35,7 +33,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
     private CreateConvoView createConvoView;
     private UserPageView userPage;
     private User detailedUser;
-    private UserView userView;
+    private UserToolbar userToolbar;
 
     //contactDetailView
     @FXML
@@ -87,6 +85,8 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
 
     @FXML
     Button newConvoButton;
+
+    @FXML
     AnchorPane currentUserAnchorPane;
 
 
@@ -115,7 +115,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
         //TODO look at the line below. I'm ashamed of myself @Nåjs
-        this.userView= new UserView(this, mainModel, this);
+        this.userToolbar = new UserToolbar(this, mainModel, this);
     }
 
 
@@ -143,7 +143,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
                     chatView.update();
                     updateContactsList();
                     updateConversationsList();
-                    userView.init();
+                    userToolbar.init();
                     displayCurrentUser();
                     //updateCreateNewConvoLists();
 
@@ -151,10 +151,10 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
                 case USER_INFO:
                     updateUserInfoTextFields();
                     //updateCurrentUserInfo();
-                    userView.updateCurrentUserInfo();
+                    userToolbar.updateCurrentUserInfo();
             }
         }
-        userView.setCurrentUserImageView();
+        userToolbar.setCurrentUserImageView();
         //currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 
@@ -222,7 +222,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
 
     @Override
     public void displayCurrentUser(){
-        currentUserAnchorPane.getChildren().add(userView);
+        currentUserAnchorPane.getChildren().add(userToolbar);
     }
     @Override
     public void displaySettings() {

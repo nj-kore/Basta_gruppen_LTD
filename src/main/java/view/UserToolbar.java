@@ -17,7 +17,7 @@ import model.MainModel;
 
 import java.io.IOException;
 
-public class UserView extends AnchorPane {
+public class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
     private MainView mainView;
@@ -37,8 +37,8 @@ public class UserView extends AnchorPane {
     @FXML
     Label currentUserNameLabel;
 
-    public UserView(IMainView parentView, MainModel mainModel, MainView mainView) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserView.fxml"));
+    public UserToolbar(IMainView parentView, MainModel mainModel, MainView mainView) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
