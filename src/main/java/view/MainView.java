@@ -112,6 +112,12 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     MenuButton statusMenu;
 
+    @FXML
+    TextField searchContactsTextField;
+
+    @FXML
+    TextField searchConversationsTextField;
+
 
     /**
      * @param location
@@ -407,6 +413,38 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         this.contactDetailViewStatusLabel.setText(user.getStatus());
         contactDetailView.toFront();
     }
+
+    @FXML
+    public void searchConversations(){
+        ArrayList<Conversation> conversationsToShow = new ArrayList<Conversation>();
+        for(Conversation c : mainModel.getConversations().values()){
+            if(c.getName().toLowerCase().contains(searchConversationsTextField.getText().toLowerCase())){
+                conversationsToShow.add(c);
+            }
+        }
+        conversationsFlowPane.getChildren().clear();
+        for(Conversation c2 : mainModel.getConversations().values()){
+            conversationsFlowPane.getChildren().add(new ConversationListItem(c2, mainModel));
+        }
+    }
+    @FXML
+    public void searchContacts(){
+        Iterator<User> iterator = mainModel.getContacts();
+        ArrayList<User> contactsToShow = new ArrayList<User>();
+        User next;
+
+        while(iterator.hasNext()) {
+            next = iterator.next();
+            if(next.getFullName().toLowerCase().contains(searchContactsTextField.getText().toLowerCase())){
+                contactsToShow.add(next);
+            }
+        }
+        contactsFlowPane.getChildren().clear();
+        for(User u : contactsToShow){
+            contactsFlowPane.getChildren().add(new ContactListItem(u, this));
+        }
+    }
+
 
 
 }

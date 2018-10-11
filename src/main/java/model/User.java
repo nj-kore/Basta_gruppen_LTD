@@ -12,7 +12,7 @@ public class User {
     private String lastName;
     private String email;
     private String status;
-    private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"};
+    private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"}; //TODO varför inte ha en enum/statusklass?
     private ArrayList<String> statuses = new ArrayList<>();
     private String statusImagePath;
     private String profileImagePath;

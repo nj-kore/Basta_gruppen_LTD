@@ -88,7 +88,7 @@
             <HBox fx:id="loginHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mainViewHBox" />
             <HBox fx:id="mainViewHBox" styleClass="mainViewHBox">
                <children>
-                  <VBox maxWidth="250.0" prefHeight="600.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="250.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                      <children>
                         <TabPane layoutX="18.0" layoutY="33.0" prefHeight="482.0" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
@@ -96,11 +96,28 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <FlowPane fx:id="conversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                             </content>
-                                          </ScrollPane>
+                                          <VBox prefHeight="443.0" prefWidth="250.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <TextField fx:id="searchConversationsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a conversation.." />
+                                                      <ImageView fx:id="searchCOnversationImageView" fitHeight="25.0" fitWidth="28.0" onMouseClicked="#searchConversations" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../pics/searchIcon.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" prefHeight="556.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                                                   <content>
+                                                      <FlowPane fx:id="conversationsFlowPane" />
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -109,11 +126,28 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                             </content>
-                                          </ScrollPane>
+                                          <VBox prefHeight="453.0" prefWidth="250.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <TextField fx:id="searchContactsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a contact..." />
+                                                      <ImageView fx:id="searchContactsImageView" fitHeight="25.0" fitWidth="28.0" onMouseClicked="#searchContacts" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../pics/searchIcon.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="218.0" VBox.vgrow="ALWAYS">
+                                                   <content>
+                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -134,7 +168,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane maxHeight="120.0" maxWidth="250.0" minHeight="60.0" prefHeight="55.0" prefWidth="250.0" VBox.vgrow="NEVER">
+                        <AnchorPane maxHeight="120.0" maxWidth="250.0" minHeight="60.0" prefHeight="70.0" prefWidth="250.0">
                            <children>
                               <ImageView fx:id="currentUserImageView" fitHeight="42.0" fitWidth="42.0" layoutX="14.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                               <ImageView fx:id="statusImageView" fitHeight="13.0" fitWidth="14.0" layoutX="46.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
