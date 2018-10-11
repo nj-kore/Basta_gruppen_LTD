@@ -15,8 +15,8 @@ public class MainModelTest {
     @Test
     public void sendMessage() {
 
-        User user1 = new User(1, "ett", "123", "bengt", "testsson");
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2");
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -36,8 +36,8 @@ public class MainModelTest {
 
     @Test
     public void readMessages() {
-        User user1 = new User(1, "ett", "123", "bengt", "testsson");
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2");
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -89,8 +89,8 @@ public class MainModelTest {
 
         MainModel model = new MainModel(userMap, conversationMap);
 
-        User activeUser = new User(1, "admin", "123", "eva", "olsson");
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson");
+        User activeUser = new User(1, "admin", "123", "eva", "olsson", MainModel.StatusType.Available);
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", MainModel.StatusType.Available);
 
         model.createUser(activeUser);
         model.createUser(contactUser);
@@ -102,7 +102,7 @@ public class MainModelTest {
     }
     @Test
     public void loadMessageInConversation(){
-        User user1 = new User(1, "hej", "123", "bengt", "testsson");
+        User user1 = new User(1, "hej", "123", "bengt", "testsson", MainModel.StatusType.Available);
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
         Conversation c = new Conversation(1, "", users);
