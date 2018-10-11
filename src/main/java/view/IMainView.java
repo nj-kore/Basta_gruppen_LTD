@@ -8,5 +8,6 @@ public interface IMainView {
     void displayUserPage();
     void displayMainView();
     void displayLoginPage();
+    void displayCreateConvoPage();
     void displayCurrentUser();
 }

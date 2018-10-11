@@ -53,6 +53,7 @@ public class MainModel extends Observable{
         User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available);
         User contactUser=new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available );
         User contactUser2=new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available );
+        setActiveUser(admin);
         admin.addContact(contactUser.getId());
         admin.addContact(contactUser2.getId());
         createUser(admin);
