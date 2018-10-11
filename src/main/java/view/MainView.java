@@ -30,7 +30,7 @@ import static javafx.scene.input.KeyCode.R;
  * given to the class from the model package via the observer class.
  */
 
-public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
+public class    MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
     private MainModel mainModel;
     private ChatView chatView;
