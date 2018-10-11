@@ -114,7 +114,6 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
-        this.newConvoListItems = new ArrayList<>();
         //TODO look at the line below. I'm ashamed of myself @Nåjs
         this.userView= new UserView(this, mainModel, this);
     }
