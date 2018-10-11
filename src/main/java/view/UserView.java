@@ -67,18 +67,17 @@ public class UserView extends AnchorPane {
     }
 
     private void addPremadeStatuses(IUserController u){
-        int counter=0;
-        for (String status : mainModel.getActiveUser().getPremadeStatuses()){
+        for (MainModel.StatusType status : MainModel.StatusType.values()){
             MenuItem m;
-            if(counter==0){
+            if(status == MainModel.StatusType.Available){
                 ImageView imageView = new ImageView("pics/statusGreen.png");
-                m=new MenuItem(status, imageView);
-            }else if(counter==1){
+                m=new MenuItem(status.toString(), imageView);
+            }else if(status == MainModel.StatusType.Busy){
                 ImageView imageView = new ImageView("pics/statusOrange.png");
-                m=new MenuItem(status, imageView);
+                m=new MenuItem(status.toString(), imageView);
             }else{
                 ImageView imageView = new ImageView("pics/statusRed.png");
-                m=new MenuItem(status, imageView);
+                m=new MenuItem(status.toString(), imageView);
             }
             statusMenu.getItems().add(m);
             m.setOnAction(new EventHandler<ActionEvent>() {
@@ -87,7 +86,6 @@ public class UserView extends AnchorPane {
                     u.onMenuButtonItemClicked(m);
                 }
             });
-            counter++;
         }
     }
 
@@ -95,7 +93,7 @@ public class UserView extends AnchorPane {
     public void updateCurrentUserInfo(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
         statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
-        statusMenu.setText(mainModel.getActiveUser().getStatus());
+        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 
     public void setCurrentUserImageView(){

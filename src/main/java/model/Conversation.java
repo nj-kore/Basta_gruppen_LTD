@@ -60,13 +60,4 @@ public class Conversation {
         if (!participants.equals(that.participants)) {return false;}
         return name != null ? name.equals(that.name) : that.name == null;
     }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (messages != null ? messages.hashCode() : 0);
-        result = 31 * result + participants.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 }

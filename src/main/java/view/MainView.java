@@ -286,7 +286,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
     public void updateCurrentUserInfo() {
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
         statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
-        statusMenu.setText(mainModel.getActiveUser().getStatus());
+        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 
     private void updateCreateNewConvoLists() {
@@ -387,7 +387,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         Image profileImage = new Image(user.getProfileImagePath());
         this.contactDetailViewProfilemageView.setImage(profileImage);
         this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
-        this.contactDetailViewStatusLabel.setText(user.getStatus());
+        this.contactDetailViewStatusLabel.setText(user.getStatus().toString());
         contactDetailView.toFront();
     }
 

@@ -21,7 +21,7 @@ public class UserController implements IUserController {
 
     @Override
     public void onMenuButtonItemClicked(MenuItem m) {
-        mainModel.setStatus(m.getText());
+        mainModel.setStatus(MainModel.StatusType.valueOf(m.getText()));
     }
 
     @Override

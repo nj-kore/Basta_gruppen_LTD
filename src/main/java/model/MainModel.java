@@ -25,6 +25,18 @@ public class MainModel extends Observable{
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
+    public enum StatusType {
+        Available, Busy, Do_not_disturb;
+
+        @Override
+        public String toString() {
+            switch (this){
+                case Busy:              return "Busy";
+                case Do_not_disturb:    return "Do not disturb";
+                default:                return "Available";
+            }
+        }
+    }
     private Map<Integer, Conversation>  conversations;
     private Map<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
@@ -38,17 +50,16 @@ public class MainModel extends Observable{
 
 
     public void initFillers() {
-        User admin = new User(1, "admin", "123", "Admin", "Boy");
-        User contactUser=new User(2, "contact", "222", "olle", "innebandysson" );
-        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling" );
+        User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available);
+        User contactUser=new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available );
+        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available );
         admin.addContact(contactUser.getId());
         admin.addContact(contactUser2.getId());
         createUser(admin);
         createUser(contactUser);
         createUser(contactUser2);
-        contactUser.setStatusImagePath("pics/activeStatus.png");
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
-        contactUser.setStatus("Matematisk");
+        contactUser.setStatus(StatusType.Busy);
         users.put(admin.getId(),admin);
         users.put(contactUser.getId(),contactUser);
         users.put(contactUser2.getId(),contactUser2);
@@ -154,21 +165,26 @@ public class MainModel extends Observable{
         return conversations;}
 
 
-    public void setStatus(String s){
+    public void setStatus(StatusType s){
+        activeUser.setStatus(s);
+        update(UpdateTypes.USER_INFO);
+    }
+
+    /*public void setStatus(String s){
         switch (s){
-            case"AVAILABLE":
+            case "Available":
                 activeUser.setStatusImagePath("pics/statusGreen.png");
                 break;
-            case "BUSY":
+            case "Busy":
                 activeUser.setStatusImagePath("pics/statusOrange.png");
                 break;
-            case "MATEMATISK":
+            case "Do not disturb":
                 activeUser.setStatusImagePath("pics/statusRed.png");
                 break;
         }
         activeUser.setStatus(s);
         update(UpdateTypes.USER_INFO);
-    }
+    }*/
 
     public Map<Integer, User> getUsers() {
         return users;
