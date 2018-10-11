@@ -17,8 +17,10 @@ public class MainModel extends Observable{
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
     private Map<Integer, Conversation>  conversations;
-    private Map<Integer, User>  users = new HashMap<>();
-    ArrayList<User> newConvoUsers = new ArrayList();
+    private Map<Integer, User>  users;
+
+    ArrayList<Conversation> conversationsToShow = new ArrayList<>();
+    ArrayList<User> usersToShow = new ArrayList<>();
     private User detailedUser;
 
 
@@ -206,6 +208,20 @@ public class MainModel extends Observable{
             }
         }
         return false;
+    }
+
+    public Iterator<User> searchContacts(String input) {
+        Iterator<User> iterator = getContacts();
+        ArrayList<User> contactsToShow = new ArrayList<User>();
+        User next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getFullName().toLowerCase().contains(input.toLowerCase())) {
+                contactsToShow.add(next);
+            }
+        }
+        return contactsToShow.iterator();
     }
 
 }

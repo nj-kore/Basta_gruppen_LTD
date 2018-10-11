@@ -1,6 +1,7 @@
 package view;
 
 import controller.IMainController;
+import controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -30,7 +34,7 @@ import static javafx.scene.input.KeyCode.R;
  * given to the class from the model package via the observer class.
  */
 
-public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
+public class MainView extends AnchorPane implements Initializable, IMainView, Observer {
 
     private MainModel mainModel;
     private ChatView chatView;
@@ -118,6 +122,12 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     TextField searchConversationsTextField;
 
+    @FXML
+    ImageView searchContactsImageView;
+
+    @FXML
+    ImageView searchConversationsImageView;
+
 
     /**
      * @param location
@@ -144,6 +154,21 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         this.userPage = new UserPageView(this, mainModel);
         this.newConvoListItems = new ArrayList<>();
 
+        IMainController c = new MainController(this, mainModel);
+
+/*        searchContactsImageView.setOnMouseClicked(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                c.searchContacts(searchContactsTextField.getText());
+            }
+        });*/
+
+/*        searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.searchContactsClicked();
+            }
+        });*/
     }
 
 
@@ -193,6 +218,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
+        while (iterator.hasNext()) {
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+        }
+    }
+
+    public void updateContactList(Iterator<User> iterator) {
+        contactsFlowPane.getChildren().clear();
         while (iterator.hasNext()) {
             contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
         }
@@ -414,6 +446,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         contactDetailView.toFront();
     }
 
+    public String getContactSearchString(){
+        return searchContactsTextField.getText();
+    }
+
     @FXML
     public void searchConversations(){
         ArrayList<Conversation> conversationsToShow = new ArrayList<Conversation>();
@@ -427,9 +463,17 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
             conversationsFlowPane.getChildren().add(new ConversationListItem(c2, mainModel));
         }
     }
-    @FXML
+/*
+    //@FXML
     public void searchContacts(){
-        Iterator<User> iterator = mainModel.getContacts();
+        Iterator<User> iterator = mainModel.searchContacts(searchContactsTextField.getText());
+        contactsFlowPane.getChildren().clear();
+        while(iterator.hasNext()){
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+        }
+*/
+
+        /*        Iterator<User> iterator = mainModel.getContacts();
         ArrayList<User> contactsToShow = new ArrayList<User>();
         User next;
 
@@ -439,11 +483,23 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                 contactsToShow.add(next);
             }
         }
-        contactsFlowPane.getChildren().clear();
-        for(User u : contactsToShow){
-            contactsFlowPane.getChildren().add(new ContactListItem(u, this));
+    }
+
+    @FXML
+    public void onSearchContactsTextFieldKeyPressed(KeyEvent event) {   //TODO flytta till model
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            searchContacts();
+            event.consume();
         }
     }
+
+    @FXML
+    public void onSearchConversationsTextFieldKeyPressed(KeyEvent event) {  //TODO flytta till model
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            searchConversations();
+            event.consume();
+        }
+    }*/
 
 
 
