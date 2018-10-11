@@ -21,7 +21,7 @@ import model.Message;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ChatView extends AnchorPane{
+public class ChatView extends AnchorPane implements IChatView{
 
 
     private MainModel mainModel;
@@ -115,27 +115,33 @@ public class ChatView extends AnchorPane{
         loadMessages();
         chatNameTextField.setText(mainModel.getActiveConversation().getName());
     }
+    @Override
     public String getInputText() {
         return chatTextArea.getText();
     }
 
+    @Override
     public void createNewLine() {
         chatTextArea.setText(chatTextArea.getText() + "\n");
         chatTextArea.end();
     }
 
+    @Override
     public void clearInputField() {
         chatTextArea.clear();
     }
 
+    @Override
     public String getChatNameText() {
         return chatNameTextField.getText();
     }
 
+    @Override
     public boolean chatNameIsFocused() {
         return chatNameTextField.isFocused();
     }
 
+    @Override
     public void setChatNameEditable(boolean editable) {
         chatNameTextField.setEditable(editable);
         if(editable) {
@@ -147,6 +153,7 @@ public class ChatView extends AnchorPane{
         }
 
     }
+    @Override
     public void setChatAreaFocused() {
         chatTextArea.requestFocus();
     }

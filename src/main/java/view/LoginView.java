@@ -17,7 +17,7 @@ import model.MainModel;
 
 import java.io.IOException;
 
-public class LoginView extends AnchorPane {
+public class LoginView extends AnchorPane implements ILoginView {
 
     @FXML
     private AnchorPane loginAnchorPane;
@@ -31,10 +31,7 @@ public class LoginView extends AnchorPane {
     private Label wrongPasswordLabel;
 
     /**
-     *
-     * @param mainModel
-     *
-     * Loads the fxml document and assigns the LoginController to handle the relevant input
+     * @param mainModel Loads the fxml document and assigns the LoginController to handle the relevant input
      */
     public LoginView(MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
@@ -68,14 +65,17 @@ public class LoginView extends AnchorPane {
 
     }
 
-    public void showWrongInputLabel() {
+    @Override
+    public void showWrongInputNotification() {
         wrongPasswordLabel.setVisible(true);
     }
 
+    @Override
     public String getPassword() {
         return passwordField.getText();
     }
 
+    @Override
     public String getUsername() {
         return userNameTextField.getText();
     }
