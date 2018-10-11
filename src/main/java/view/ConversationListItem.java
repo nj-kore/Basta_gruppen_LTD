@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.MainModel;
@@ -19,16 +20,16 @@ public class ConversationListItem extends AnchorPane{
     private Conversation conversation;
 
     @FXML
-    ImageView conversationProfileImageView;
+    private ImageView conversationProfileImageView;
 
     @FXML
-    ImageView conversationStatusImageView;
+    private ImageView conversationStatusImageView;
 
     @FXML
-    Label conversationNameLabel;
+    private Label conversationNameLabel;
 
     @FXML
-    Label conversationStatusLabel;
+    private Label conversationStatusLabel;
 
 
     public ConversationListItem(Conversation conversation, MainModel mainModel) {
@@ -45,6 +46,13 @@ public class ConversationListItem extends AnchorPane{
 
         this.mainModel = mainModel;
         this.conversation = conversation;
+        this.conversationNameLabel.setText(conversation.getName());
+
+        if (this.conversation.getParticipants().size() == 2) {
+            this.conversationProfileImageView.setImage(new Image(this.conversation.getParticipants().get(0).getStatusImagePath()));
+        } else {
+            this.conversationProfileImageView.setImage(new Image("pics/groupConvoDefaultImage.jpg"));
+        }
 
     }
 

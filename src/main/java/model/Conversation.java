@@ -8,7 +8,7 @@ import java.util.Map;
 public class Conversation {
     private int id;
     private Map<Integer, Message> messages = new HashMap<>();
-    private List<User> participants = new ArrayList<User>();
+    private List<User> participants = new ArrayList<>();
     private String name;
 
     public Conversation(int id, String name, ArrayList<User> participants) {
@@ -68,5 +68,9 @@ public class Conversation {
         result = 31 * result + participants.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    public List<User> getParticipants() {
+        return participants;
     }
 }
