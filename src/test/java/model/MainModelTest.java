@@ -59,6 +59,8 @@ public class MainModelTest {
         Conversation c1 = model.loadConversation(1);
         assertEquals(c1.getMessages().size() - oldSize, 1);
         assertEquals(c1.getMessages().get(c1.getMessages().size() - 1).getText(), "hejsan");
+        assertTrue(model.login("ett","123"));
+        assertFalse(model.login("Hackerman","gEt_HacKeD"));
     }
 
     //The test should try to load conversation number 2 from the dataHandlerDummy, which only returns null

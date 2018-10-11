@@ -1,6 +1,15 @@
+/**
+ *
+ * @author Filip Andréasson
+ * @author Gustav Häger
+ * @author Jonathan Köre
+ * @author Gustaf Spjut
+ * @author Benjamin Vinnerholt
+ * @version 0.5
+ * @since 2018-09-09
+ * The MainModel is responsible for the logic and state of the application. It creates and handles the data
+ */
 package model;
-
-
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -192,8 +201,6 @@ public class MainModel extends Observable{
             if(u.getUsername().equals(username)) {
                 if(u.getPassword().equals(password)) {
                     setActiveUser(u);
-                    //setActiveConversation(conversations.get(0).getId());
-                    //initFillers();
                     update(UpdateTypes.INIT);
                     return true;
                 }
