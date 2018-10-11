@@ -11,15 +11,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String status;
-    private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"};
-    private ArrayList<String> statuses = new ArrayList<>();
+    private MainModel.StatusType status;
     private String statusImagePath;
     private String profileImagePath;
     private String[] statusPaths = new String[3];
 
 
-    public User(int id, String username, String password, String firstName, String lastName) {
+    public User(int id, String username, String password, String firstName, String lastName, MainModel.StatusType status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,6 +28,7 @@ public class User {
         statusPaths[0] = "pics/statusGreen.png";
         statusPaths[1] = "pics/statusOrange.png";
         statusPaths[2] = "pics/statusRed.png";
+        this.status = status;
 
     }
 
@@ -39,7 +38,13 @@ public class User {
         return id;
     }
 
-    public String getStatusImagePath(){return statusImagePath;}
+    public String getStatusImagePath(){
+        switch (status){
+            case Do_not_disturb: return statusPaths[2];
+            case Busy: return statusPaths[1];
+            default: return statusPaths[0];
+        }
+    }
 
     public String getFullName(){
         return firstName + " " + lastName;
@@ -49,9 +54,6 @@ public class User {
         return password;
     }
 
-    public String[] getPremadeStatuses(){
-        return premadeStatuses;
-    }
     public String getFirstName() {
         return firstName;
     }
@@ -68,7 +70,7 @@ public class User {
 
     public String getProfileImagePath(){return profileImagePath;}
 
-    public String getStatus(){return status;}
+    public MainModel.StatusType getStatus(){return status;}
 
     public String getUsername() {
         return username;
@@ -95,12 +97,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setStatus(String status){this.status=status;
-
-    }
-
-    public void setStatusImagePath(String statusImagePath){
-        this.statusImagePath = statusImagePath;
+    public void setStatus(MainModel.StatusType status){
+        this.status = status;
     }
 
     public void setProfileImagePath(String profileImagePath){
@@ -133,31 +131,19 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (!password.equals(user.password)) return false;
-        if (!username.equals(user.username)) return false;
-        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
-        if (!firstName.equals(user.firstName)) return false;
-        if (!lastName.equals(user.lastName)) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (id != user.id) {return false;}
+        if (!password.equals(user.password)) {return false;}
+        if (!username.equals(user.username)) {return false;}
+        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) {return false;}
+        if (!firstName.equals(user.firstName)) {return false;}
+        if (!lastName.equals(user.lastName)) {return false;}
+        if (email != null ? !email.equals(user.email) : user.email != null) {return false;}
         return status != null ? status.equals(user.status) : user.status == null;
-    }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + password.hashCode();
-        result = 31 * result + username.hashCode();
-        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
     }
 }

@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
  * given to the class from the model package via the observer class.
  */
 
-public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
+public class    MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
     private MainModel mainModel;
     private ChatView chatView;
@@ -35,6 +35,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     private CreateConvoView createConvoView;
     private UserPageView userPage;
     private User detailedUser;
+    private UserView userView;
 
     //contactDetailView
     @FXML
@@ -86,6 +87,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     Button newConvoButton;
+    AnchorPane currentUserAnchorPane;
 
 
     /**
@@ -112,6 +114,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
+        this.newConvoListItems = new ArrayList<>();
+        //TODO look at the line below. I'm ashamed of myself @Nåjs
+        this.userView= new UserView(this, mainModel, this);
     }
 
 
@@ -139,16 +144,19 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     chatView.update();
                     updateContactsList();
                     updateConversationsList();
-                    addPremadeStatuses();
-
+                    userView.init();
+                    displayCurrentUser();
                     //updateCreateNewConvoLists();
+
                     break;
                 case USER_INFO:
                     updateUserInfoTextFields();
-                    updateCurrentUserInfo();
+                    //updateCurrentUserInfo();
+                    userView.updateCurrentUserInfo();
             }
         }
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+        userView.setCurrentUserImageView();
+        //currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 
     private void updateUserInfoTextFields() {
@@ -214,6 +222,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     @Override
+    public void displayCurrentUser(){
+        currentUserAnchorPane.getChildren().add(userView);
+    }
+    @Override
     public void displaySettings() {
 
     }
@@ -234,37 +246,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         mainViewHBox.toFront();
     }
 
-    @FXML
-    public void addPremadeStatuses(){
-        int counter=0;
-        for (String status : mainModel.getActiveUser().getPremadeStatuses()){
-            MenuItem m;// = new MenuItem(status);
-
-            if(counter==0){
-                ImageView imageView = new ImageView("pics/statusGreen.png");
-                m=new MenuItem(status, imageView);
-            }else if(counter==1){
-                ImageView imageView = new ImageView("pics/statusOrange.png");
-                m=new MenuItem(status, imageView);
-            }else{
-                ImageView imageView = new ImageView("pics/statusRed.png");
-                m=new MenuItem(status, imageView);
-            }
-            statusMenu.getItems().add(m);
-            m.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    statusMenu.setText(m.getText());
-                    //Todo store clicked status in json or user
-                    //mainModel.getActiveUser().setStatus(m.getText());
-                    mainModel.setStatus(m.getText());
-
-                }
-            });
-            counter++;
-        }
-    }
-
 
     public void backToChat(){
         mainViewAnchorPane.getChildren().clear();
@@ -283,11 +264,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         }
     }
 
+    //TODO try to delete?
     public void updateCurrentUserInfo() {
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));//TODO denna fungerar tydligen inte
+        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
         statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
+        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
-
+  
 
     //contactDetailView functionality
     @FXML
@@ -311,7 +294,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         Image profileImage = new Image(user.getProfileImagePath());
         this.contactDetailViewProfilemageView.setImage(profileImage);
         this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
-        this.contactDetailViewStatusLabel.setText(user.getStatus());
+        this.contactDetailViewStatusLabel.setText(user.getStatus().toString());
         contactDetailView.toFront();
     }
 

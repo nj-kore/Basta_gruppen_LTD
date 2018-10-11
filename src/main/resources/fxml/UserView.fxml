@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root maxHeight="120.0" maxWidth="250.0" minHeight="60.0" prefHeight="55.0" prefWidth="250.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="currentUserImageView" fitHeight="42.0" fitWidth="42.0" layoutX="14.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <ImageView fx:id="statusImageView" fitHeight="13.0" fitWidth="14.0" layoutX="46.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pics/statusGreen.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="optionsImage" fitHeight="42.0" fitWidth="42.0" layoutX="208.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
+         <image>
+            <Image url="@../pics/optionsIcon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="currentUserNameLabel" layoutX="65.0" layoutY="14.0" text="currentUser" />
+      <MenuButton fx:id="statusMenu" layoutX="65.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Statustext" />
+   </children>
+</fx:root>

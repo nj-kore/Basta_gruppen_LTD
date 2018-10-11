@@ -48,7 +48,7 @@ public class ContactListItem extends AnchorPane {
         contactNameLabel.setText(user.getFullName());
         contactStatusImageView.setImage(new Image(user.getStatusImagePath()));
         contactProfileImageView.setImage(new Image(user.getProfileImagePath()));
-        contactStatusLabel.setText(user.getStatus());
+        contactStatusLabel.setText(user.getStatus().toString());
     }
 
     @FXML
