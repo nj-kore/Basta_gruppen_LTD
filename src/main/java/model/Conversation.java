@@ -60,4 +60,8 @@ public class Conversation {
         if (!participants.equals(that.participants)) {return false;}
         return name != null ? name.equals(that.name) : that.name == null;
     }
+    
+    public List<User> getParticipants() {
+        return participants;
+    }
 }
