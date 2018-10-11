@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,18 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
 import model.Conversation;
 import model.MainModel;
 import model.User;
-import sun.plugin.javascript.navig.Anchor;
 
 import java.net.URL;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static javafx.scene.input.KeyCode.R;
 
 /**
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
