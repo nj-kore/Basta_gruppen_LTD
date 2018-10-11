@@ -49,7 +49,7 @@ public class ConversationListItem extends AnchorPane{
         this.conversationNameLabel.setText(conversation.getName());
 
         if (this.conversation.getParticipants().size() == 2) {
-            this.conversationProfileImageView.setImage(new Image(this.conversation.getParticipants().get(0).getStatusImagePath()));
+            this.conversationProfileImageView.setImage(new Image(this.conversation.getParticipants().get(0).getProfileImagePath()));
         } else {
             this.conversationProfileImageView.setImage(new Image("pics/groupConvoDefaultImage.jpg"));
         }
@@ -58,7 +58,7 @@ public class ConversationListItem extends AnchorPane{
 
     @FXML
     public void conversationListItemClicked() {
-        mainModel.setActiveConversation(this.conversation.getId());
+        mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
     }
 
 }

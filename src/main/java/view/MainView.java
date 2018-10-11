@@ -145,7 +145,6 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
                     updateConversationsList();
                     userToolbar.init();
                     displayCurrentUser();
-                    //updateCreateNewConvoLists();
 
                     break;
                 case USER_INFO:
@@ -284,6 +283,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         users.add(mainModel.getActiveUser());
         mainModel.createConversation(users, detailedUser.getFullName());
         contactDetailView.toBack();
+        updateConversationsList();
         displayMainView();
     }
 

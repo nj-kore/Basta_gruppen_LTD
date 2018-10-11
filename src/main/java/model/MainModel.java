@@ -137,6 +137,7 @@ public class MainModel extends Observable{
 
     public void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
+        update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
     public void createConversation(ArrayList<User> users, String name) {
