@@ -50,14 +50,14 @@ public class Conversation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){ return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
 
         Conversation that = (Conversation) o;
 
-        if (id != that.id) return false;
-        if (messages != null ? !messages.equals(that.messages) : that.messages != null) return false;
-        if (!participants.equals(that.participants)) return false;
+        if (id != that.id) {return false;}
+        if (messages != null ? !messages.equals(that.messages) : that.messages != null) {return false;}
+        if (!participants.equals(that.participants)) {return false;}
         return name != null ? name.equals(that.name) : that.name == null;
     }
 

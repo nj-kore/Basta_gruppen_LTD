@@ -19,7 +19,6 @@ public class MainModel extends Observable{
     private Map<Integer, Conversation>  conversations;
     private Map<Integer, User>  users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
-    private User detailedUser;
 
 
     public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
@@ -60,7 +59,7 @@ public class MainModel extends Observable{
             int newMessageId = 0;
 
             if(!activeConversation.getMessages().keySet().isEmpty())
-                newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
+            {newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;}
 
             Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
             activeConversation.addMessage(m);
@@ -122,7 +121,7 @@ public class MainModel extends Observable{
     public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
         if(!conversations.keySet().isEmpty())
-            newConversationId = Collections.max(conversations.keySet()) + 1;
+        {newConversationId = Collections.max(conversations.keySet()) + 1;}
 
         Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
@@ -161,11 +160,6 @@ public class MainModel extends Observable{
         activeUser.setStatus(s);
         update(UpdateTypes.USER_INFO);
     }
-
-    //@Override
-    //public HashMap<Integer,Conversation> getConversations() {
-       // return conversations;            //TODO returns null
-  //  }
 
     public Map<Integer, User> getUsers() {
         return users;

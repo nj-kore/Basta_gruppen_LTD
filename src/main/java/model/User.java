@@ -13,7 +13,6 @@ public class User {
     private String email;
     private String status;
     private String[] premadeStatuses = {"AVAILABLE", "BUSY", "MATEMATISK"};
-    private ArrayList<String> statuses = new ArrayList<>();
     private String statusImagePath;
     private String profileImagePath;
     private String[] statusPaths = new String[3];
@@ -133,18 +132,18 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (!password.equals(user.password)) return false;
-        if (!username.equals(user.username)) return false;
-        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
-        if (!firstName.equals(user.firstName)) return false;
-        if (!lastName.equals(user.lastName)) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (id != user.id) {return false;}
+        if (!password.equals(user.password)) {return false;}
+        if (!username.equals(user.username)) {return false;}
+        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) {return false;}
+        if (!firstName.equals(user.firstName)) {return false;}
+        if (!lastName.equals(user.lastName)) {return false;}
+        if (email != null ? !email.equals(user.email) : user.email != null) {return false;}
         return status != null ? status.equals(user.status) : user.status == null;
     }
 
