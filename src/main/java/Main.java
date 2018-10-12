@@ -1,5 +1,4 @@
 import infrastructure.IDataLoader;
-import infrastructure.IDataSaver;
 import infrastructure.JsonSaver;
 import infrastructure.JsonLoader;
 import javafx.application.Application;
@@ -46,12 +45,12 @@ public class Main extends Application {
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
         mainModel.initFillers();
         //Creates an instance of datasaver which can be used to save data
-        IDataSaver dataSaver = new JsonSaver(mainModel);
+        JsonSaver dataSaver = new JsonSaver(mainModel);
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel);
 
         //adds datasaver to mainmodels observers
-        mainModel.addObserver((JsonSaver)dataSaver);
+        mainModel.addObserver(dataSaver);
         //adds mainView to mainmodels observers
         mainModel.addObserver((MainView)mainView);
 

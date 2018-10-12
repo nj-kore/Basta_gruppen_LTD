@@ -1,6 +1,6 @@
 /**
  *
- * A class that saves data to JSON.
+ * A class that saves MainModel data to JSON.
  *
  * @author          Gustav Hager
  * responsibility:  To save data to "database" (json files).
@@ -14,53 +14,17 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import model.Conversation;
 import model.MainModel;
-import model.Message;
 import model.User;
 import java.io.*;
 import java.util.*;
 
-public class JsonSaver implements IDataSaver, Observer {
+public class JsonSaver implements Observer {
 
     private MainModel model;
 
     public JsonSaver(MainModel model) {
         this.model = model;
         saveModel();
-    }
-
-
-
-    @Override
-    public void saveMessage(int conversationId, Message messageToSave) {
-        List<Conversation> conversations = new ArrayList<Conversation>();
-        if (!fileExists("src/main/java/infrastructure/conversations.json")){
-            writeConversations(null);
-        }else{
-            Conversation conversation = model.loadConversation(conversationId);
-            conversation.addMessage(messageToSave);
-            writeConversations(conversations);
-        }
-    }
-
-
-    /**
-     * Saves User u to users.json using Gson
-     * @param userToSave the User to be saved
-     */
-    @Override
-    public void saveUser(User userToSave) {
-        List<User> users = new ArrayList<User>();
-        if (!fileExists("src/main/java/infrastructure/users.json")){
-            users.add(userToSave);
-            writeUsers(users);
-        }
-
-        Map<Integer, User> userMap = model.getUsers();
-        if(!userMap.containsKey(userToSave.getId())){
-            userMap.put(userToSave.getId(),userToSave);
-            users = new ArrayList<User>(userMap.values());
-            writeUsers(users);
-        }
     }
 
     /**
@@ -90,22 +54,6 @@ public class JsonSaver implements IDataSaver, Observer {
             writer.close();
         } catch (IOException e){
             throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void saveConversation(Conversation conversationToSave) {
-        List<Conversation> conversations = new ArrayList<Conversation>();
-        if (!fileExists("src/main/java/infrastructure/conversations.json")){
-            conversations.add(conversationToSave);
-            writeConversations(conversations);
-        }
-
-        Map<Integer, Conversation> conversationMap = model.getConversations();
-        if(!conversationMap.containsKey(conversationToSave.getId())){
-            conversationMap.put(conversationToSave.getId(),conversationToSave);
-            conversations = new ArrayList<Conversation>(conversationMap.values());
-            writeConversations(conversations);
         }
     }
 
