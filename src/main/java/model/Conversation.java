@@ -8,7 +8,7 @@ import java.util.Map;
 public class Conversation {
     private int id;
     private Map<Integer, Message> messages = new HashMap<>();
-    private List<User> participants = new ArrayList<User>();
+    private List<User> participants = new ArrayList<>();
     private String name;
 
     public Conversation(int id, String name, ArrayList<User> participants) {
@@ -46,5 +46,22 @@ public class Conversation {
     //Todo make protected
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){ return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
+
+        Conversation that = (Conversation) o;
+
+        if (id != that.id) {return false;}
+        if (messages != null ? !messages.equals(that.messages) : that.messages != null) {return false;}
+        if (!participants.equals(that.participants)) {return false;}
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+    
+    public List<User> getParticipants() {
+        return participants;
     }
 }

@@ -17,7 +17,7 @@
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="71.0" prefWidth="800.0">
+            <AnchorPane prefHeight="71.0" prefWidth="800.0" style="-fx-background-color: white;">
                <children>
                   <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="14.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">

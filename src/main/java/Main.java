@@ -41,10 +41,10 @@ public class Main extends Application {
         //Creates an instance of dataloader that can be used to load data
         IDataLoader dataLoader = new JsonLoader();
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
-        MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
+        MainModel mainModel =  new MainModel(dataLoader.loadUsers("src/main/java/infrastructure/users.json"),dataLoader.loadConversations("src/main/java/infrastructure/conversations.json"));
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
-        //mainModel.initFillers();
+        mainModel.initFillers();
         //Creates an instance of datasaver which can be used to save data
         IDataSaver dataSaver = new JsonSaver(mainModel);
         //tries to log in as user with username admin and password 123

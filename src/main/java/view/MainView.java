@@ -3,12 +3,9 @@ package view;
 import controller.IMainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -22,19 +19,21 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
 /**
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
  * given to the class from the model package via the observer class.
  */
 
-public class MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
+public class    MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
 
     private MainModel mainModel;
     private ChatView chatView;
     private LoginView loginView;
+    private CreateConvoView createConvoView;
     private UserPageView userPage;
-    private ArrayList<NewConvoContactListItem> newConvoListItems;
     private User detailedUser;
+    private UserToolbar userToolbar;
 
     //contactDetailView
     @FXML
@@ -51,34 +50,6 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     Label contactDetailViewNameLabel;
-
-    //newConversationView
-    @FXML
-    AnchorPane createConvoView;
-
-    @FXML
-    FlowPane newConvoContactPane;
-
-    @FXML
-    FlowPane newConvoConvoPane;
-
-    @FXML
-    Button newConvoCreateConvoButton;
-
-    @FXML
-    Button newConvoMoveUsersButton;
-
-    @FXML
-    Button newConvoCloseButton;
-
-    @FXML
-    Button newConvoSaveNameButton;
-
-    @FXML
-    TextField newConvoSaveNameTextField;
-
-    @FXML
-    Label newConvoSaveNameLabel;
 
 
     //mainView
@@ -98,6 +69,9 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     HBox loginHBox;
 
     @FXML
+    HBox createConvoHBox;
+
+    @FXML
     StackPane mainViewStackPane;
 
     @FXML
@@ -105,6 +79,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
 
     @FXML
     ImageView statusImageView;
+
+    @FXML
+    MenuButton statusMenu;
+
+    @FXML
+    Button newConvoButton;
+
+    @FXML
+    AnchorPane currentUserAnchorPane;
 
 
     /**
@@ -129,9 +112,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         this.mainModel = mainModel;
         this.chatView = new ChatView(mainModel);
         this.loginView = new LoginView(mainModel);
+        this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
-        this.newConvoListItems = new ArrayList<>();
-
+        //TODO look at the line below. I'm ashamed of myself @Nåjs
+        this.userToolbar = new UserToolbar(this, mainModel, this);
     }
 
 
@@ -159,11 +143,22 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
                     chatView.update();
                     updateContactsList();
                     updateConversationsList();
-                    //updateCreateNewConvoLists();
+                    userToolbar.init();
+                    displayCurrentUser();
+
                     break;
+                case USER_INFO:
+                    updateUserInfoTextFields();
+                    //updateCurrentUserInfo();
+                    userToolbar.updateCurrentUserInfo();
             }
         }
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+        userToolbar.setCurrentUserImageView();
+        //currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+    }
+
+    private void updateUserInfoTextFields() {
+        userPage.updateUserInfoTextFields();
     }
 
     /**
@@ -187,7 +182,7 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         conversationsFlowPane.getChildren().clear();
         Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
         while (iterator.hasNext()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next()));
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
         }
 
     }
@@ -198,6 +193,15 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
+    }
+
+    @Override
+    public void displayCreateConvoPage() {
+        createConvoHBox.toFront();
+        createConvoHBox.getChildren().clear();
+        createConvoHBox.getChildren().add(createConvoView);
+        createConvoView.setMinWidth(mainViewAnchorPane.getWidth());
+        //createConvoView.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
     }
 
     @Override
@@ -216,6 +220,10 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     }
 
     @Override
+    public void displayCurrentUser(){
+        currentUserAnchorPane.getChildren().add(userToolbar);
+    }
+    @Override
     public void displaySettings() {
 
     }
@@ -223,15 +231,25 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
     @FXML
     @Override
     public void displayUserPage() {
-        loginHBox.getChildren().clear();
-        loginHBox.getChildren().add(userPage);
-        loginHBox.toFront();
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(userPage);
+        userPage.prefWidthProperty().bind(mainViewAnchorPane.widthProperty());
+        userPage.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
+        updateUserInfoTextFields();
+
     }
 
     @Override
     public void displayMainView() {
-        loginHBox.toBack();
+        mainViewHBox.toFront();
     }
+
+
+    public void backToChat(){
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(chatView);
+    }
+
 
     public void updateContactsList(ArrayList<User> contacts) {
 
@@ -244,88 +262,13 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         }
     }
 
+    //TODO try to delete?
     public void updateCurrentUserInfo() {
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath())); //TODO denna fungerar tydligen inte
+        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
+        statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
+        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
-
-
-    private void updateCreateNewConvoLists() {
-        newConvoContactPane.getChildren().clear();
-        newConvoConvoPane.getChildren().clear();
-        Iterator<User> itr = mainModel.getContacts();
-        while (itr.hasNext()) {
-            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
-            newConvoContactPane.getChildren().add(newConvoContact);
-            newConvoListItems.add(newConvoContact);
-        }
-    }
-
-
-    //createNewConvo functionality
-    @FXML
-    private void newConvoMoveUsersButtonClicked() {
-
-        ArrayList<Node> paneList = new ArrayList<>();
-        paneList.addAll(newConvoConvoPane.getChildren());
-        paneList.addAll(newConvoContactPane.getChildren());
-
-        for (Node node : paneList) {
-
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
-
-            if (newConvoContactListItem.isClicked()) {
-
-                if (newConvoContactPane.getChildren().contains(node)) {
-
-                    newConvoContactPane.getChildren().remove(node);
-                    newConvoConvoPane.getChildren().add(newConvoContactListItem);
-                } else {
-
-                    newConvoConvoPane.getChildren().remove(node);
-                    newConvoContactPane.getChildren().add(newConvoContactListItem);
-                }
-                newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color: aqua");
-            }
-        }
-    }
-
-    @FXML
-    private void newConvoCreateConvoButtonClicked() {
-        ArrayList<User> users = new ArrayList<>();
-        for (Node node : newConvoContactPane.getChildren()) {
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
-            users.add(newConvoContactListItem.getUser());
-        }
-        users.add(mainModel.getActiveUser());
-        mainModel.createConversation(users, newConvoSaveNameTextField.getText());
-        createConvoView.toBack();
-        updateConversationsList();
-    }
-
-    @FXML
-    private void newConvoSaveNameButtonClicked() {
-        if(!newConvoSaveNameTextField.getText().isEmpty()) {
-            newConvoCreateConvoButton.setDisable(false);
-        } else {
-            newConvoSaveNameLabel.setText("Conversation needs to have a name");
-            newConvoSaveNameLabel.setStyle("-fx-background-color: #FF0000");
-        }
-    }
-
-    @FXML
-    private void newConvoButtonClicked() {
-        newConvoCreateConvoButton.setDisable(true);
-        newConvoSaveNameLabel.setText("Choose a name for the conversation:");
-        newConvoSaveNameLabel.setStyle("");
-        createConvoView.toFront();
-        updateCreateNewConvoLists();
-    }
-
-    @FXML
-    public void newConvoCloseButtonClicked() {
-        createConvoView.toBack();
-    }
+  
 
     //contactDetailView functionality
     @FXML
@@ -340,15 +283,23 @@ public class MainView extends AnchorPane implements Initializable, IMainControll
         users.add(mainModel.getActiveUser());
         mainModel.createConversation(users, detailedUser.getFullName());
         contactDetailView.toBack();
+        updateConversationsList();
+        displayMainView();
     }
 
     public void loadDetailView(User user) {
+        detailedUser = user;
         this.contactDetailViewNameLabel.setText(user.getFullName());
         Image profileImage = new Image(user.getProfileImagePath());
         this.contactDetailViewProfilemageView.setImage(profileImage);
         this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
-        this.contactDetailViewStatusLabel.setText(user.getStatus());
+        this.contactDetailViewStatusLabel.setText(user.getStatus().toString());
         contactDetailView.toFront();
+    }
+
+    @FXML
+    public void newConvoButtonClicked() {
+        displayCreateConvoPage();
     }
 
 

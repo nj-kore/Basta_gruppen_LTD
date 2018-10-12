@@ -3,8 +3,10 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import model.MainModel;
 import model.Conversation;
 
 import java.io.IOException;
@@ -14,20 +16,23 @@ import java.io.IOException;
  */
 public class ConversationListItem extends AnchorPane{
 
-    @FXML
-    ImageView conversationProfileImageView;
+    private MainModel mainModel;
+    private Conversation conversation;
 
     @FXML
-    ImageView conversationStatusImageView;
+    private ImageView conversationProfileImageView;
 
     @FXML
-    Label conversationNameLabel;
+    private ImageView conversationStatusImageView;
 
     @FXML
-    Label conversationStatusLabel;
+    private Label conversationNameLabel;
+
+    @FXML
+    private Label conversationStatusLabel;
 
 
-    public ConversationListItem(Conversation conversation) {
+    public ConversationListItem(Conversation conversation, MainModel mainModel) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
@@ -39,11 +44,21 @@ public class ConversationListItem extends AnchorPane{
             throw new RuntimeException(exception);
         }
 
+        this.mainModel = mainModel;
+        this.conversation = conversation;
+        this.conversationNameLabel.setText(conversation.getName());
+
+        if (this.conversation.getParticipants().size() == 2) {
+            this.conversationProfileImageView.setImage(new Image(this.conversation.getParticipants().get(0).getProfileImagePath()));
+        } else {
+            this.conversationProfileImageView.setImage(new Image("pics/groupConvoDefaultImage.jpg"));
+        }
+
     }
 
     @FXML
     public void conversationListItemClicked() {
-
+        mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
     }
 
 }
