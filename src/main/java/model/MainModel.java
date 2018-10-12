@@ -11,6 +11,8 @@
  */
 package model;
 
+
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -225,6 +227,34 @@ public class MainModel extends Observable{
             }
         }
         return false;
+    }
+
+    public Iterator<User> searchContacts(String input) {
+        Iterator<User> iterator = getContacts();
+        ArrayList<User> contactsToShow = new ArrayList<User>();
+        User next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getFullName().toLowerCase().contains(input.toLowerCase())) {
+                contactsToShow.add(next);
+            }
+        }
+        return contactsToShow.iterator();
+    }
+
+    public Iterator<Conversation> searchConversations(String conversationSearchString) {
+        Iterator<Conversation> iterator = getConversations().values().iterator();
+        ArrayList<Conversation> conversationsToShow = new ArrayList<>();
+        Conversation next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
+                conversationsToShow.add(next);
+            }
+        }
+        return conversationsToShow.iterator();
     }
 
 }

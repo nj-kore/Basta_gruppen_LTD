@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import model.*;
 import model.Message;
 
@@ -21,7 +23,7 @@ import model.Message;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ChatView extends AnchorPane{
+public class ChatView extends AnchorPane implements IChatView{
 
 
     private MainModel mainModel;
@@ -115,27 +117,33 @@ public class ChatView extends AnchorPane{
         loadMessages();
         chatNameTextField.setText(mainModel.getActiveConversation().getName());
     }
+    @Override
     public String getInputText() {
         return chatTextArea.getText();
     }
 
+    @Override
     public void createNewLine() {
         chatTextArea.setText(chatTextArea.getText() + "\n");
         chatTextArea.end();
     }
 
+    @Override
     public void clearInputField() {
         chatTextArea.clear();
     }
 
+    @Override
     public String getChatNameText() {
         return chatNameTextField.getText();
     }
 
+    @Override
     public boolean chatNameIsFocused() {
         return chatNameTextField.isFocused();
     }
 
+    @Override
     public void setChatNameEditable(boolean editable) {
         chatNameTextField.setEditable(editable);
         if(editable) {
@@ -147,8 +155,39 @@ public class ChatView extends AnchorPane{
         }
 
     }
+
+    @Override
     public void setChatAreaFocused() {
         chatTextArea.requestFocus();
     }
+
+    private class MessageItem extends AnchorPane {
+
+        @FXML
+        private Label messageUserNameLabel;
+
+        @FXML
+        private ImageView messageImageView;
+
+        @FXML
+        private TextFlow messageTextFlow;
+
+        public MessageItem(Message message, User concreteUser){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+
+            try {
+                fxmlLoader.load();
+            } catch (IOException exception) {
+                throw new RuntimeException(exception);
+            }
+            Image profileImage = new Image(concreteUser.getProfileImagePath());
+            messageImageView.setImage(profileImage);
+            messageUserNameLabel.setText(concreteUser.getFullName());
+            messageTextFlow.getChildren().add(new Text(message.getText()));
+        }
+    }
+
 }
 

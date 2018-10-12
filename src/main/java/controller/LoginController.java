@@ -3,21 +3,22 @@ package controller;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
-import view.LoginView;
+import view.ILoginView;
 
 public class LoginController implements ILoginController {
     private MainModel mainModel;
-    private LoginView loginView;
+    private ILoginView loginView;
 
-    public LoginController(LoginView loginView, MainModel mainModel) {
+    public LoginController(ILoginView loginView, MainModel mainModel) {
         this.loginView = loginView;
         this.mainModel = mainModel;
     }
 
     @Override
     public void onLoginButtonClicked() {
-        if(!mainModel.login(loginView.getUsername(), loginView.getPassword()))
-            loginView.showWrongInputLabel();
+        if (!mainModel.login(loginView.getUsername(), loginView.getPassword())) {
+            loginView.showWrongInputNotification();
+        }else loginView.clearTextFields();      //TODO funkar inte
     }
 
     @Override

@@ -4,14 +4,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import view.ChatView;
+import view.IChatView;
 import view.MainView;
 
 public class ChatController implements IChatController {
 
-    private ChatView chatView;
+    private IChatView chatView;
     private MainModel mainModel;
 
-    public ChatController(ChatView chatView, MainModel mainModel) {
+    public ChatController(IChatView chatView, MainModel mainModel) {
         this.mainModel = mainModel;
         this.chatView = chatView;
     }
