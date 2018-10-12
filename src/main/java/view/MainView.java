@@ -278,6 +278,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         createConvoHBox.toFront();
         createConvoHBox.getChildren().clear();
         createConvoHBox.getChildren().add(createConvoView);
+        createConvoView.updateCreateConversationLists();
         createConvoView.setMinWidth(mainViewAnchorPane.getWidth());
         //createConvoView.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
     }
@@ -389,5 +390,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
 
-
+    public void createConvoViewToBack() {
+        createConvoHBox.toBack();
+    }
 }

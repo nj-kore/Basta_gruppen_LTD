@@ -12,8 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.MainModel;
+import model.User;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 
 public class CreateConvoView extends AnchorPane{
@@ -42,6 +44,9 @@ public class CreateConvoView extends AnchorPane{
 
     public CreateConvoView(MainModel mainModel, MainView mainView) {
 
+        this.mainView = mainView;
+        this.mainModel = mainModel;
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/CreateConvoView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -51,9 +56,6 @@ public class CreateConvoView extends AnchorPane{
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        this.mainView = mainView;
-        this.mainModel = mainModel;
 
         ICreateConvoController createConvoController = new CreateConvoController(mainView, this, mainModel);
 
@@ -82,18 +84,19 @@ public class CreateConvoView extends AnchorPane{
             }
         });
 
-        this.mainView = mainView;
-        this.mainModel = mainModel;
-
         createConvoButton.setDisable(true);
         saveNameLabel.setText("Choose a name for the conversation:");
         saveNameLabel.setStyle("");
-        createConvoView.toFront();
-        ((CreateConvoController) createConvoController).updateCreateNewConvoLists();
     }
 
-    public AnchorPane getCreateConvoView() {
-        return createConvoView;
+    public void updateCreateConversationLists() {
+        contactPane.getChildren().clear();
+        convoPane.getChildren().clear();
+        Iterator<User> itr = mainModel.getContacts();
+        while (itr.hasNext()) {
+            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
+            contactPane.getChildren().add(newConvoContact);
+        }
     }
 
     public FlowPane getContactPane() {

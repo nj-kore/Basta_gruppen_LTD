@@ -78,24 +78,4 @@ public class CreateConvoController implements ICreateConvoController{
         mainView.displayMainView();
     }
 
-    @Override
-    public void updateConversationLists() {
-        createConvoView.getContactPane().getChildren().clear();
-        createConvoView.getConvoPane().getChildren().clear();
-        Iterator<User> itr = mainModel.getContacts();
-        while (itr.hasNext()) {
-            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
-            createConvoView.getContactPane().getChildren().add(newConvoContact);
-        }
-    }
-
-    public void updateCreateNewConvoLists() {
-        createConvoView.getContactPane().getChildren().clear();
-        createConvoView.getConvoPane().getChildren().clear();
-        Iterator<User> itr = mainModel.getContacts();
-        while (itr.hasNext()) {
-            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
-            createConvoView.getContactPane().getChildren().add(newConvoContact);
-        }
-    }
 }
