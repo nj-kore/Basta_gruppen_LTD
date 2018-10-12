@@ -80,4 +80,9 @@ public class LoginView extends AnchorPane implements ILoginView {
         return userNameTextField.getText();
     }
 
+    @Override
+    public void clearTextFields() {
+        userNameTextField.clear();
+        passwordField.clear();
+    }
 }

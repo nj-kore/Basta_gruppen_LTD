@@ -1,11 +1,17 @@
 package view;
 
 import controller.IMainController;
+import controller.MainController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -25,7 +31,7 @@ import java.util.ResourceBundle;
  * given to the class from the model package via the observer class.
  */
 
-public class    MainView extends AnchorPane implements Initializable, IMainController, IMainView, Observer {
+public class MainView extends AnchorPane implements Initializable, IMainView, Observer {
 
     private MainModel mainModel;
     private ChatView chatView;
@@ -89,6 +95,24 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
     @FXML
     AnchorPane currentUserAnchorPane;
 
+    @FXML
+    TextField searchContactsTextField;
+
+    @FXML
+    TextField searchConversationsTextField;
+
+    @FXML
+    ImageView searchContactsImageView;
+
+    @FXML
+    ImageView searchConversationsImageView;
+
+    @FXML
+    Label noContactsFoundLabel;
+
+    @FXML
+    Label noConversationsFoundLabel;
+
 
     /**
      * @param location
@@ -99,6 +123,34 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayLoginPage();
+        IMainController c = new MainController(this, mainModel);
+        searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.searchContactsClicked();
+            }
+        });
+
+        searchContactsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                c.onSearchContactsTextFieldKeyPressed(event);
+            }
+        });
+
+        searchConversationsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.searchConversationsClicked();
+            }
+        });
+
+        searchConversationsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                c.onSearchConversationsEnterKeyPressed(event);
+            }
+        });
 
         //chatView.startTiming();
 
@@ -172,6 +224,23 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         }
     }
 
+    public void updateContactList(Iterator<User> iterator) {
+        contactsFlowPane.getChildren().clear();
+        if(!iterator.hasNext()) contactsFlowPane.getChildren().add(noContactsFoundLabel);
+
+        while (iterator.hasNext()) {
+            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+        }
+    }
+
+/*    private void displayNoContactsFound(boolean display) {
+        noContactsFoundLabel.setVisible(display);
+    }
+
+    private void displayNoConversationsFound(boolean display) {
+        noConversationsFoundLabel.setVisible(display);
+    }*/
+
 
     /**
      * Clears the conversationsFlowPane and fills it with new ConversationListItems corresponding to
@@ -179,8 +248,17 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
      */
     public void updateConversationsList() {
 
+            conversationsFlowPane.getChildren().clear();
+            Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+            while (iterator.hasNext()) {
+                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+            }
+
+    }
+
+    public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
-        Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+        if(!iterator.hasNext()) conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
         }
@@ -268,7 +346,7 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
         statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
         statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
-  
+
 
     //contactDetailView functionality
     @FXML
@@ -301,6 +379,15 @@ public class    MainView extends AnchorPane implements Initializable, IMainContr
     public void newConvoButtonClicked() {
         displayCreateConvoPage();
     }
+
+    public String getContactSearchString(){
+        return searchContactsTextField.getText();
+    }
+
+    public String getConversationSearchString() {
+        return searchConversationsTextField.getText();
+    }
+
 
 
 }

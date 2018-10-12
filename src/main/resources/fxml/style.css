@@ -105,6 +105,11 @@
     -fx-text-fill: rgba(255,70,70, 0.8);
     -fx-font-size: 14px;
 }
+
+.redText12{
+    -fx-text-fill: rgba(255,70,70, 0.8);
+    -fx-font-size: 12px;
+}
 #background-lightbox{
     -fx-background-color: rgba(0,0,0,0.75);
 }
