@@ -44,7 +44,7 @@
             <HBox fx:id="createConvoHBox" alignment="CENTER" />
             <HBox fx:id="mainViewHBox" styleClass="mainViewHBox">
                <children>
-                  <VBox maxWidth="250.0" prefHeight="600.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="250.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                      <children>
                         <TabPane layoutX="18.0" layoutY="33.0" prefHeight="482.0" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
@@ -52,11 +52,32 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <FlowPane fx:id="conversationsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                             </content>
-                                          </ScrollPane>
+                                          <VBox prefHeight="443.0" prefWidth="250.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <TextField fx:id="searchConversationsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a conversation.." />
+                                                      <ImageView fx:id="searchConversationsImageView" fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../pics/searchIcon.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" prefHeight="556.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                                                   <content>
+                                                      <FlowPane fx:id="conversationsFlowPane">
+                                                         <children>
+                                                            <Label fx:id="noConversationsFoundLabel" alignment="TOP_CENTER" styleClass="redSmallText" text="Couldn't find any matching conversations." />
+                                                         </children>
+                                                      </FlowPane>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -65,11 +86,32 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
-                                             </content>
-                                          </ScrollPane>
+                                          <VBox prefHeight="453.0" prefWidth="250.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <TextField fx:id="searchContactsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a contact..." />
+                                                      <ImageView fx:id="searchContactsImageView" fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../pics/searchIcon.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="218.0" VBox.vgrow="ALWAYS">
+                                                   <content>
+                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label fx:id="noContactsFoundLabel" alignment="TOP_LEFT" styleClass="redSmallText" text="Couldn't find any matching users." />
+                                                         </children>
+                                                      </FlowPane>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                               </content>

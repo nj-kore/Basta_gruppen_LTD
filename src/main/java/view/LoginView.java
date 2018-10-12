@@ -80,4 +80,8 @@ public class LoginView extends AnchorPane {
         return userNameTextField.getText();
     }
 
+    public void clearTextFields() {
+        userNameTextField.clear();
+        passwordField.clear();
+    }
 }
