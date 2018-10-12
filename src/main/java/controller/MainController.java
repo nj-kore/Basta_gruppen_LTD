@@ -19,52 +19,23 @@ public class MainController implements IMainController {
 
 
     }
-    @Override
-    public void searchConversation(){
-    }
-    @Override
-    public void searchConversationsKeyPressed(KeyEvent event) {
-        if(event.getCode().equals(KeyCode.ENTER)) {
-            searchConversation();
-            event.consume();
-        }
-    }
 
-    @Override
-    public void searchContactsKeyPressed(KeyEvent event) {
 
-    }
 
-    @Override
-    public void searchContacts(String input) {
-
-    }
-
-/*    @Override
-    public void searchContactsKeyPressed(KeyEvent event) {
-        if(event.getCode().equals(KeyCode.ENTER)) {
-            mainModel.searchContacts();
-            event.consume();
-        }
-    }*/
-
-/*    @Override
-    public void searchContacts(String input){
-        Iterator<User> iterator = mainModel.searchContacts(input);
-        mainView.updateContactList(iterator);
-    }*/
 
     @Override
     public void searchContactsClicked() {
-        System.out.println("ebola");
         Iterator<User> contacts = mainModel.searchContacts(mainView.getContactSearchString());
         mainView.updateContactList(contacts);
+
+
     }
 
     @Override
     public void onSearchContactsTextFieldKeyPressed(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER)){
             searchContactsClicked();
+            event.consume();
         }
     }
 
@@ -75,9 +46,10 @@ public class MainController implements IMainController {
     }
 
     @Override
-    public void onSearchConversationsTextFieldKeyPressed(KeyEvent event) {
+    public void onSearchConversationsEnterKeyPressed(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER)) {
             searchConversationsClicked();
+            event.consume();
         }
     }
 }

@@ -113,7 +113,11 @@
                                                 </HBox>
                                                 <ScrollPane fitToWidth="true" prefHeight="556.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
                                                    <content>
-                                                      <FlowPane fx:id="conversationsFlowPane" />
+                                                      <FlowPane fx:id="conversationsFlowPane">
+                                                         <children>
+                                                            <Label fx:id="noConversationsFoundLabel" alignment="TOP_CENTER" styleClass="redSmallText" text="Couldn't find any matching conversations." />
+                                                         </children>
+                                                      </FlowPane>
                                                    </content>
                                                 </ScrollPane>
                                              </children>
@@ -143,7 +147,11 @@
                                                 </HBox>
                                                 <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="218.0" VBox.vgrow="ALWAYS">
                                                    <content>
-                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0" />
+                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label fx:id="noContactsFoundLabel" alignment="TOP_LEFT" styleClass="redSmallText" text="Couldn't find any matching users." />
+                                                         </children>
+                                                      </FlowPane>
                                                    </content>
                                                 </ScrollPane>
                                              </children>

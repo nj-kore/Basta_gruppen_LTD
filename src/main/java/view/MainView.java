@@ -128,6 +128,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     @FXML
     ImageView searchConversationsImageView;
 
+    @FXML
+    Label noContactsFoundLabel;
+
+    @FXML
+    Label noConversationsFoundLabel;
+
 
     /**
      * @param location
@@ -163,7 +169,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         searchConversationsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                c.onSearchConversationsTextFieldKeyPressed(event);
+                c.onSearchConversationsEnterKeyPressed(event);
             }
         });
 
@@ -238,10 +244,20 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
+        if(!iterator.hasNext()) contactsFlowPane.getChildren().add(noContactsFoundLabel);
+
         while (iterator.hasNext()) {
             contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
         }
     }
+
+/*    private void displayNoContactsFound(boolean display) {
+        noContactsFoundLabel.setVisible(display);
+    }
+
+    private void displayNoConversationsFound(boolean display) {
+        noConversationsFoundLabel.setVisible(display);
+    }*/
 
 
     /**
@@ -260,8 +276,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
+        if(!iterator.hasNext()) conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+
         }
 
     }
