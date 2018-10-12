@@ -59,7 +59,7 @@ public class CreateConvoController implements ICreateConvoController{
         }
         users.add(mainModel.getActiveUser());
         mainModel.createConversation(users, createConvoView.getSaveNameTextField().getText());
-        createConvoView.toBack();
+        mainView.createConvoViewToBack();
         mainView.updateConversationsList();
     }
 
