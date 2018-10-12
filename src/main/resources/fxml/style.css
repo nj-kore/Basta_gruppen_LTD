@@ -19,8 +19,6 @@
     -fx-border-radius: 5px;
 }
 
-
-
 #passwordErrorText{
     -fx-text-fill: red;
 }
@@ -131,5 +129,20 @@
 }
 
 #conversationListItemStatus{
-    //TODO ITALIC
+    -fx-font-style: italic;
+}
+
+.listItem{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+.listItem:hover{
+    -fx-border-color: rgb(54,57,62);
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+}
+.listItem:pressed{
+    -fx-background-color: rgb(200,200,200);
+    -fx-border-color: gray;
+    -fx-border-radius: 5px;
 }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane id="background-lightbox" fx:id="contactDetailView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,15 +48,15 @@
                <children>
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="250.0" prefWidth="0.0" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER">
                      <children>
-                        <TabPane layoutX="18.0" layoutY="33.0" prefHeight="482.0" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane layoutX="18.0" layoutY="33.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefWidth="250.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
                           <tabs>
                             <Tab text="Conversations">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
                                        <children>
-                                          <VBox prefHeight="443.0" prefWidth="250.0">
+                                          <VBox maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0">
                                              <children>
-                                                <HBox>
+                                                <HBox maxHeight="25.0" VBox.vgrow="NEVER">
                                                    <children>
                                                       <TextField fx:id="searchConversationsTextField" prefHeight="26.0" prefWidth="778.0" promptText="Search for a conversation.." />
                                                       <ImageView fx:id="searchConversationsImageView" fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
@@ -69,9 +69,9 @@
                                                       </ImageView>
                                                    </children>
                                                 </HBox>
-                                                <ScrollPane fitToWidth="true" prefHeight="556.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                                                <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
                                                    <content>
-                                                      <FlowPane fx:id="conversationsFlowPane">
+                                                      <FlowPane fx:id="conversationsFlowPane" maxHeight="1.7976931348623157E308">
                                                          <children>
                                                             <Label fx:id="noConversationsFoundLabel" alignment="TOP_CENTER" styleClass="redText12" text="Couldn't find any matching conversations." />
                                                          </children>
@@ -86,9 +86,9 @@
                             </Tab>
                             <Tab text="Contacts">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <VBox prefHeight="453.0" prefWidth="250.0">
+                                          <VBox maxHeight="1.7976931348623157E308" prefWidth="250.0">
                                              <children>
                                                 <HBox>
                                                    <children>
@@ -103,9 +103,9 @@
                                                       </ImageView>
                                                    </children>
                                                 </HBox>
-                                                <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="218.0" VBox.vgrow="ALWAYS">
+                                                <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" prefWidth="218.0" VBox.vgrow="ALWAYS">
                                                    <content>
-                                                      <FlowPane fx:id="contactsFlowPane" prefHeight="200.0" prefWidth="200.0">
+                                                      <FlowPane fx:id="contactsFlowPane" maxHeight="1.7976931348623157E308" prefWidth="200.0">
                                                          <children>
                                                             <Label fx:id="noContactsFoundLabel" alignment="TOP_LEFT" styleClass="redText12" text="Couldn't find any matching users." />
                                                          </children>
@@ -120,7 +120,7 @@
                             </Tab>
                           </tabs>
                         </TabPane>
-                        <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <AnchorPane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" VBox.vgrow="NEVER">
                            <children>
                               <Button fx:id="newConvoButton" layoutX="159.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#newConvoButtonClicked" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
@@ -134,7 +134,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="currentUserAnchorPane" maxHeight="120.0" maxWidth="250.0" minHeight="60.0" prefHeight="55.0" prefWidth="250.0" VBox.vgrow="NEVER" />
+                        <AnchorPane fx:id="currentUserAnchorPane" maxHeight="120.0" maxWidth="250.0" minHeight="100.0" prefHeight="55.0" prefWidth="250.0" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
                 <AnchorPane fx:id="mainViewAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
