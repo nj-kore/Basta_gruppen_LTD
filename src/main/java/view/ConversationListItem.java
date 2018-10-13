@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * ConversationListItem is view that displays one conversation as an item
  */
-public class ConversationListItem extends AnchorPane{
+public class ConversationListItem extends AnchorPane {
 
     private MainModel mainModel;
     private Conversation conversation;

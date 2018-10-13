@@ -163,6 +163,8 @@ public class MainModel extends Observable{
         if(name.length() > 0 && name.length() < 30) {
             activeConversation.setName(name);
         }
+        update(UpdateTypes.ACTIVE_CONVERSATION);
+        update(UpdateTypes.CONVERSATIONS);
     }
 
     public Map<Integer,Conversation> getConversations() {
