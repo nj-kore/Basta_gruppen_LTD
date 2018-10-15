@@ -7,7 +7,6 @@ public interface IChatController {
     void onChatAreaKeyPressed(KeyEvent event);
     void onChangeChatNameClicked();
     void onLeaveChatClicked();
-    void onConversationNameKeyPressed(KeyEvent e);
     void onChatNameKeyPressed(KeyEvent e);
     void onChatNameAccept();
     void onChatNameDecline();

@@ -54,17 +54,17 @@ public class ChatController implements IChatController {
         chatView.editChatName();
     }
 
-    /**
-     * Chooses what actions the be taken according to what key was pressed while editing the chat name
-     *
-     * @param event the key combination that was typed by the user
-     */
     @Override
     public void onLeaveChatClicked() {
         mainModel.getConversations().remove(mainModel.getActiveConversation());
         //TODO fixa det här filip
     }
 
+    /**
+     * Chooses what actions the be taken according to what key was pressed while editing the chat name
+     *
+     * @param event the key combination that was typed by the user
+     */
     @Override
     public void onChatNameKeyPressed(KeyEvent event) {
 
