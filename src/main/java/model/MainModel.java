@@ -152,6 +152,7 @@ public class MainModel extends Observable{
         setActiveConversation(conversation.getId());
         update(UpdateTypes.ACTIVE_CONVERSATION);
         //TODO update view conversationlist
+        //update((Up));
     }
 
     //Exists for testing purposes
@@ -160,9 +161,52 @@ public class MainModel extends Observable{
     }
 
     public void setConversationName(String name) {
-        if(name.length() > 0 && name.length() < 30) {
+        if(validateConversationName(name))
             activeConversation.setName(name);
+        else
+            activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
+
+        update(UpdateTypes.ACTIVE_CONVERSATION);
+        update(UpdateTypes.CONVERSATIONS);
+
+    }
+
+    private final int MAX_LENGTH = 30;
+    private final int MIN_LENGTH = 0;
+
+    private boolean validateConversationName(String name) {
+        return(name.length() > MIN_LENGTH && name.length() < MAX_LENGTH);
+    }
+
+    public String generatePlaceholderName(Conversation c) {
+        StringBuilder placeholderName = new StringBuilder();
+        Stack<User> userStack =  new Stack<>();
+        // TODO: 14/10/2018
+        //Remove this when the app starts with a valid conversation
+        if(c.getParticipants() == null)
+            return "Placeholder";
+
+        userStack.addAll(c.getParticipants());
+        //If it is 1, then it is the active user that is the participant, in which case we
+        //might aswell display the current users name, instead of a blank one.
+        if (userStack.size() != 1) {
+            userStack.remove(activeUser);
         }
+
+        placeholderName.append(userStack.pop().getFirstName());
+
+        while(!userStack.isEmpty()) {
+            User u = userStack.pop();
+            if(placeholderName.length() + u.getFirstName().length() < MAX_LENGTH) {
+                placeholderName.append(", ");
+                placeholderName.append(u.getFirstName());
+            }
+            else {
+                placeholderName.append(" + " + userStack.size() + " more.");
+                break;
+            }
+        }
+        return placeholderName.toString();
     }
 
     public Map<Integer,Conversation> getConversations() {
