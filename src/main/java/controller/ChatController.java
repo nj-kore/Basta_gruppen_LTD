@@ -69,7 +69,7 @@ public class ChatController implements IChatController {
     public void onChatNameKeyPressed(KeyEvent event) {
 
         if (event.getCode().equals(KeyCode.ENTER)) {
-            chatView.finishEditChatName();
+            onChatNameAccept();
         }
     }
 

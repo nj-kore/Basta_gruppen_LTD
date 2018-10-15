@@ -2,6 +2,8 @@ package view;
 
 import controller.ChatController;
 import controller.IChatController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -88,6 +90,12 @@ public class ChatView extends AnchorPane implements IChatView {
         acceptImageView.setOnMouseClicked(event -> chatController.onChatNameAccept());
 
         declineImageView.setOnMouseClicked(event -> chatController.onChatNameDecline());
+
+        //I dont really know if this should go into the controller or not
+        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue)
+                chatController.onChatNameDecline();
+        });
     }
 
     /**
