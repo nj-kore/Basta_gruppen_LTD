@@ -109,7 +109,15 @@ public class ChatView extends AnchorPane implements IChatView {
      */
     public void update() {
         loadMessages();
-        chatNameTextField.setText(mainModel.getActiveConversation().getName());
+        loadChatName();
+    }
+
+    private void loadChatName() {
+        String name = mainModel.getActiveConversation().getName();
+        if(name.length() > 0)
+            chatNameTextField.setText(mainModel.getActiveConversation().getName());
+        else
+            chatNameTextField.setText(mainModel.generatePlaceholderName(mainModel.getActiveConversation()));
     }
 
     /**
@@ -166,7 +174,7 @@ public class ChatView extends AnchorPane implements IChatView {
     public void cancelEditChatName() {
         setChatNameEditable(false);
         //restores it to the old name
-        chatNameTextField.setText(mainModel.getActiveConversation().getName());
+        loadChatName();
     }
 
     /**
