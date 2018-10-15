@@ -93,6 +93,7 @@ public class ChatView extends AnchorPane implements IChatView {
     /**
      * Loads the messages from the model and displays them as MessageItems
      */
+
     public void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
