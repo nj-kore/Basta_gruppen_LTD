@@ -1,5 +1,4 @@
 /**
- *
  * @author Filip Andréasson
  * @author Gustav Häger
  * @author Jonathan Köre
@@ -12,7 +11,6 @@
 package model;
 
 
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -20,31 +18,36 @@ import java.util.*;
 /**
  * The façade for the model package.
  */
-public class MainModel extends Observable{
+public class MainModel extends Observable {
     private User activeUser;
     private Conversation activeConversation;
 
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
     }
+
     public enum StatusType {
         Available, Busy, Do_not_disturb;
 
         @Override
         public String toString() {
-            switch (this){
-                case Busy:              return "Busy";
-                case Do_not_disturb:    return "Do not disturb";
-                default:                return "Available";
+            switch (this) {
+                case Busy:
+                    return "Busy";
+                case Do_not_disturb:
+                    return "Do not disturb";
+                default:
+                    return "Available";
             }
         }
     }
-    private Map<Integer, Conversation>  conversations;
-    private Map<Integer, User>  users = new HashMap<>();
+
+    private Map<Integer, Conversation> conversations;
+    private Map<Integer, User> users = new HashMap<>();
     ArrayList<User> newConvoUsers = new ArrayList();
 
 
-    public MainModel(Map<Integer, User>  users, Map<Integer, Conversation>  conversations){
+    public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
         this.users = users;
         this.conversations = conversations;
         activeConversation = new Conversation(-1, "", null);
@@ -53,8 +56,8 @@ public class MainModel extends Observable{
 
     public void initFillers() {
         User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available);
-        User contactUser=new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available );
-        User contactUser2=new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available );
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available);
+        User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available);
         setActiveUser(admin);
         admin.addContact(contactUser.getId());
         admin.addContact(contactUser2.getId());
@@ -63,9 +66,9 @@ public class MainModel extends Observable{
         createUser(contactUser2);
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus(StatusType.Busy);
-        users.put(admin.getId(),admin);
-        users.put(contactUser.getId(),contactUser);
-        users.put(contactUser2.getId(),contactUser2);
+        users.put(admin.getId(), admin);
+        users.put(contactUser.getId(), contactUser);
+        users.put(contactUser2.getId(), contactUser2);
         update(UpdateTypes.INIT);
     }
 
@@ -77,12 +80,13 @@ public class MainModel extends Observable{
      * Tells the view to update itself
      */
     public void sendMessage(String text) {
-        if(text.length() > 0) {
+        if (text.length() > 0) {
             //The new ID is going to be one more than the current highest message id in the conversation
             int newMessageId = 0;
 
-            if(!activeConversation.getMessages().keySet().isEmpty())
-            {newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;}
+            if (!activeConversation.getMessages().keySet().isEmpty()) {
+                newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
+            }
 
             Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
             activeConversation.addMessage(m);
@@ -90,6 +94,7 @@ public class MainModel extends Observable{
         }
 
     }
+
     public void setUserInfo(String firstName, String lastName, String email) {
         activeUser.setFirstName(firstName);
         activeUser.setLastName(lastName);
@@ -112,17 +117,17 @@ public class MainModel extends Observable{
         return conversations.get(conversationId);
     }
 
-    public Iterator<Message> loadMessagesInConversation(){
+    public Iterator<Message> loadMessagesInConversation() {
         return activeConversation.getMessages().values().iterator();
     }
 
-    public void addContact(int userId){
+    public void addContact(int userId) {
         activeUser.addContact(userId);
     }
 
-    public Iterator<User> getContacts(){
+    public Iterator<User> getContacts() {
         List<User> list = new ArrayList<>();
-        for(int id : activeUser.getContacts()) {
+        for (int id : activeUser.getContacts()) {
             list.add(getUser(id));
         }
         return list.iterator();
@@ -144,8 +149,9 @@ public class MainModel extends Observable{
 
     public void createConversation(ArrayList<User> users, String name) {
         int newConversationId = 0;
-        if(!conversations.keySet().isEmpty())
-        {newConversationId = Collections.max(conversations.keySet()) + 1;}
+        if (!conversations.keySet().isEmpty()) {
+            newConversationId = Collections.max(conversations.keySet()) + 1;
+        }
 
         Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
@@ -160,16 +166,17 @@ public class MainModel extends Observable{
     }
 
     public void setConversationName(String name) {
-        if(name.length() > 0 && name.length() < 30) {
+        if (name.length() > 0 && name.length() < 30) {
             activeConversation.setName(name);
         }
     }
 
-    public Map<Integer,Conversation> getConversations() {
-        return conversations;}
+    public Map<Integer, Conversation> getConversations() {
+        return conversations;
+    }
 
 
-    public void setStatus(StatusType s){
+    public void setStatus(StatusType s) {
         activeUser.setStatus(s);
         update(UpdateTypes.USER_INFO);
     }
@@ -217,9 +224,9 @@ public class MainModel extends Observable{
      */
     public boolean login(String username, String password) {
 
-        for(User u : users.values()) {
-            if(u.getUsername().equals(username)) {
-                if(u.getPassword().equals(password)) {
+        for (User u : users.values()) {
+            if (u.getUsername().equals(username)) {
+                if (u.getPassword().equals(password)) {
                     setActiveUser(u);
                     update(UpdateTypes.INIT);
                     return true;
@@ -247,11 +254,23 @@ public class MainModel extends Observable{
         Iterator<Conversation> iterator = getConversations().values().iterator();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
         Conversation next;
+        boolean conversationFound;
 
         while (iterator.hasNext()) {
+            conversationFound = false;
             next = iterator.next();
-            if (next.getName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
-                conversationsToShow.add(next);
+            for (User u : next.getParticipants()) {
+                if (u.getFullName().contains(conversationSearchString)) {
+                    conversationsToShow.add(next);
+                    conversationFound = true;
+                    break;
+                }
+            }
+
+            if (!conversationFound) {
+                if (next.getName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
+                    conversationsToShow.add(next);
+                }
             }
         }
         return conversationsToShow.iterator();
