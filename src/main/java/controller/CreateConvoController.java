@@ -1,15 +1,11 @@
 package controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.Node;
 import model.MainModel;
 import model.User;
 import view.CreateConvoView;
 import view.MainView;
-import view.NewConvoContactListItem;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CreateConvoController implements ICreateConvoController{
 
@@ -24,54 +20,23 @@ public class CreateConvoController implements ICreateConvoController{
     }
 
     @Override
-    public void onMoveUsersButtonClicked() {
-        ArrayList<Node> paneList = new ArrayList<>();
-        paneList.addAll(createConvoView.getConvoPane().getChildren());
-        paneList.addAll(createConvoView.getContactPane().getChildren());
-
-        for (Node node : paneList) {
-
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
-
-            if (newConvoContactListItem.isClicked()) {
-
-                if (createConvoView.getContactPane().getChildren().contains(node)) {
-
-                    createConvoView.getContactPane().getChildren().remove(node);
-                    createConvoView.getConvoPane().getChildren().add(newConvoContactListItem);
-                } else {
-
-                    createConvoView.getConvoPane().getChildren().remove(node);
-                    createConvoView.getContactPane().getChildren().add(newConvoContactListItem);
-                }
-                newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color:");
-            }
-        }
-    }
-
-    @Override
     public void onCreateConversationButtonClicked() {
-        ArrayList<User> users = new ArrayList<>();
-        for (Node node : createConvoView.getContactPane().getChildren()) {
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
-            users.add(newConvoContactListItem.getUser());
-        }
+        ArrayList<User> users = new ArrayList<>(createConvoView.getSelectedUsers());
         users.add(mainModel.getActiveUser());
-        mainModel.createConversation(users, createConvoView.getSaveNameTextField().getText());
+        mainModel.createConversation(users, createConvoView.getSaveNameTextFieldText());
         mainView.createConvoViewToBack();
         mainView.updateConversationsList();
     }
 
-    @Override
+    /*@Override
     public void onSaveNameButtonClicked() {
-        if(!createConvoView.getSaveNameTextField().getText().isEmpty()) {
-            createConvoView.getCreateConvoButton().setDisable(false);
+        if(!createConvoView.getSaveNameTextFieldText().isEmpty()) {
+            createConvoView.setDisableCreateConvoButton(false);
         } else {
-            createConvoView.getSaveNameLabel().setText("Conversation needs to have a name");
-            createConvoView.getSaveNameLabel().setStyle("-fx-background-color: #FF0000");
+            createConvoView.setDisableCreateConvoButton(true);
+            createConvoView.saveNameFailed();
         }
-    }
+    }*/
 
     @Override
     public void onCloseButtonClicked() {
