@@ -14,13 +14,10 @@ public class ContactListItem extends AnchorPane {
 
     @FXML
     ImageView contactProfileImageView;
-
     @FXML
     ImageView contactStatusImageView;
-
     @FXML
     Label contactNameLabel;
-
     @FXML
     Label contactStatusLabel;
 
@@ -41,10 +38,6 @@ public class ContactListItem extends AnchorPane {
         }
         this.mainView = mainView;
         this.user = user;
-        //TODO Add functionality for the three functions below
-        //contactListItemStatusImageView.getImage(user.getStatusimage());
-        //contactListItemProfileImageView.getImage(user.getProfileImage());
-        //contactListItemStatusLabel.setText(user.getStatus());
         contactNameLabel.setText(user.getFullName());
         contactStatusImageView.setImage(new Image(user.getStatusImagePath()));
         contactProfileImageView.setImage(new Image(user.getProfileImagePath()));

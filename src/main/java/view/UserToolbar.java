@@ -49,7 +49,6 @@ public class UserToolbar extends AnchorPane {
         }
         this.mainModel = mainModel;
         this.mainView = mainView;
-        updateCurrentUserInfo();
     }
 
     public void init(){
@@ -62,6 +61,7 @@ public class UserToolbar extends AnchorPane {
                 u.onOoptionsButtonClicked();
             }
         });
+        updateCurrentUserInfo();
 
     }
 

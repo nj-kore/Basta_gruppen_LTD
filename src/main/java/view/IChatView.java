@@ -2,16 +2,10 @@ package view;
 
 public interface IChatView {
     String getInputText();
-
     String getChatNameText();
-
     void createNewLine();
-
     void clearInputField();
-
-    boolean chatNameIsFocused();
-
-    void setChatNameEditable(boolean editable);
-
-    void setChatAreaFocused();
+    void editChatName();
+    void cancelEditChatName();
+    void finishEditChatName();
 }
