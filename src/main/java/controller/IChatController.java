@@ -8,5 +8,6 @@ public interface IChatController {
     void onSendButtonClicked();
     void onChatAreaKeyPressed(KeyEvent event);
     void onChangeChatNameClicked();
+    void onLeaveChatClicked();
     void onConversationNameKeyPressed(KeyEvent e);
 }

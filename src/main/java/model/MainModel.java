@@ -151,7 +151,6 @@ public class MainModel extends Observable{
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
         update(UpdateTypes.ACTIVE_CONVERSATION);
-        //TODO update view conversationlist
     }
 
     //Exists for testing purposes

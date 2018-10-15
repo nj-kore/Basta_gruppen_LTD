@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -23,6 +23,7 @@
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
                     <items>
                       <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
+                        <MenuItem fx:id="leaveChatMenuItem" mnemonicParsing="false" text="Leave Conversation" />
                     </items>
                      <contextMenu>
                         <ContextMenu>

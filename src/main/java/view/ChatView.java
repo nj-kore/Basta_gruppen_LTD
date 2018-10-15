@@ -103,6 +103,7 @@ public class ChatView extends AnchorPane implements IChatView{
             }
         });
     }
+
     public void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
@@ -113,6 +114,7 @@ public class ChatView extends AnchorPane implements IChatView{
             }
         }
     }
+
     public void update() {
         loadMessages();
         chatNameTextField.setText(mainModel.getActiveConversation().getName());
