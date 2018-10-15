@@ -160,7 +160,6 @@ public class MainModel extends Observable {
     }
 
     public void setConversationName(String name) {
-        if (name.length() > 0 && name.length() < 30) {
             if (validateConversationName(name))
                 activeConversation.setName(name);
             else
@@ -169,7 +168,7 @@ public class MainModel extends Observable {
             update(UpdateTypes.ACTIVE_CONVERSATION);
             update(UpdateTypes.CONVERSATIONS);
 
-        }
+
     }
 
     private final int MAX_LENGTH = 30;
