@@ -70,11 +70,9 @@ public class MainModel extends Observable {
     }
 
     /**
-     * @param text
-     *
-     * Sends a text to the active conversation from the active user
-     *
-     * Tells the view to update itself
+     * @param text Sends a text to the active conversation from the active user
+     *             <p>
+     *             Tells the view to update itself
      */
     public void sendMessage(String text) {
         if (text.length() > 0) {
@@ -102,8 +100,8 @@ public class MainModel extends Observable {
 
     /**
      * @param u the type of "update" that the observers should do
-     *
-     * Notifies the observers with the String update as an argument
+     *          <p>
+     *          Notifies the observers with the String update as an argument
      */
     private void update(UpdateTypes u) {
         setChanged();
@@ -165,29 +163,30 @@ public class MainModel extends Observable {
 
     public void setConversationName(String name) {
         if (name.length() > 0 && name.length() < 30) {
-        if(validateConversationName(name))
-            activeConversation.setName(name);
-        else
-            activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
+            if (validateConversationName(name))
+                activeConversation.setName(name);
+            else
+                activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
 
-        update(UpdateTypes.ACTIVE_CONVERSATION);
-        update(UpdateTypes.CONVERSATIONS);
+            update(UpdateTypes.ACTIVE_CONVERSATION);
+            update(UpdateTypes.CONVERSATIONS);
 
+        }
     }
 
     private final int MAX_LENGTH = 30;
     private final int MIN_LENGTH = 0;
 
     private boolean validateConversationName(String name) {
-        return(name.length() > MIN_LENGTH && name.length() < MAX_LENGTH);
+        return (name.length() > MIN_LENGTH && name.length() < MAX_LENGTH);
     }
 
     public String generatePlaceholderName(Conversation c) {
         StringBuilder placeholderName = new StringBuilder();
-        Stack<User> userStack =  new Stack<>();
+        Stack<User> userStack = new Stack<>();
         // TODO: 14/10/2018
         //Remove this when the app starts with a valid conversation
-        if(c.getParticipants() == null)
+        if (c.getParticipants() == null)
             return "Placeholder";
 
         userStack.addAll(c.getParticipants());
@@ -199,13 +198,12 @@ public class MainModel extends Observable {
 
         placeholderName.append(userStack.pop().getFirstName());
 
-        while(!userStack.isEmpty()) {
+        while (!userStack.isEmpty()) {
             User u = userStack.pop();
-            if(placeholderName.length() + u.getFirstName().length() < MAX_LENGTH) {
+            if (placeholderName.length() + u.getFirstName().length() < MAX_LENGTH) {
                 placeholderName.append(", ");
                 placeholderName.append(u.getFirstName());
-            }
-            else {
+            } else {
                 placeholderName.append(" + " + userStack.size() + " more.");
                 break;
             }
@@ -257,11 +255,10 @@ public class MainModel extends Observable {
 
 
     /**
-     *
      * @param username
      * @param password
      * @return if the login was successfull or not
-     *
+     * <p>
      * Checks if a User was found with the corresponding username and password
      */
     public boolean login(String username, String password) {
