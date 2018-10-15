@@ -21,18 +21,14 @@ public class CreateConvoController implements ICreateConvoController{
 
     @Override
     public void onCreateConversationButtonClicked() {
-        if (createConvoView.getSaveNameTextFieldText().isEmpty()){
-            createConvoView.setDisableCreateConvoButton(true);
-        } else {
-            ArrayList<User> users = new ArrayList<>(createConvoView.getSelectedUsers());
-            users.add(mainModel.getActiveUser());
-            mainModel.createConversation(users, createConvoView.getSaveNameTextFieldText());
-            mainView.createConvoViewToBack();
-            mainView.updateConversationsList();
-        }
+        ArrayList<User> users = new ArrayList<>(createConvoView.getSelectedUsers());
+        users.add(mainModel.getActiveUser());
+        mainModel.createConversation(users, createConvoView.getSaveNameTextFieldText());
+        mainView.createConvoViewToBack();
+        mainView.updateConversationsList();
     }
 
-    @Override
+    /*@Override
     public void onSaveNameButtonClicked() {
         if(!createConvoView.getSaveNameTextFieldText().isEmpty()) {
             createConvoView.setDisableCreateConvoButton(false);
@@ -40,7 +36,7 @@ public class CreateConvoController implements ICreateConvoController{
             createConvoView.setDisableCreateConvoButton(true);
             createConvoView.saveNameFailed();
         }
-    }
+    }*/
 
     @Override
     public void onCloseButtonClicked() {

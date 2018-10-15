@@ -8,7 +8,7 @@ public interface ICreateConvoView {
     void updateCreateConversationLists();
     void onMoveUsersButtonClicked();
     ArrayList<User> getSelectedUsers();
-    void saveNameFailed();
-    void setDisableCreateConvoButton(boolean bool);
+    //void saveNameFailed();
+    //void setDisableCreateConvoButton(boolean bool);
     String getSaveNameTextFieldText();
 }

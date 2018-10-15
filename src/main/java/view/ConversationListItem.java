@@ -46,7 +46,13 @@ public class ConversationListItem extends AnchorPane {
 
         this.mainModel = mainModel;
         this.conversation = conversation;
-        this.conversationNameLabel.setText(conversation.getName());
+        String name = conversation.getName();
+        if(name.length() == 0)
+            name = mainModel.generatePlaceholderName(conversation);
+
+        this.conversationNameLabel.setText(name);
+
+
 
         if (this.conversation.getParticipants().size() == 2) {
             this.conversationProfileImageView.setImage(new Image(this.conversation.getParticipants().get(0).getProfileImagePath()));

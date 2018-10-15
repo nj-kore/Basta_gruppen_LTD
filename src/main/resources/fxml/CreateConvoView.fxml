@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root id="background-lightbox" fx:id="createConvoView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1861.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="background-lightbox" fx:id="createConvoView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1861.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="721.0" snapToPixel="false" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="100.0">
          <children>
@@ -44,8 +44,8 @@
             </Button>
             <Button fx:id="closeButton" layoutX="554.0" layoutY="2.0" mnemonicParsing="false" styleClass="boldText" text="X" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
             <TextField fx:id="saveNameTextField" layoutX="253.0" layoutY="302.0" />
-            <Label fx:id="saveNameLabel" layoutX="253.0" layoutY="285.0" style="-fx-background-color: #FF0000;" text="Choose a name for the conversation:" />
-            <Button fx:id="saveNameButton" layoutX="406.0" layoutY="301.0" mnemonicParsing="false" text="Save" />
+            <Label fx:id="saveNameLabel" layoutX="253.0" layoutY="285.0" text="Conversation name (optional)" />
+            <Button fx:id="saveNameButton" layoutX="406.0" layoutY="301.0" mnemonicParsing="false" text="Save" visible="false" />
          </children>
       </AnchorPane>
    </children>
