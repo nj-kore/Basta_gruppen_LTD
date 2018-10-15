@@ -8,7 +8,7 @@ import java.util.Map;
 public class Conversation {
     private int id;
     private Map<Integer, Message> messages = new HashMap<>();
-    private List<User> participants = new ArrayList<>();
+    private List<User> participants;
     private String name;
 
     public Conversation(int id, String name, ArrayList<User> participants) {

@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public interface IChatController {
@@ -10,4 +8,7 @@ public interface IChatController {
     void onChangeChatNameClicked();
     void onLeaveChatClicked();
     void onConversationNameKeyPressed(KeyEvent e);
+    void onChatNameKeyPressed(KeyEvent e);
+    void onChatNameAccept();
+    void onChatNameDecline();
 }
