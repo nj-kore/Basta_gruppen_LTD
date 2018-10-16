@@ -185,7 +185,9 @@ public class UserPageView extends AnchorPane {
                 mainModel.getActiveUser().setPassword(newPasswordField.getText());
                 passwordChangedLabel.setVisible(true);
             }
-        } else wrongPasswordLabel.setVisible(true);
+        } else {
+            wrongPasswordLabel.setVisible(true);
+        }
     }
 
     /**
@@ -197,15 +199,10 @@ public class UserPageView extends AnchorPane {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
         File selectedFile = fileChooser.showOpenDialog(null);
-
         if(selectedFile != null){
             mainModel.getActiveUser().setProfileImagePath(
                     selectedFile.toURI().toString());   //selectedFile.getPath();
             profilePicImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));       //"../../resources/" + selectedFile.getName())
-        }else System.out.println("Invalid image ");
-
-
-
+        }
     }
-
 }

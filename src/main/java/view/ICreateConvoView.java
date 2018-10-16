@@ -2,13 +2,11 @@ package view;
 
 import model.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ICreateConvoView {
     void updateCreateConversationLists();
     void onMoveUsersButtonClicked();
-    ArrayList<User> getSelectedUsers();
-    //void saveNameFailed();
-    //void setDisableCreateConvoButton(boolean bool);
+    List<User> getSelectedUsers();
     String getSaveNameTextFieldText();
 }

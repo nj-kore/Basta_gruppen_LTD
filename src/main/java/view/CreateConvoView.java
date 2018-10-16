@@ -41,12 +41,9 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
     @FXML
     private Label saveNameLabel;
 
-    private MainView mainView;
     private MainModel mainModel;
 
     CreateConvoView(MainModel mainModel, MainView mainView) {
-
-        this.mainView = mainView;
         this.mainModel = mainModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/CreateConvoView.fxml"));
@@ -121,7 +118,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
                     this.getContactPane().getChildren().add(newConvoContactListItem);
                 }
                 newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color:");
+                newConvoContactListItem.setStyle("-fx-background-color: none");
             }
         }
     }

@@ -2,16 +2,13 @@ package controller;
 
 import javafx.scene.control.MenuItem;
 import model.MainModel;
-import view.MainView;
-import view.UserToolbar;
+import view.IMainView;
 
-public class UserController implements IUserController {
+public class UserToolbarController implements IUserToolbarController {
     private MainModel mainModel;
-    private UserToolbar userToolbar;
-    private MainView mainView;
+    private IMainView mainView;
 
-    public UserController(UserToolbar userToolbar, MainModel mainModel, MainView mainView) {
-        this.userToolbar = userToolbar;
+    public UserToolbarController(MainModel mainModel, IMainView mainView) {
         this.mainModel = mainModel;
         this.mainView = mainView;
     }
@@ -22,7 +19,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public void onOoptionsButtonClicked() {
+    public void onOptionsButtonClicked() {
         mainView.displayUserPage();
     }
 }

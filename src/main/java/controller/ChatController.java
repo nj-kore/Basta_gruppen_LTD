@@ -3,9 +3,7 @@ package controller;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
-import view.ChatView;
 import view.IChatView;
-import view.MainView;
 
 /**
  * The controller class that handles all the inputs from the ChatView

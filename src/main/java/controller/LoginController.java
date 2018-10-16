@@ -18,7 +18,9 @@ public class LoginController implements ILoginController {
     public void onLoginButtonClicked() {
         if (!mainModel.login(loginView.getUsername(), loginView.getPassword())) {
             loginView.showWrongInputNotification();
-        }else loginView.clearTextFields();
+        }else {
+            loginView.clearTextFields();
+        }
     }
 
     @Override

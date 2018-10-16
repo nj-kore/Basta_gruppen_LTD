@@ -2,14 +2,12 @@ package view;
 
 import controller.IMainController;
 import controller.MainController;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,9 +20,6 @@ import model.User;
 
 import java.net.URL;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 
 /**
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
@@ -167,7 +162,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
         //TODO look at the line below. I'm ashamed of myself @Nåjs
-        this.userToolbar = new UserToolbar(this, mainModel, this);
+        this.userToolbar = new UserToolbar(this, mainModel);
     }
 
 
@@ -197,12 +192,14 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
                     updateConversationsList();
                     userToolbar.init();
                     displayCurrentUser();
-
                     break;
                 case USER_INFO:
                     updateUserInfoTextFields();
                     //updateCurrentUserInfo();
                     userToolbar.updateCurrentUserInfo();
+                    break;
+                default:
+                    break;
             }
         }
         userToolbar.setCurrentUserImageView();
@@ -226,20 +223,14 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()) contactsFlowPane.getChildren().add(noContactsFoundLabel);
+        if(!iterator.hasNext()) {
+            contactsFlowPane.getChildren().add(noContactsFoundLabel);
+        }
 
         while (iterator.hasNext()) {
             contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
         }
     }
-
-/*    private void displayNoContactsFound(boolean display) {
-        noContactsFoundLabel.setVisible(display);
-    }
-
-    private void displayNoConversationsFound(boolean display) {
-        noConversationsFoundLabel.setVisible(display);
-    }*/
 
 
     /**
@@ -258,7 +249,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()) conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
+        if(!iterator.hasNext()){
+            conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
+        }
         while (iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
         }
@@ -302,10 +295,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     public void displayCurrentUser(){
         currentUserAnchorPane.getChildren().add(userToolbar);
     }
-    @Override
-    public void displaySettings() {
-
-    }
 
     @FXML
     @Override
@@ -330,12 +319,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
 
-    public void updateContactsList(ArrayList<User> contacts) {
-
+    public void updateContactsList(List<User> contacts) {
         contactsFlowPane.getChildren().clear();
-
         for (User user : contacts) {
-
             ContactListItem contactListItemView = new ContactListItem(user, this);
             contactsFlowPane.getChildren().add(contactListItemView);
         }
@@ -344,7 +330,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     //TODO try to delete?
     public void updateCurrentUserInfo() {
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
-        statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
+        statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));
         statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 

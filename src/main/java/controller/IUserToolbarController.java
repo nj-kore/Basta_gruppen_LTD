@@ -2,9 +2,7 @@ package controller;
 
 import javafx.scene.control.MenuItem;
 
-import java.awt.*;
-
-public interface IUserController {
+public interface IUserToolbarController {
     void onMenuButtonItemClicked(MenuItem m);
-    void onOoptionsButtonClicked();
+    void onOptionsButtonClicked();
 }

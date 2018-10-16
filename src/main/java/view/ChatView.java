@@ -2,24 +2,18 @@ package view;
 
 import controller.ChatController;
 import controller.IChatController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import model.*;
+import model.MainModel;
 import model.Message;
+import model.User;
 
 
 import java.io.IOException;
@@ -53,7 +47,13 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem changeChatNameMenuItem;
 
     @FXML
-    private ImageView acceptImageView, declineImageView;
+    private ImageView acceptImageView;
+
+    @FXML
+    private ImageView declineImageView;
+
+    private String editingColor = "-fx-background-color: cyan;";
+    private String notEditingColor = "-fx-background-color: white;";
 
 
     /**
@@ -94,8 +94,9 @@ public class ChatView extends AnchorPane implements IChatView {
 
         //I dont really know if this should go into the controller or not
         chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue)
+            if(!newValue){
                 chatController.onChatNameDecline();
+            }
         });
     }
 
@@ -124,10 +125,12 @@ public class ChatView extends AnchorPane implements IChatView {
 
     private void loadChatName() {
         String name = mainModel.getActiveConversation().getName();
-        if(name.length() > 0)
+        if(name.length() > 0){
             chatNameTextField.setText(mainModel.getActiveConversation().getName());
-        else
+        }
+        else{
             chatNameTextField.setText(mainModel.generatePlaceholderName(mainModel.getActiveConversation()));
+        }
     }
 
     /**
@@ -139,10 +142,12 @@ public class ChatView extends AnchorPane implements IChatView {
         chatNameTextField.setEditable(editable);
         acceptImageView.setVisible(editable);
         declineImageView.setVisible(editable);
-        if(editable)
-            chatNameTextField.setStyle("-fx-background-color: cyan;");
-        else
-            chatNameTextField.setStyle("-fx-background-color: white;");
+        if(editable){
+            chatNameTextField.setStyle(editingColor);
+        }
+        else{
+            chatNameTextField.setStyle(notEditingColor);
+        }
     }
 
     /**

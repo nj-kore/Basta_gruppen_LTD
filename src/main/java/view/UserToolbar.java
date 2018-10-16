@@ -1,7 +1,7 @@
 package view;
 
-import controller.IUserController;
-import controller.UserController;
+import controller.IUserToolbarController;
+import controller.UserToolbarController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
-    private MainView mainView;
+    private IMainView mainView;
 
     @FXML
     ImageView currentUserImageView;
@@ -37,7 +37,7 @@ public class UserToolbar extends AnchorPane {
     @FXML
     Label currentUserNameLabel;
 
-    public UserToolbar(IMainView parentView, MainModel mainModel, MainView mainView) {
+    public UserToolbar(IMainView mainView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -52,20 +52,20 @@ public class UserToolbar extends AnchorPane {
     }
 
     public void init(){
-        IUserController u = new UserController(this, mainModel, mainView);
+        IUserToolbarController u = new UserToolbarController(mainModel, mainView);
         addPremadeStatuses(u);
         currentUserNameLabel.setText(mainModel.getActiveUser().getUsername());
         optionsImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                u.onOoptionsButtonClicked();
+                u.onOptionsButtonClicked();
             }
         });
         updateCurrentUserInfo();
 
     }
 
-    private void addPremadeStatuses(IUserController u){
+    private void addPremadeStatuses(IUserToolbarController u){
         for (MainModel.StatusType status : MainModel.StatusType.values()){
             MenuItem m;
             if(status == MainModel.StatusType.Available){
@@ -91,7 +91,7 @@ public class UserToolbar extends AnchorPane {
 
     public void updateCurrentUserInfo(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
-        statusImageView.setImage(new Image((mainModel.getActiveUser().getStatusImagePath())));
+        statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));
         statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 
