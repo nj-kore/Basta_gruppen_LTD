@@ -23,6 +23,7 @@ import model.Message;
 
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 /**
@@ -219,6 +220,9 @@ public class ChatView extends AnchorPane implements IChatView {
         @FXML
         private TextFlow messageTextFlow;
 
+        @FXML
+        private Label messageTimeStampLabel;
+
         /**
          * Initialises the MessageItem and builds the item according to the data found inside the two parameters
          *
@@ -240,6 +244,8 @@ public class ChatView extends AnchorPane implements IChatView {
             messageImageView.setImage(profileImage);
             messageUserNameLabel.setText(concreteUser.getFullName());
             messageTextFlow.getChildren().add(new Text(message.getText()));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
+            messageTimeStampLabel.setText(message.getTime().format(formatter));
         }
     }
 
