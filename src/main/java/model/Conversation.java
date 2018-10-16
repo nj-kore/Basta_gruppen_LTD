@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,7 @@ public class Conversation {
     private List<User> participants;
     private String name;
 
-    public Conversation(int id, String name, ArrayList<User> participants) {
+    public Conversation(int id, String name, List<User> participants) {
         this.id = id;
         this.name = name;
         this.participants = participants;
@@ -60,7 +59,16 @@ public class Conversation {
         if (!participants.equals(that.participants)) {return false;}
         return name != null ? name.equals(that.name) : that.name == null;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (messages != null ? messages.hashCode() : 0);
+        result = 31 * result + participants.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
     public List<User> getParticipants() {
         return participants;
     }

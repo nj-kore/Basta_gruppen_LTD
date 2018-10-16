@@ -1,18 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class User {
     private int id;
     private String password;
     private String username;
-    private ArrayList<Integer> contacts = new ArrayList<>();
+    private List<Integer> contacts = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
     private MainModel.StatusType status;
-    private String statusImagePath;
     private String profileImagePath;
     private String[] statusPaths = new String[3];
 
@@ -24,7 +25,6 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         profileImagePath = "pics/userIcon.png";
-        statusImagePath = "pics/userIcon.png";
         statusPaths[0] = "pics/statusGreen.png";
         statusPaths[1] = "pics/statusOrange.png";
         statusPaths[2] = "pics/statusRed.png";
@@ -66,7 +66,7 @@ public class User {
         return email;
     }
 
-    protected ArrayList<Integer> getContacts(){return contacts;}
+    protected List<Integer> getContacts(){return contacts;}
 
     public String getProfileImagePath(){return profileImagePath;}
 
@@ -107,23 +107,6 @@ public class User {
 
 
     /**
-     * Checks if parameter password equals the users password.
-     * @param password
-     * @return
-     * true if password matches
-     * false otherwise
-     */
-    //Functionality
-    // TODO: 02/10/2018  Move this
-    public boolean confirmPassword(String password){
-        if (this.password.equals(password)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
      * adds userToAdd to contacts.
      * @param userToAdd
      */
@@ -144,6 +127,20 @@ public class User {
         if (!lastName.equals(user.lastName)) {return false;}
         if (email != null ? !email.equals(user.email) : user.email != null) {return false;}
         return status != null ? status.equals(user.status) : user.status == null;
+    }
 
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + password.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + contacts.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + status.hashCode();
+        result = 31 * result + profileImagePath.hashCode();
+        result = 31 * result + Arrays.hashCode(statusPaths);
+        return result;
     }
 }

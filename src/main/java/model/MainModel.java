@@ -41,7 +41,7 @@ public class MainModel extends Observable {
 
     private Map<Integer, Conversation> conversations;
     private Map<Integer, User> users = new HashMap<>();
-    ArrayList<User> newConvoUsers = new ArrayList();
+    List<User> newConvoUsers = new ArrayList();
 
 
     public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
@@ -142,7 +142,7 @@ public class MainModel extends Observable {
         update(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
-    public void createConversation(ArrayList<User> users, String name) {
+    public void createConversation(List<User> users, String name) {
         int newConversationId = 0;
         if (!conversations.keySet().isEmpty()) {
             newConversationId = Collections.max(conversations.keySet()) + 1;
