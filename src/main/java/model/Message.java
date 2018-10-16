@@ -27,6 +27,10 @@ public class Message {
         return text;
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
     //Setters
     protected void setText(String text) {
         this.text = text;

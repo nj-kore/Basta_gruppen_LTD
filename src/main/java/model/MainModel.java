@@ -160,10 +160,12 @@ public class MainModel extends Observable {
     }
 
     public void setConversationName(String name) {
-            if (validateConversationName(name))
+            if (validateConversationName(name)){
                 activeConversation.setName(name);
-            else
+            }
+            else{
                 activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
+            }
 
             update(UpdateTypes.ACTIVE_CONVERSATION);
             update(UpdateTypes.CONVERSATIONS);
@@ -171,11 +173,11 @@ public class MainModel extends Observable {
 
     }
 
-    private final int MAX_LENGTH = 30;
-    private final int MIN_LENGTH = 0;
+    private final static int MAX_LENGTH = 30;
+    private final static int MIN_LENGTH = 0;
 
     private boolean validateConversationName(String name) {
-        return (name.length() > MIN_LENGTH && name.length() < MAX_LENGTH);
+        return name.length() > MIN_LENGTH && name.length() < MAX_LENGTH;
     }
 
     public String generatePlaceholderName(Conversation c) {
@@ -183,8 +185,9 @@ public class MainModel extends Observable {
         Stack<User> userStack = new Stack<>();
         // TODO: 14/10/2018
         //Remove this when the app starts with a valid conversation
-        if (c.getParticipants() == null)
+        if (c.getParticipants() == null){
             return "Placeholder";
+        }
 
         userStack.addAll(c.getParticipants());
         //If it is 1, then it is the active user that is the participant, in which case we
@@ -279,7 +282,7 @@ public class MainModel extends Observable {
 
         while (iterator.hasNext()) {
             next = iterator.next();
-            if (next.getFullName().toLowerCase().contains(input.toLowerCase())) {
+            if (next.getFullName().toLowerCase(new Locale("sv-SE")).contains(input.toLowerCase(new Locale("sv-SE")))) {
                 contactsToShow.add(next);
             }
         }
@@ -304,7 +307,7 @@ public class MainModel extends Observable {
             }
 
             if (!conversationFound) {
-                if (next.getName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
+                if (next.getName().toLowerCase(new Locale("sv-SE")).contains(conversationSearchString.toLowerCase(new Locale("sv-SE")))) {
                     conversationsToShow.add(next);
                 }
             }
