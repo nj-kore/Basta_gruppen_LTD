@@ -57,16 +57,6 @@ public class JsonSaver implements Observer {
         }
     }
 
-    /**
-     * Checks to see if a file exists at the inputted path
-     * @param path the path to the file in question
-     * @return boolean
-     */
-    private boolean fileExists(String path){
-        File f = new File(path);
-        return f.exists() && !f.isDirectory();
-    }
-
     @Override
     public void update(Observable o, Object arg) {
         saveModel();
