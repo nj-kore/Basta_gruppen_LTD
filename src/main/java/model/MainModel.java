@@ -120,6 +120,10 @@ public class MainModel extends Observable{
         activeUser.addContact(userId);
     }
 
+    public void addConversation(int convoID) {
+        activeUser.addConversation(convoID);
+    }
+
     public Iterator<User> getContacts(){
         List<User> list = new ArrayList<>();
         for(int id : activeUser.getContacts()) {
@@ -149,8 +153,17 @@ public class MainModel extends Observable{
 
         Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
+        activeUser.addConversation(newConversationId);
         setActiveConversation(conversation.getId());
         update(UpdateTypes.ACTIVE_CONVERSATION);
+    }
+
+    public void leaveConversation() {
+        activeConversation.getParticipants().remove(activeUser);
+        conversations.remove(activeConversation.getId());
+        activeConversation = null;
+        update(UpdateTypes.ACTIVE_CONVERSATION);
+        update(UpdateTypes.CONVERSATIONS);
     }
 
     //Exists for testing purposes
@@ -207,8 +220,13 @@ public class MainModel extends Observable{
         return placeholderName.toString();
     }
 
-    public Map<Integer,Conversation> getConversations() {
-        return conversations;}
+    public Iterator<Conversation> getConversations() {
+            List<Conversation> list = new ArrayList<>();
+            for(int id : activeUser.getConversations()) {
+                list.add(conversations.get(id));
+            }
+            return list.iterator();
+    }
 
 
     public void setStatus(StatusType s){
@@ -286,7 +304,7 @@ public class MainModel extends Observable{
     }
 
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
-        Iterator<Conversation> iterator = getConversations().values().iterator();
+        Iterator<Conversation> iterator = getConversations();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
         Conversation next;
 

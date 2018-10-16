@@ -73,7 +73,15 @@ public class JsonSaver implements Observer {
     }
 
     private void saveModel() {
-        writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
+        ArrayList<Conversation> conversationArrayList = new ArrayList<>();
+
+        while (model.getConversations().hasNext()) {
+            conversationArrayList.add(model.getConversations().next());
+            System.out.println(conversationArrayList);
+        }
+        writeConversations(new ArrayList<Conversation>(model.getConversations());
+        ArrayList<Conversation> arrayList = new ArrayList<>();
+        arrayList.addAll(model.getConversations());
         writeUsers(new ArrayList<User>(model.getUsers().values()));
     }
 }

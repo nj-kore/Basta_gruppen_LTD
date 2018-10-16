@@ -56,8 +56,7 @@ public class ChatController implements IChatController {
 
     @Override
     public void onLeaveChatClicked() {
-        mainModel.getConversations().remove(mainModel.getActiveConversation());
-        //TODO fixa det här filip
+        mainModel.leaveConversation();
     }
 
     /**

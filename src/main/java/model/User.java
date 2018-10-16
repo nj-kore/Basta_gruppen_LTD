@@ -8,6 +8,7 @@ public class User {
     private String password;
     private String username;
     private ArrayList<Integer> contacts = new ArrayList<>();
+    private ArrayList<Integer> conversations = new ArrayList<>();
     private String firstName;
     private String lastName;
     private String email;
@@ -68,6 +69,10 @@ public class User {
 
     protected ArrayList<Integer> getContacts(){return contacts;}
 
+    protected ArrayList<Integer> getConversations(){
+        return conversations;
+    }
+
     public String getProfileImagePath(){return profileImagePath;}
 
     public MainModel.StatusType getStatus(){return status;}
@@ -127,7 +132,13 @@ public class User {
      * adds userToAdd to contacts.
      * @param userToAdd
      */
-    public void addContact(int userToAdd){contacts.add(userToAdd);}
+    public void addContact(int userToAdd){
+        contacts.add(userToAdd);
+    }
+
+    public void addConversation(int convoToAdd){
+        conversations.add(convoToAdd);
+    }
 
     @Override
     public boolean equals(Object o) {

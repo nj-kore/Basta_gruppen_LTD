@@ -180,7 +180,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         if (o instanceof MainModel) {
             switch ((MainModel.UpdateTypes)arg) {
                 case ACTIVE_CONVERSATION:
-                    chatView.update();
+                    if(mainModel.getActiveConversation() != null) {
+                        chatView.setVisible(true);      //TODO better solution?
+                        chatView.update();
+                    } else
+                        chatView.setVisible(false);
+
                     break;
                 case CONTACTS:
                     updateContactsList();
@@ -249,7 +254,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     public void updateConversationsList() {
 
             conversationsFlowPane.getChildren().clear();
-            Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+            Iterator<Conversation> iterator = mainModel.getConversations();
             while (iterator.hasNext()) {
                 conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
             }

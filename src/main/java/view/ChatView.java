@@ -50,6 +50,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem changeChatNameMenuItem;
 
     @FXML
+    private MenuItem leaveChatMenuItem;
+
+    @FXML
     private ImageView acceptImageView, declineImageView;
 
 
@@ -84,6 +87,8 @@ public class ChatView extends AnchorPane implements IChatView {
         chatNameTextField.setOnKeyPressed(event -> chatController.onChatNameKeyPressed(event));
 
         changeChatNameMenuItem.setOnAction(event -> chatController.onChangeChatNameClicked());
+
+        leaveChatMenuItem.setOnAction(event -> chatController.onLeaveChatClicked());
 
         acceptImageView.setOnMouseClicked(event -> chatController.onChatNameAccept());
 
