@@ -2,18 +2,11 @@ package view;
 
 import controller.ChatController;
 import controller.IChatController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
@@ -32,6 +25,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
+    private MainView mainView;
 
     @FXML
     private FlowPane chatFlowPane;
@@ -54,6 +48,9 @@ public class ChatView extends AnchorPane implements IChatView {
     @FXML
     private ImageView acceptImageView, declineImageView;
 
+    @FXML
+    private Button createUserButton;
+
 
     /**
      *
@@ -61,7 +58,7 @@ public class ChatView extends AnchorPane implements IChatView {
      *
      * Initialises the ChatViews components and links all the controlling input to an IChatController
      */
-    public ChatView(MainModel mainModel) {
+    public ChatView(MainModel mainModel, MainView mainView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -74,8 +71,11 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
+        this.mainView = mainView;
 
         IChatController chatController = new ChatController(this, mainModel);
+
+        createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
 
         sendButton.setOnAction(event -> chatController.onSendButtonClicked());
 
@@ -113,12 +113,19 @@ public class ChatView extends AnchorPane implements IChatView {
         }
     }
 
+    public void creatUserButtonVisible(){
+        createUserButton.setVisible(true);
+    }
+
     /**
      * Updates the ChatView to be up to date with the model
      */
     public void update() {
         loadMessages();
         loadChatName();
+        if(mainModel.getActiveUser().getIsManager()){
+            createUserButton.setVisible(true);
+        }
     }
 
     private void loadChatName() {

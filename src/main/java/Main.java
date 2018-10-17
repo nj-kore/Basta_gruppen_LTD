@@ -58,6 +58,7 @@ public class Main extends Application {
         fxmlLoader.setController(mainView);
 
         try {
+            fxmlLoader.setRoot(mainView);
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 1280, 720);
 

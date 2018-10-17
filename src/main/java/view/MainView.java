@@ -40,6 +40,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     private UserPageView userPage;
     private User detailedUser;
     private UserToolbar userToolbar;
+    private CreateUserView createUserView;
 
     //contactDetailView
     @FXML
@@ -159,15 +160,15 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     }
 
-    public MainView(MainModel mainModel){
+    public MainView(MainModel mainModel) {
 
         this.mainModel = mainModel;
-        this.chatView = new ChatView(mainModel);
+        this.chatView = new ChatView(mainModel, this);
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
-        //TODO look at the line below. I'm ashamed of myself @Nåjs
         this.userToolbar = new UserToolbar(this, mainModel, this);
+        this.createUserView = new CreateUserView(this, mainModel);
     }
 
 
@@ -178,7 +179,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof MainModel) {
-            switch ((MainModel.UpdateTypes)arg) {
+            switch ((MainModel.UpdateTypes) arg) {
                 case ACTIVE_CONVERSATION:
                     chatView.update();
                     break;
@@ -199,6 +200,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
                     displayCurrentUser();
 
                     break;
+
                 case USER_INFO:
                     updateUserInfoTextFields();
                     //updateCurrentUserInfo();
@@ -226,7 +228,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()) contactsFlowPane.getChildren().add(noContactsFoundLabel);
+        if (!iterator.hasNext()) contactsFlowPane.getChildren().add(noContactsFoundLabel);
 
         while (iterator.hasNext()) {
             contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
@@ -248,19 +250,19 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
      */
     public void updateConversationsList() {
 
-            conversationsFlowPane.getChildren().clear();
-            Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
-            while (iterator.hasNext()) {
-                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
-            }
+        conversationsFlowPane.getChildren().clear();
+        Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+        while (iterator.hasNext()) {
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), (MainModel) this.mainModel));
+        }
 
     }
 
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()) conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
+        if (!iterator.hasNext()) conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         while (iterator.hasNext()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), (MainModel) this.mainModel));
         }
 
     }
@@ -271,6 +273,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
+    }
+
+    public void displayCreateUserView() {
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(createUserView);
     }
 
     @Override
@@ -299,9 +306,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
     @Override
-    public void displayCurrentUser(){
+    public void displayCurrentUser() {
         currentUserAnchorPane.getChildren().add(userToolbar);
     }
+
     @Override
     public void displaySettings() {
 
@@ -324,7 +332,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
 
-    public void backToChat(){
+    public void backToChat() {
         mainViewAnchorPane.getChildren().clear();
         mainViewAnchorPane.getChildren().add(chatView);
     }
@@ -381,7 +389,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         displayCreateConvoPage();
     }
 
-    public String getContactSearchString(){
+    public String getContactSearchString() {
         return searchContactsTextField.getText();
     }
 
