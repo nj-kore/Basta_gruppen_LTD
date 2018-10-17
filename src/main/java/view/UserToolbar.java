@@ -88,7 +88,6 @@ public class UserToolbar extends AnchorPane {
         }
     }
 
-
     public void updateCurrentUserInfo(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
         statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));

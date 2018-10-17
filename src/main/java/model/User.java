@@ -16,9 +16,10 @@ public class User {
     private MainModel.StatusType status;
     private String profileImagePath;
     private String[] statusPaths = new String[3];
+    private Boolean isManager;
 
 
-    public User(int id, String username, String password, String firstName, String lastName, MainModel.StatusType status) {
+    public User(int id, String username, String password, String firstName, String lastName, MainModel.StatusType status, Boolean isManager) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -29,6 +30,7 @@ public class User {
         statusPaths[1] = "pics/statusOrange.png";
         statusPaths[2] = "pics/statusRed.png";
         this.status = status;
+        this.isManager = isManager;
 
     }
 
@@ -74,6 +76,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public Boolean getIsManager(){
+        return isManager;
     }
 
     //Setters

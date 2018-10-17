@@ -14,8 +14,8 @@ public class MainModelTest {
     @Test
     public void sendMessage() {
 
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, true);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -35,8 +35,8 @@ public class MainModelTest {
 
     @Test
     public void readMessages() {
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, true);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -88,8 +88,8 @@ public class MainModelTest {
 
         MainModel model = new MainModel(userMap, conversationMap);
 
-        User activeUser = new User(1, "admin", "123", "eva", "olsson", MainModel.StatusType.Available);
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", MainModel.StatusType.Available);
+        User activeUser = new User(1, "admin", "123", "eva", "olsson", MainModel.StatusType.Available, true);
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", MainModel.StatusType.Available, true);
 
         model.createUser(activeUser);
         model.createUser(contactUser);
@@ -101,7 +101,7 @@ public class MainModelTest {
     }
     @Test
     public void loadMessageInConversation(){
-        User user1 = new User(1, "hej", "123", "bengt", "testsson", MainModel.StatusType.Available);
+        User user1 = new User(1, "hej", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
         Conversation c = new Conversation(1, "", users);
@@ -145,12 +145,12 @@ public class MainModelTest {
         MainModel model = new MainModel(userMap, conversationMap);
         ArrayList<User> participants = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available);
+            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available, false);
             model.createUser(u);
             participants.add(u);
         }
         model.createConversation(participants, "");
-        User admin = new User(500, "", "", "admin", "", MainModel.StatusType.Busy);
+        User admin = new User(500, "", "", "admin", "", MainModel.StatusType.Busy, false);
         model.createUser(admin);
         model.setActiveUser(admin);
         participants.add(admin);
@@ -160,7 +160,7 @@ public class MainModelTest {
 
         participants.clear();
         for(int i = 20; i < 22; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available);
+            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available, false);
             model.createUser(u);
             participants.add(u);
         }
