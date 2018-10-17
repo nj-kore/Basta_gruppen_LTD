@@ -163,8 +163,9 @@ public class ChatView extends AnchorPane implements IChatView {
         loadMessages();
         loadChatName();
         loadParticipants();
-      if(mainModel.getActiveUser().getIsManager()){
+        if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
+        }
     }
 
     private void loadParticipants() {
