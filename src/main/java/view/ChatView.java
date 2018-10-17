@@ -30,8 +30,6 @@ public class ChatView extends AnchorPane implements IChatView {
     private MainModel mainModel;
     private MainView mainView;
 
-    private MainView mainView;
-
     @FXML
     private FlowPane chatFlowPane;
 
