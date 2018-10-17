@@ -244,7 +244,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     public void updateConversationsList() {
 
             conversationsFlowPane.getChildren().clear();
-            Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
+            Iterator<Conversation> iterator = mainModel.getUsersConversations();
             while (iterator.hasNext()) {
                 conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
             }

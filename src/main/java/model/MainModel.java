@@ -55,6 +55,15 @@ public class MainModel extends Observable {
         User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available, Boolean.TRUE);
         User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, Boolean.FALSE);
         User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available, Boolean.FALSE);
+        /*Map<Integer, User> userMap = new HashMap();
+        createUser(new User(4, "admin", "123", "Eva", "Dickinssonm", MainModel.StatusType.Available, true));
+        createUser(new User(5, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", MainModel.StatusType.Available, true));
+        createUser(new User(6, "Mr cool", "kh9845jnd", "Johan", "Petterson", MainModel.StatusType.Available, true));
+        createUser(new User(7, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", MainModel.StatusType.Available, true));
+        createUser(new User(8, "TheTaboToast", "jkg84jf", "Karin", "Lidman", MainModel.StatusType.Available, true));
+        createUser(new User(9, "Heyman12", "jf672jfnm", "Carline", "Mandala", MainModel.StatusType.Available, true));
+        createUser(new User(10, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", MainModel.StatusType.Available, true));
+        createUser(new User(11, "Diddelydoo", "lhjie34", "Olof", "Klickson", MainModel.StatusType.Available, true));*/
         setActiveUser(admin);
         admin.addContact(contactUser.getId());
         admin.addContact(contactUser2.getId());
@@ -137,6 +146,14 @@ public class MainModel extends Observable {
         this.activeUser = activeUser;
     }
 
+    /**
+     * Set the active user using its id
+     * @param id
+     */
+    public void setActiveUser(int id) {
+        activeUser = users.get(id);
+    }
+
     public void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
         update(UpdateTypes.ACTIVE_CONVERSATION);
@@ -180,6 +197,9 @@ public class MainModel extends Observable {
         return name.length() > MIN_LENGTH && name.length() < MAX_LENGTH;
     }
 
+    /**
+     * Constructs a placeholder name to a conversation, consisting of the names of participants in the conversation
+     */
     public String generatePlaceholderName(Conversation c) {
         StringBuilder placeholderName = new StringBuilder();
         Stack<User> userStack = new Stack<>();
@@ -211,8 +231,26 @@ public class MainModel extends Observable {
         return placeholderName.toString();
     }
 
+    /**
+     *
+     * @return all conversations currently held by the model
+     */
     public Map<Integer, Conversation> getConversations() {
         return conversations;
+    }
+
+    /**
+     *
+     * @return all conversations in which the user is a participant
+     */
+    public Iterator<Conversation> getUsersConversations() {
+        List<Conversation> userConversations = new ArrayList<>();
+        for(Conversation c : conversations.values()) {
+            if(c.getParticipants().contains(activeUser)) {
+                userConversations.add(c);
+            }
+        }
+        return userConversations.iterator();
     }
 
 
@@ -250,7 +288,7 @@ public class MainModel extends Observable {
     /**
      * @param username
      * @param password
-     * @return if the login was successfull or not
+     * @return if the login was successful or not
      * <p>
      * Checks if a User was found with the corresponding username and password
      */
