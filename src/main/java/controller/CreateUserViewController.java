@@ -34,12 +34,5 @@ public class CreateUserViewController implements ICreateUserViewController {
 
     }
 
-    private Boolean checkInput() {
-        if (createUserView.getUserName() != "" && createUserView.getFirstName() != "" && createUserView.getlastName() != ""
-                && createUserView.getPassword() != "") {
-            return true;
-        }
-        return false;
-    }
 
 }

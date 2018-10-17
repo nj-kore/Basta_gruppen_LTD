@@ -162,7 +162,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
-        //this.userToolbar = new UserToolbar(this, mainModel, this);
         this.createUserView = new CreateUserView(this, mainModel);
         this.userToolbar = new UserToolbar(this, mainModel);
     }
@@ -367,6 +366,13 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         contactDetailView.toBack();
         updateConversationsList();
         displayMainView();
+    }
+
+    public void logout(){
+        userToolbar.statusMenu.getItems().clear();
+        mainModel.setActiveUser(null);
+        displayLoginPage();
+        loginView.clearTextFields();
     }
 
     public void loadDetailView(User user) {

@@ -1,5 +1,8 @@
 package view;
 
+import controller.IUserPageController;
+import controller.UserPageController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -8,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import model.MainModel;
@@ -22,6 +26,8 @@ public class UserPageView extends AnchorPane {
 
     MainView parent;
     MainModel mainModel;
+
+
 
     @FXML
     TextField firstNameTextField;
@@ -56,6 +62,9 @@ public class UserPageView extends AnchorPane {
     @FXML
     ImageView profilePicImageView;
 
+    @FXML
+    Button changePasswordButton;
+
     public UserPageView(MainView parentView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
@@ -69,6 +78,67 @@ public class UserPageView extends AnchorPane {
 
         this.parent = parentView;
         this.mainModel = mainModel;
+
+        IUserPageController c = new UserPageController(mainModel, parent);
+
+        saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                c.saveUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText());
+                enableInfoTextFields(false);
+
+                changePictureButton.setVisible(false);
+                changePictureButton.setDisable(true);
+                saveChangesButton.setDisable(true);
+                saveChangesButton.setVisible(false);
+            }
+        });
+
+        changePasswordButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
+                    wrongPasswordLabel.setVisible(false);
+                    if(!newPasswordField.getText().equals("")) {
+                        c.changePassword(newPasswordField.getText());
+                        passwordChangedLabel.setVisible(true);
+                    }
+                } else {
+                    wrongPasswordLabel.setVisible(true);
+                }
+            }
+        });
+
+        changePasswordButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
+                    wrongPasswordLabel.setVisible(false);
+                    if(!newPasswordField.getText().equals("")) {
+                        c.changePassword(newPasswordField.getText());
+                        passwordChangedLabel.setVisible(true);
+                    }
+                } else {
+                    wrongPasswordLabel.setVisible(true);
+                }
+            }
+        });
+
+        changePictureButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.getExtensionFilters().add(
+                        new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+                File selectedFile = fileChooser.showOpenDialog(null);
+                if(selectedFile != null){
+                    c.changeProfilePicture(selectedFile.toURI().toString());
+                   //Is it cleaner to have the controller tell the view to update pic rather then the view calling the model as below?
+                    profilePicImageView.setImage(new Image(selectedFile.toURI().toString()));       //View changes itself, not based on model
+                }
+            }
+        });
+
     }
 
     void updateUserInfoTextFields() {
@@ -85,6 +155,8 @@ public class UserPageView extends AnchorPane {
     public void backToChat(){
         passwordChangedLabel.setVisible(false);
         wrongPasswordLabel.setVisible(false);
+        newPasswordField.clear();
+        oldPasswordField.clear();
         parent.backToChat();
     }
 
@@ -103,30 +175,11 @@ public class UserPageView extends AnchorPane {
 
     @FXML
     private void logOut(){
-        mainModel.setActiveUser(null);
-        parent.displayLoginPage();
+        parent.logout();
+        newPasswordField.clear();
+        oldPasswordField.clear();
     }
 
-
-    /**
-     * Updates the model with info inserted into firstName-, lastName- and emailTextFields.
-     */
-    @FXML
-    private void saveInfoChange(){
-        /*REWORKING
-        mainModel.getActiveUser().setFirstName(firstNameTextField.getText());
-        mainModel.getActiveUser().setLastName(lastNameTextField.getText());
-        mainModel.getActiveUser().setEmail(emailTextField.getText());
-        */
-        mainModel.setUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText()); //TODO
-        enableInfoTextFields(false);
-
-        changePictureButton.setVisible(false);
-        changePictureButton.setDisable(true);
-        saveChangesButton.setDisable(true);
-        saveChangesButton.setVisible(false);
-        parent.updateCurrentUserInfo();
-    }
 
     /**
      * Enables firstName-, lastName- and emailTextField to be edited and changes their style to show the user that they can be edited.
@@ -172,37 +225,5 @@ public class UserPageView extends AnchorPane {
             lastNameTextField.setStyle("-fx-background-color: transparent");
         }
 
-    }
-
-    /**
-     * Changes the users password.
-     */
-    @FXML
-    private void changePassword(){
-        if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
-            wrongPasswordLabel.setVisible(false);
-            if(!newPasswordField.getText().equals("")) {
-                mainModel.getActiveUser().setPassword(newPasswordField.getText());
-                passwordChangedLabel.setVisible(true);
-            }
-        } else {
-            wrongPasswordLabel.setVisible(true);
-        }
-    }
-
-    /**
-     * Opens a FileChooser to allow the user to change profile picture.
-     */
-    @FXML
-    private void changePicture(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null){
-            mainModel.getActiveUser().setProfileImagePath(
-                    selectedFile.toURI().toString());   //selectedFile.getPath();
-            profilePicImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));       //"../../resources/" + selectedFile.getName())
-        }
     }
 }
