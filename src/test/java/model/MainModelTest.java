@@ -3,10 +3,7 @@ package model;
 import org.junit.Test;
 
 import javax.jws.soap.SOAPBinding;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -137,6 +134,53 @@ public class MainModelTest {
     }
 
     @Test
+    public void getUsersConversations() {
+        MainModel model = new MainModel(getFillerUsers(), new HashMap<>());
+        List<User> participants = new ArrayList<>();
+        participants.add(model.getUser(1));
+        participants.add(model.getUser(2));
+        participants.add(model.getUser(3));
+        model.createConversation(participants, "chat1");
+
+        List<User> participants2 = new ArrayList<>();
+        participants2.add(model.getUser(1));
+        participants2.add(model.getUser(4));
+        participants2.add(model.getUser(5));
+        model.createConversation(participants2, "chat2");
+
+        List<User> participants3 = new ArrayList<>();
+        participants3.add(model.getUser(1));
+        participants3.add(model.getUser(2));
+        participants3.add(model.getUser(3));
+        model.createConversation(participants3, "chat3");
+
+        model.setActiveUser(1);
+        Iterator<Conversation> itr = model.getUsersConversations();
+
+        StringBuilder s = new StringBuilder();
+        while(itr.hasNext()) {
+            s.append(itr.next().getName());
+        }
+        assertEquals("chat1chat2chat3", s.toString());
+
+        model.setActiveUser(2);
+        itr = model.getUsersConversations();
+        StringBuilder s2 = new StringBuilder();
+        while(itr.hasNext()) {
+            s2.append(itr.next().getName());
+        }
+        assertEquals("chat1chat3", s2.toString());
+
+
+        assertFalse(itr.hasNext());
+
+
+
+
+
+    }
+
+    @Test
     public void generatePlaceholderName() {
 
         HashMap<Integer, User> userMap = new HashMap<>();
@@ -193,5 +237,20 @@ public class MainModelTest {
 
         assertEquals(model.getActiveConversation().getName(), name);
 
+    }
+
+    private Map<Integer, User> getFillerUsers() {
+
+        Map<Integer, User> userMap = new HashMap();
+        userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinssonm", MainModel.StatusType.Available, true));
+        userMap.put(2, new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", MainModel.StatusType.Available, true));
+        userMap.put(3, new User(3, "Mr cool", "kh9845jnd", "Johan", "Petterson", MainModel.StatusType.Available, true));
+        userMap.put(4, new User(4, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", MainModel.StatusType.Available, true));
+        userMap.put(5, new User(5, "TheTaboToast", "jkg84jf", "Karin", "Lidman", MainModel.StatusType.Available, true));
+        userMap.put(6, new User(6, "Heyman12", "jf672jfnm", "Carline", "Mandala", MainModel.StatusType.Available, true));
+        userMap.put(7, new User(7, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", MainModel.StatusType.Available, true));
+        userMap.put(8, new User(8, "Diddelydoo", "lhjie34", "Olof", "Klickson", MainModel.StatusType.Available, true));
+
+        return userMap;
     }
 }
