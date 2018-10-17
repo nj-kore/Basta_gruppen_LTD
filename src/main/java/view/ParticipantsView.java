@@ -30,7 +30,7 @@ public class ParticipantsView extends AnchorPane {
 
     public ParticipantsView(MainModel mainModel, IChatView chatView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ParticipantList.fxml"));
-        //fxmlLoader.setRoot(this);
+        fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
         try {
@@ -76,7 +76,7 @@ public class ParticipantsView extends AnchorPane {
 
         public ParticipantItem(User user) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ParticipantListItem.fxml"));
-            //fxmlLoader.setRoot(this);
+            fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
 
             try {
