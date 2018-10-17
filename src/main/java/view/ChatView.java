@@ -28,6 +28,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
+    private MainView mainView;
 
     private MainView mainView;
 
@@ -76,6 +77,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
 
+    @FXML
+    private Button createUserButton;
+
 
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
@@ -93,10 +97,13 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
+        this.mainView = mainView;
 
         this.mainView = mainView;
 
         IChatController chatController = new ChatController(this, mainModel);
+
+        createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
 
         sendButton.setOnAction(event -> chatController.onSendButtonClicked());
 
@@ -145,6 +152,10 @@ public class ChatView extends AnchorPane implements IChatView {
         }
     }
 
+    public void creatUserButtonVisible(){
+        createUserButton.setVisible(true);
+    }
+
     /**
      * Updates the ChatView to be up to date with the model
      */
@@ -152,6 +163,8 @@ public class ChatView extends AnchorPane implements IChatView {
         loadMessages();
         loadChatName();
         loadParticipants();
+      if(mainModel.getActiveUser().getIsManager()){
+            createUserButton.setVisible(true);
     }
 
     private void loadParticipants() {

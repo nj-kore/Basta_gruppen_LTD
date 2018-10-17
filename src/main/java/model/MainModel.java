@@ -52,9 +52,9 @@ public class MainModel extends Observable {
 
 
     public void initFillers() {
-        User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available);
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available);
-        User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available);
+        User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available, Boolean.TRUE);
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, Boolean.FALSE);
+        User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available, Boolean.FALSE);
         setActiveUser(admin);
         admin.addContact(contactUser.getId());
         admin.addContact(contactUser2.getId());
@@ -63,9 +63,9 @@ public class MainModel extends Observable {
         createUser(contactUser2);
         contactUser.setProfileImagePath("pics/lukasmaly.jpg");
         contactUser.setStatus(StatusType.Busy);
-        users.put(admin.getId(), admin);
-        users.put(contactUser.getId(), contactUser);
-        users.put(contactUser2.getId(), contactUser2);
+        //users.put(admin.getId(), admin);
+        //users.put(contactUser.getId(), contactUser);
+        //users.put(contactUser2.getId(), contactUser2);
         update(UpdateTypes.INIT);
     }
 
@@ -221,28 +221,21 @@ public class MainModel extends Observable {
         update(UpdateTypes.USER_INFO);
     }
 
-    /*public void setStatus(String s){
-        switch (s){
-            case "Available":
-                activeUser.setStatusImagePath("pics/statusGreen.png");
-                break;
-            case "Busy":
-                activeUser.setStatusImagePath("pics/statusOrange.png");
-                break;
-            case "Do not disturb":
-                activeUser.setStatusImagePath("pics/statusRed.png");
-                break;
-        }
-        activeUser.setStatus(s);
-        update(UpdateTypes.USER_INFO);
-    }*/
-
     public Map<Integer, User> getUsers() {
         return users;
     }
 
     public void createUser(User u) {
         users.put(u.getId(), u);
+    }
+
+    public void createUserForController(String u, String pw, String fn, String ln, Boolean a){
+        int id = getNewUserId();
+        User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
+        //Adds as a contact to the active user, might not be usefull later on
+        getActiveUser().addContact(id);
+        createUser(user);
+        update(UpdateTypes.CONTACTS);
     }
 
     public User getActiveUser() {
@@ -313,6 +306,20 @@ public class MainModel extends Observable {
             }
         }
         return conversationsToShow.iterator();
+    }
+
+    /**
+     * @return a user id that is one higher then the previously highest
+     * Will give higher and higher user id as we add more users even if we remove users in between
+     */
+    public int getNewUserId(){
+        int highest =0;
+        for (User u : users.values()) {
+            if (u.getId()>highest) {
+            }
+                highest=u.getId();
+            }
+            return highest+1;
     }
 
 }

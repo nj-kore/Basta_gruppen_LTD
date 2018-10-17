@@ -35,6 +35,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     private UserPageView userPage;
     private User detailedUser;
     private UserToolbar userToolbar;
+    private CreateUserView createUserView;
 
     //contactDetailView
     @FXML
@@ -161,7 +162,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
-        //TODO look at the line below. I'm ashamed of myself @Nåjs
+        //this.userToolbar = new UserToolbar(this, mainModel, this);
+        this.createUserView = new CreateUserView(this, mainModel);
         this.userToolbar = new UserToolbar(this, mainModel);
     }
 
@@ -266,6 +268,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         loginHBox.toFront();
         loginHBox.getChildren().clear();
         loginHBox.getChildren().add(loginView);
+    }
+
+    public void displayCreateUserView() {
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(createUserView);
     }
 
     @Override

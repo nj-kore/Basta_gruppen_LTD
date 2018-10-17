@@ -54,6 +54,7 @@
                               layoutY="23.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
                    <Label fx:id="participantsLabel" layoutX="560.0" layoutY="27.0" prefHeight="17.0" prefWidth="31.0"
                           text="amountParticipants" visible="false"/>
+                  <Button fx:id="createUserButton" layoutX="586.0" layoutY="22.0" mnemonicParsing="false" text="Create User" visible="false" />
                </children>
             </AnchorPane>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" minHeight="500.0" pannable="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
