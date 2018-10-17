@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.MainModel;
@@ -27,6 +28,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
+    private ParticipantsView participantsView;
 
     @FXML
     private FlowPane chatFlowPane;
@@ -47,10 +49,16 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem changeChatNameMenuItem;
 
     @FXML
+    private MenuItem viewParticipantsMenuItem;
+
+    @FXML
     private ImageView acceptImageView;
 
     @FXML
     private ImageView declineImageView;
+
+    @FXML
+    private HBox participantsHBox;
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -75,6 +83,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
+        participantsView = new ParticipantsView(mainModel, this);
 
         IChatController chatController = new ChatController(this, mainModel);
 
@@ -148,6 +157,19 @@ public class ChatView extends AnchorPane implements IChatView {
         else{
             chatNameTextField.setStyle(notEditingColor);
         }
+    }
+
+    @FXML
+    private void viewParticipants(){
+        participantsHBox.getChildren().clear();
+        participantsHBox.getChildren().add(participantsView);
+        participantsView.updateParticipants();
+        participantsView.toFront();
+    }
+
+    @Override
+    public void closeParticipants(){
+        participantsHBox.toBack();
     }
 
     /**

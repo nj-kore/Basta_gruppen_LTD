@@ -155,3 +155,11 @@
     -fx-font-size: 12px;
     -fx-text-fill: grey;
 }
+/*
+
+.blackBorder{
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-background-insets: 2px;
+}
+*/
