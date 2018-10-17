@@ -157,7 +157,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     public MainView(MainModel mainModel){
 
         this.mainModel = mainModel;
-        this.chatView = new ChatView(mainModel);
+        this.chatView = new ChatView(mainModel, this);
         this.loginView = new LoginView(mainModel);
         this.createConvoView = new CreateConvoView(mainModel, this);
         this.userPage = new UserPageView(this, mainModel);
@@ -176,6 +176,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
             switch ((MainModel.UpdateTypes)arg) {
                 case ACTIVE_CONVERSATION:
                     chatView.update();
+                    chatView.closeParticipantView();
                     break;
                 case CONTACTS:
                     updateContactsList();
@@ -187,11 +188,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
                     displayMainView();
                     //Cant be run in Init since there are no conversations yet
                     displayChat();
-                    chatView.update();
                     updateContactsList();
                     updateConversationsList();
                     userToolbar.init();
                     displayCurrentUser();
+                    setDefaultConversation();
+                    chatView.update();
                     break;
                 case USER_INFO:
                     updateUserInfoTextFields();
@@ -242,7 +244,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
             conversationsFlowPane.getChildren().clear();
             Iterator<Conversation> iterator = mainModel.getConversations().values().iterator();
             while (iterator.hasNext()) {
-                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
             }
 
     }
@@ -253,7 +255,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
             conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         }
         while (iterator.hasNext()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(),(MainModel) this.mainModel));
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
         }
 
     }
@@ -294,6 +296,14 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     @Override
     public void displayCurrentUser(){
         currentUserAnchorPane.getChildren().add(userToolbar);
+    }
+
+    @Override
+    public void setDefaultConversation() {
+        updateConversationsList();
+        if (!conversationsFlowPane.getChildren().isEmpty()) {
+            mainModel.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
+        }
     }
 
     @FXML

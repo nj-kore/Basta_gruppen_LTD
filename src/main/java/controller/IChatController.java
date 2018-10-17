@@ -10,4 +10,8 @@ public interface IChatController {
     void onChatNameKeyPressed(KeyEvent e);
     void onChatNameAccept();
     void onChatNameDecline();
+
+    void onParticipantsClicked();
+
+    void onCloseParticipantsViewClicked();
 }

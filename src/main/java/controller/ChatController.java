@@ -3,6 +3,7 @@ package controller;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
+import view.ConversationListItem;
 import view.IChatView;
 
 /**
@@ -54,8 +55,8 @@ public class ChatController implements IChatController {
 
     @Override
     public void onLeaveChatClicked() {
-        mainModel.getConversations().remove(mainModel.getActiveConversation());
-        //TODO fixa det här filip
+        mainModel.getConversations().remove(mainModel.getActiveConversation().getId());
+        chatView.setDefaultConversation();
     }
 
     /**
@@ -83,6 +84,16 @@ public class ChatController implements IChatController {
     public void onChatNameAccept() {
         mainModel.setConversationName(chatView.getChatNameText());
         chatView.finishEditChatName();
+    }
+
+    @Override
+    public void onParticipantsClicked() {
+        chatView.loadParticipantView();
+    }
+
+    @Override
+    public void onCloseParticipantsViewClicked() {
+        chatView.closeParticipantView();
     }
 
 }
