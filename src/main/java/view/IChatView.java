@@ -8,4 +8,10 @@ public interface IChatView {
     void editChatName();
     void cancelEditChatName();
     void finishEditChatName();
+
+    void loadParticipantView();
+
+    void closeParticipantView();
+
+    void setDefaultConversation();
 }

@@ -68,4 +68,7 @@ public class ConversationListItem extends AnchorPane {
         mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
     }
 
+    public Conversation getConversation() {
+        return conversation;
+    }
 }

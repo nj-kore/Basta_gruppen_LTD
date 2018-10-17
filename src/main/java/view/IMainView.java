@@ -9,5 +9,6 @@ public interface IMainView {
     void displayLoginPage();
     void displayCreateConvoPage();
     void displayCurrentUser();
+    void setDefaultConversation();
     void displayCreateUserView();
 }

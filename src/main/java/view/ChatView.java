@@ -4,6 +4,7 @@ import controller.ChatController;
 import controller.IChatController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,10 +49,28 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem changeChatNameMenuItem;
 
     @FXML
+    private MenuItem leaveChatMenuItem;
+
+    @FXML
     private ImageView acceptImageView;
 
     @FXML
     private ImageView declineImageView;
+
+    @FXML
+    private ImageView participantsImageView;
+
+    @FXML
+    private Label participantsLabel;
+
+    @FXML
+    private AnchorPane participantView;
+
+    @FXML
+    private Button participantViewCloseButton;
+
+    @FXML
+    private FlowPane participantViewFlowPane;
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -61,10 +80,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     /**
-     *
-     * @param mainModel
-     *
-     * Initialises the ChatViews components and links all the controlling input to an IChatController
+     * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      */
     public ChatView(MainModel mainModel, MainView mainView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
@@ -81,6 +97,8 @@ public class ChatView extends AnchorPane implements IChatView {
         this.mainModel = mainModel;
         this.mainView = mainView;
 
+        this.mainView = mainView;
+
         IChatController chatController = new ChatController(this, mainModel);
 
         createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
@@ -95,16 +113,26 @@ public class ChatView extends AnchorPane implements IChatView {
 
         changeChatNameMenuItem.setOnAction(event -> chatController.onChangeChatNameClicked());
 
+        leaveChatMenuItem.setOnAction(event -> chatController.onLeaveChatClicked());
+
         acceptImageView.setOnMouseClicked(event -> chatController.onChatNameAccept());
 
         declineImageView.setOnMouseClicked(event -> chatController.onChatNameDecline());
 
+        participantsImageView.setOnMouseClicked(event -> chatController.onParticipantsClicked());
+
+        participantsLabel.setOnMouseClicked(event -> chatController.onParticipantsClicked());
+
+        participantViewCloseButton.setOnMouseClicked(event -> chatController.onCloseParticipantsViewClicked());
+
         //I dont really know if this should go into the controller or not
         chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue){
+            if (!newValue) {
                 chatController.onChatNameDecline();
             }
         });
+
+        this.participantsImageView.setImage(new Image("pics/userIcon.png"));
     }
 
     /**
@@ -132,40 +160,64 @@ public class ChatView extends AnchorPane implements IChatView {
     public void update() {
         loadMessages();
         loadChatName();
+        loadParticipants();
         if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
         }
     }
 
+    private void loadParticipants() {
+        if (mainModel.getActiveConversation() != null) {
+            this.participantsLabel.setText(Integer.toString(mainModel.getActiveConversation().getParticipants().size()));
+            participantsLabel.setVisible(true);
+            participantsImageView.setVisible(true);
+        }
+    }
+
     private void loadChatName() {
         String name = mainModel.getActiveConversation().getName();
-        if(name.length() > 0){
+        if (name.length() > 0) {
             chatNameTextField.setText(mainModel.getActiveConversation().getName());
-        }
-        else{
+        } else {
             chatNameTextField.setText(mainModel.generatePlaceholderName(mainModel.getActiveConversation()));
         }
     }
 
+    @Override
+    public void loadParticipantView() {
+        for (User user : mainModel.getActiveConversation().getParticipants()) {
+            participantViewFlowPane.getChildren().add(new ContactListItem(user, mainView));
+        }
+
+        participantView.toFront();
+    }
+
+    public void setDefaultConversation() {
+        mainView.setDefaultConversation();
+    }
+
+    @Override
+    public void closeParticipantView() {
+        participantView.toBack();
+    }
+
     /**
      * Makes the ChatName editable and makes the accept and decline button visible
-     * @param editable
      *
+     * @param editable
      */
     private void setChatNameEditable(boolean editable) {
         chatNameTextField.setEditable(editable);
         acceptImageView.setVisible(editable);
         declineImageView.setVisible(editable);
-        if(editable){
+        if (editable) {
             chatNameTextField.setStyle(editingColor);
-        }
-        else{
+        } else {
             chatNameTextField.setStyle(notEditingColor);
         }
     }
 
     /**
-     *
      * @return the text that is currently in the chat input area
      */
     @Override
@@ -216,7 +268,6 @@ public class ChatView extends AnchorPane implements IChatView {
     }
 
     /**
-     *
      * @return the text inside the chatNameTextField
      */
     @Override
@@ -247,7 +298,6 @@ public class ChatView extends AnchorPane implements IChatView {
          *
          * @param message
          * @param concreteUser
-         *
          */
         public MessageItem(Message message, User concreteUser) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
