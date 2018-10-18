@@ -28,7 +28,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
-    private MainView mainView;
+    private ParticipantsView participantsView;
+    private MainView mainView; //TODO implementera setDefaultConversation m.h.a model.
 
     @FXML
     private FlowPane chatFlowPane;
@@ -52,6 +53,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem leaveChatMenuItem;
 
     @FXML
+    private MenuItem viewParticipantsMenuItem;
+
+    @FXML
     private ImageView acceptImageView;
 
     @FXML
@@ -63,14 +67,9 @@ public class ChatView extends AnchorPane implements IChatView {
     @FXML
     private Label participantsLabel;
 
-    @FXML
-    private AnchorPane participantView;
 
     @FXML
-    private Button participantViewCloseButton;
-
-    @FXML
-    private FlowPane participantViewFlowPane;
+    private AnchorPane participantsAnchorPane;
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -95,8 +94,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
-        this.mainView = mainView;
-
+        participantsView = new ParticipantsView(mainModel, this);
         this.mainView = mainView;
 
         IChatController chatController = new ChatController(this, mainModel);
@@ -119,11 +117,6 @@ public class ChatView extends AnchorPane implements IChatView {
 
         declineImageView.setOnMouseClicked(event -> chatController.onChatNameDecline());
 
-        participantsImageView.setOnMouseClicked(event -> chatController.onParticipantsClicked());
-
-        participantsLabel.setOnMouseClicked(event -> chatController.onParticipantsClicked());
-
-        participantViewCloseButton.setOnMouseClicked(event -> chatController.onCloseParticipantsViewClicked());
 
         //I dont really know if this should go into the controller or not
         chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -183,23 +176,11 @@ public class ChatView extends AnchorPane implements IChatView {
         }
     }
 
-    @Override
-    public void loadParticipantView() {
-        for (User user : mainModel.getActiveConversation().getParticipants()) {
-            participantViewFlowPane.getChildren().add(new ContactListItem(user, mainView));
-        }
-
-        participantView.toFront();
-    }
 
     public void setDefaultConversation() {
         mainView.setDefaultConversation();
     }
 
-    @Override
-    public void closeParticipantView() {
-        participantView.toBack();
-    }
 
     /**
      * Makes the ChatName editable and makes the accept and decline button visible
@@ -215,6 +196,19 @@ public class ChatView extends AnchorPane implements IChatView {
         } else {
             chatNameTextField.setStyle(notEditingColor);
         }
+    }
+
+    @FXML
+    private void viewParticipants(){
+        participantsAnchorPane.getChildren().clear();
+        participantsAnchorPane.getChildren().add(participantsView);
+        participantsView.updateParticipants();
+        participantsAnchorPane.toFront();
+    }
+
+    @Override
+    public void closeParticipants(){
+        participantsAnchorPane.toBack();
     }
 
     /**

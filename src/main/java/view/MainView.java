@@ -177,7 +177,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
             switch ((MainModel.UpdateTypes)arg) {
                 case ACTIVE_CONVERSATION:
                     chatView.update();
-                    chatView.closeParticipantView();
                     break;
                 case CONTACTS:
                     updateContactsList();

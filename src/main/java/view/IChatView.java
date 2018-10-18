@@ -1,6 +1,8 @@
 package view;
 
 public interface IChatView {
+    void closeParticipants();
+
     String getInputText();
     String getChatNameText();
     void createNewLine();
@@ -9,9 +11,6 @@ public interface IChatView {
     void cancelEditChatName();
     void finishEditChatName();
 
-    void loadParticipantView();
-
-    void closeParticipantView();
 
     void setDefaultConversation();
 }

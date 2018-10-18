@@ -11,7 +11,5 @@ public interface IChatController {
     void onChatNameAccept();
     void onChatNameDecline();
 
-    void onParticipantsClicked();
 
-    void onCloseParticipantsViewClicked();
 }

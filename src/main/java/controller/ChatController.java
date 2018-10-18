@@ -77,6 +77,7 @@ public class ChatController implements IChatController {
         chatView.cancelEditChatName();
     }
 
+
     /**
      * Sets the active conversations name to the name that is currently in the chatNameTextField
      */
@@ -84,16 +85,6 @@ public class ChatController implements IChatController {
     public void onChatNameAccept() {
         mainModel.setConversationName(chatView.getChatNameText());
         chatView.finishEditChatName();
-    }
-
-    @Override
-    public void onParticipantsClicked() {
-        chatView.loadParticipantView();
-    }
-
-    @Override
-    public void onCloseParticipantsViewClicked() {
-        chatView.closeParticipantView();
     }
 
 }
