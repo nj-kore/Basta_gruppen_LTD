@@ -318,7 +318,7 @@ public class MainModel extends Observable {
             conversationFound = false;
             next = iterator.next();
             for (User u : next.getParticipants()) {
-                if (u.getFullName().contains(conversationSearchString)) {
+                if (u.getFullName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
                     conversationsToShow.add(next);
                     conversationFound = true;
                     break;

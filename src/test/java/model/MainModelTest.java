@@ -1,5 +1,6 @@
 package model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -7,6 +8,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class MainModelTest {
+
     @Test
     public void sendMessage() {
 
@@ -251,5 +253,67 @@ public class MainModelTest {
         userMap.put(8, new User(8, "Diddelydoo", "lhjie34", "Olof", "Klickson", StatusType.Available, true));
 
         return userMap;
+    }
+
+    @Test
+    public void createUserForController() {
+    }
+
+    @Test
+    public void searchContacts() {
+
+    }
+
+    @Test
+    public void searchConversations() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+
+        Map<Integer, User> users1m = getFillerUsers();
+        ArrayList<User> users1 = new ArrayList<User>();
+        users1.addAll(users1m.values());
+
+        ArrayList<User> users2 = new ArrayList<User>();
+        User u = new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", StatusType.Available, true);
+        users2.add(u);
+        userMap.putAll(users1m);
+        userMap.put(u.getId(), u);
+
+        Conversation c1 = new Conversation(1, "conv1", users1);
+        conversationMap.put(c1.getId(), c1);
+        Conversation c2 = new Conversation(2, "BANGO", users2);
+        conversationMap.put(c2.getId(), c2);
+        Conversation c3 = new Conversation(3, "AXAXAXA", users2);
+        conversationMap.put(c3.getId(), c3);
+
+        Iterator<Conversation> iterator = mainModel.searchConversations("bAnGo");
+        assertEquals(iterator.next(), c1);  //c1 has a participant with the first name Bango, should therefore match the search.
+        assertEquals(iterator.next(), c2);  //c2's name is bango, should therefore match
+        assertEquals(iterator.hasNext(), false);    //c3 is neither named bango or contains a user by the name bango, the search should therefore
+                                                           // only return 2 conversations.
+
+    }
+
+    @Test
+    public void getNewUserId() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        User u1 = new User(mainModel.getNewUserId(), "t", "t", "t", "t", StatusType.Available, false);
+        userMap.put(mainModel.getNewUserId(), u1);
+        User u2 = new User(mainModel.getNewUserId(), "h", "h", "h", "h", StatusType.Available, false);
+        userMap.put(mainModel.getNewUserId(), u2);
+        User u3 = new User(mainModel.getNewUserId(), "i", "i", "i", "i", StatusType.Available, false);
+        userMap.put(mainModel.getNewUserId(), u3);
+        User u4 = new User(mainModel.getNewUserId(), "c", "c", "c", "c", StatusType.Available, false);
+        userMap.put(mainModel.getNewUserId(), u4);
+        User u5 = new User(mainModel.getNewUserId(), "c", "c", "c", "c", StatusType.Available, false);
+        userMap.put(mainModel.getNewUserId(), u5);
+
+        assertEquals(1, u1.getId());
+        assertEquals(2, u2.getId());
+        assertEquals(3, u3.getId());
+        assertEquals(4, u4.getId());
     }
 }
