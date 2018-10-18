@@ -160,8 +160,8 @@ public class ChatView extends AnchorPane implements IChatView {
     }
 
     private void loadParticipants() {
-        if (mainModel.getActiveConversation() != null) {
-            this.participantsLabel.setText(Integer.toString(mainModel.getActiveConversation().getParticipants().size()));
+        if (mainModel.getActiveConversation() != null && mainModel.getActiveConversation().getParticipants() != null) {//There is an active conversation from the start with id -1
+            participantsLabel.setText(Integer.toString(mainModel.getActiveConversation().getParticipants().size()));
             participantsLabel.setVisible(true);
             participantsImageView.setVisible(true);
         }
