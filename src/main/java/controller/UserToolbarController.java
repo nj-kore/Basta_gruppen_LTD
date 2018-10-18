@@ -2,6 +2,7 @@ package controller;
 
 import javafx.scene.control.MenuItem;
 import model.MainModel;
+import model.StatusType;
 import view.IMainView;
 
 public class UserToolbarController implements IUserToolbarController {
@@ -15,7 +16,7 @@ public class UserToolbarController implements IUserToolbarController {
 
     @Override
     public void onMenuButtonItemClicked(MenuItem m) {
-        mainModel.setStatus(MainModel.StatusType.valueOf(m.getText().replaceAll(" ", "_")));
+        mainModel.setStatus(StatusType.valueOf(m.getText().replaceAll(" ", "_")));
     }
 
     @Override

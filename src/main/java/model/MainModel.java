@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 
+
 /**
  * The façade for the model package.
  */
@@ -24,19 +25,6 @@ public class MainModel extends Observable {
 
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
-    }
-
-    public enum StatusType {
-        Available, Busy, Do_not_disturb;
-
-        @Override
-        public String toString() {
-            switch (this){
-                case Busy:              return "Busy";
-                case Do_not_disturb:    return "Do not disturb";
-                default:                return "Available";
-            }
-        }
     }
 
     private Map<Integer, Conversation> conversations;
