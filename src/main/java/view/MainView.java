@@ -300,6 +300,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     @Override
     public void displayCurrentUser(){
+        currentUserAnchorPane.getChildren().clear();
         currentUserAnchorPane.getChildren().add(userToolbar);
     }
 
