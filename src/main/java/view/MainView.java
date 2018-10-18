@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import model.Conversation;
 import model.MainModel;
 import model.User;
+import model.observerpattern.ModelObserver;
 
 import java.net.URL;
 import java.util.*;
@@ -24,9 +25,17 @@ import java.util.*;
 /**
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
  * given to the class from the model package via the observer class.
+ *
+ *  @author Filip Andréasson
+ *  @author Gustav Häger
+ *  @author Jonathan Köre
+ *  @author Gustaf Spjut
+ *  @author Benjamin Vinnerholt
+ *
+ *  @since 2018-09-09
  */
 
-public class MainView extends AnchorPane implements Initializable, IMainView, Observer {
+public class MainView extends AnchorPane implements Initializable, IMainView, ModelObserver {
 
     private MainModel mainModel;
     private ChatView chatView;
@@ -155,7 +164,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     }
 
-    public MainView(MainModel mainModel){
+    public MainView(MainModel mainModel) {
 
         this.mainModel = mainModel;
         this.chatView = new ChatView(mainModel, this);
@@ -168,41 +177,41 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
 
     /**
-     * @param o   is the observable class that called the update method
-     * @param arg Decodes the arg to see what kind of task the view should do
+     *  This method is called whenever the any ModelObservable object calls the method 'notifyObservers'.
+     *  The method will use a switch case to call the relevant update method(s) in the application.
+     *
+     * @param   updateType  is the type of task the update method will perform
      */
     @Override
-    public void update(Observable o, Object arg) {
-        if (o instanceof MainModel) {
-            switch ((MainModel.UpdateTypes)arg) {
-                case ACTIVE_CONVERSATION:
-                    chatView.update();
-                    break;
-                case CONTACTS:
-                    updateContactsList();
-                    break;
-                case CONVERSATIONS:
-                    updateConversationsList();
-                    break;
-                case INIT:
-                    displayMainView();
-                    //Cant be run in Init since there are no conversations yet
-                    displayChat();
-                    updateContactsList();
-                    updateConversationsList();
-                    userToolbar.init();
-                    displayCurrentUser();
-                    setDefaultConversation();
-                    chatView.init();
-                    break;
-                case USER_INFO:
-                    updateUserInfoTextFields();
-                    //updateCurrentUserInfo();
-                    userToolbar.updateCurrentUserInfo();
-                    break;
-                default:
-                    break;
-            }
+    public void update(MainModel.UpdateTypes updateType) {
+        switch (updateType) {
+            case ACTIVE_CONVERSATION:
+                chatView.update();
+                break;
+            case CONTACTS:
+                updateContactsList();
+                break;
+            case CONVERSATIONS:
+                updateConversationsList();
+                break;
+            case INIT:
+                displayMainView();
+                //Cant be run in Init since there are no conversations yet
+                displayChat();
+                updateContactsList();
+                updateConversationsList();
+                userToolbar.init();
+                displayCurrentUser();
+                setDefaultConversation();
+                chatView.init();
+                break;
+            case USER_INFO:
+                updateUserInfoTextFields();
+                //updateCurrentUserInfo();
+                userToolbar.updateCurrentUserInfo();
+                break;
+            default:
+                break;
         }
         userToolbar.setCurrentUserImageView();
         //currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
@@ -225,7 +234,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
 
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()) {
+        if (!iterator.hasNext()) {
             contactsFlowPane.getChildren().add(noContactsFoundLabel);
         }
 
@@ -241,17 +250,17 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
      */
     public void updateConversationsList() {
 
-            conversationsFlowPane.getChildren().clear();
-            Iterator<Conversation> iterator = mainModel.getUsersConversations();
-            while (iterator.hasNext()) {
-                conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
-            }
+        conversationsFlowPane.getChildren().clear();
+        Iterator<Conversation> iterator = mainModel.getUsersConversations();
+        while (iterator.hasNext()) {
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
+        }
 
     }
 
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
-        if(!iterator.hasNext()){
+        if (!iterator.hasNext()) {
             conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         }
         while (iterator.hasNext()) {
@@ -299,7 +308,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
     @Override
-    public void displayCurrentUser(){
+    public void displayCurrentUser() {
         currentUserAnchorPane.getChildren().clear();
         currentUserAnchorPane.getChildren().add(userToolbar);
     }
@@ -329,7 +338,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
     }
 
 
-    public void backToChat(){
+    public void backToChat() {
         mainViewAnchorPane.getChildren().clear();
         mainViewAnchorPane.getChildren().add(chatView);
     }
@@ -368,7 +377,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         displayMainView();
     }
 
-    public void logout(){
+    public void logout() {
         userToolbar.statusMenu.getItems().clear();
         mainModel.setActiveUser(null);
         displayLoginPage();
@@ -390,7 +399,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
         displayCreateConvoPage();
     }
 
-    public String getContactSearchString(){
+    public String getContactSearchString() {
         return searchContactsTextField.getText();
     }
 

@@ -11,6 +11,8 @@
 package model;
 
 
+import model.observerpattern.ModelObservable;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -19,7 +21,7 @@ import java.util.*;
 /**
  * The façade for the model package.
  */
-public class MainModel extends Observable {
+public class MainModel extends ModelObservable {
     private User activeUser;
     private Conversation activeConversation;
 
@@ -63,7 +65,7 @@ public class MainModel extends Observable {
         //users.put(admin.getId(), admin);
         //users.put(contactUser.getId(), contactUser);
         //users.put(contactUser2.getId(), contactUser2);
-        //update(UpdateTypes.INIT);
+        //notifyObservers(UpdateTypes.INIT);
     }
 
     /**
@@ -82,7 +84,7 @@ public class MainModel extends Observable {
 
             Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
             activeConversation.addMessage(m);
-            update(UpdateTypes.ACTIVE_CONVERSATION);
+            notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
         }
 
     }
@@ -92,23 +94,12 @@ public class MainModel extends Observable {
         activeUser.setLastName(lastName);
         activeUser.setEmail(email);
         activeUser.setProfileImagePath(picURL);
-        update(UpdateTypes.USER_INFO);
+        notifyObservers(UpdateTypes.USER_INFO);
     }
 
     public void changePassword(String newPassword){
         activeUser.setPassword(newPassword);
-        update(UpdateTypes.USER_INFO);
-    }
-
-
-    /**
-     * @param u the type of "update" that the observers should do
-     *          <p>
-     *          Notifies the observers with the String update as an argument
-     */
-    private void update(UpdateTypes u) {
-        setChanged();
-        notifyObservers(u);
+        notifyObservers(UpdateTypes.USER_INFO);
     }
 
     public Conversation loadConversation(int conversationId) {
@@ -150,7 +141,7 @@ public class MainModel extends Observable {
 
     public void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
-        update(UpdateTypes.ACTIVE_CONVERSATION);
+        notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
     public void createConversation(List<User> users, String name) {
@@ -162,7 +153,7 @@ public class MainModel extends Observable {
         Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
-        update(UpdateTypes.ACTIVE_CONVERSATION);
+        notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
     //Exists for testing purposes
@@ -178,8 +169,8 @@ public class MainModel extends Observable {
                 activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
             }
 
-            update(UpdateTypes.ACTIVE_CONVERSATION);
-            update(UpdateTypes.CONVERSATIONS);
+            notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
+            notifyObservers(UpdateTypes.CONVERSATIONS);
 
 
     }
@@ -250,7 +241,7 @@ public class MainModel extends Observable {
 
     public void setStatus(StatusType s) {
         activeUser.setStatus(s);
-        update(UpdateTypes.USER_INFO);
+        notifyObservers(UpdateTypes.USER_INFO);
     }
 
     public Map<Integer, User> getUsers() {
@@ -267,7 +258,7 @@ public class MainModel extends Observable {
         //Adds as a contact to the active user, might not be usefull later on
         getActiveUser().addContact(id);
         createUser(user);
-        update(UpdateTypes.CONTACTS);
+        notifyObservers(UpdateTypes.CONTACTS);
     }
 
     public User getActiveUser() {
@@ -292,7 +283,7 @@ public class MainModel extends Observable {
             if (u.getUsername().equals(username)) {
                 if (u.getPassword().equals(password)) {
                     setActiveUser(u);
-                    update(UpdateTypes.INIT);
+                    notifyObservers(UpdateTypes.INIT);
                     return true;
                 }
             }

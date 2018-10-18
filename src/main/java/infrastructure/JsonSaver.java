@@ -15,10 +15,12 @@ import com.google.gson.Gson;
 import model.Conversation;
 import model.MainModel;
 import model.User;
+import model.observerpattern.ModelObserver;
+
 import java.io.*;
 import java.util.*;
 
-public class JsonSaver implements Observer {
+public class JsonSaver implements ModelObserver {
 
     private MainModel model;
 
@@ -57,8 +59,15 @@ public class JsonSaver implements Observer {
         }
     }
 
+    /**
+     *  This method is called whenever the any ModelObservable object calls the method 'notifyObservers'
+     *  because it will need to save the model whenever anything changes in the application
+     *
+     * @param   updateType     is the type of task the update method will perform
+     */
+
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(MainModel.UpdateTypes updateType) {
         saveModel();
     }
 
