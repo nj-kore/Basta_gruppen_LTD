@@ -11,15 +11,15 @@ public class UserPageController implements IUserPageController {
         this.mainModel = mainModel;
     }
 
-    public void saveUserInfo(String fn, String ln, String email) {
-        mainModel.setUserInfo(fn, ln, email);
+    public void saveUserInfo(String fn, String ln, String email, String picURL) {
+        mainModel.setUserInfo(fn, ln, email, picURL);
     }
 
     public void changePassword(String s){
-        mainModel.getActiveUser().setPassword(s);
+        mainModel.changePassword(s);
     }
 
-    public void changeProfilePicture(String picURL){
-        mainModel.getActiveUser().setProfileImagePath(picURL);
-    }
+    //public void changeProfilePicture(String picURL){
+        //mainModel.getActiveUser().setProfileImagePath(picURL);
+    //}
 }
