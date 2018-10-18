@@ -243,7 +243,7 @@ public class MainModelTest {
     private Map<Integer, User> getFillerUsers() {
 
         Map<Integer, User> userMap = new HashMap();
-        userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinssonm", StatusType.Available, true));
+        userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinsson", StatusType.Available, true));
         userMap.put(2, new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", StatusType.Available, true));
         userMap.put(3, new User(3, "Mr cool", "kh9845jnd", "Johan", "Petterson", StatusType.Available, true));
         userMap.put(4, new User(4, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", StatusType.Available, true));
@@ -261,7 +261,28 @@ public class MainModelTest {
 
     @Test
     public void searchContacts() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
 
+        Map<Integer, User> users = getFillerUsers();
+        User active = new User(mainModel.getNewUserId(), "Doofenshmirtz", "perry", "Doktor", "Doofus", StatusType.Available, true);
+        userMap.put(mainModel.getNewUserId(), active);
+        userMap.putAll(users);
+
+        mainModel.setActiveUser(active);
+        for (User u : users.values()){
+            mainModel.addContact(u.getId());
+        }
+
+        Iterator<User> iterator = mainModel.searchContacts("son");
+
+        assertEquals(iterator.next().getId(), 1);   //Eva Dickinsson
+        assertEquals(iterator.next().getId(), 2);   //Kalle Johnson
+        assertEquals(iterator.next().getId(), 3);   //Johan Petterson
+        assertEquals(iterator.next().getId(), 7);   //Bango Rickson
+        assertEquals(iterator.next().getId(), 8);   //Olof Klickson
+        assertEquals(iterator.hasNext(), false);
     }
 
     @Test
