@@ -176,14 +176,15 @@ public class UserPageView extends AnchorPane {
      * false to disable
      */
     private void enableInfoTextFields(boolean enableEdit){
-        if(enableEdit){
-            firstNameTextField.setEditable(true);
-            lastNameTextField.setEditable(true);
-            emailTextField.setEditable(true);
+        firstNameTextField.setEditable(enableEdit);
+        lastNameTextField.setEditable(enableEdit);
+        emailTextField.setEditable(enableEdit);
 
-            firstNameTextField.setFocusTraversable(true);
-            lastNameTextField.setFocusTraversable(true);
-            emailTextField.setFocusTraversable(true);
+        firstNameTextField.setFocusTraversable(enableEdit);
+        lastNameTextField.setFocusTraversable(enableEdit);
+        emailTextField.setFocusTraversable(enableEdit);
+
+        if(enableEdit){
 
             firstNameTextField.setStyle("-fx-border-insets: 2px");
             emailTextField.setStyle("-fx-border-insets: 2px");
@@ -196,13 +197,6 @@ public class UserPageView extends AnchorPane {
             firstNameTextField.requestFocus();
         }
         else{
-            firstNameTextField.setEditable(false);
-            lastNameTextField.setEditable(false);
-            emailTextField.setEditable(false);
-
-            firstNameTextField.setFocusTraversable(false);
-            lastNameTextField.setFocusTraversable(false);
-            emailTextField.setFocusTraversable(false);
 
             firstNameTextField.setStyle("-fx-border-insets: 0px");
             emailTextField.setStyle("-fx-border-insets: 0px");
