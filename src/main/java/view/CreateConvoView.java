@@ -46,7 +46,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
     CreateConvoView(MainModel mainModel, MainView mainView) {
         this.mainModel = mainModel;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/CreateConvoView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateConvoView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

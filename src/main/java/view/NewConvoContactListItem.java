@@ -26,7 +26,7 @@ public class NewConvoContactListItem extends AnchorPane {
 
 
     public NewConvoContactListItem(User user) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/NewConvoContactListItemView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NewConvoContactListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

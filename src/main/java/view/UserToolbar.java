@@ -39,7 +39,7 @@ public class UserToolbar extends AnchorPane {
     Label currentUserNameLabel;
 
     public UserToolbar(IMainView mainView, MainModel mainModel) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserToolbar.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

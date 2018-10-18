@@ -33,7 +33,7 @@ public class ParticipantsView extends AnchorPane {
     Label noMatchingParticipantsLabel;
 
     public ParticipantsView(MainModel mainModel, IChatView chatView) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ParticipantList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantList.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

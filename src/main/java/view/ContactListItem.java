@@ -27,7 +27,7 @@ public class ContactListItem extends AnchorPane {
 
     public ContactListItem(User user, MainView mainView) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ContactListItemView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ContactListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
