@@ -26,6 +26,7 @@ public class UserPageView extends AnchorPane {
 
     MainView parent;
     MainModel mainModel;
+    String imagePath;
 
 
 
@@ -84,28 +85,13 @@ public class UserPageView extends AnchorPane {
         saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                c.saveUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText());
+                c.saveUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), imagePath);
                 enableInfoTextFields(false);
 
                 changePictureButton.setVisible(false);
                 changePictureButton.setDisable(true);
                 saveChangesButton.setDisable(true);
                 saveChangesButton.setVisible(false);
-            }
-        });
-
-        changePasswordButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
-                    wrongPasswordLabel.setVisible(false);
-                    if(!newPasswordField.getText().equals("")) {
-                        c.changePassword(newPasswordField.getText());
-                        passwordChangedLabel.setVisible(true);
-                    }
-                } else {
-                    wrongPasswordLabel.setVisible(true);
-                }
             }
         });
 
@@ -132,7 +118,8 @@ public class UserPageView extends AnchorPane {
                         new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
                 File selectedFile = fileChooser.showOpenDialog(null);
                 if(selectedFile != null){
-                    c.changeProfilePicture(selectedFile.toURI().toString());
+                    imagePath = selectedFile.toURI().toString();
+                    //c.changeProfilePicture(selectedFile.toURI().toString());
                    //Is it cleaner to have the controller tell the view to update pic rather then the view calling the model as below?
                     profilePicImageView.setImage(new Image(selectedFile.toURI().toString()));       //View changes itself, not based on model
                 }
@@ -145,6 +132,7 @@ public class UserPageView extends AnchorPane {
         firstNameTextField.setText(mainModel.getActiveUser().getFirstName());
         lastNameTextField.setText(mainModel.getActiveUser().getLastName());
         emailTextField.setText(mainModel.getActiveUser().getEmail());
+        profilePicImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 
     /**

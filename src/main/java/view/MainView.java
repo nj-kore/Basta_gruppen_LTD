@@ -193,7 +193,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Ob
                     userToolbar.init();
                     displayCurrentUser();
                     setDefaultConversation();
-                    chatView.update();
+                    chatView.init();
                     break;
                 case USER_INFO:
                     updateUserInfoTextFields();
