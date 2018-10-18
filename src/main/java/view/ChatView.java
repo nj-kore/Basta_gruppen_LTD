@@ -82,7 +82,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      */
     public ChatView(MainModel mainModel, MainView mainView) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ChatView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -297,7 +297,7 @@ public class ChatView extends AnchorPane implements IChatView {
          * @param concreteUser
          */
         public MessageItem(Message message, User concreteUser) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/Message.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Message.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
 

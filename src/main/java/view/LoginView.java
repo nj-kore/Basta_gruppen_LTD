@@ -33,7 +33,7 @@ public class LoginView extends AnchorPane implements ILoginView {
      * @param mainModel Loads the fxml document and assigns the LoginController to handle the relevant input
      */
     public LoginView(MainModel mainModel) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

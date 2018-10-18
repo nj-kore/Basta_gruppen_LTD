@@ -54,7 +54,7 @@ public class Main extends Application {
         //adds mainView to mainmodels observers
         mainModel.addObserver((MainView)mainView);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../resources/fxml/MainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
         fxmlLoader.setController(mainView);
 
         try {

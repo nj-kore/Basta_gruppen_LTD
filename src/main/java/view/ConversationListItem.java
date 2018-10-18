@@ -34,7 +34,7 @@ public class ConversationListItem extends AnchorPane {
 
     public ConversationListItem(Conversation conversation, MainModel mainModel) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ConversationListItemView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

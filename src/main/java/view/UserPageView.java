@@ -67,7 +67,7 @@ public class UserPageView extends AnchorPane {
     Button changePasswordButton;
 
     public UserPageView(MainView parentView, MainModel mainModel) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/UserPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

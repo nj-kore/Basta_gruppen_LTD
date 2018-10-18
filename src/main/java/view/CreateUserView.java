@@ -42,7 +42,7 @@ public class CreateUserView extends AnchorPane {
     Label inputHintLabel;
 
     public CreateUserView(MainView mainView, MainModel mainModel) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/CreateUserView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
