@@ -87,10 +87,16 @@ public class MainModel extends Observable {
 
     }
 
-    public void setUserInfo(String firstName, String lastName, String email) {
+    public void setUserInfo(String firstName, String lastName, String email, String picURL) {
         activeUser.setFirstName(firstName);
         activeUser.setLastName(lastName);
         activeUser.setEmail(email);
+        activeUser.setProfileImagePath(picURL);
+        update(UpdateTypes.USER_INFO);
+    }
+
+    public void changePassword(String newPassword){
+        activeUser.setPassword(newPassword);
         update(UpdateTypes.USER_INFO);
     }
 
