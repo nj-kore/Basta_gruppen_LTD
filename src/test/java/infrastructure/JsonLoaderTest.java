@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Conversation;
 import model.MainModel;
+import model.StatusType;
 import model.User;
 import org.junit.Test;
 import java.io.FileWriter;
@@ -22,8 +23,8 @@ public class JsonLoaderTest {
     @Test
     public void loadUsers() throws Exception {
         //Create users
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, false);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, false);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", StatusType.Available, false);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", StatusType.Available, false);
         //Add users to list for writing to JSON
         List<User> users = new ArrayList<User>();
         users.add(user1);
@@ -53,8 +54,8 @@ public class JsonLoaderTest {
     @Test
     public void loadConversations() throws Exception {
         //Create users for the conversation
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, true);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", StatusType.Available, true);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", StatusType.Available, true);
         //Add users to a list
         ArrayList<User> users = new ArrayList<User>();
         users.add(user1);
