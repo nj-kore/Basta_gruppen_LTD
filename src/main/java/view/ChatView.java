@@ -63,14 +63,6 @@ public class ChatView extends AnchorPane implements IChatView {
     @FXML
     private Label participantsLabel;
 
-    @FXML
-    private AnchorPane participantView;
-
-    @FXML
-    private Button participantViewCloseButton;
-
-    @FXML
-    private FlowPane participantViewFlowPane;
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -119,11 +111,6 @@ public class ChatView extends AnchorPane implements IChatView {
 
         declineImageView.setOnMouseClicked(event -> chatController.onChatNameDecline());
 
-        participantsImageView.setOnMouseClicked(event -> chatController.onParticipantsClicked());
-
-        participantsLabel.setOnMouseClicked(event -> chatController.onParticipantsClicked());
-
-        participantViewCloseButton.setOnMouseClicked(event -> chatController.onCloseParticipantsViewClicked());
 
         //I dont really know if this should go into the controller or not
         chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -183,23 +170,11 @@ public class ChatView extends AnchorPane implements IChatView {
         }
     }
 
-    @Override
-    public void loadParticipantView() {
-        for (User user : mainModel.getActiveConversation().getParticipants()) {
-            participantViewFlowPane.getChildren().add(new ContactListItem(user, mainView));
-        }
-
-        participantView.toFront();
-    }
 
     public void setDefaultConversation() {
         mainView.setDefaultConversation();
     }
 
-    @Override
-    public void closeParticipantView() {
-        participantView.toBack();
-    }
 
     /**
      * Makes the ChatName editable and makes the accept and decline button visible

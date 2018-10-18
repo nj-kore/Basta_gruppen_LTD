@@ -86,14 +86,4 @@ public class ChatController implements IChatController {
         chatView.finishEditChatName();
     }
 
-    @Override
-    public void onParticipantsClicked() {
-        chatView.loadParticipantView();
-    }
-
-    @Override
-    public void onCloseParticipantsViewClicked() {
-        chatView.closeParticipantView();
-    }
-
 }
