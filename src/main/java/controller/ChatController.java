@@ -77,6 +77,7 @@ public class ChatController implements IChatController {
         chatView.cancelEditChatName();
     }
 
+
     /**
      * Sets the active conversations name to the name that is currently in the chatNameTextField
      */

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="437.0" style="-fx-background-color: white;" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="15.0" layoutY="20.0" styleClass="detailViewMediumText" text="Participants" />
+      <TextField fx:id="searchParticipantsTextField" layoutX="163.0" layoutY="27.0" promptText="Search for a participant..." />
+      <ImageView fx:id="searchParticipantsImageView" fitHeight="26.0" fitWidth="26.0" layoutX="312.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" styleClass="blackBorder">
+         <image>
+            <Image url="@../pics/searchIcon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="58.0" prefHeight="383.0" prefWidth="396.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <content>
+            <FlowPane fx:id="participantsFlowPane" prefHeight="73.0" prefWidth="394.0">
+               <children>
+                  <Label fx:id="noMatchingParticipantsLabel" styleClass="redSmallText" text="No matching participants found" />
+               </children></FlowPane>
+         </content>
+      </ScrollPane>
+      <Button fx:id="participantsCloseButton" layoutX="396.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeParticipants" prefHeight="26.0" prefWidth="26.0" text="x" />
+   </children>
+</fx:root>

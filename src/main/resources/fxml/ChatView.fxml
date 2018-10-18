@@ -18,22 +18,19 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" stylesheets="@style.css" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="767.2" prefWidth="1015.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="71.0" prefWidth="800.0" style="-fx-background-color: white;">
                <children>
                    <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="15.0" layoutY="1.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
-                    <items>
-                      <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
+                     <items>
+                        <MenuItem fx:id="viewParticipants" mnemonicParsing="false" onAction="#viewParticipants" text="View Participants" />
+                        <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
                         <MenuItem fx:id="leaveChatMenuItem" mnemonicParsing="false" text="Leave Conversation" />
-                    </items>
+                     </items>
                      <contextMenu>
-                        <ContextMenu>
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                          </items>
-                        </ContextMenu>
+                        <ContextMenu />
                      </contextMenu>
                   </MenuButton>
                   <ImageView fx:id="acceptImageView" fitHeight="39.0" fitWidth="31.0" layoutX="421.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -72,5 +69,6 @@
             </HBox>
          </children>
       </VBox>
+      <AnchorPane fx:id="participantsAnchorPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
    </children>
 </fx:root>

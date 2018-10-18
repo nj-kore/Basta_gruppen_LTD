@@ -28,7 +28,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
-    private MainView mainView;
+    private ParticipantsView participantsView;
+    private MainView mainView; //TODO implementera setDefaultConversation m.h.a model.
 
     @FXML
     private FlowPane chatFlowPane;
@@ -52,6 +53,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem leaveChatMenuItem;
 
     @FXML
+    private MenuItem viewParticipantsMenuItem;
+
+    @FXML
     private ImageView acceptImageView;
 
     @FXML
@@ -63,6 +67,9 @@ public class ChatView extends AnchorPane implements IChatView {
     @FXML
     private Label participantsLabel;
 
+
+    @FXML
+    private AnchorPane participantsAnchorPane;
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -87,8 +94,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
-        this.mainView = mainView;
-
+        participantsView = new ParticipantsView(mainModel, this);
         this.mainView = mainView;
 
         IChatController chatController = new ChatController(this, mainModel);
@@ -190,6 +196,19 @@ public class ChatView extends AnchorPane implements IChatView {
         } else {
             chatNameTextField.setStyle(notEditingColor);
         }
+    }
+
+    @FXML
+    private void viewParticipants(){
+        participantsAnchorPane.getChildren().clear();
+        participantsAnchorPane.getChildren().add(participantsView);
+        participantsView.updateParticipants();
+        participantsAnchorPane.toFront();
+    }
+
+    @Override
+    public void closeParticipants(){
+        participantsAnchorPane.toBack();
     }
 
     /**

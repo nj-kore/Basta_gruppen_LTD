@@ -1,6 +1,8 @@
 package view;
 
 public interface IChatView {
+    void closeParticipants();
+
     String getInputText();
     String getChatNameText();
     void createNewLine();
