@@ -13,13 +13,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private MainModel.StatusType status;
+    private StatusType status;
     private String profileImagePath;
     private String[] statusPaths = new String[3];
     private Boolean isManager;
 
 
-    public User(int id, String username, String password, String firstName, String lastName, MainModel.StatusType status, Boolean isManager) {
+    public User(int id, String username, String password, String firstName, String lastName, StatusType status, Boolean isManager) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -72,7 +72,7 @@ public class User {
 
     public String getProfileImagePath(){return profileImagePath;}
 
-    public MainModel.StatusType getStatus(){return status;}
+    public StatusType getStatus(){return status;}
 
     public String getUsername() {
         return username;
@@ -103,7 +103,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setStatus(MainModel.StatusType status){
+    public void setStatus(StatusType status){
         this.status = status;
     }
 

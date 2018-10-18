@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.MainModel;
+import model.StatusType;
 
 import java.io.IOException;
 
@@ -66,12 +67,12 @@ public class UserToolbar extends AnchorPane {
     }
 
     private void addPremadeStatuses(IUserToolbarController u){
-        for (MainModel.StatusType status : MainModel.StatusType.values()){
+        for (StatusType status : StatusType.values()){
             MenuItem m;
-            if(status == MainModel.StatusType.Available){
+            if(status == StatusType.Available){
                 ImageView imageView = new ImageView("pics/statusGreen.png");
                 m=new MenuItem(status.toString(), imageView);
-            }else if(status == MainModel.StatusType.Busy){
+            }else if(status == StatusType.Busy){
                 ImageView imageView = new ImageView("pics/statusOrange.png");
                 m=new MenuItem(status.toString(), imageView);
             }else{
