@@ -2,7 +2,6 @@ package model;
 
 import org.junit.Test;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -11,8 +10,8 @@ public class MainModelTest {
     @Test
     public void sendMessage() {
 
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, true);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", StatusType.Available, true);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", StatusType.Available, true);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -32,8 +31,8 @@ public class MainModelTest {
 
     @Test
     public void readMessages() {
-        User user1 = new User(1, "ett", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
-        User user2 = new User(2, "två", "123", "bengt2", "testsson2", MainModel.StatusType.Available, true);
+        User user1 = new User(1, "ett", "123", "bengt", "testsson", StatusType.Available, true);
+        User user2 = new User(2, "två", "123", "bengt2", "testsson2", StatusType.Available, true);
         HashMap<Integer, User> userMap = new HashMap<>();
         userMap.put(1, user1);
         userMap.put(2, user2);
@@ -85,8 +84,8 @@ public class MainModelTest {
 
         MainModel model = new MainModel(userMap, conversationMap);
 
-        User activeUser = new User(1, "admin", "123", "eva", "olsson", MainModel.StatusType.Available, true);
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", MainModel.StatusType.Available, true);
+        User activeUser = new User(1, "admin", "123", "eva", "olsson", StatusType.Available, true);
+        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, true);
 
         model.createUser(activeUser);
         model.createUser(contactUser);
@@ -98,7 +97,7 @@ public class MainModelTest {
     }
     @Test
     public void loadMessageInConversation(){
-        User user1 = new User(1, "hej", "123", "bengt", "testsson", MainModel.StatusType.Available, true);
+        User user1 = new User(1, "hej", "123", "bengt", "testsson", StatusType.Available, true);
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
         Conversation c = new Conversation(1, "", users);
@@ -189,12 +188,12 @@ public class MainModelTest {
         MainModel model = new MainModel(userMap, conversationMap);
         ArrayList<User> participants = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available, false);
+            User u = new User(i, "" + i, "123", "person" + i, "", StatusType.Available, false);
             model.createUser(u);
             participants.add(u);
         }
         model.createConversation(participants, "");
-        User admin = new User(500, "", "", "admin", "", MainModel.StatusType.Busy, false);
+        User admin = new User(500, "", "", "admin", "", StatusType.Busy, false);
         model.createUser(admin);
         model.setActiveUser(admin);
         participants.add(admin);
@@ -204,7 +203,7 @@ public class MainModelTest {
 
         participants.clear();
         for(int i = 20; i < 22; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", MainModel.StatusType.Available, false);
+            User u = new User(i, "" + i, "123", "person" + i, "", StatusType.Available, false);
             model.createUser(u);
             participants.add(u);
         }
@@ -242,14 +241,14 @@ public class MainModelTest {
     private Map<Integer, User> getFillerUsers() {
 
         Map<Integer, User> userMap = new HashMap();
-        userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinssonm", MainModel.StatusType.Available, true));
-        userMap.put(2, new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", MainModel.StatusType.Available, true));
-        userMap.put(3, new User(3, "Mr cool", "kh9845jnd", "Johan", "Petterson", MainModel.StatusType.Available, true));
-        userMap.put(4, new User(4, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", MainModel.StatusType.Available, true));
-        userMap.put(5, new User(5, "TheTaboToast", "jkg84jf", "Karin", "Lidman", MainModel.StatusType.Available, true));
-        userMap.put(6, new User(6, "Heyman12", "jf672jfnm", "Carline", "Mandala", MainModel.StatusType.Available, true));
-        userMap.put(7, new User(7, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", MainModel.StatusType.Available, true));
-        userMap.put(8, new User(8, "Diddelydoo", "lhjie34", "Olof", "Klickson", MainModel.StatusType.Available, true));
+        userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinssonm", StatusType.Available, true));
+        userMap.put(2, new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", StatusType.Available, true));
+        userMap.put(3, new User(3, "Mr cool", "kh9845jnd", "Johan", "Petterson", StatusType.Available, true));
+        userMap.put(4, new User(4, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", StatusType.Available, true));
+        userMap.put(5, new User(5, "TheTaboToast", "jkg84jf", "Karin", "Lidman", StatusType.Available, true));
+        userMap.put(6, new User(6, "Heyman12", "jf672jfnm", "Carline", "Mandala", StatusType.Available, true));
+        userMap.put(7, new User(7, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", StatusType.Available, true));
+        userMap.put(8, new User(8, "Diddelydoo", "lhjie34", "Olof", "Klickson", StatusType.Available, true));
 
         return userMap;
     }
