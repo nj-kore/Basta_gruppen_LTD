@@ -24,7 +24,10 @@
       </ImageView>
       <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="58.0" prefHeight="383.0" prefWidth="396.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <content>
-            <FlowPane fx:id="participantsFlowPane" prefHeight="73.0" prefWidth="394.0" />
+            <FlowPane fx:id="participantsFlowPane" prefHeight="73.0" prefWidth="394.0">
+               <children>
+                  <Label fx:id="noMatchingParticipantsLabel" styleClass="redSmallText" text="No matching participants found" />
+               </children></FlowPane>
          </content>
       </ScrollPane>
       <Button fx:id="participantsCloseButton" layoutX="396.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeParticipants" prefHeight="26.0" prefWidth="26.0" text="x" />
