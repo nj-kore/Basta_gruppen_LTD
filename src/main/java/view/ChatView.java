@@ -124,8 +124,6 @@ public class ChatView extends AnchorPane implements IChatView {
                 chatController.onChatNameDecline();
             }
         });
-
-        this.participantsImageView.setImage(new Image("pics/userIcon.png"));
     }
 
     /**
@@ -154,9 +152,14 @@ public class ChatView extends AnchorPane implements IChatView {
         loadMessages();
         loadChatName();
         loadParticipants();
+    }
+
+    public void init() {
         if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
         }
+        this.participantsImageView.setImage(new Image("pics/userIcon.png"));
+        update();
     }
 
     private void loadParticipants() {

@@ -63,7 +63,7 @@ public class MainModel extends Observable {
         //users.put(admin.getId(), admin);
         //users.put(contactUser.getId(), contactUser);
         //users.put(contactUser2.getId(), contactUser2);
-        update(UpdateTypes.INIT);
+        //update(UpdateTypes.INIT);
     }
 
     /**
