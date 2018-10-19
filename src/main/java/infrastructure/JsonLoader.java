@@ -26,20 +26,31 @@ import java.util.Map;
 
 public class JsonLoader implements IDataLoader {
 
+    private String usersPath;
+    private String conversationsPath;
+
+    /**
+     * A class that deserializes Users and Conversations
+     * @param usersPath the path the the JSON-file containing the serialized Users
+     * @param conversationsPath the path the the json-file containing the serialized Conversations
+     */
+    public JsonLoader(String usersPath, String conversationsPath) {
+        this.usersPath = usersPath;
+        this.conversationsPath = conversationsPath;
+    }
+
     /**
      * Loads all Users from JSON file at specified path
-     * @param path The path to the JSON file that contains the Users to load
      * @return List of User or null
      */
     @Override
-    public Map<Integer, User> loadUsers(String path){
+    public Map<Integer, User> loadUsers(){
         Gson gson = new Gson();
         List<User> users;
         Map<Integer,User> usersMap = new HashMap<Integer,User>();
         Type listType = new TypeToken<List<User>>() {}.getType();
-        //"src/main/java/infrastructure/users.json"
-        if (fileExists(path)){
-            try (JsonReader reader = new JsonReader(new FileReader(path))){
+        if (fileExists(usersPath)){
+            try (JsonReader reader = new JsonReader(new FileReader(usersPath))){
                 users = gson.fromJson(reader, listType);
                 for(User u: users){
                     usersMap.put(u.getId(),u);
@@ -54,17 +65,16 @@ public class JsonLoader implements IDataLoader {
 
     /**
      * Loads all Conversations from JSON file at specified path
-     * @param path the path to the JSON file that contains the Conversations to load
      * @return conversations
      */
     @Override
-    public Map<Integer, Conversation> loadConversations(String path){
+    public Map<Integer, Conversation> loadConversations(){
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Conversation>>() {}.getType();
         Map<Integer, Conversation> conversationsMap = new HashMap<Integer, Conversation>();
         List<Conversation> conversations = new ArrayList<Conversation>();
-        if (fileExists(path)){
-            try (JsonReader reader = new JsonReader(new FileReader(path))){
+        if (fileExists(conversationsPath)){
+            try (JsonReader reader = new JsonReader(new FileReader(conversationsPath))){
                 conversations = gson.fromJson(reader, listType);
                 for(Conversation c: conversations){
                     conversationsMap.put(c.getId(),c);
