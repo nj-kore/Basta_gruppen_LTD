@@ -42,12 +42,12 @@ public class JsonLoaderTest {
             throw new RuntimeException(e);
         }
 
-        JsonLoader jsonLoader = new JsonLoader();
+        JsonLoader jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json", "src/test/java/infrastructure/conversations.json");
 
-        assertEquals(user1, jsonLoader.loadUsers("src/test/java/infrastructure/users.json").get(1));
-        assertEquals(user2, jsonLoader.loadUsers("src/test/java/infrastructure/users.json").get(2));
-        assertNotEquals(user1,jsonLoader.loadUsers("src/test/java/infrastructure/users.json").get(2));
-        assertEquals(usersMap.keySet(),jsonLoader.loadUsers("src/test/java/infrastructure/users.json").keySet());
+        assertEquals(user1, jsonLoader.loadUsers().get(1));
+        assertEquals(user2, jsonLoader.loadUsers().get(2));
+        assertNotEquals(user1,jsonLoader.loadUsers().get(2));
+        assertEquals(usersMap.keySet(),jsonLoader.loadUsers().keySet());
 
     }
 
@@ -82,12 +82,12 @@ public class JsonLoaderTest {
             throw new RuntimeException(e);
         }
 
-        JsonLoader jsonLoader = new JsonLoader();
+        JsonLoader jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json","src/test/java/infrastructure/conversations.json");
 
-        assertEquals(conversation1, jsonLoader.loadConversations("src/test/java/infrastructure/conversations.json").get(1));
-        assertEquals(conversation2, jsonLoader.loadConversations("src/test/java/infrastructure/conversations.json").get(2));
-        assertNotEquals(user1,jsonLoader.loadConversations("src/test/java/infrastructure/conversations.json").get(2));
-        assertEquals(conversationsMap.keySet(),jsonLoader.loadUsers("src/test/java/infrastructure/conversations.json").keySet());
+        assertEquals(conversation1, jsonLoader.loadConversations().get(1));
+        assertEquals(conversation2, jsonLoader.loadConversations().get(2));
+        assertNotEquals(user1,jsonLoader.loadConversations().get(2));
+        assertEquals(conversationsMap.keySet(),jsonLoader.loadUsers().keySet());
     }
 
 }

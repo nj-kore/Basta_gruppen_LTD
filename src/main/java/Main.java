@@ -38,14 +38,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Creates an instance of dataloader that can be used to load data
-        IDataLoader dataLoader = new JsonLoader();
+        IDataLoader dataLoader = new JsonLoader("src/main/java/infrastructure/users.json","src/main/java/infrastructure/conversations.json");
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
-        MainModel mainModel =  new MainModel(dataLoader.loadUsers("src/main/java/infrastructure/users.json"),dataLoader.loadConversations("src/main/java/infrastructure/conversations.json"));
+        MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
 
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
         //mainModel.initFillers();      //TODO fixa så man slipper göra detta varje gång
         //Creates an instance of datasaver which can be used to save data
-        JsonSaver dataSaver = new JsonSaver(mainModel);
+        JsonSaver dataSaver = new JsonSaver(mainModel, "src/main/java/infrastructure/users.json","src/main/java/infrastructure/conversations.json");
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel);
 

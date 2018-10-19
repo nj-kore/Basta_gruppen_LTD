@@ -4,7 +4,7 @@
  *
  * @author          Gustav Hager
  * responsibility:  To save data to "database" (json files).
- * used by:         MainModel
+ * used by:         MainModel (as an observer)
  * used for:        Saving data to the "database" (json files).
  */
 
@@ -20,12 +20,16 @@ import model.observerpattern.ModelObserver;
 import java.io.*;
 import java.util.*;
 
-public class JsonSaver implements ModelObserver {
+public class JsonSaver implements IDataSaver, ModelObserver {
 
     private MainModel model;
+    private String usersPath;
+    private String conversationsPath;
 
-    public JsonSaver(MainModel model) {
+    public JsonSaver(MainModel model, String usersPath, String conversationsPath) {
         this.model = model;
+        this.usersPath = usersPath;
+        this.conversationsPath = conversationsPath;
         saveModel();
     }
 
@@ -35,13 +39,7 @@ public class JsonSaver implements ModelObserver {
      * @param users
      */
     private void writeUsers(List<User> users){
-        try (Writer writer = new FileWriter("src/main/java/infrastructure/users.json")) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
-            gson.toJson(users, writer);
-            writer.close();
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        write(users, usersPath);
     }
 
     /**
@@ -50,9 +48,20 @@ public class JsonSaver implements ModelObserver {
      * @param conversations the conversations to write to file
      */
     private void writeConversations(List<Conversation> conversations){
-        try (Writer writer = new FileWriter("src/main/java/infrastructure/conversations.json")) {
+        write(conversations, conversationsPath);
+    }
+    /**
+     * Writes the inputted list to inputted path in Json.
+     * Serializes nulls and creates a new file at path if one doesn't already exist.
+     * If a file already exists at specified path, it is overwritten.
+     * Will overwrite any existing users; use fileExists before calling.
+     * @param thingsToWrite List of Objects to serialize and write to file
+     * @param pathToWrite path to file that is to be written to
+     */
+    private void write(List<?> thingsToWrite, String pathToWrite){
+        try (Writer writer = new FileWriter(pathToWrite)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
-            gson.toJson(conversations, writer);
+            gson.toJson(thingsToWrite, writer);
             writer.close();
         } catch (IOException e){
             throw new RuntimeException(e);
@@ -71,8 +80,25 @@ public class JsonSaver implements ModelObserver {
         saveModel();
     }
 
+    /**
+     * Saves the model
+     */
     private void saveModel() {
-        writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
+        saveUsers();
+        saveConversations();
+    }
+
+    /**
+     * Saves the Users in the model by writing them to usersPath
+     */
+    public void saveUsers(){
         writeUsers(new ArrayList<User>(model.getUsers().values()));
+    }
+
+    /**
+     * Saves the Conversations in the model by writing them to conversationsPath
+     */
+    public void saveConversations(){
+        writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
     }
 }
