@@ -1,7 +1,7 @@
 package view;
 
 public interface IChatView {
-    void closeParticipants();
+    void closeRemoveParticipants();
 
     String getInputText();
     String getChatNameText();
@@ -13,4 +13,6 @@ public interface IChatView {
 
 
     void setDefaultConversation();
+
+    void closeAddParticipants();
 }

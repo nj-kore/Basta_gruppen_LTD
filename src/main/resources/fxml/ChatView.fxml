@@ -25,7 +25,8 @@
                    <TextField id="chatNameTextField" fx:id="chatNameTextField" editable="false" layoutX="15.0" layoutY="1.0" maxWidth="1.7976931348623157E308" prefHeight="68.0" prefWidth="407.0" stylesheets="@style.css" text="chatName" />
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
                      <items>
-                        <MenuItem fx:id="viewParticipants" mnemonicParsing="false" onAction="#viewParticipants" text="View Participants" />
+                        <MenuItem fx:id="addParticipantsMenuItem" mnemonicParsing="false" onAction="#displayAddParticipants" text="Add Participants" />
+                        <MenuItem fx:id="viewParticipants" mnemonicParsing="false" onAction="#displayRemoveParticipants" text="View Participants" />
                         <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
                         <MenuItem fx:id="leaveChatMenuItem" mnemonicParsing="false" text="Leave Conversation" />
                      </items>
@@ -69,6 +70,6 @@
             </HBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="participantsAnchorPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
+      <AnchorPane fx:id="participantsAnchorPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="860.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
    </children>
 </fx:root>

@@ -25,15 +25,15 @@ public class MainModel extends ModelObservable {
     private User activeUser;
     private Conversation activeConversation;
 
+
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
-    }
 
+    }
     private Map<Integer, Conversation> conversations;
     private Map<Integer, User> users = new HashMap<>();
+
     List<User> newConvoUsers = new ArrayList();
-
-
     public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
         this.users = users;
         this.conversations = conversations;
@@ -156,6 +156,7 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
     }
 
+
     //Exists for testing purposes
     public void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
@@ -174,14 +175,13 @@ public class MainModel extends ModelObservable {
 
 
     }
-
     private final static int MAX_LENGTH = 30;
+
     private final static int MIN_LENGTH = 0;
 
     private boolean validateConversationName(String name) {
         return name.length() > MIN_LENGTH && name.length() < MAX_LENGTH;
     }
-
     /**
      * Constructs a placeholder name to a conversation, consisting of the names of participants in the conversation
      */
@@ -343,6 +343,41 @@ public class MainModel extends ModelObservable {
                 highest=u.getId();
             }
             return highest+1;
+    }
+
+    public Iterator<User> getNonParticipants(Conversation conversation) {
+        ArrayList<User> usersNotInConversation = new ArrayList<User>();
+        Iterator<User> contacts = getContacts();
+        User contact;
+
+        while(contacts.hasNext()){
+            contact = contacts.next();
+            if(!conversation.getParticipants().contains(contact)){
+                usersNotInConversation.add(contact);
+            }
+        }
+        return usersNotInConversation.iterator();
+    }
+
+    public Iterator<User> searchNonParticipants(String searchInput, Conversation conversation){
+        Iterator<User> nonParticipants = getNonParticipants(conversation);
+        ArrayList<User> matchingUsers = new ArrayList<User>();
+        User nonParticipant;
+
+        while(nonParticipants.hasNext()){
+            nonParticipant = nonParticipants.next();
+            if(nonParticipant.getFullName().contains(searchInput)){
+                matchingUsers.add(nonParticipant);
+            }
+        }
+        return matchingUsers.iterator();
+    }
+
+    public void addParticipants(Iterator<User> participantsToAdd, Conversation conversation) {
+        while (participantsToAdd.hasNext()){
+            conversation.addParticipant(participantsToAdd.next());
+        }
+        setActiveConversation(conversation.getId());
     }
 
 }

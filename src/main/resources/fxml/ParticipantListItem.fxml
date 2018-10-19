@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="390.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#participantItemSelected" prefHeight="73.0" prefWidth="400.0" styleClass="itemPliancy" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="profilePictureImageView" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0">
          <image>
@@ -14,14 +14,6 @@
          </image>
       </ImageView>
       <Label fx:id="nameLabel" layoutX="78.0" layoutY="9.0" styleClass="detailViewMediumText" text="Name" />
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="550.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="19.0">
-         <image>
-            <Image url="@../pics/cross.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="78.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="statusImageView" fitHeight="15.0" fitWidth="15.0" layoutX="78.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,4 +22,7 @@
       </ImageView>
       <Label fx:id="statusLabel" layoutX="97.0" layoutY="46.0" text="Status" />
    </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </fx:root>

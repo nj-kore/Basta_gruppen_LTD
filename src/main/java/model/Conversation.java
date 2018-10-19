@@ -72,4 +72,8 @@ public class Conversation {
     public List<User> getParticipants() {
         return participants;
     }
+
+    public void addParticipant(User userToAdd) {
+        participants.add(userToAdd);
+    }
 }

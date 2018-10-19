@@ -155,11 +155,19 @@
     -fx-font-size: 12px;
     -fx-text-fill: grey;
 }
-/*
 
-.blackBorder{
-    -fx-border-width: 1px;
-    -fx-border-color: black;
-    -fx-background-insets: 2px;
+
+.itemPliancy{
 }
-*/
+
+.itemPliancy:hover{
+    -fx-border-color: rgb(54,57,62);
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+}
+.itemPliancy:pressed{
+    -fx-background-color: rgb(200,200,200);
+    -fx-border-color: gray;
+    -fx-border-radius: 5px;
+}
+

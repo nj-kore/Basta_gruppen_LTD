@@ -4,7 +4,6 @@ import controller.ChatController;
 import controller.IChatController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +27,10 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
-    private ParticipantsView participantsView;
+    private RemoveParticipantsView removeParticipantsView;
+    private AddParticipantsView addParticipantsView;
     private MainView mainView; //TODO implementera setDefaultConversation m.h.a model.
+
 
     @FXML
     private FlowPane chatFlowPane;
@@ -56,6 +57,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private MenuItem viewParticipantsMenuItem;
 
     @FXML
+    private MenuItem addParticipantsMenuItem;
+
+    @FXML
     private ImageView acceptImageView;
 
     @FXML
@@ -70,6 +74,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
     @FXML
     private AnchorPane participantsAnchorPane;
+
 
     private String editingColor = "-fx-background-color: cyan;";
     private String notEditingColor = "-fx-background-color: white;";
@@ -94,7 +99,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
-        participantsView = new ParticipantsView(mainModel, this);
+        removeParticipantsView = new RemoveParticipantsView(mainModel, this, mainModel.getActiveConversation());
+        addParticipantsView = new AddParticipantsView(mainModel, this, mainModel.getActiveConversation());
         this.mainView = mainView;
 
         IChatController chatController = new ChatController(this, mainModel);
@@ -185,6 +191,7 @@ public class ChatView extends AnchorPane implements IChatView {
     }
 
 
+
     /**
      * Makes the ChatName editable and makes the accept and decline button visible
      *
@@ -202,17 +209,33 @@ public class ChatView extends AnchorPane implements IChatView {
     }
 
     @FXML
-    private void viewParticipants(){
+    private void displayRemoveParticipants(){
         participantsAnchorPane.getChildren().clear();
-        participantsAnchorPane.getChildren().add(participantsView);
-        participantsView.updateParticipants();
+        participantsAnchorPane.getChildren().add(removeParticipantsView);
+        removeParticipantsView.update();
         participantsAnchorPane.toFront();
     }
 
+    @FXML
+    private void displayAddParticipants(){
+        participantsAnchorPane.getChildren().clear();
+        participantsAnchorPane.getChildren().add(addParticipantsView);
+        addParticipantsView.update();
+        participantsAnchorPane.toFront();
+    }
+
+
     @Override
-    public void closeParticipants(){
+    public void closeRemoveParticipants(){
         participantsAnchorPane.toBack();
     }
+
+    @Override
+    public void closeAddParticipants() {
+        participantsAnchorPane.toBack();
+    }
+
+
 
     /**
      * @return the text that is currently in the chat input area

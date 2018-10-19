@@ -47,7 +47,6 @@ public class ContactListItem extends AnchorPane {
     @FXML
     public void contactListItemClicked() {
         mainView.loadDetailView(this.user);
-        //mainView.
     }
 
 }

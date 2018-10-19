@@ -4,17 +4,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import model.User;
-import view.ParticipantsView;
+import view.RemoveParticipantsView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParticipantsController implements IParticipantsController{
-    ParticipantsView participantsView;
+    RemoveParticipantsView removeParticipantsView;
     MainModel mainModel;
 
-    public ParticipantsController(ParticipantsView participantsView, MainModel mainModel) {
-        this.participantsView = participantsView;
+    public ParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel) {
+        this.removeParticipantsView = removeParticipantsView;
         this.mainModel = mainModel;
     }
 
@@ -23,12 +23,12 @@ public class ParticipantsController implements IParticipantsController{
     public void searchParticipants() {
         List<User> users = mainModel.getActiveConversation().getParticipants();
         List<User> usersToShow = new ArrayList<User>();
-        String searchString = participantsView.getSearchString();
+        String searchString = removeParticipantsView.getSearchString();
 
         for(User u : users){
             if(u.getFullName().contains(searchString)) usersToShow.add(u);
         }
-        participantsView.showSearchResult(usersToShow.iterator());
+        removeParticipantsView.showSearchResult(usersToShow.iterator());
     }
 
 
@@ -40,4 +40,4 @@ public class ParticipantsController implements IParticipantsController{
                 event.consume();
             }
         }
-    }
+}
