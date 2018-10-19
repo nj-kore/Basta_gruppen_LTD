@@ -55,7 +55,7 @@ public class Conversation {
         Conversation that = (Conversation) o;
 
         if (id != that.id) {return false;}
-        if (messages != null ? !messages.equals(that.messages) : that.messages != null) {return false;}
+        if (!messages.equals(that.messages)) {return false;}
         if (!participants.equals(that.participants)) {return false;}
         return name != null ? name.equals(that.name) : that.name == null;
     }

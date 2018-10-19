@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 
 public class JsonSaverTest {
     private MainModel createDummyModel(){
@@ -34,6 +36,10 @@ public class JsonSaverTest {
         MainModel mainModel = createDummyModel();
         JsonSaver jsonSaver = new JsonSaver(mainModel, "src/test/java/infrastructure/users.json","src/test/java/infrastructure/conversations.json");
         jsonSaver.update(null);
+        JsonLoader jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json", "src/test/java/infrastructure/conversations.json");
+        MainModel mainModel2 = new MainModel(jsonLoader.loadUsers(),jsonLoader.loadConversations());
+        assertEquals(mainModel.getUsers(),mainModel2.getUsers());
+        assertEquals(mainModel.getConversations(),mainModel2.getConversations());
     }
 
     @Test
@@ -41,6 +47,9 @@ public class JsonSaverTest {
         MainModel mainModel = createDummyModel();
         JsonSaver jsonSaver = new JsonSaver(mainModel, "src/test/java/infrastructure/users.json","src/test/java/infrastructure/conversations.json");
         jsonSaver.saveUsers();
+        JsonLoader jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json", "src/test/java/infrastructure/conversations.json");
+        MainModel mainModel2 = new MainModel(jsonLoader.loadUsers(),jsonLoader.loadConversations());
+        assertEquals(mainModel.getUsers(),mainModel2.getUsers());
     }
 
     @Test
@@ -48,6 +57,9 @@ public class JsonSaverTest {
         MainModel mainModel = createDummyModel();
         JsonSaver jsonSaver = new JsonSaver(mainModel, "src/test/java/infrastructure/users.json","src/test/java/infrastructure/conversations.json");
         jsonSaver.saveConversations();
+        JsonLoader jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json", "src/test/java/infrastructure/conversations.json");
+        MainModel mainModel2 = new MainModel(jsonLoader.loadUsers(),jsonLoader.loadConversations());
+        assertEquals(mainModel.getConversations(),mainModel2.getConversations());
     }
 
 }

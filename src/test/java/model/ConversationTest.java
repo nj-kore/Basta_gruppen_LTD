@@ -19,4 +19,39 @@ public class ConversationTest {
         c.addMessage(message);
         assertFalse(c.getMessages().isEmpty());
     }
+
+    @Test
+    public void equals(){
+        ArrayList<User> userList = new ArrayList<>();
+        ArrayList<User> userList2 = new ArrayList<>();
+        Conversation conversation = new Conversation(1,"foo", userList );
+        Conversation conversation2 = new Conversation(1,"foo",userList2 );
+        Conversation conversation3 = new Conversation(1,"bar", userList );
+        Conversation conversation4 = new Conversation(2,"bar", userList );
+        Conversation conversation5 = new Conversation(1,"foo", null );
+        Conversation conversation6 = new Conversation(1,null, userList );
+        Conversation conversation7 = new Conversation(1,"bar", userList );
+
+        assertTrue(conversation.equals(conversation2));
+        conversation2.addParticipant(new User(5, null, null, null, null, null, null));
+        assertFalse(conversation.equals(conversation2));
+        assertFalse(conversation.equals(conversation6));
+        assertFalse(conversation.equals(conversation3));
+        assertFalse(conversation.equals(conversation4));
+        assertFalse(conversation.equals(conversation5));
+        assertFalse(conversation.equals(conversation7));
+
+        assertFalse(conversation.equals(null));
+        assertFalse(conversation.equals("This is a string"));
+    }
+
+    @Test
+    public void HashCode(){
+        ArrayList<User> userList = new ArrayList<>();
+        Conversation conversation = new Conversation(1,"foo",userList );
+        Conversation conversation2 = new Conversation(1,"foo",userList );
+        Conversation conversation3 = new Conversation(1,"bar",userList );
+        assertTrue(conversation.hashCode() == conversation2.hashCode());
+        assertFalse(conversation.hashCode() == conversation3.hashCode());
+    }
 }
