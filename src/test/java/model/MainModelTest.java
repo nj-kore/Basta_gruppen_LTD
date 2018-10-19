@@ -84,14 +84,14 @@ public class MainModelTest {
 
         MainModel model = new MainModel(userMap, conversationMap);
 
-        User activeUser = new User(1, "admin", "123", "eva", "olsson", StatusType.Available, true);
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, true);
+        //User activeUser = new User(1, "admin", "123", "eva", "olsson", StatusType.Available, true);
+        //User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, true);
 
-        model.createUser(activeUser);
-        model.createUser(contactUser);
-        model.setActiveUser(activeUser);
+        model.createUser("admin", "123", "eva", "olsson", true);
+
+        //model.setActiveUser(activeUser);
         assertFalse(model.getContacts().hasNext());
-        model.addContact(contactUser.getId());
+        model.createUser("contact", "222", "olle", "innebandysson", false);
         assertNotNull(model.getContacts().next());
 
     }
@@ -188,34 +188,33 @@ public class MainModelTest {
         MainModel model = new MainModel(userMap, conversationMap);
         ArrayList<User> participants = new ArrayList<>();
         for(int i = 0; i < 20; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", StatusType.Available, false);
-            model.createUser(u);
-            participants.add(u);
+            model.createUser( "" + i, "123", "person" + i, "", false);
+            participants.add(model.getUser(i));
         }
         model.createConversation(participants, "");
-        User admin = new User(500, "", "", "admin", "", StatusType.Busy, false);
-        model.createUser(admin);
-        model.setActiveUser(admin);
-        participants.add(admin);
+        //User admin = new User(500, "", "", "admin", "", StatusType.Busy, false);
+        model.createUser("", "", "admin", "", false);
+        model.setActiveUser(20);
+        participants.add(model.getUser(20));
 
         //only 19 people, because it does not include yourself
         assertEquals(model.generatePlaceholderName(model.getActiveConversation()), "person19, person18, person17 + 16 more.");
 
+
         participants.clear();
-        for(int i = 20; i < 22; i++) {
-            User u = new User(i, "" + i, "123", "person" + i, "", StatusType.Available, false);
-            model.createUser(u);
-            participants.add(u);
+        for(int i = 21; i < 23; i++) {
+            //User u = new User(i, "" + i, "123", "person" + i, "", StatusType.Available, false);
+            model.createUser("" + i, "123", "person" + i, "",false);
+            participants.add(model.getUser(i));
         }
-        participants.add(admin);
         model.createConversation(participants, "");
-        assertEquals(model.generatePlaceholderName(model.getActiveConversation()), "person21, person20");
+        assertEquals(model.generatePlaceholderName(model.getActiveConversation()), "person22, person21");
         participants.clear();
 
-        participants.add(admin);
+        participants.add(model.getUser(20));
         model.createConversation(participants, "");
 
-        assertEquals(model.generatePlaceholderName(model.getActiveConversation()), admin.getFirstName());
+        assertEquals(model.generatePlaceholderName(model.getActiveConversation()), model.getUser(20).getFirstName());
     }
 
     @Test

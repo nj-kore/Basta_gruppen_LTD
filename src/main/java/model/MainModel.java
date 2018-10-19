@@ -350,7 +350,11 @@ public class MainModel extends Observable {
      */
     public int getNewUserId(){
         int highest =0;
+        if (users.isEmpty()){
+            return 0;
+        }
         for (User u : users.values()) {
+
             if (u.getId()>highest) {
             }
                 highest=u.getId();
