@@ -106,7 +106,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
         participantsFlowPane.getChildren().clear();
         participantsToRemoveFlowPane.getChildren().clear();
 
-        Iterator<User> participants = mainModel.getParticipants();
+        Iterator<User> participants = mainModel.getParticipants(conversation);
         while(participants.hasNext()){
             participantsFlowPane.getChildren().add(new ParticipantItem(participants.next(), this));
         }

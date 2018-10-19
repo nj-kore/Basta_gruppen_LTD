@@ -136,7 +136,7 @@ public class MainModelTest {
 
     @Test
     public void getUsersConversations() {
-        MainModel model = new MainModel(getFillerUsers(), new HashMap<>());
+        MainModel model = new MainModel(getFillerUsers(8), new HashMap<>());
         List<User> participants = new ArrayList<>();
         participants.add(model.getUser(1));
         participants.add(model.getUser(2));
@@ -240,7 +240,7 @@ public class MainModelTest {
 
     }
 
-    private Map<Integer, User> getFillerUsers() {
+    private Map<Integer, User> getFillerUsers(int amount) {
 
         Map<Integer, User> userMap = new HashMap();
         userMap.put(1, new User(1, "admin", "123", "Eva", "Dickinsson", StatusType.Available, true));
@@ -252,7 +252,11 @@ public class MainModelTest {
         userMap.put(7, new User(7, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", StatusType.Available, true));
         userMap.put(8, new User(8, "Diddelydoo", "lhjie34", "Olof", "Klickson", StatusType.Available, true));
 
-        return userMap;
+        Map<Integer, User> toReturn = new HashMap<>();
+        for(int i = 1; i <= amount; i++){
+            toReturn.put(i, userMap.get(i));
+        }
+        return toReturn;
     }
 
     @Test
@@ -265,7 +269,7 @@ public class MainModelTest {
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
 
-        Map<Integer, User> users = getFillerUsers();
+        Map<Integer, User> users = getFillerUsers(8);
         User active = new User(mainModel.getNewUserId(), "Doofenshmirtz", "perry", "Doktor", "Doofus", StatusType.Available, true);
         userMap.put(mainModel.getNewUserId(), active);
         userMap.putAll(users);
@@ -291,7 +295,7 @@ public class MainModelTest {
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
 
-        Map<Integer, User> users1m = getFillerUsers();
+        Map<Integer, User> users1m = getFillerUsers(8);
         ArrayList<User> users1 = new ArrayList<User>();
         users1.addAll(users1m.values());
 
@@ -336,5 +340,50 @@ public class MainModelTest {
         assertEquals(2, u2.getId());
         assertEquals(3, u3.getId());
         assertEquals(4, u4.getId());
+    }
+
+    @Test
+    public void getParticipants() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        ArrayList<User> participants = new ArrayList<>();
+        userMap.putAll(getFillerUsers(3));
+        participants.addAll(userMap.values());
+
+        Conversation conversation = new Conversation(1, "t", participants);
+        conversationMap.put(1, conversation);
+        mainModel.setActiveConversation(conversation.getId());
+        mainModel.setActiveUser(participants.get(2)); //3rd user of the conversation is the active user
+
+        Iterator<User> returnedParticipants = mainModel.getParticipants(conversation);
+
+        assertEquals(returnedParticipants.next(), participants.get(0));
+        assertEquals(returnedParticipants.next(), participants.get(1));
+        assertEquals(returnedParticipants.hasNext(), false);
+    }
+
+    @Test
+    public void getNonParticipants() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        ArrayList<User> participants = new ArrayList<>();
+        userMap.putAll(getFillerUsers(3));
+        participants.addAll(userMap.values());
+        User u1 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
+        User u2 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
+        userMap.put(u1.getId(), u1);
+
+        Conversation conversation = new Conversation(1, "t", participants);
+        conversationMap.put(1, conversation);
+        mainModel.setActiveConversation(conversation.getId());
+        mainModel.setActiveUser(u2.getId());
+        mainModel.addContact(u1.getId());
+
+        Iterator<User> iterator = mainModel.getNonParticipants(conversation);
+
+        assertEquals(iterator.next(), u1);
+        assertEquals(iterator.hasNext(), false);
     }
 }

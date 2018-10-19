@@ -22,7 +22,7 @@ public class RemoveParticipantsController implements IRemoveParticipantsControll
 
     @Override
     public void searchParticipants() {
-        List<User> users = mainModel.getActiveConversation().getParticipants();
+        List<User> users = removeParticipantsView.getConversation().getParticipants();
         List<User> usersToShow = new ArrayList<>();
         String searchString = removeParticipantsView.getSearchString();
 
