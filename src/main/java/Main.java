@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.MainModel;
+import model.observerpattern.ModelObserver;
 import view.IMainView;
 import view.MainView;
 
@@ -45,7 +46,7 @@ public class Main extends Application {
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
         //mainModel.initFillers();      //TODO fixa så man slipper göra detta varje gång
         //Creates an instance of datasaver which can be used to save data
-        JsonSaver dataSaver = new JsonSaver(mainModel, "src/main/java/infrastructure/users.json","src/main/java/infrastructure/conversations.json");
+        ModelObserver dataSaver = new JsonSaver(mainModel, "src/main/java/infrastructure/users.json","src/main/java/infrastructure/conversations.json");
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel);
 

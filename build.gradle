@@ -9,12 +9,17 @@ buildscript {
     }
 }
 
-
 plugins {
     id 'java'
     id 'jacoco'
     id 'application'
 }
+
+apply plugin: 'javafx-gradle-plugin'
+
+defaultTasks 'clean', 'build'
+
+
 
 mainClassName = "Main"
 
@@ -50,9 +55,6 @@ jacocoTestReport {
         html.enabled true
     }
 }
-
-apply plugin: 'javafx-gradle-plugin'
-
 
 jfx {
     // minimal requirement for jfxJar-task
