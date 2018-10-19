@@ -26,12 +26,14 @@ public class MainModel extends ModelObservable {
     private Conversation activeConversation;
 
 
+
+
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
 
     }
     private Map<Integer, Conversation> conversations;
-    private Map<Integer, User> users = new HashMap<>();
+    private Map<Integer, User> users;
 
     List<User> newConvoUsers = new ArrayList();
     public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
@@ -102,7 +104,7 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateTypes.USER_INFO);
     }
 
-    public Conversation loadConversation(int conversationId) {
+    Conversation loadConversation(int conversationId) {
         return conversations.get(conversationId);
     }
 
@@ -110,7 +112,7 @@ public class MainModel extends ModelObservable {
         return activeConversation.getMessages().values().iterator();
     }
 
-    public void addContact(int userId) {
+    void addContact(int userId) {
         activeUser.addContact(userId);
     }
 
@@ -293,7 +295,7 @@ public class MainModel extends ModelObservable {
 
     public Iterator<User> searchContacts(String input) {
         Iterator<User> iterator = getContacts();
-        ArrayList<User> contactsToShow = new ArrayList<User>();
+        ArrayList<User> contactsToShow = new ArrayList<>();
         User next;
 
         while (iterator.hasNext()) {
@@ -346,7 +348,7 @@ public class MainModel extends ModelObservable {
     }
 
     public Iterator<User> getNonParticipants(Conversation conversation) {
-        ArrayList<User> usersNotInConversation = new ArrayList<User>();
+        ArrayList<User> usersNotInConversation = new ArrayList<>();
         Iterator<User> contacts = getContacts();
         User contact;
 
@@ -361,7 +363,7 @@ public class MainModel extends ModelObservable {
 
     public Iterator<User> searchNonParticipants(String searchInput, Conversation conversation){
         Iterator<User> nonParticipants = getNonParticipants(conversation);
-        ArrayList<User> matchingUsers = new ArrayList<User>();
+        ArrayList<User> matchingUsers = new ArrayList<>();
         User nonParticipant;
 
         while(nonParticipants.hasNext()){
@@ -376,6 +378,13 @@ public class MainModel extends ModelObservable {
     public void addParticipants(Iterator<User> participantsToAdd, Conversation conversation) {
         while (participantsToAdd.hasNext()){
             conversation.addParticipant(participantsToAdd.next());
+        }
+        setActiveConversation(conversation.getId());
+    }
+
+    public void removeParticipants(Iterator<User> participantsToRemove, Conversation conversation) {
+        while (participantsToRemove.hasNext()){
+            conversation.removeParticipant(participantsToRemove.next());
         }
         setActiveConversation(conversation.getId());
     }

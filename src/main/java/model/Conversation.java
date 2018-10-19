@@ -22,7 +22,7 @@ public class Conversation {
      * Adds message m to conversation
      * @param m
      */
-    public void addMessage(Message m) {
+    void addMessage(Message m) {
         messages.put(m.getId(), m);
     }
 
@@ -37,7 +37,7 @@ public class Conversation {
     }
 
 
-    public Map<Integer, Message> getMessages() {
+    Map<Integer, Message> getMessages() {
         return messages;
     }
 
@@ -73,7 +73,13 @@ public class Conversation {
         return participants;
     }
 
-    public void addParticipant(User userToAdd) {
+    void addParticipant(User userToAdd) {
         participants.add(userToAdd);
+    }
+
+    void removeParticipant(User userToRemove) {
+        if(participants.contains(userToRemove)){
+            participants.remove(userToRemove);
+        }
     }
 }

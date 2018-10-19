@@ -7,13 +7,14 @@ import model.User;
 import view.RemoveParticipantsView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ParticipantsController implements IParticipantsController{
-    RemoveParticipantsView removeParticipantsView;
-    MainModel mainModel;
+public class RemoveParticipantsController implements IRemoveParticipantsController {
+    private RemoveParticipantsView removeParticipantsView;
+    private MainModel mainModel;
 
-    public ParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel) {
+    public RemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel) {
         this.removeParticipantsView = removeParticipantsView;
         this.mainModel = mainModel;
     }
@@ -22,7 +23,7 @@ public class ParticipantsController implements IParticipantsController{
     @Override
     public void searchParticipants() {
         List<User> users = mainModel.getActiveConversation().getParticipants();
-        List<User> usersToShow = new ArrayList<User>();
+        List<User> usersToShow = new ArrayList<>();
         String searchString = removeParticipantsView.getSearchString();
 
         for(User u : users){
@@ -40,4 +41,12 @@ public class ParticipantsController implements IParticipantsController{
                 event.consume();
             }
         }
+
+
+
+    @Override
+    public void removeParticipants() {
+        mainModel.removeParticipants(removeParticipantsView.getParticipantsToAddOrRemove(), removeParticipantsView.getConversation());
+        removeParticipantsView.closeView();
+    }
 }

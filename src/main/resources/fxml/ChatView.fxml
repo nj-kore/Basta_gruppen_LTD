@@ -26,7 +26,7 @@
                   <MenuButton fx:id="optionsMenuButton" layoutX="655.0" layoutY="22.0" mnemonicParsing="false" text="Options" AnchorPane.rightAnchor="20.0">
                      <items>
                         <MenuItem fx:id="addParticipantsMenuItem" mnemonicParsing="false" onAction="#displayAddParticipants" text="Add Participants" />
-                        <MenuItem fx:id="viewParticipants" mnemonicParsing="false" onAction="#displayRemoveParticipants" text="View Participants" />
+                        <MenuItem fx:id="viewParticipants" mnemonicParsing="false" onAction="#displayRemoveParticipants" text="Remove Participants" />
                         <MenuItem fx:id="changeChatNameMenuItem" mnemonicParsing="false" text="Change chat name" />
                         <MenuItem fx:id="leaveChatMenuItem" mnemonicParsing="false" text="Leave Conversation" />
                      </items>

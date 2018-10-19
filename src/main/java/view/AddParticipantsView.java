@@ -22,7 +22,7 @@ import java.util.Iterator;
 public class AddParticipantsView extends AnchorPane implements IParticipantView {
 
     MainModel mainModel;
-    IChatView chatView;
+    private IChatView chatView;
     private Conversation conversation;
 
     @FXML
@@ -43,7 +43,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     @FXML
     private Button addParticipantsButton;
 
-    public AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
+    AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -61,7 +61,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         IAddParticipantsController controller = new AddParticipantsController(this, mainModel);
 
         searchNonParticipantsImageView.setOnMouseClicked(event -> controller.searchNonParticipants());
-        searchNonParticipantsTextField.setOnKeyPressed(event -> controller.isEnterPressed(event));
+        searchNonParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
         addParticipantsButton.setOnAction(event -> controller.addParticipants());
     }
 
@@ -70,6 +70,8 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     public void showSearch(Iterator<User> usersToShow) {
         nonParticipantsFlowPane.getChildren().clear();
         User userToShow;
+
+        if(!usersToShow.hasNext()) nonParticipantsFlowPane.getChildren().add(noMatchingNonParticipantsLabel);
 
         while(usersToShow.hasNext()){
             userToShow = usersToShow.next();
@@ -115,7 +117,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
 
     @Override
     public Iterator<User> getParticipantsToAddOrRemove() {
-        ArrayList<User> usersToAdd = new ArrayList<User>();
+        ArrayList<User> usersToAdd = new ArrayList<>();
 
         for(Node userNode : contactsToAddFlowPane.getChildren()){
             ParticipantItem userParticipantItem = (ParticipantItem) userNode;

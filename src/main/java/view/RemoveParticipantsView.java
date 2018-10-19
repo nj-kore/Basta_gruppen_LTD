@@ -1,8 +1,10 @@
 package view;
 
-import controller.ParticipantsController;
+import controller.RemoveParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,13 +15,14 @@ import model.MainModel;
 import model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class RemoveParticipantsView extends AnchorPane implements IParticipantView {
 
     MainModel mainModel;
-    IChatView chatView;
-    Conversation conversation;
+    private IChatView chatView;
+    private Conversation conversation;
 
     @FXML
     private FlowPane participantsFlowPane;
@@ -36,6 +39,9 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     @FXML
     private FlowPane participantsToRemoveFlowPane;
 
+    @FXML
+    private Button removeParticipantsButton;
+
     public RemoveParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantList.fxml"));
         fxmlLoader.setRoot(this);
@@ -51,11 +57,11 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
         this.chatView = chatView;
         this.conversation = conversation;
 
-        ParticipantsController controller = new ParticipantsController(this, mainModel);
+        RemoveParticipantsController controller = new RemoveParticipantsController(this, mainModel);
 
         searchParticipantsImageView.setOnMouseClicked(event -> controller.searchParticipants());
-        searchParticipantsTextField.setOnKeyPressed(event -> controller.isEnterPressed(event));
-
+        searchParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
+        removeParticipantsButton.setOnAction(event -> controller.removeParticipants());
     }
 
 
@@ -111,7 +117,13 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
 
     @Override
     public Iterator<User> getParticipantsToAddOrRemove() {
-        return null; //TODO
+        ArrayList<User> usersToRemove = new ArrayList<>();
+
+        for(Node userNode : participantsToRemoveFlowPane.getChildren()){
+            ParticipantItem userParticipantItem = (ParticipantItem) userNode;
+            usersToRemove.add(userParticipantItem.getUser());
+        }
+        return usersToRemove.iterator();
     }
 
     @Override
