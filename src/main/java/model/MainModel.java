@@ -43,9 +43,9 @@ public class MainModel extends ModelObservable {
 
 
     public void initFillers() {
-        User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available, Boolean.TRUE);
-        User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, Boolean.FALSE);
-        User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available, Boolean.FALSE);
+        //User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available, Boolean.TRUE);
+        //User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, Boolean.FALSE);
+        //User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available, Boolean.FALSE);
         /*Map<Integer, User> userMap = new HashMap();
         createUser(new User(4, "admin", "123", "Eva", "Dickinssonm", MainModel.StatusType.Available, true));
         createUser(new User(5, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", MainModel.StatusType.Available, true));
@@ -55,14 +55,15 @@ public class MainModel extends ModelObservable {
         createUser(new User(9, "Heyman12", "jf672jfnm", "Carline", "Mandala", MainModel.StatusType.Available, true));
         createUser(new User(10, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", MainModel.StatusType.Available, true));
         createUser(new User(11, "Diddelydoo", "lhjie34", "Olof", "Klickson", MainModel.StatusType.Available, true));*/
-        setActiveUser(admin);
-        admin.addContact(contactUser.getId());
-        admin.addContact(contactUser2.getId());
-        createUser(admin);
-        createUser(contactUser);
-        createUser(contactUser2);
-        contactUser.setProfileImagePath("pics/lukasmaly.jpg");
-        contactUser.setStatus(StatusType.Busy);
+
+        createUser("admin", "123", "Admin", "Boy", true);
+        createUser("contact", "222", "olle", "innebandysson", false);
+        createUser("contact2", "222", "kalle", "kuling", false);
+        //setActiveUser(admin);
+        //activeUser.addContact(2);
+        //activeUser.addContact(3);
+        //contactUser.setProfileImagePath("pics/lukasmaly.jpg");
+        //contactUser.setStatus(StatusType.Busy);
         //users.put(admin.getId(), admin);
         //users.put(contactUser.getId(), contactUser);
         //users.put(contactUser2.getId(), contactUser2);
@@ -254,12 +255,21 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateTypes.USER_INFO);
     }
 
-    public void createUserForController(String u, String pw, String fn, String ln, Boolean a){
+    public void createUser(String u, String pw, String fn, String ln, Boolean a){
         int id = getNewUserId();
         User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
         //Adds as a contact to the active user, might not be usefull later on
         getActiveUser().addContact(id);
         createUser(user);
+        notifyObservers(UpdateTypes.CONTACTS);
+        users.put(user.getId(), user);
+        if (getActiveUser()==null){
+            setActiveUser(user.getId());
+        }
+        if(activeUser.getId()!=id){
+            getActiveUser().addContact(id);
+        }
+
         notifyObservers(UpdateTypes.CONTACTS);
     }
 
@@ -339,7 +349,11 @@ public class MainModel extends ModelObservable {
      */
     public int getNewUserId(){
         int highest =0;
+        if (users.isEmpty()){
+            return 0;
+        }
         for (User u : users.values()) {
+
             if (u.getId()>highest) {
             }
                 highest=u.getId();
