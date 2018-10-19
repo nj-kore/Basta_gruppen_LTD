@@ -368,9 +368,8 @@ public class MainModelTest {
         HashMap<Integer, User> userMap = new HashMap<>();
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
-        ArrayList<User> participants = new ArrayList<>();
         userMap.putAll(getFillerUsers(3));
-        participants.addAll(userMap.values());
+        ArrayList<User> participants = new ArrayList<>(userMap.values());
         User u1 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
         User u2 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
         userMap.put(u1.getId(), u1);
