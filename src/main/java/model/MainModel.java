@@ -258,8 +258,6 @@ public class MainModel extends ModelObservable {
     public void createUser(String u, String pw, String fn, String ln, Boolean a){
         int id = getNewUserId();
         User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
-        //Adds as a contact to the active user, might not be usefull later on
-        getActiveUser().addContact(id);
         createUser(user);
         notifyObservers(UpdateTypes.CONTACTS);
         users.put(user.getId(), user);

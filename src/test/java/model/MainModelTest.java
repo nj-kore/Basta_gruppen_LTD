@@ -335,10 +335,10 @@ public class MainModelTest {
         User u5 = new User(mainModel.getNewUserId(), "c", "c", "c", "c", StatusType.Available, false);
         userMap.put(mainModel.getNewUserId(), u5);
 
-        assertEquals(1, u1.getId());
-        assertEquals(2, u2.getId());
-        assertEquals(3, u3.getId());
-        assertEquals(4, u4.getId());
+        assertEquals(0, u1.getId());
+        assertEquals(1, u2.getId());
+        assertEquals(2, u3.getId());
+        assertEquals(3, u4.getId());
     }
 
     @Test
