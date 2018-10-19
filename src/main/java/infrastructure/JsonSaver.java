@@ -30,7 +30,6 @@ public class JsonSaver implements IDataSaver, ModelObserver {
         this.model = model;
         this.usersPath = usersPath;
         this.conversationsPath = conversationsPath;
-        saveModel();
     }
 
     /**

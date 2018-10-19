@@ -86,8 +86,10 @@ public class JsonLoaderTest {
 
         assertEquals(conversation1, jsonLoader.loadConversations().get(1));
         assertEquals(conversation2, jsonLoader.loadConversations().get(2));
-        assertNotEquals(user1,jsonLoader.loadConversations().get(2));
         assertEquals(conversationsMap.keySet(),jsonLoader.loadConversations().keySet());
+        assertNotEquals(user1,jsonLoader.loadConversations().get(2));
+        jsonLoader = new JsonLoader("src/test/java/infrastructure/users.json","src/test/java/infrastructure/conversations/");
+        assertNotEquals(user1,jsonLoader.loadConversations().get(2));
     }
 
 }

@@ -251,6 +251,7 @@ public class MainModel extends ModelObservable {
 
     public void createUser(User u) {
         users.put(u.getId(), u);
+        notifyObservers(UpdateTypes.USER_INFO);
     }
 
     public void createUserForController(String u, String pw, String fn, String ln, Boolean a){
