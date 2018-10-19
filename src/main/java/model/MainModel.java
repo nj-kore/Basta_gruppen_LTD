@@ -27,7 +27,6 @@ public class MainModel extends ModelObservable {
 
 
 
-
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
 
@@ -360,6 +359,16 @@ public class MainModel extends ModelObservable {
         }
         return usersNotInConversation.iterator();
     }
+
+    /**
+     * @return Participants of a conversation WITHOUT current activeUser.
+     */
+    public Iterator<User> getParticipants() {
+        List<User> participants = getActiveConversation().getParticipants();
+        participants.remove(getActiveUser());
+        return participants.iterator();
+    }
+
 
     public Iterator<User> searchNonParticipants(String searchInput, Conversation conversation){
         Iterator<User> nonParticipants = getNonParticipants(conversation);

@@ -17,6 +17,7 @@ import model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class RemoveParticipantsView extends AnchorPane implements IParticipantView {
 
@@ -104,9 +105,12 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
         this.conversation = mainModel.getActiveConversation();
         participantsFlowPane.getChildren().clear();
         participantsToRemoveFlowPane.getChildren().clear();
-        for(User u : mainModel.getActiveConversation().getParticipants()){
-            participantsFlowPane.getChildren().add(new ParticipantItem(u, this));
+
+        Iterator<User> participants = mainModel.getParticipants();
+        while(participants.hasNext()){
+            participantsFlowPane.getChildren().add(new ParticipantItem(participants.next(), this));
         }
+
     }
 
     @Override

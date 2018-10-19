@@ -109,11 +109,11 @@ public class ChatView extends AnchorPane implements IChatView {
 
         sendButton.setOnAction(event -> chatController.onSendButtonClicked());
 
-        chatTextArea.setOnKeyPressed(event -> chatController.onChatAreaKeyPressed(event));
+        chatTextArea.setOnKeyPressed(chatController::onChatAreaKeyPressed);
 
         chatNameTextField.setOnMouseClicked(event -> chatController.onChangeChatNameClicked());
 
-        chatNameTextField.setOnKeyPressed(event -> chatController.onChatNameKeyPressed(event));
+        chatNameTextField.setOnKeyPressed(chatController::onChatNameKeyPressed);
 
         changeChatNameMenuItem.setOnAction(event -> chatController.onChangeChatNameClicked());
 
@@ -333,7 +333,7 @@ public class ChatView extends AnchorPane implements IChatView {
             messageImageView.setImage(profileImage);
             messageUserNameLabel.setText(concreteUser.getFullName());
             messageTextFlow.getChildren().add(new Text(message.getText()));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             messageTimeStampLabel.setText(message.getTime().format(formatter));
         }
     }
