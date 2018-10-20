@@ -1,10 +1,10 @@
 ﻿# ShatApp
 ShatApp is an application made for corporations to provide an easy and effective way to chat with colleagues.\
 It was created as a project for the course TDA367 at Chalmers University of Technology. \
-It is not suitable for actual corporate use in its current state since there can only be one instance of it at a time, and since it has no capabilities of sending messages over a network.
+It is not suitable for actual corporate use in its current state since it can't communicate with anyone but itself, and since it has no capabilities of sending messages over a network.
  ## Presets
 There are premade Users and Conversations that can be loaded and put into the MainModel upon instantiation. \
-Premade Users and Conversations can be viewed in Users.json and Conversations.json. \
+Premade Users and Conversations can be viewed in users.json and conversations.json in /json/. \
 Standard admin login is admin:123 (username:password) and one of a few regular users is contact:222. \
 You can of course edit these in the JSON, alternatively create your own Users/Conversations to input into the MainModel upon instantiation.
 ## Running ShatApp with the gradle wrapper
