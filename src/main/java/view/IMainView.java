@@ -11,4 +11,8 @@ public interface IMainView {
     void displayCurrentUser();
     void setDefaultConversation();
     void displayCreateUserView();
+    void createConvoViewToBack();
+    void updateConversationsList();
+    void backToChat();
+
 }

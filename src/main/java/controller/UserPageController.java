@@ -1,13 +1,13 @@
 package controller;
 
 import model.MainModel;
+import view.IMainView;
 import view.MainView;
 
 public class UserPageController implements IUserPageController {
     private MainModel mainModel;
-    private MainView mainView;
 
-    public UserPageController(MainModel mainModel, MainView mainview) {
+    public UserPageController(MainModel mainModel) {
         this.mainModel = mainModel;
     }
 
@@ -19,7 +19,5 @@ public class UserPageController implements IUserPageController {
         mainModel.changePassword(s);
     }
 
-    //public void changeProfilePicture(String picURL){
-        //mainModel.getActiveUser().setProfileImagePath(picURL);
-    //}
+
 }
