@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 
-
 /**
  * The façade for the model package.
  */
@@ -25,49 +24,18 @@ public class MainModel extends ModelObservable {
     private User activeUser;
     private Conversation activeConversation;
 
-
-
     public enum UpdateTypes {
         ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
 
     }
+
     private Map<Integer, Conversation> conversations;
     private Map<Integer, User> users;
 
-    List<User> newConvoUsers = new ArrayList();
     public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
         this.users = users;
         this.conversations = conversations;
         activeConversation = new Conversation(-1, "", null);
-    }
-
-
-    public void initFillers() {
-        //User admin = new User(1, "admin", "123", "Admin", "Boy", StatusType.Available, Boolean.TRUE);
-        //User contactUser = new User(2, "contact", "222", "olle", "innebandysson", StatusType.Available, Boolean.FALSE);
-        //User contactUser2 = new User(3, "contact2", "222", "kalle", "kuling", StatusType.Available, Boolean.FALSE);
-        /*Map<Integer, User> userMap = new HashMap();
-        createUser(new User(4, "admin", "123", "Eva", "Dickinssonm", MainModel.StatusType.Available, true));
-        createUser(new User(5, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", MainModel.StatusType.Available, true));
-        createUser(new User(6, "Mr cool", "kh9845jnd", "Johan", "Petterson", MainModel.StatusType.Available, true));
-        createUser(new User(7, "Dinkerwoltz", "kfg984jhgf", "Mustafa", "Köre", MainModel.StatusType.Available, true));
-        createUser(new User(8, "TheTaboToast", "jkg84jf", "Karin", "Lidman", MainModel.StatusType.Available, true));
-        createUser(new User(9, "Heyman12", "jf672jfnm", "Carline", "Mandala", MainModel.StatusType.Available, true));
-        createUser(new User(10, "Jamiecoo00l", "mbkmGGF", "Bango", "Rickson", MainModel.StatusType.Available, true));
-        createUser(new User(11, "Diddelydoo", "lhjie34", "Olof", "Klickson", MainModel.StatusType.Available, true));*/
-
-        createUser("admin", "123", "Admin", "Boy", true);
-        createUser("contact", "222", "olle", "innebandysson", false);
-        createUser("contact2", "222", "kalle", "kuling", false);
-        //setActiveUser(admin);
-        //activeUser.addContact(2);
-        //activeUser.addContact(3);
-        //contactUser.setProfileImagePath("pics/lukasmaly.jpg");
-        //contactUser.setStatus(StatusType.Busy);
-        //users.put(admin.getId(), admin);
-        //users.put(contactUser.getId(), contactUser);
-        //users.put(contactUser2.getId(), contactUser2);
-        //notifyObservers(UpdateTypes.INIT);
     }
 
     /**
@@ -157,7 +125,6 @@ public class MainModel extends ModelObservable {
         setActiveConversation(conversation.getId());
         notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
     }
-
 
     //Exists for testing purposes
     public void addConversation(Conversation c) {
