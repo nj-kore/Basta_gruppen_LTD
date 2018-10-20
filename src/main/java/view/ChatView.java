@@ -100,8 +100,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
-        removeParticipantsView = new RemoveParticipantsView(mainModel, this, mainModel.getActiveConversation());
-        addParticipantsView = new AddParticipantsView(mainModel, this, mainModel.getActiveConversation());
+        removeParticipantsView = new RemoveParticipantsView(mainModel, this, mainModel.getActiveConversation(), factory);
+        addParticipantsView = new AddParticipantsView(mainModel, this, mainModel.getActiveConversation(), factory);
         this.mainView = mainView;
 
         IChatController chatController =factory.getChatController(this, mainModel);

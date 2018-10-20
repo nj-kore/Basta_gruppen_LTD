@@ -39,4 +39,16 @@ public class ControllerFactory implements IControllerFactory {
         return userToolbarController;
     }
 
+    public IRemoveParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel){
+        IRemoveParticipantsController removeParticipantsController = new RemoveParticipantsController(removeParticipantsView, mainModel);
+        return removeParticipantsController;
+    }
+
+    public IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
+        IAddParticipantsController addParticipantsController = new AddParticipantsController(addParticipantsView, mainModel);
+                return addParticipantsController;
+    }
+
+
+
 }

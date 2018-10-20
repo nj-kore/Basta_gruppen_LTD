@@ -2,6 +2,7 @@ package view;
 
 import controller.AddParticipantsController;
 import controller.IAddParticipantsController;
+import controller.IControllerFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AddParticipantsView extends AnchorPane implements IParticipantView {
+public class AddParticipantsView extends AnchorPane implements IParticipantView, IAddParticipantsView {
 
     MainModel mainModel;
     private IChatView chatView;
@@ -43,7 +44,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     @FXML
     private Button addParticipantsButton;
 
-    AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
+    AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -58,7 +59,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         this.chatView = chatView;
         this.conversation = conversation;
 
-        IAddParticipantsController controller = new AddParticipantsController(this, mainModel);
+        IAddParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
 
         searchNonParticipantsImageView.setOnMouseClicked(event -> controller.searchNonParticipants());
         searchNonParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
