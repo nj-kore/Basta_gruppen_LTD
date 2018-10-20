@@ -1,3 +1,5 @@
+import controller.ControllerFactory;
+import controller.IControllerFactory;
 import infrastructure.IDataLoader;
 import infrastructure.JsonSaver;
 import infrastructure.JsonLoader;
@@ -38,16 +40,16 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        String usersPath = "json/users.json";
+        String conversationsPath = "json/conversations.json";
         //Creates an instance of dataloader that can be used to load data
-        IDataLoader dataLoader = new JsonLoader("json/users.json","json/conversations.json");
+        IDataLoader dataLoader = new JsonLoader(usersPath,conversationsPath);
         //Creates an instance of mainmodel that uses data loaded in by the jsonLoader
         MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
-
+        //Creates a factory for creating controllers
         IControllerFactory factory = new ControllerFactory();
-        //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
-        //mainModel.initFillers();      //TODO fixa så man slipper göra detta varje gång
         //Creates an instance of datasaver which can be used to save data
-        ModelObserver dataSaver = new JsonSaver(mainModel, "json/users.json","json/conversations.json");
+        ModelObserver dataSaver = new JsonSaver(mainModel, usersPath,conversationsPath);
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel, factory);
 
