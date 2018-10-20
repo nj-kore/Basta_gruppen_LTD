@@ -151,6 +151,9 @@ public class ChatView extends AnchorPane implements IChatView {
     public void creatUserButtonVisible(){
         createUserButton.setVisible(true);
     }
+    public void createUserButtonInVisible(){
+        createUserButton.setVisible(false);
+    }
 
     /**
      * Updates the ChatView to be up to date with the model

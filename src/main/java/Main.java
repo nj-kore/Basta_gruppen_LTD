@@ -46,7 +46,7 @@ public class Main extends Application {
         MainModel mainModel =  new MainModel(dataLoader.loadUsers(),dataLoader.loadConversations());
         IControllerFactory factory = new ControllerFactory();
         //CREATES FILLERS FOR MAINMODEL: TESTING PURPOSES ONLY
-        mainModel.initFillers();      //TODO fixa så man slipper göra detta varje gång
+        //mainModel.initFillers();      //TODO fixa så man slipper göra detta varje gång
         //Creates an instance of datasaver which can be used to save data
         ModelObserver dataSaver = new JsonSaver(mainModel, "src/main/java/infrastructure/users.json","src/main/java/infrastructure/conversations.json");
         //tries to log in as user with username admin and password 123
