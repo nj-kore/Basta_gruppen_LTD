@@ -384,4 +384,27 @@ public class MainModelTest {
         assertEquals(iterator.next(), u1);
         assertEquals(iterator.hasNext(), false);
     }
+
+    @Test
+    public void searchNonParticipants(){
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        userMap.putAll(getFillerUsers(3));
+        ArrayList<User> participants = new ArrayList<>(userMap.values());
+        User u1 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
+        User u2 = new User(mainModel.getNewUserId(), "aa", "bb", "cc", "bb", StatusType.Available, false);
+        userMap.put(u1.getId(), u1);
+
+        Conversation conversation = new Conversation(1, "t", participants);
+        conversationMap.put(1, conversation);
+        mainModel.setActiveConversation(conversation.getId());
+        mainModel.setActiveUser(u2.getId());
+        mainModel.addContact(u1.getId());
+
+        Iterator<User> searchIterator = mainModel.searchNonParticipants("cc", conversation);
+        assertEquals(searchIterator.next(), u1);
+        assertEquals(searchIterator.hasNext(), false);
+
+    }
 }
