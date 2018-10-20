@@ -3,14 +3,16 @@ package controller;
 
 import model.MainModel;
 import view.CreateUserView;
+import view.ICreateUserView;
+import view.IMainView;
 import view.MainView;
 
 public class CreateUserViewController implements ICreateUserViewController {
-    private MainView mainView;
+    private IMainView mainView;
     private MainModel mainModel;
-    private CreateUserView createUserView;
+    private ICreateUserView createUserView;
 
-    public CreateUserViewController(MainModel mainModel, MainView mainView, CreateUserView createUserView) {
+    public CreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView) {
         this.mainModel = mainModel;
         this.mainView = mainView;
         this.createUserView = createUserView;

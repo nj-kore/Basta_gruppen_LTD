@@ -3,17 +3,19 @@ package controller;
 import model.MainModel;
 import model.User;
 import view.CreateConvoView;
+import view.ICreateConvoView;
+import view.IMainView;
 import view.MainView;
 
 import java.util.ArrayList;
 
 public class CreateConvoController implements ICreateConvoController{
 
-    private MainView mainView;
+    private IMainView mainView;
     private MainModel mainModel;
-    private CreateConvoView createConvoView;
+    private ICreateConvoView createConvoView;
 
-    public CreateConvoController(MainView mainView, CreateConvoView createConvoView, MainModel mainModel) {
+    public CreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel) {
         this.mainView = mainView;
         this.createConvoView = createConvoView;
         this.mainModel = mainModel;

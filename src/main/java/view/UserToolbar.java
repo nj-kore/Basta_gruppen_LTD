@@ -1,5 +1,6 @@
 package view;
 
+import controller.IControllerFactory;
 import controller.IUserToolbarController;
 import controller.UserToolbarController;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ public class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
     private IMainView mainView;
+    private IControllerFactory factory;
 
     @FXML
     ImageView currentUserImageView;
@@ -38,7 +40,7 @@ public class UserToolbar extends AnchorPane {
     @FXML
     Label currentUserNameLabel;
 
-    public UserToolbar(IMainView mainView, MainModel mainModel) {
+    public UserToolbar(IMainView mainView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -50,10 +52,11 @@ public class UserToolbar extends AnchorPane {
         }
         this.mainModel = mainModel;
         this.mainView = mainView;
+        this.factory=factory;
     }
 
     public void init(){
-        IUserToolbarController u = new UserToolbarController(mainModel, mainView);
+        IUserToolbarController u =factory.getUserToolBarController(mainModel, mainView);
         addPremadeStatuses(u);
         currentUserNameLabel.setText(mainModel.getActiveUser().getUsername());
         optionsImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -83,7 +86,7 @@ public class UserToolbar extends AnchorPane {
             m.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    u.onMenuButtonItemClicked(m);
+                    u.onMenuButtonItemClicked(m.getText());
                 }
             });
         }

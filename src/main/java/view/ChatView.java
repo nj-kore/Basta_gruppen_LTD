@@ -2,6 +2,7 @@ package view;
 
 import controller.ChatController;
 import controller.IChatController;
+import controller.IControllerFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -86,7 +87,7 @@ public class ChatView extends AnchorPane implements IChatView {
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      */
-    public ChatView(MainModel mainModel, MainView mainView) {
+    public ChatView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -103,7 +104,7 @@ public class ChatView extends AnchorPane implements IChatView {
         addParticipantsView = new AddParticipantsView(mainModel, this, mainModel.getActiveConversation());
         this.mainView = mainView;
 
-        IChatController chatController = new ChatController(this, mainModel);
+        IChatController chatController =factory.getChatController(this, mainModel);
 
         createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
 

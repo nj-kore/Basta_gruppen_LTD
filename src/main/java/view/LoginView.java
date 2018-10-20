@@ -1,5 +1,6 @@
 package view;
 
+import controller.IControllerFactory;
 import controller.ILoginController;
 import controller.LoginController;
 import javafx.event.ActionEvent;
@@ -32,7 +33,7 @@ public class LoginView extends AnchorPane implements ILoginView {
     /**
      * @param mainModel Loads the fxml document and assigns the LoginController to handle the relevant input
      */
-    public LoginView(MainModel mainModel) {
+    public LoginView(MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -45,7 +46,7 @@ public class LoginView extends AnchorPane implements ILoginView {
 
 
         //The following lines creates a controller that we can temporarily use to assign functions to
-        ILoginController c = new LoginController(this, mainModel);
+        ILoginController c = factory.getLoginController(this, mainModel);
 
         logInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
