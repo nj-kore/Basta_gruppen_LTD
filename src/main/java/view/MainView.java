@@ -382,6 +382,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         mainModel.setActiveUser(null);
         displayLoginPage();
         loginView.clearTextFields();
+        chatView.createUserButtonInVisible();
     }
 
     public void loadDetailView(User user) {
