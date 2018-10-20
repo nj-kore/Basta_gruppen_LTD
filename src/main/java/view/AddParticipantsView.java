@@ -44,7 +44,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     private Button addParticipantsButton;
 
     AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/AddParticipantsView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
