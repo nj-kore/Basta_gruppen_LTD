@@ -1,5 +1,4 @@
 /**
- *
  * A class that loads data from JSON.
  *
  * @author          Gustav Hager

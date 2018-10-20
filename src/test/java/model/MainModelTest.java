@@ -1,6 +1,5 @@
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -280,12 +279,12 @@ public class MainModelTest {
 
         Iterator<User> iterator = mainModel.searchContacts("son");
 
-        assertEquals(iterator.next().getId(), 1);   //Eva Dickinsson
-        assertEquals(iterator.next().getId(), 2);   //Kalle Johnson
-        assertEquals(iterator.next().getId(), 3);   //Johan Petterson
-        assertEquals(iterator.next().getId(), 7);   //Bango Rickson
-        assertEquals(iterator.next().getId(), 8);   //Olof Klickson
-        assertEquals(iterator.hasNext(), false);
+        assertEquals(1, iterator.next().getId());   //Eva Dickinsson
+        assertEquals(2, iterator.next().getId());   //Kalle Johnson
+        assertEquals(3, iterator.next().getId());   //Johan Petterson
+        assertEquals(7, iterator.next().getId());   //Bango Rickson
+        assertEquals(8, iterator.next().getId());   //Olof Klickson
+        assertFalse(iterator.hasNext());
     }
 
     @Test
@@ -314,7 +313,7 @@ public class MainModelTest {
         Iterator<Conversation> iterator = mainModel.searchConversations("bAnGo");
         assertEquals(iterator.next(), c1);  //c1 has a participant with the first name Bango, should therefore match the search.
         assertEquals(iterator.next(), c2);  //c2's name is bango, should therefore match
-        assertEquals(iterator.hasNext(), false);    //c3 is neither named bango or contains a user by the name bango, the search should therefore
+        assertFalse(iterator.hasNext());    //c3 is neither named bango or contains a user by the name bango, the search should therefore
                                                            // only return 2 conversations.
 
     }
@@ -359,7 +358,7 @@ public class MainModelTest {
 
         assertEquals(returnedParticipants.next(), participants.get(0));
         assertEquals(returnedParticipants.next(), participants.get(1));
-        assertEquals(returnedParticipants.hasNext(), false);
+        assertFalse(returnedParticipants.hasNext());
     }
 
     @Test
@@ -382,7 +381,7 @@ public class MainModelTest {
         Iterator<User> iterator = mainModel.getNonParticipants(conversation);
 
         assertEquals(iterator.next(), u1);
-        assertEquals(iterator.hasNext(), false);
+        assertFalse(iterator.hasNext());
     }
 
     @Test
@@ -404,7 +403,7 @@ public class MainModelTest {
 
         Iterator<User> searchIterator = mainModel.searchNonParticipants("cc", conversation);
         assertEquals(searchIterator.next(), u1);
-        assertEquals(searchIterator.hasNext(), false);
+        assertFalse(searchIterator.hasNext());
 
     }
 }

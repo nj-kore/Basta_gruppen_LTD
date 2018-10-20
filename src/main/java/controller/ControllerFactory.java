@@ -1,7 +1,6 @@
 package controller;
 
 import model.MainModel;
-import sun.applet.Main;
 import view.*;
 
 public class ControllerFactory implements IControllerFactory {

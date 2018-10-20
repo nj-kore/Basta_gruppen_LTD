@@ -6,7 +6,6 @@ package infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Conversation;
-import model.MainModel;
 import model.StatusType;
 import model.User;
 import org.junit.Test;
@@ -17,7 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 
 public class JsonLoaderTest {
     @Test

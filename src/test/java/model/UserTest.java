@@ -1,7 +1,6 @@
 package model;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class UserTest {
@@ -16,13 +15,14 @@ public class UserTest {
     }
 
     @Test
-    public void equals() throws Exception {
+    public void equalsTest() throws Exception {
         User user = new User(1,"","","","",StatusType.Available,false);
         User user2 = new User(1,"","","","",StatusType.Available,false);
         User user3 = new User(2,"","","","",StatusType.Available,false);
         User user4 = new User(1,"","","","",null,false);
         user.setEmail("");
         user2.setEmail("");
+        //assertEquals is not used since it is in fact equals that needs to be tested
         assertTrue(user.equals(user2));
         assertTrue(user2.equals(user));
         assertFalse(user.equals(user3));
@@ -32,7 +32,7 @@ public class UserTest {
     }
 
     @Test
-    public void HashCode() throws Exception {
+    public void hashCodeTest() throws Exception {
         User user = new User(1,"","","","",StatusType.Available,false);
         User user2 = new User(1,"","","","",StatusType.Available,false);
         User user3 = new User(4,"","","","",StatusType.Available,false);
