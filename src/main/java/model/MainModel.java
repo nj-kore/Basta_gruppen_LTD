@@ -309,8 +309,8 @@ public class MainModel extends ModelObservable {
     }
 
     /**
-     * @return a user id that is one higher then the previously highest
      * Will give higher and higher user id as we add more users even if we remove users in between
+     * @return a user id that is one higher then the previously highest
      */
     public int getNewUserId(){
         int highest =0;
@@ -318,12 +318,11 @@ public class MainModel extends ModelObservable {
             return 0;
         }
         for (User u : users.values()) {
-
             if (u.getId()>highest) {
-            }
                 highest=u.getId();
             }
-            return highest+1;
+        }
+        return highest + 1;
     }
 
     public Iterator<User> getNonParticipants(Conversation conversation) {

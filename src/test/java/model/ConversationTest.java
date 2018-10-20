@@ -5,8 +5,7 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ConversationTest {
     @Test
@@ -21,7 +20,7 @@ public class ConversationTest {
     }
 
     @Test
-    public void equals(){
+    public void equalsTest(){
         ArrayList<User> userList = new ArrayList<>();
         ArrayList<User> userList2 = new ArrayList<>();
         Conversation conversation = new Conversation(1,"foo", userList );
@@ -31,7 +30,7 @@ public class ConversationTest {
         Conversation conversation5 = new Conversation(1,"foo", null );
         Conversation conversation6 = new Conversation(1,null, userList );
         Conversation conversation7 = new Conversation(1,"bar", userList );
-
+        //assertEquals is not used since it is in fact equals that needs to be tested
         assertTrue(conversation.equals(conversation2));
         conversation2.addParticipant(new User(5, null, null, null, null, null, null));
         assertFalse(conversation.equals(conversation2));
@@ -46,12 +45,12 @@ public class ConversationTest {
     }
 
     @Test
-    public void HashCode(){
+    public void hashCodeTest(){
         ArrayList<User> userList = new ArrayList<>();
         Conversation conversation = new Conversation(1,"foo",userList );
         Conversation conversation2 = new Conversation(1,"foo",userList );
         Conversation conversation3 = new Conversation(1,"bar",userList );
-        assertTrue(conversation.hashCode() == conversation2.hashCode());
-        assertFalse(conversation.hashCode() == conversation3.hashCode());
+        assertEquals(conversation.hashCode(), conversation2.hashCode());
+        assertNotEquals(conversation.hashCode(), conversation3.hashCode());
     }
 }
