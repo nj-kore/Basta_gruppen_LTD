@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AddParticipantsView extends AnchorPane implements IParticipantView, IAddParticipantsView {
+public class AddParticipantsView extends AnchorPane implements IParticipantView {
 
     MainModel mainModel;
     private IChatView chatView;

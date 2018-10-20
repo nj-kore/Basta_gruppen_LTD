@@ -405,6 +405,10 @@ public class MainModelTest {
         Iterator<User> searchIterator = mainModel.searchNonParticipants("cc", conversation);
         assertEquals(searchIterator.next(), u1);
         assertEquals(searchIterator.hasNext(), false);
+    }
+
+    @Test
+    public void addParticipants(){
 
     }
 }
