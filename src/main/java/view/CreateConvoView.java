@@ -1,6 +1,7 @@
 package view;
 
 import controller.CreateConvoController;
+import controller.IControllerFactory;
 import controller.ICreateConvoController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,7 +44,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
 
     private MainModel mainModel;
 
-    CreateConvoView(MainModel mainModel, MainView mainView) {
+    CreateConvoView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
         this.mainModel = mainModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateConvoView.fxml"));
@@ -56,7 +57,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
             throw new RuntimeException(exception);
         }
 
-        ICreateConvoController createConvoController = new CreateConvoController(mainView, this, mainModel);
+        ICreateConvoController createConvoController = factory.getCreateConvoController(mainView, this, mainModel);
 
         createConvoButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

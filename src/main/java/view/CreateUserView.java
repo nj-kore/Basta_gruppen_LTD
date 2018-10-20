@@ -1,6 +1,7 @@
 package view;
 
 import controller.CreateUserViewController;
+import controller.IControllerFactory;
 import controller.ICreateUserViewController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import model.MainModel;
 
 import java.io.IOException;
 
-public class CreateUserView extends AnchorPane {
+public class CreateUserView extends AnchorPane implements ICreateUserView {
 
     MainView mainView;
     MainModel mainModel;
@@ -41,7 +42,7 @@ public class CreateUserView extends AnchorPane {
     @FXML
     Label inputHintLabel;
 
-    public CreateUserView(MainView mainView, MainModel mainModel) {
+    public CreateUserView(MainView mainView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -54,9 +55,7 @@ public class CreateUserView extends AnchorPane {
         this.mainModel = mainModel;
         this.mainView = mainView;
 
-        ICreateUserViewController c = new CreateUserViewController(mainModel, mainView, this) {
-
-        };
+        ICreateUserViewController c = factory.getCreateUserViewController(mainModel, mainView, this);
         cancelCreateUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

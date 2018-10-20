@@ -1,5 +1,6 @@
 package view;
 
+import controller.IControllerFactory;
 import controller.IMainController;
 import controller.MainController;
 import javafx.event.EventHandler;
@@ -26,13 +27,12 @@ import java.util.*;
  * The MainView is the main class of the view package. Linking all the different views together and forwards info
  * given to the class from the model package via the observer class.
  *
- *  @author Filip Andréasson
- *  @author Gustav Häger
- *  @author Jonathan Köre
- *  @author Gustaf Spjut
- *  @author Benjamin Vinnerholt
- *
- *  @since 2018-09-09
+ * @author Filip Andréasson
+ * @author Gustav Häger
+ * @author Jonathan Köre
+ * @author Gustaf Spjut
+ * @author Benjamin Vinnerholt
+ * @since 2018-09-09
  */
 
 public class MainView extends AnchorPane implements Initializable, IMainView, ModelObserver {
@@ -164,23 +164,23 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     }
 
-    public MainView(MainModel mainModel) {
+    public MainView(MainModel mainModel, IControllerFactory factory) {
 
         this.mainModel = mainModel;
-        this.chatView = new ChatView(mainModel, this);
-        this.loginView = new LoginView(mainModel);
-        this.createConvoView = new CreateConvoView(mainModel, this);
-        this.userPage = new UserPageView(this, mainModel);
-        this.createUserView = new CreateUserView(this, mainModel);
-        this.userToolbar = new UserToolbar(this, mainModel);
+        this.chatView = new ChatView(mainModel, this, factory);
+        this.loginView = new LoginView(mainModel, factory);
+        this.createConvoView = new CreateConvoView(mainModel, this, factory);
+        this.userPage = new UserPageView(this, mainModel, factory);
+        this.createUserView = new CreateUserView(this, mainModel, factory);
+        this.userToolbar = new UserToolbar(this, mainModel, factory);
     }
 
 
     /**
-     *  This method is called whenever the any ModelObservable object calls the method 'notifyObservers'.
-     *  The method will use a switch case to call the relevant update method(s) in the application.
+     * This method is called whenever the any ModelObservable object calls the method 'notifyObservers'.
+     * The method will use a switch case to call the relevant update method(s) in the application.
      *
-     * @param   updateType  is the type of task the update method will perform
+     * @param updateType is the type of task the update method will perform
      */
     @Override
     public void update(MainModel.UpdateTypes updateType) {
@@ -382,6 +382,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         mainModel.setActiveUser(null);
         displayLoginPage();
         loginView.clearTextFields();
+        chatView.createUserButtonInVisible();
     }
 
     public void loadDetailView(User user) {

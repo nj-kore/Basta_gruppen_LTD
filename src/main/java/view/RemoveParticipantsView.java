@@ -1,5 +1,7 @@
 package view;
 
+import controller.IControllerFactory;
+import controller.IRemoveParticipantsController;
 import controller.RemoveParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +45,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     @FXML
     private Button removeParticipantsButton;
 
-    public RemoveParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation) {
+    public RemoveParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantList.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -58,7 +60,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
         this.chatView = chatView;
         this.conversation = conversation;
 
-        RemoveParticipantsController controller = new RemoveParticipantsController(this, mainModel);
+        IRemoveParticipantsController controller = factory.getRemoveParticipantsController(this, mainModel);
 
         searchParticipantsImageView.setOnMouseClicked(event -> controller.searchParticipants());
         searchParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);

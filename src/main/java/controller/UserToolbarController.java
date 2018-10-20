@@ -15,8 +15,8 @@ public class UserToolbarController implements IUserToolbarController {
     }
 
     @Override
-    public void onMenuButtonItemClicked(MenuItem m) {
-        mainModel.setStatus(StatusType.valueOf(m.getText().replaceAll(" ", "_")));
+    public void onMenuButtonItemClicked(String m) {
+        mainModel.setStatus(StatusType.valueOf(m.replaceAll(" ", "_")));
     }
 
     @Override
