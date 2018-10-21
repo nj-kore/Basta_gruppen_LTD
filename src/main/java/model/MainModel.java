@@ -232,13 +232,12 @@ public class MainModel extends ModelObservable {
      * @return The placeholder name
      */
     public String generatePlaceholderName(Conversation c) {
-        StringBuilder placeholderName = new StringBuilder();
-        Stack<User> userStack = new Stack<>();
-        // TODO: 14/10/2018
-        //Remove this when the app starts with a valid conversation
+        //Return Placeholder if a conversation slips through that has no participants
         if (c.getParticipants() == null){
             return "Placeholder";
         }
+        StringBuilder placeholderName = new StringBuilder();
+        Stack<User> userStack = new Stack<>();
 
         userStack.addAll(c.getParticipants());
         //If it is 1, then it is the active user that is the participant, in which case we
