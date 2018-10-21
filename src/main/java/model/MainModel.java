@@ -67,8 +67,8 @@ public class MainModel extends ModelObservable {
                 newMessageId = Collections.max(activeConversation.getMessages().keySet()) + 1;
             }
 
-            Message m = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
-            activeConversation.addMessage(m);
+            Message messageToSend = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
+            activeConversation.addMessage(messageToSend);
             notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
         }
 
