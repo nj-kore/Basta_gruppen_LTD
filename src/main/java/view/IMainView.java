@@ -1,8 +1,8 @@
 package view;
 
+import model.User;
+
 public interface IMainView {
-    void displayContacts();
-    void displayConversations();
     void displayChat();
     void displayUserPage();
     void displayMainView();
@@ -14,5 +14,6 @@ public interface IMainView {
     void createConvoViewToBack();
     void updateConversationsList();
     void backToChat();
-
+    void loadDetailView(User user);
+    void logout();
 }

@@ -33,7 +33,7 @@ public class ChatView extends AnchorPane implements IChatView {
     private MainModel mainModel;
     private RemoveParticipantsView removeParticipantsView;
     private AddParticipantsView addParticipantsView;
-    private MainView mainView; //TODO implementera setDefaultConversation m.h.a model.
+    private IMainView mainView;
 
 
     @FXML
@@ -92,7 +92,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainView The parent MainView of the ChatView.
      * @param factory The ControllerFactory which is responsible for creating controllers.
      */
-    ChatView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
+    ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class CreateUserView extends AnchorPane implements ICreateUserView {
 
-    private MainView mainView;
+    private IMainView mainView;
     MainModel mainModel;
 
     @FXML
@@ -41,7 +41,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
     @FXML
     private Label inputHintLabel;
 
-    CreateUserView(MainView mainView, MainModel mainModel, IControllerFactory factory) {
+    CreateUserView(IMainView mainView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

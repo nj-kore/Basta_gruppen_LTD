@@ -21,11 +21,11 @@ public class ContactListItem extends AnchorPane {
     @FXML
     private Label contactStatusLabel;
 
-    private MainView mainView;
+    private IMainView mainView;
     private User user;
 
 
-    public ContactListItem(User user, MainView mainView) {
+    public ContactListItem(User user, IMainView mainView) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ContactListItemView.fxml"));
         fxmlLoader.setRoot(this);

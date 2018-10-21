@@ -25,7 +25,7 @@ import java.io.IOException;
  */
 public class UserPageView extends AnchorPane {
 
-    private MainView parent;
+    private IMainView parent;
     MainModel mainModel;
     private String imagePath;
 
@@ -79,7 +79,7 @@ public class UserPageView extends AnchorPane {
     private
     Button changePasswordButton;
 
-    UserPageView(MainView parentView, MainModel mainModel, IControllerFactory factory) {
+    UserPageView(IMainView parentView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

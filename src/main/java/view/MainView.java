@@ -180,7 +180,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     public MainView(MainModel mainModel, IControllerFactory factory) {
-
         this.mainModel = mainModel;
         this.chatView = new ChatView(mainModel, this, factory);
         this.loginView = new LoginView(mainModel, factory);
@@ -313,16 +312,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     @Override
-    public void displayContacts() {
-        updateContactsList();
-    }
-
-    @Override
-    public void displayConversations() {
-        updateConversationsList();
-    }
-
-    @Override
     public void displayChat() {
         mainViewAnchorPane.getChildren().add(chatView);
     }
@@ -389,7 +378,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         displayMainView();
     }
 
-    void logout() {
+    @Override
+    public void logout() {
         userToolbar.statusMenu.getItems().clear();
         mainModel.setActiveUser(null);
         displayLoginPage();
@@ -397,7 +387,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         chatView.createUserButtonInVisible();
     }
 
-    void loadDetailView(User user) {
+    @Override
+    public void loadDetailView(User user) {
         detailedUser = user;
         this.contactDetailViewNameLabel.setText(user.getFullName());
         Image profileImage = new Image(user.getProfileImagePath());
