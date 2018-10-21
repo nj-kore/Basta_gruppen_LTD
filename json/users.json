@@ -1,0 +1,56 @@
+[
+  {
+    "id": 0,
+    "password": "123",
+    "username": "admin",
+    "contacts": [
+      1,
+      2
+    ],
+    "firstName": "Admin",
+    "lastName": "Boy",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/userIcon.png",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": true
+  },
+  {
+    "id": 1,
+    "password": "222",
+    "username": "contact",
+    "contacts": [],
+    "firstName": "olle",
+    "lastName": "innebandysson",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/bill.jpg",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": false
+  },
+  {
+    "id": 2,
+    "password": "222",
+    "username": "contact2",
+    "contacts": [],
+    "firstName": "kalle",
+    "lastName": "kuling",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/steve.jpg",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": false
+  }
+]
