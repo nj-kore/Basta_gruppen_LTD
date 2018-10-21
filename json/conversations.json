@@ -59,23 +59,6 @@
     },
     "participants": [
       {
-        "id": 1,
-        "password": "222",
-        "username": "contact",
-        "contacts": [],
-        "firstName": "olle",
-        "lastName": "innebandysson",
-        "email": null,
-        "status": "Available",
-        "profileImagePath": "pics/bill.jpg",
-        "statusPaths": [
-          "pics/statusGreen.png",
-          "pics/statusOrange.png",
-          "pics/statusRed.png"
-        ],
-        "isManager": false
-      },
-      {
         "id": 0,
         "password": "123",
         "username": "admin",
@@ -258,5 +241,137 @@
       }
     ],
     "name": "Test"
+  },
+  {
+    "id": 3,
+    "messages": {},
+    "participants": [
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
+    ],
+    "name": "asd"
+  },
+  {
+    "id": 4,
+    "messages": {},
+    "participants": [
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
+    ],
+    "name": "olle innebandysson"
+  },
+  {
+    "id": 5,
+    "messages": {},
+    "participants": [
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
+    ],
+    "name": "olle innebandysson"
   }
 ]

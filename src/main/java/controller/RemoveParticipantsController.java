@@ -33,7 +33,9 @@ public class RemoveParticipantsController implements IRemoveParticipantsControll
 
         while (users.hasNext()){
             next = users.next();
-            if(next.getFullName().contains(searchString)) usersToShow.add(next);
+            if(next.getFullName().contains(searchString)){
+                usersToShow.add(next);
+            }
         }
         removeParticipantsView.showSearchResult(usersToShow.iterator());
     }

@@ -77,7 +77,9 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         nonParticipantsFlowPane.getChildren().clear();
         User userToShow;
 
-        if(!usersToShow.hasNext()) nonParticipantsFlowPane.getChildren().add(noMatchingNonParticipantsLabel);
+        if(!usersToShow.hasNext()) {
+            nonParticipantsFlowPane.getChildren().add(noMatchingNonParticipantsLabel);
+        }
 
         while(usersToShow.hasNext()){
             userToShow = usersToShow.next();
