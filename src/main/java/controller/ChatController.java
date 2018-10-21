@@ -14,13 +14,17 @@ public class ChatController implements IChatController {
     private IChatView chatView;
     private MainModel mainModel;
 
+    /**
+     * @param chatView An IChatView holds the data that the controller is dependant on forwarding to the mainModel
+     * @param mainModel The mainModel which the controller forwards data from the view to
+     */
     public ChatController(IChatView chatView, MainModel mainModel) {
         this.mainModel = mainModel;
         this.chatView = chatView;
     }
 
     /**
-     * Forwards the text typed in the chat to the model
+     * Forwards the text typed in the chat to the model, and tells the chatView to clear its text fields
      */
     @Override
     public void onSendButtonClicked() {
@@ -30,10 +34,11 @@ public class ChatController implements IChatController {
     }
 
     /**
+     * Chooses what actions to be taken according to what was typed into the chat
+     * <p>Sends the message if the <b>enter</b> key is pressed</p>
+     * <p>Creates a new line if <b>enter</b> in combination with <b>shift</b> key is pressed</p>
      *
-     * Chooses what actions to be taken according to what was typed into the chat input
-     *
-     * @param event the key combination that was typed by the user
+     * @param event The key combination that was typed by the user
      */
     @Override
     public void onChatAreaKeyPressed(KeyEvent event) {
@@ -48,6 +53,9 @@ public class ChatController implements IChatController {
         }
     }
 
+    /**
+     * Tells the chat to show that the chatName is currently in "edit" mode
+     */
     @Override
     public void onChangeChatNameClicked() {
         chatView.editChatName();
@@ -72,6 +80,9 @@ public class ChatController implements IChatController {
         }
     }
 
+    /**
+     * Tells the chat to cancel the edit of the chat name
+     */
     @Override
     public void onChatNameDecline() {
         chatView.cancelEditChatName();
