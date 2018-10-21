@@ -11,7 +11,7 @@
     "lastName": "Boy",
     "email": null,
     "status": "Available",
-    "profileImagePath": "pics/userIcon.png",
+    "profileImagePath": null,
     "statusPaths": [
       "pics/statusGreen.png",
       "pics/statusOrange.png",

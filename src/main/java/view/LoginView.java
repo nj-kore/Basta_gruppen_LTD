@@ -2,7 +2,6 @@ package view;
 
 import controller.IControllerFactory;
 import controller.ILoginController;
-import controller.LoginController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +16,10 @@ import model.MainModel;
 
 import java.io.IOException;
 
+/**
+ * The interface presented to the user upon application start-up, giving the user a way to enter a username and
+ * password to log in
+ */
 public class LoginView extends AnchorPane implements ILoginView {
 
     @FXML
@@ -31,7 +34,10 @@ public class LoginView extends AnchorPane implements ILoginView {
     private Label wrongPasswordLabel;
 
     /**
-     * @param mainModel Loads the fxml document and assigns the LoginController to handle the relevant input
+     * Loads the fxml document and assigns the ILoginController to handle the relevant input from the user
+     * @param mainModel The mainModel exists here as a parameter solely to be passed on to the IControllerFactory
+     *                  on the creation of the LoginController
+     * @param factory   The factory which creates the ILoginController on which the LoginView is dependant
      */
     public LoginView(MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
@@ -65,21 +71,35 @@ public class LoginView extends AnchorPane implements ILoginView {
 
     }
 
+    /**
+     * Displays "wrong username or password" to the user
+     */
     @Override
     public void showWrongInputNotification() {
         wrongPasswordLabel.setVisible(true);
     }
 
+    /**
+     *
+     * @return The text currently in the passwordField
+     */
     @Override
     public String getPassword() {
         return passwordField.getText();
     }
 
+    /**
+     *
+     * @return The text currently in the userNameTextField
+     */
     @Override
     public String getUsername() {
         return userNameTextField.getText();
     }
 
+    /**
+     * Clears the username and password text fields
+     */
     @Override
     public void clearTextFields() {
         userNameTextField.clear();
