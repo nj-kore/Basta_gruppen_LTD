@@ -121,7 +121,7 @@ public class UserPageView extends AnchorPane {
                 if(selectedFile != null){
                     imagePath = selectedFile.toURI().toString();
                     //c.changeProfilePicture(selectedFile.toURI().toString());
-                   //Is it cleaner to have the controller tell the view to update pic rather then the view calling the model as below?
+                    //Is it cleaner to have the controller tell the view to update pic rather then the view calling the model as below?
                     profilePicImageView.setImage(new Image(selectedFile.toURI().toString()));       //View changes itself, not based on model
                 }
             }
