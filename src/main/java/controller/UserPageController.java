@@ -11,8 +11,8 @@ public class UserPageController implements IUserPageController {
         this.mainModel = mainModel;
     }
 
-    public void saveUserInfo(String fn, String ln, String email, String picURL) {
-        mainModel.setUserInfo(fn, ln, email, picURL);
+    public void saveUserInfo(String firstName, String surname, String email, String picURL) {
+        mainModel.setUserInfo(firstName, surname, email, picURL);
     }
 
     public void changePassword(String s){
