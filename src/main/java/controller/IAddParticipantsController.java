@@ -1,5 +1,9 @@
 package controller;
 
+/**
+ * @author Benjamin Vinnerholt
+ */
+
 import javafx.scene.input.KeyEvent;
 
 public interface IAddParticipantsController {

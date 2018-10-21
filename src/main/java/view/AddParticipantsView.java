@@ -5,7 +5,6 @@ package view;
  * @since 2018-10-15
  */
 
-import controller.AddParticipantsController;
 import controller.IAddParticipantsController;
 import controller.IControllerFactory;
 import javafx.fxml.FXML;

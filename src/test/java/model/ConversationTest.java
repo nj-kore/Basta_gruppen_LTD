@@ -1,4 +1,8 @@
 package model;
+/**
+ * @author Filip Andréasson
+ *
+ */
 
 import org.junit.Test;
 
