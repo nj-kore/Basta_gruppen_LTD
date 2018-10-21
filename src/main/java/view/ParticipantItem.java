@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * @author Benjamin Vinnerholt
+ * @since 2018-10-15
+ */
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
