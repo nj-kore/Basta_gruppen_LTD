@@ -18,6 +18,7 @@ public class ConversationListItem extends AnchorPane {
 
     private MainModel mainModel;
     private Conversation conversation;
+    private IMainView mainView;
 
     @FXML
     private ImageView conversationProfileImageView;
@@ -32,7 +33,7 @@ public class ConversationListItem extends AnchorPane {
     private Label conversationStatusLabel;
 
 
-    public ConversationListItem(Conversation conversation, MainModel mainModel) {
+    public ConversationListItem(Conversation conversation, MainModel mainModel, IMainView mainView) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ConversationListItemView.fxml"));
         fxmlLoader.setRoot(this);
@@ -46,6 +47,7 @@ public class ConversationListItem extends AnchorPane {
 
         this.mainModel = mainModel;
         this.conversation = conversation;
+        this.mainView=mainView;
         String name = conversation.getName();
         if(name.length() == 0){
             name = mainModel.generatePlaceholderName(conversation);
@@ -65,7 +67,8 @@ public class ConversationListItem extends AnchorPane {
 
     @FXML
     public void conversationListItemClicked() {
-        mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
+        mainView.setActiveConversation(this.conversation.getId());
+        //mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
     }
 
     public Conversation getConversation() {

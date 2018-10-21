@@ -36,7 +36,10 @@ public class ControllerFactory implements IControllerFactory {
     public IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
         return new AddParticipantsController(addParticipantsView, mainModel);
     }
-
+    public IMainController getMainController(MainModel mainModel, IMainView mainView){
+        IMainController mainController=new MainController(mainView, mainModel);
+        return mainController;
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerFactory;
 import controller.IControllerFactory;
 import controller.IMainController;
 import controller.MainController;
@@ -45,6 +46,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     private User detailedUser;
     private UserToolbar userToolbar;
     private CreateUserView createUserView;
+    private IControllerFactory factory;
 
     //contactDetailView
     @FXML
@@ -148,32 +150,32 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayLoginPage();
-        IMainController c = new MainController(this, mainModel);
+        IMainController controller=factory.getMainController(mainModel, this);
         searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                c.searchContactsClicked();
+                controller.searchContactsClicked();
             }
         });
 
         searchContactsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                c.onSearchContactsTextFieldKeyPressed(event);
+                controller.onSearchContactsTextFieldKeyPressed(event);
             }
         });
 
         searchConversationsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                c.searchConversationsClicked();
+                controller.searchConversationsClicked();
             }
         });
 
         searchConversationsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                c.onSearchConversationsEnterKeyPressed(event);
+                controller.onSearchConversationsEnterKeyPressed(event);
             }
         });
 
@@ -187,6 +189,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         this.userPage = new UserPageView(this, mainModel, factory);
         this.createUserView = new CreateUserView(this, mainModel, factory);
         this.userToolbar = new UserToolbar(this, mainModel, factory);
+       this.factory=factory;
     }
 
 
@@ -265,7 +268,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         conversationsFlowPane.getChildren().clear();
         Iterator<Conversation> iterator = mainModel.getUsersConversations();
         while (iterator.hasNext()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel, this));
         }
 
     }
@@ -276,16 +279,17 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
             conversationsFlowPane.getChildren().add(noConversationsFoundLabel);
         }
         while (iterator.hasNext()) {
-            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel));
+            conversationsFlowPane.getChildren().add(new ConversationListItem(iterator.next(), this.mainModel, this));
         }
 
     }
 
     @Override
     public void setDefaultConversation() {
+        IMainController controller=factory.getMainController(mainModel, this);
         updateConversationsList();
         if (!conversationsFlowPane.getChildren().isEmpty()) {
-            mainModel.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
+            controller.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
         }
     }
 
@@ -369,10 +373,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @FXML
     public void contactDetailViewCreateConvoButtonClicked() {
+        IMainController controller=factory.getMainController(mainModel, this);
         ArrayList<User> users = new ArrayList<>();
         users.add(detailedUser);
         users.add(mainModel.getActiveUser());
-        mainModel.createConversation(users, detailedUser.getFullName());
+        controller.createConversation(users, detailedUser.getFullName());
         contactDetailView.toBack();
         updateConversationsList();
         displayMainView();
@@ -380,8 +385,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @Override
     public void logout() {
+        IMainController controller=factory.getMainController(mainModel, this);
         userToolbar.statusMenu.getItems().clear();
-        mainModel.setActiveUser(null);
+        controller.logout();
         displayLoginPage();
         loginView.clearTextFields();
         chatView.createUserButtonInVisible();
@@ -414,5 +420,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     public void createConvoViewToBack() {
         createConvoHBox.toBack();
+    }
+
+    public void setActiveConversation(int id){
+        IMainController controller=factory.getMainController(mainModel, this);
+        controller.setActiveConversation(id);
     }
 }

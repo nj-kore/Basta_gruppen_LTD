@@ -20,4 +20,6 @@ public interface IControllerFactory {
     IRemoveParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
 
     IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
+
+    IMainController getMainController(MainModel mainModel, IMainView mainView);
 }
