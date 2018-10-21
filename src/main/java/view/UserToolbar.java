@@ -18,28 +18,32 @@ import model.StatusType;
 
 import java.io.IOException;
 
-public class UserToolbar extends AnchorPane {
+class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
     private IMainView mainView;
     private IControllerFactory factory;
 
     @FXML
+    private
     ImageView currentUserImageView;
 
     @FXML
+    private
     ImageView statusImageView;
 
     @FXML
     MenuButton statusMenu;
 
     @FXML
+    private
     ImageView optionsImage;
 
     @FXML
+    private
     Label currentUserNameLabel;
 
-    public UserToolbar(IMainView mainView, MainModel mainModel, IControllerFactory factory) {
+    UserToolbar(IMainView mainView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -54,7 +58,7 @@ public class UserToolbar extends AnchorPane {
         this.factory = factory;
     }
 
-    public void init(){
+    void init(){
         IUserToolbarController toolBarController = factory.getUserToolBarController(mainModel, mainView);
         addPremadeStatuses(toolBarController);
         currentUserNameLabel.setText(mainModel.getActiveUser().getUsername());
@@ -91,13 +95,13 @@ public class UserToolbar extends AnchorPane {
         }
     }
 
-    public void updateCurrentUserInfo(){
+    void updateCurrentUserInfo(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
         statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));
         statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 
-    public void setCurrentUserImageView(){
+    void setCurrentUserImageView(){
         currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 

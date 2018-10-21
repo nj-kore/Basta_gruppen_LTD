@@ -17,15 +17,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import model.MainModel;
 import model.Message;
-import model.User;
 
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 /**
@@ -96,7 +92,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainView The parent MainView of the ChatView.
      * @param factory The ControllerFactory which is responsible for creating controllers.
      */
-    public ChatView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
+    ChatView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -146,7 +142,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * Loads the messages from the model and displays them as MessageItems
      */
 
-    public void loadMessages() {
+    private void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
         if (itr != null) {
@@ -173,7 +169,7 @@ public class ChatView extends AnchorPane implements IChatView {
         loadParticipants();
     }
 
-    public void init() {
+    void init() {
         if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
         }

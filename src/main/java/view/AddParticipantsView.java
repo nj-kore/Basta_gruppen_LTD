@@ -92,10 +92,6 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         return searchNonParticipantsTextField.getText();
     }
 
-    @Override
-    public void addOrRemoveFromConversation() {
-
-    }
 
     @Override
     @FXML
