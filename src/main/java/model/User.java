@@ -79,7 +79,13 @@ public class User {
 
     protected List<Integer> getContacts(){return contacts;}
 
-    public String getProfileImagePath(){return profileImagePath;}
+    public String getProfileImagePath(){
+        if (profileImagePath == null) {
+            return "pics/userIcon.png";
+        } else {
+            return profileImagePath;
+        }
+    }
 
     public StatusType getStatus(){return status;}
 
