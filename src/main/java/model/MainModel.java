@@ -85,7 +85,9 @@ public class MainModel extends ModelObservable {
         activeUser.setFirstName(firstName);
         activeUser.setLastName(lastName);
         activeUser.setEmail(email);
-        activeUser.setProfileImagePath(picURL);
+        if(picURL != null){
+            activeUser.setProfileImagePath(picURL);
+        }
         notifyObservers(UpdateTypes.USER_INFO);
     }
 
