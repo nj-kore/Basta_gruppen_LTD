@@ -85,6 +85,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
+     * @param mainView The parent MainView of the ChatView.
+     * @param factory The ControllerFactory which is responsible for creating controllers.
      */
     public ChatView(MainModel mainModel, MainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
@@ -141,8 +143,8 @@ public class ChatView extends AnchorPane implements IChatView {
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
         if (itr != null) {
             while (itr.hasNext()) {
-                Message m = itr.next();
-                chatFlowPane.getChildren().add(new MessageItem(m, mainModel.getUser(m.getSenderId())));
+                Message message = itr.next();
+                chatFlowPane.getChildren().add(new MessageItem(message, mainModel.getUser(message.getSenderId())));
             }
         }
     }

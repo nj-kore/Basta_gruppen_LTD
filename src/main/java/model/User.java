@@ -123,9 +123,9 @@ public class User {
 
     /**
      * adds userToAdd to contacts.
-     * @param userToAdd
+     * @param idOfUserToAdd The id of the user that is to be added to contacts
      */
-    public void addContact(int userToAdd){contacts.add(userToAdd);}
+    public void addContact(int idOfUserToAdd){contacts.add(idOfUserToAdd);}
 
     @Override
     public boolean equals(Object o) {

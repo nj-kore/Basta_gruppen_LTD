@@ -26,12 +26,12 @@ public class CreateUserViewController implements ICreateUserViewController {
 
 
     public void createUser(){
-        String u = createUserView.getUserName();
-        String fn = createUserView.getFirstName();
-        String ln = createUserView.getlastName();
-        String pw = createUserView.getPassword();
+        String userName = createUserView.getUserName();
+        String firstName = createUserView.getFirstName();
+        String surname = createUserView.getlastName();
+        String password = createUserView.getPassword();
         Boolean isAdmin = createUserView.getAdminCheckBox();
-        mainModel.createUser(u, pw, fn, ln, isAdmin);
+        mainModel.createUser(userName, password, firstName, surname, isAdmin);
         mainView.backToChat();
 
     }

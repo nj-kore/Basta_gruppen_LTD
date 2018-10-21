@@ -65,13 +65,13 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
         createUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (userNameText.getText()==null || userNameText.getText().trim().isEmpty()){
+                if (checkText(userNameText.getText(), userNameText.getText())) {
                     inputHintLabel.setVisible(true);
-                }else if (firstNameText.getText()==null || firstNameText.getText().trim().isEmpty()){
+                }else if (checkText(firstNameText.getText(), firstNameText.getText())){
                     inputHintLabel.setVisible(true);
-                }else if (lastNameText.getText()== null || lastNameText.getText().trim().isEmpty()){
+                }else if (checkText(lastNameText.getText(), lastNameText.getText())){
                     inputHintLabel.setVisible(true);
-                }else if(passwordText.getText()==null || passwordText.getText().trim().isEmpty()){
+                }else if(checkText(passwordText.getText(), passwordText.getText())){
                     inputHintLabel.setVisible(true);
                 }else {
                     c.createUser();
@@ -87,6 +87,12 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
 
     }
 
+    private Boolean checkText(String isnull, String trim){
+        if (isnull==null || trim.trim().isEmpty()){
+            return true;
+        }
+        return false;
+    }
     public String getUserName(){
         return userNameText.getText();
     }

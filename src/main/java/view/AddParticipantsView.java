@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * @author Benjamin Vinnerholt
+ * @since 2018-10-15
+ */
+
 import controller.AddParticipantsController;
 import controller.IAddParticipantsController;
 import controller.IControllerFactory;
