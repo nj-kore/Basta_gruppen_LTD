@@ -28,7 +28,7 @@ public class ParticipantItem extends AnchorPane {
     private Label statusLabel;
 
     public ParticipantItem(User user, IParticipantView participantView) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../resources/fxml/ParticipantListItem.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantListItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
