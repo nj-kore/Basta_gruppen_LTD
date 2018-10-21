@@ -385,7 +385,7 @@ public class MainModelTest {
     }
 
     @Test
-    public void searchNonParticipants(){
+    public void searchNonParticipants() {
         HashMap<Integer, User> userMap = new HashMap<>();
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
@@ -404,6 +404,41 @@ public class MainModelTest {
         Iterator<User> searchIterator = mainModel.searchNonParticipants("cc", conversation);
         assertEquals(searchIterator.next(), u1);
         assertFalse(searchIterator.hasNext());
+    }
+    @Test
+    public void addParticipants(){
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        ArrayList<User> participants = new ArrayList<>();
+        userMap.putAll(getFillerUsers(3));
+        Conversation conversation = new Conversation(1, "t", participants);
+        Iterator<User> searchIterator =mainModel.getParticipants(conversation);
+        assertEquals(searchIterator.hasNext(), false);
+        ArrayList<User> participantsToAdd = new ArrayList<>();
+        participantsToAdd.add(userMap.remove(2));
+        mainModel.addParticipants(participantsToAdd.iterator(), conversation);
+        searchIterator=mainModel.getParticipants(conversation);
+        assertEquals(searchIterator.hasNext(), true);
+    }
 
+    @Test
+    public void removeParticipants(){
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        ArrayList<User> participants = new ArrayList<>();
+        userMap.putAll(getFillerUsers(3));
+        Conversation conversation = new Conversation(1, "t", participants);
+        Iterator<User> searchIterator =mainModel.getParticipants(conversation);
+        ArrayList<User> participantsToAdd = new ArrayList<>();
+        participantsToAdd.add(userMap.remove(2));
+        mainModel.addParticipants(participantsToAdd.iterator(), conversation);
+        ArrayList<User> participantsToRemove = new ArrayList<>();
+        participantsToRemove=participantsToAdd;
+        assertEquals(searchIterator.hasNext(), true);
+        mainModel.removeParticipants(participantsToRemove.iterator(), conversation);
+        searchIterator=mainModel.getParticipants(conversation);
+        assertEquals(searchIterator.hasNext(), false);
     }
 }
