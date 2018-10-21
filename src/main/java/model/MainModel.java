@@ -217,15 +217,10 @@ public class MainModel extends ModelObservable {
         return users;
     }
 
-    public void createUser(User u) {
-        users.put(u.getId(), u);
-        notifyObservers(UpdateTypes.USER_INFO);
-    }
 
     public void createUser(String u, String pw, String fn, String ln, Boolean a){
         int id = getNewUserId();
         User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
-        createUser(user);
         notifyObservers(UpdateTypes.CONTACTS);
         users.put(user.getId(), user);
         if (getActiveUser()==null){
