@@ -5,15 +5,17 @@ import javafx.scene.input.KeyEvent;
 import model.Conversation;
 import model.MainModel;
 import model.User;
+import view.IMainView;
 import view.MainView;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class MainController implements IMainController {
-    MainView mainView;
+    IMainView mainView;
     MainModel mainModel;
 
-    public MainController(MainView mainView, MainModel mainModel){
+    public MainController(IMainView mainView, MainModel mainModel){
         this.mainView = mainView;
         this.mainModel = mainModel;
 
@@ -42,7 +44,7 @@ public class MainController implements IMainController {
     @Override
     public void searchConversationsClicked() {
         Iterator<Conversation> conversations = mainModel.searchConversations(mainView.getConversationSearchString());
-        mainView.updateConversationsList(conversations);
+        mainView.updateConversationsList();
     }
 
     @Override
@@ -51,5 +53,17 @@ public class MainController implements IMainController {
             searchConversationsClicked();
             event.consume();
         }
+    }
+
+    public void setActiveConversation (int id){
+    mainModel.setActiveConversation(id);
+    }
+
+    public void createConversation (List<User> users, String name){
+        mainModel.createConversation(users, name);
+    }
+
+    public void logout(){
+        mainModel.setActiveUser(null);
     }
 }
