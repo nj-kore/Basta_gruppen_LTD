@@ -1,7 +1,7 @@
 /**
  * A class that saves MainModel data to JSON.
  *
- * @author          Gustav Häger
+ * @author          gradGustav Häger
  * responsibility:  To save data to "database" (json files).
  * used by:         MainModel (as an observer)
  * used for:        Saving data to the "database" (json files).
