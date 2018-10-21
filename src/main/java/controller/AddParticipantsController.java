@@ -1,5 +1,9 @@
 package controller;
 
+/**
+ * @author Benjamin Vinnerholt
+ */
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;

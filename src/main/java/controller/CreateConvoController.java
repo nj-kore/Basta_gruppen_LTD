@@ -2,10 +2,8 @@ package controller;
 
 import model.MainModel;
 import model.User;
-import view.CreateConvoView;
 import view.ICreateConvoView;
 import view.IMainView;
-import view.MainView;
 
 import java.util.ArrayList;
 
@@ -30,15 +28,6 @@ public class CreateConvoController implements ICreateConvoController{
         mainView.updateConversationsList();
     }
 
-    /*@Override
-    public void onSaveNameButtonClicked() {
-        if(!createConvoView.getSaveNameTextFieldText().isEmpty()) {
-            createConvoView.setDisableCreateConvoButton(false);
-        } else {
-            createConvoView.setDisableCreateConvoButton(true);
-            createConvoView.saveNameFailed();
-        }
-    }*/
 
     @Override
     public void onCloseButtonClicked() {

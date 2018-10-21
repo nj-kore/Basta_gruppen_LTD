@@ -1,8 +1,7 @@
 package controller;
 
 import model.MainModel;
-import view.IMainView;
-import view.MainView;
+
 
 public class UserPageController implements IUserPageController {
     private MainModel mainModel;

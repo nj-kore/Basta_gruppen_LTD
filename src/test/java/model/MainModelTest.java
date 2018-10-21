@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * @author Benjamin Vinnerholt
+ * @author Gustaf Spjut
+ * @author Jonathan Köre
+ * @author Gustav Häger
+ * @author Filip Andréasson
+ */
+
 import org.junit.Test;
 
 import java.util.*;

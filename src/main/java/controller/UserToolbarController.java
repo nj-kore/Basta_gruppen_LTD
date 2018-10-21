@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.control.MenuItem;
 import model.MainModel;
 import model.StatusType;
 import view.IMainView;

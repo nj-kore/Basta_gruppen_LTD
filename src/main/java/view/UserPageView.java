@@ -21,7 +21,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- *
+ * @author Benjamin Vinnerholt
+ * @author Gustaf Spjut
  */
 public class UserPageView extends AnchorPane {
 

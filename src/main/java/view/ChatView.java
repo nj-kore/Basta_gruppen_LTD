@@ -1,5 +1,13 @@
 package view;
 
+/**
+ * @author Jonathan Köre
+ * @author Benjamin Vinnerholt
+ * @author Gustav Häger
+ * @author Filip Andréasson
+ * @author Gustaf Spjut
+ */
+
 import controller.IChatController;
 import controller.IControllerFactory;
 import javafx.fxml.FXML;
@@ -301,47 +309,7 @@ public class ChatView extends AnchorPane implements IChatView {
     }
 
 
-    /**
-     * The class that is used as a visual representation for the message in the chat.
-     */
-    private class MessageItem extends AnchorPane {
 
-        @FXML
-        private Label messageUserNameLabel;
-
-        @FXML
-        private ImageView messageImageView;
-
-        @FXML
-        private TextFlow messageTextFlow;
-
-        @FXML
-        private Label messageTimeStampLabel;
-
-        /**
-         * Initialises the MessageItem and builds the item according to the data found inside the two parameters
-         *
-         * @param message
-         * @param concreteUser
-         */
-        public MessageItem(Message message, User concreteUser) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Message.fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-
-            try {
-                fxmlLoader.load();
-            } catch (IOException exception) {
-                throw new RuntimeException(exception);
-            }
-            Image profileImage = new Image(concreteUser.getProfileImagePath());
-            messageImageView.setImage(profileImage);
-            messageUserNameLabel.setText(concreteUser.getFullName());
-            messageTextFlow.getChildren().add(new Text(message.getText()));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            messageTimeStampLabel.setText(message.getTime().format(formatter));
-        }
-    }
 
 }
 
