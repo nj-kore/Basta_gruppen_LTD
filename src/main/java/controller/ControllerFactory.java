@@ -5,9 +5,6 @@ import view.*;
 
 public class ControllerFactory implements IControllerFactory {
 
-
-
-
     public IChatController getChatController(IChatView chatView, MainModel mainModel){
         return new ChatController(chatView, mainModel);
     }
