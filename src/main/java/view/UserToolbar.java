@@ -2,7 +2,6 @@ package view;
 
 import controller.IControllerFactory;
 import controller.IUserToolbarController;
-import controller.UserToolbarController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -52,17 +51,17 @@ public class UserToolbar extends AnchorPane {
         }
         this.mainModel = mainModel;
         this.mainView = mainView;
-        this.factory=factory;
+        this.factory = factory;
     }
 
     public void init(){
-        IUserToolbarController u =factory.getUserToolBarController(mainModel, mainView);
-        addPremadeStatuses(u);
+        IUserToolbarController toolBarController = factory.getUserToolBarController(mainModel, mainView);
+        addPremadeStatuses(toolBarController);
         currentUserNameLabel.setText(mainModel.getActiveUser().getUsername());
         optionsImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                u.onOptionsButtonClicked();
+                toolBarController.onOptionsButtonClicked();
             }
         });
         updateCurrentUserInfo();
@@ -71,22 +70,22 @@ public class UserToolbar extends AnchorPane {
 
     private void addPremadeStatuses(IUserToolbarController u){
         for (StatusType status : StatusType.values()){
-            MenuItem m;
+            MenuItem menuItem;
             if(status == StatusType.Available){
                 ImageView imageView = new ImageView("pics/statusGreen.png");
-                m=new MenuItem(status.toString(), imageView);
+                menuItem=new MenuItem(status.toString(), imageView);
             }else if(status == StatusType.Busy){
                 ImageView imageView = new ImageView("pics/statusOrange.png");
-                m=new MenuItem(status.toString(), imageView);
+                menuItem=new MenuItem(status.toString(), imageView);
             }else{
                 ImageView imageView = new ImageView("pics/statusRed.png");
-                m=new MenuItem(status.toString(), imageView);
+                menuItem=new MenuItem(status.toString(), imageView);
             }
-            statusMenu.getItems().add(m);
-            m.setOnAction(new EventHandler<ActionEvent>() {
+            statusMenu.getItems().add(menuItem);
+            menuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    u.onMenuButtonItemClicked(m.getText());
+                    u.onMenuButtonItemClicked(menuItem.getText());
                 }
             });
         }

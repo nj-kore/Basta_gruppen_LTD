@@ -40,7 +40,7 @@ public class User {
         statusPaths[2] = "pics/statusRed.png";
         this.status = status;
         this.isManager = isManager;
-
+        profileImagePath = "pics/userIcon.png";
     }
 
 
@@ -117,8 +117,7 @@ public class User {
     }
 
     public void setProfileImagePath(String profileImagePath){
-        this.profileImagePath=profileImagePath;
-
+        this.profileImagePath = profileImagePath;
     }
 
 
