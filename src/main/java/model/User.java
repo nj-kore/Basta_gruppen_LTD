@@ -1,3 +1,12 @@
+/**
+ * A class that holds the data of a User in the application
+ * responsibility:  To hold the data of a User
+ * used by:         A lot of classes, including but not limited to: MainModel, JsonSaver, JsonLoader
+ * used for:        Modeling a user.
+ * @author Gustaf Spjut
+ * @author Jonathan Köre
+ * @author Gustav Häger
+ */
 package model;
 
 import java.util.ArrayList;

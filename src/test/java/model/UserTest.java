@@ -1,3 +1,6 @@
+/**
+ * @author Gustav Häger
+ */
 package model;
 
 import org.junit.Test;

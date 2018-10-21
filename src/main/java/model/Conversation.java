@@ -1,3 +1,12 @@
+/**
+ * A class that holds the data of a Conversation in the application
+ * responsibility:  To hold the data of a Conversation
+ * used by:         A lot of classes, including but not limited to: MainModel, JsonSaver, JsonLoader
+ * used for:        Modeling a Conversation.
+ * @author Jonathan Köre
+ * @author Filip Andréasson
+ */
+
 package model;
 
 import java.util.HashMap;

@@ -1,3 +1,17 @@
+/**
+ * The Shat App is a messaging desktop application for business. The app allows you to chat with contacts at work
+ *
+ * @author Filip Andréasson
+ * @author Gustav Häger
+ * @author Jonathan Köre
+ * @author Gustaf Spjut
+ * @author Benjamin Vinnerholt
+ *
+ * @version 0.5
+ * @since 2018-09-09
+ */
+
+
 import controller.ControllerFactory;
 import controller.IControllerFactory;
 import infrastructure.IDataLoader;
@@ -14,20 +28,6 @@ import view.IMainView;
 import view.MainView;
 
 import java.io.IOException;
-
-/**
- * The Shat App is a messaging desktop application for business. The app allows you to chat with contacts at work
- *
- * @author Filip Andréasson
- * @author Gustav Häger
- * @author Jonathan Köre
- * @author Gustaf Spjut
- * @author Benjamin Vinnerholt
- *
- * @version 0.5
- * @since 2018-09-09
- */
-
 
 public class Main extends Application {
 
