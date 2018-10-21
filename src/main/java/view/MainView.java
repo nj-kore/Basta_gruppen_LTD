@@ -141,10 +141,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
 
     /**
-     * @param location
-     * @param resources Initializes the class and loads the views that makes out the complete mainView.
-     *                  Proceeds to show the loginpage to the user
-     *                  Finally it adds itself as an observer to the model
+     * Initializes the class and loads the views that makes out the complete mainView.
+     * Proceeds to show the loginpage to the user
+     * Finally it adds itself as an observer to the model
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

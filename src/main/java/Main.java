@@ -33,7 +33,7 @@ public class Main extends Application {
 
 
     /**
-     * @param stage
+     * @param stage the top level container
      * @throws Exception
      *
      * Starts the program and sets the scene to MainView.fxml

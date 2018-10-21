@@ -418,6 +418,7 @@ public class MainModel extends ModelObservable {
     }
 
     /**
+     * @param conversation The conversations
      * @return Participants of a conversation WITHOUT current activeUser.
      */
     public Iterator<User> getParticipants(Conversation conversation) {
