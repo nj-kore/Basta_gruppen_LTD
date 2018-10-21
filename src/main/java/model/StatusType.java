@@ -1,3 +1,9 @@
+/**
+ * An enum for the different statuses a User can have
+ * responsibility:  To represent the current status of a User
+ * used by:         User
+ * @author Gustav Häger
+ */
 package model;
 
 public enum StatusType {

@@ -1,6 +1,5 @@
 package view;
 
-import controller.ChatController;
 import controller.IChatController;
 import controller.IControllerFactory;
 import javafx.fxml.FXML;
