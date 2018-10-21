@@ -37,6 +37,24 @@
             "nano": 377000000
           }
         }
+      },
+      "2": {
+        "id": 2,
+        "text": "Ah va hända?",
+        "senderId": 0,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 21
+          },
+          "time": {
+            "hour": 18,
+            "minute": 30,
+            "second": 26,
+            "nano": 170000000
+          }
+        }
       }
     },
     "participants": [
@@ -175,23 +193,6 @@
         "isManager": false
       },
       {
-        "id": 2,
-        "password": "222",
-        "username": "contact2",
-        "contacts": [],
-        "firstName": "kalle",
-        "lastName": "kuling",
-        "email": null,
-        "status": "Available",
-        "profileImagePath": "pics/steve.jpg",
-        "statusPaths": [
-          "pics/statusGreen.png",
-          "pics/statusOrange.png",
-          "pics/statusRed.png"
-        ],
-        "isManager": false
-      },
-      {
         "id": 0,
         "password": "123",
         "username": "admin",
@@ -212,7 +213,7 @@
         "isManager": true
       }
     ],
-    "name": "group conversation"
+    "name": ""
   },
   {
     "id": 2,
