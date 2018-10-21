@@ -48,74 +48,95 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     //contactDetailView
     @FXML
+    private
     AnchorPane contactDetailView;
 
     @FXML
+    private
     ImageView contactDetailViewProfilemageView;
 
     @FXML
+    private
     ImageView contactDetailViewStatusImageView;
 
     @FXML
+    private
     Label contactDetailViewStatusLabel;
 
     @FXML
+    private
     Label contactDetailViewNameLabel;
 
 
     //mainView
     @FXML
+    private
     AnchorPane mainViewAnchorPane;
 
     @FXML
+    private
     FlowPane contactsFlowPane;
 
     @FXML
+    private
     FlowPane conversationsFlowPane;
 
     @FXML
+    private
     HBox mainViewHBox;
 
     @FXML
+    private
     HBox loginHBox;
 
     @FXML
+    private
     HBox createConvoHBox;
 
     @FXML
     StackPane mainViewStackPane;
 
     @FXML
+    private
     ImageView currentUserImageView;
 
     @FXML
+    private
     ImageView statusImageView;
 
     @FXML
+    private
     MenuButton statusMenu;
 
     @FXML
     Button newConvoButton;
 
     @FXML
+    private
     AnchorPane currentUserAnchorPane;
 
     @FXML
+    private
     TextField searchContactsTextField;
 
     @FXML
+    private
     TextField searchConversationsTextField;
 
     @FXML
+    private
     ImageView searchContactsImageView;
 
     @FXML
+    private
     ImageView searchConversationsImageView;
 
     @FXML
+    private
     Label noContactsFoundLabel;
 
     @FXML
+    private
     Label noConversationsFoundLabel;
 
 
@@ -223,7 +244,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     /**
      * Clears the contactFlowPane and fills it with new ContactListItems corresponding to different Users
      */
-    public void updateContactsList() {
+    private void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
         while (iterator.hasNext()) {
@@ -269,6 +290,14 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     @Override
+    public void setDefaultConversation() {
+        updateConversationsList();
+        if (!conversationsFlowPane.getChildren().isEmpty()) {
+            mainModel.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
+        }
+    }
+
+    @Override
     public void displayLoginPage() {
         mainViewHBox.toBack();
         loginHBox.toFront();
@@ -310,14 +339,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     public void displayCurrentUser() {
         currentUserAnchorPane.getChildren().clear();
         currentUserAnchorPane.getChildren().add(userToolbar);
-    }
-
-    @Override
-    public void setDefaultConversation() {
-        updateConversationsList();
-        if (!conversationsFlowPane.getChildren().isEmpty()) {
-            mainModel.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
-        }
     }
 
     @FXML
