@@ -143,8 +143,8 @@ public class ChatView extends AnchorPane implements IChatView {
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
         if (itr != null) {
             while (itr.hasNext()) {
-                Message m = itr.next();
-                chatFlowPane.getChildren().add(new MessageItem(m, mainModel.getUser(m.getSenderId())));
+                Message message = itr.next();
+                chatFlowPane.getChildren().add(new MessageItem(message, mainModel.getUser(message.getSenderId())));
             }
         }
     }
