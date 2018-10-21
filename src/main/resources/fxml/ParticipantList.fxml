@@ -14,7 +14,7 @@
    <children>
       <Label layoutX="15.0" layoutY="14.0" styleClass="detailViewMediumText" text="Participants" />
       <TextField fx:id="searchParticipantsTextField" layoutX="163.0" layoutY="19.0" promptText="Search for a participant..." />
-      <ImageView fx:id="searchParticipantsImageView" fitHeight="26.0" fitWidth="26.0" layoutX="312.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" styleClass="blackBorder">
+      <ImageView fx:id="searchParticipantsImageView" fitHeight="26.0" fitWidth="26.0" layoutX="312.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" >
          <image>
             <Image url="@../pics/searchIcon.png" />
          </image>
@@ -37,5 +37,6 @@
             <FlowPane fx:id="participantsToRemoveFlowPane" prefHeight="73.0" prefWidth="394.0" />
          </content>
       </ScrollPane>
+      <Button layoutX="391.0" layoutY="459.0" mnemonicParsing="false" onAction="#moveUsers" text="Move Users" />
    </children>
 </fx:root>

@@ -343,7 +343,7 @@ public class MainModel extends ModelObservable {
      * @return Participants of a conversation WITHOUT current activeUser.
      */
     public Iterator<User> getParticipants(Conversation conversation) {
-        List<User> participants = conversation.getParticipants();
+        List<User> participants = new ArrayList<>((conversation.getParticipants()));    
         participants.remove(getActiveUser());
         return participants.iterator();
     }

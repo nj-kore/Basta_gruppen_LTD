@@ -15,7 +15,7 @@ public interface IParticipantView {
     void closeView();
     void update();
 
-    void select(ParticipantItem participantItem);
+    void moveUsers();
 
     Iterator<User> getParticipantsToAddOrRemove();
 

@@ -22,12 +22,14 @@ public class RemoveParticipantsController implements IRemoveParticipantsControll
 
     @Override
     public void searchParticipants() {
-        List<User> users = removeParticipantsView.getConversation().getParticipants();
+        Iterator<User> users = mainModel.getParticipants(removeParticipantsView.getConversation());
         List<User> usersToShow = new ArrayList<>();
         String searchString = removeParticipantsView.getSearchString();
+        User next;
 
-        for(User u : users){
-            if(u.getFullName().contains(searchString)) usersToShow.add(u);
+        while (users.hasNext()){
+            next = users.next();
+            if(next.getFullName().contains(searchString)) usersToShow.add(next);
         }
         removeParticipantsView.showSearchResult(usersToShow.iterator());
     }

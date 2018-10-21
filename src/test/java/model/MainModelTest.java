@@ -427,18 +427,22 @@ public class MainModelTest {
         HashMap<Integer, User> userMap = new HashMap<>();
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
-        ArrayList<User> participants = new ArrayList<>();
-        userMap.putAll(getFillerUsers(3));
-        Conversation conversation = new Conversation(1, "t", participants);
-        Iterator<User> searchIterator =mainModel.getParticipants(conversation);
-        ArrayList<User> participantsToAdd = new ArrayList<>();
-        participantsToAdd.add(userMap.remove(2));
-        mainModel.addParticipants(participantsToAdd.iterator(), conversation);
-        ArrayList<User> participantsToRemove = new ArrayList<>();
-        participantsToRemove=participantsToAdd;
-        assertEquals(searchIterator.hasNext(), true);
-        mainModel.removeParticipants(participantsToRemove.iterator(), conversation);
-        searchIterator=mainModel.getParticipants(conversation);
-        assertEquals(searchIterator.hasNext(), false);
+
+        ArrayList<User> fillers = new ArrayList<>(getFillerUsers(3).values());
+        Conversation conversation = new Conversation(1, "one", fillers);
+        conversationMap.put(1, conversation);
+
+        assertEquals(conversationMap.get(1).getParticipants().size(), 3);
+        List<User> usersToRemoveList = new ArrayList<>(conversation.getParticipants());  //3 participants
+        usersToRemoveList.remove(0);    //2 participants
+        usersToRemoveList.remove(0);    //1 participant to remove
+        mainModel.removeParticipants(usersToRemoveList.iterator(), conversation);
+        assertEquals(conversation.getParticipants().size(), 2);
+        assertEquals(conversation.getParticipants().get(0), fillers.get(0));
+        assertEquals(conversation.getParticipants().get(1), fillers.get(1));
+        usersToRemoveList = new ArrayList<>(conversation.getParticipants());
+        mainModel.removeParticipants(usersToRemoveList.iterator(), conversation);
+        assertEquals(conversation.getParticipants().size(), 0);
+
     }
 }

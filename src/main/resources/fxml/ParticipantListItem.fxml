@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#participantItemSelected" prefHeight="73.0" prefWidth="400.0" styleClass="itemPliancy" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toggleClicked" prefHeight="73.0" prefWidth="400.0" styleClass="itemPliancy" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="profilePictureImageView" fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0">
          <image>

@@ -44,7 +44,8 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     @FXML
     private Button addParticipantsButton;
 
-    AddParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation, IControllerFactory factory) {
+
+    AddParticipantsView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -57,7 +58,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
 
         this.mainModel = mainModel;
         this.chatView = chatView;
-        this.conversation = conversation;
+        this.conversation = mainModel.getActiveConversation();
 
         IAddParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
 
@@ -111,9 +112,32 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     }
 
     @Override
-    public void select(ParticipantItem participantItem) {
-        nonParticipantsFlowPane.getChildren().remove(participantItem);
-        contactsToAddFlowPane.getChildren().add(participantItem);
+    @FXML
+    public void moveUsers() {
+        ArrayList<Node> paneList = new ArrayList<>();
+        paneList.addAll(nonParticipantsFlowPane.getChildren());
+        paneList.addAll(contactsToAddFlowPane.getChildren());
+
+        for (Node node : paneList) {
+
+            ParticipantItem participantItem = (ParticipantItem) node;
+
+            if (participantItem.getIsClicked()) {
+
+                if (nonParticipantsFlowPane.getChildren().contains(node)) {
+
+                    nonParticipantsFlowPane.getChildren().remove(node);
+                    contactsToAddFlowPane.getChildren().add(node);
+                } else if(contactsToAddFlowPane.getChildren().contains(node)){
+
+                    nonParticipantsFlowPane.getChildren().add(node);
+                    contactsToAddFlowPane.getChildren().remove(node);
+                }
+                participantItem.setClicked(false);
+                participantItem.setClickedColour();
+            }
+        }
+
     }
 
     @Override

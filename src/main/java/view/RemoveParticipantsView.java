@@ -45,7 +45,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     @FXML
     private Button removeParticipantsButton;
 
-    public RemoveParticipantsView(MainModel mainModel, IChatView chatView, Conversation conversation, IControllerFactory factory) {
+    public RemoveParticipantsView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantList.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -58,7 +58,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
 
         this.mainModel = mainModel;
         this.chatView = chatView;
-        this.conversation = conversation;
+        this.conversation = mainModel.getActiveConversation();
 
         IRemoveParticipantsController controller = factory.getRemoveParticipantsController(this, mainModel);
 
@@ -116,10 +116,27 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     }
 
     @Override
-    public void select(ParticipantItem participantItem) {
-        participantsFlowPane.getChildren().remove(participantItem);
-        participantsToRemoveFlowPane.getChildren().add(participantItem);
+    public void moveUsers() {
+        ArrayList<Node> paneList = new ArrayList<>();
+        paneList.addAll(participantsFlowPane.getChildren());
+        paneList.addAll(participantsToRemoveFlowPane.getChildren());
+
+        for (Node node : paneList) {
+            ParticipantItem participantItem = (ParticipantItem) node;
+            if (participantItem.getIsClicked()) {
+                if (participantsFlowPane.getChildren().contains(node)) {
+                    participantsFlowPane.getChildren().remove(node);
+                    participantsToRemoveFlowPane.getChildren().add(node);
+                } else {
+                    participantsToRemoveFlowPane.getChildren().remove(node);
+                    participantsFlowPane.getChildren().add(node);
+                }
+                participantItem.setClicked(false);
+                participantItem.setClickedColour();
+            }
+        }
     }
+    
 
     @Override
     public Iterator<User> getParticipantsToAddOrRemove() {

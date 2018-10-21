@@ -14,6 +14,7 @@ public class ParticipantItem extends AnchorPane {
 
     IParticipantView participantView;
     private User user;
+    private boolean isClicked = false;
 
     @FXML
     private ImageView profilePictureImageView;
@@ -47,13 +48,31 @@ public class ParticipantItem extends AnchorPane {
 
     }
 
-    @FXML
-    private void participantItemSelected(){
-        participantView.select(this);
-    }
 
     public User getUser(){
         return user;
+    }
+
+    @FXML
+    private void toggleClicked(){
+        this.isClicked = !this.isClicked;
+        setClickedColour();
+    }
+
+    public void setClicked(boolean clicked){
+        isClicked = clicked;
+    }
+
+    public boolean getIsClicked(){
+        return isClicked;
+    }
+
+    public void setClickedColour(){
+        if (isClicked) {
+            this.setStyle("-fx-background-color: #ada9a9");
+        } else {
+            this.setStyle("-fx-background-color: transparent");
+        }
     }
 
 }
