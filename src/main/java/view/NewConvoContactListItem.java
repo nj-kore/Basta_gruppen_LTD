@@ -25,7 +25,7 @@ public class NewConvoContactListItem extends AnchorPane {
     private User user;
 
 
-    public NewConvoContactListItem(User user) {
+    NewConvoContactListItem(User user) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NewConvoContactListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -46,7 +46,6 @@ public class NewConvoContactListItem extends AnchorPane {
 
     @FXML
     public void newConvoContactClicked() {
-        //this.setBackground(new Background(new BackgroundFill(Color.web("#ada9a9"), CornerRadii.EMPTY, Insets.EMPTY)));
         if (this.isClicked) {
             this.isClicked = false;
             this.setStyle("-fx-background-color: #f7efef");
@@ -61,11 +60,11 @@ public class NewConvoContactListItem extends AnchorPane {
         return user;
     }
 
-    public boolean isClicked() {
+    boolean isClicked() {
         return isClicked;
     }
 
-    public void setClicked(boolean clicked) {
+    void setClicked(boolean clicked) {
         isClicked = clicked;
     }
 }

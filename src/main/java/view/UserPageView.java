@@ -2,7 +2,6 @@ package view;
 
 import controller.IControllerFactory;
 import controller.IUserPageController;
-import controller.UserPageController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,49 +25,61 @@ import java.io.IOException;
  */
 public class UserPageView extends AnchorPane {
 
-    MainView parent;
+    private MainView parent;
     MainModel mainModel;
-    String imagePath;
+    private String imagePath;
 
 
 
     @FXML
+    private
     TextField firstNameTextField;
 
     @FXML
+    private
     TextField emailTextField;
 
     @FXML
+    private
     PasswordField oldPasswordField;
 
     @FXML
+    private
     PasswordField newPasswordField;
 
     @FXML
+    private
     TextField lastNameTextField;
 
     @FXML
+    private
     Button editInfoButton;
 
     @FXML
+    private
     Button saveChangesButton;
 
     @FXML
+    private
     Button changePictureButton;
 
     @FXML
+    private
     Label passwordChangedLabel;
 
     @FXML
+    private
     Label wrongPasswordLabel;
 
     @FXML
+    private
     ImageView profilePicImageView;
 
     @FXML
+    private
     Button changePasswordButton;
 
-    public UserPageView(MainView parentView, MainModel mainModel, IControllerFactory factory) {
+    UserPageView(MainView parentView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

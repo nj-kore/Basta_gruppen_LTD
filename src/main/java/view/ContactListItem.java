@@ -13,13 +13,13 @@ public class ContactListItem extends AnchorPane {
 
 
     @FXML
-    ImageView contactProfileImageView;
+    private ImageView contactProfileImageView;
     @FXML
-    ImageView contactStatusImageView;
+    private ImageView contactStatusImageView;
     @FXML
-    Label contactNameLabel;
+    private Label contactNameLabel;
     @FXML
-    Label contactStatusLabel;
+    private Label contactStatusLabel;
 
     private MainView mainView;
     private User user;

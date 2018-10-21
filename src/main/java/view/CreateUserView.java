@@ -1,6 +1,5 @@
 package view;
 
-import controller.CreateUserViewController;
 import controller.IControllerFactory;
 import controller.ICreateUserViewController;
 import javafx.event.EventHandler;
@@ -15,34 +14,34 @@ import java.io.IOException;
 
 public class CreateUserView extends AnchorPane implements ICreateUserView {
 
-    MainView mainView;
+    private MainView mainView;
     MainModel mainModel;
 
     @FXML
-    TextField userNameText;
+    private TextField userNameText;
 
     @FXML
-    TextField firstNameText;
+    private TextField firstNameText;
 
     @FXML
-    TextField lastNameText;
+    private TextField lastNameText;
 
     @FXML
-    PasswordField passwordText;
+    private PasswordField passwordText;
 
     @FXML
-    CheckBox isAdminCheckBox;
+    private CheckBox isAdminCheckBox;
 
     @FXML
-    Button createUser;
+    private Button createUser;
 
     @FXML
-    Button cancelCreateUser;
+    private Button cancelCreateUser;
 
     @FXML
-    Label inputHintLabel;
+    private Label inputHintLabel;
 
-    public CreateUserView(MainView mainView, MainModel mainModel, IControllerFactory factory) {
+    CreateUserView(MainView mainView, MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -88,10 +87,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
     }
 
     private Boolean checkText(String isnull, String trim){
-        if (isnull==null || trim.trim().isEmpty()){
-            return true;
-        }
-        return false;
+        return isnull == null || trim.trim().isEmpty();
     }
     public String getUserName(){
         return userNameText.getText();

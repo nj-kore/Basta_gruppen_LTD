@@ -1,7 +1,7 @@
 /**
  * A class that saves MainModel data to JSON.
  *
- * @author          gradGustav Häger
+ * @author          Gustav Häger
  * responsibility:  To save data to "database" (json files).
  * used by:         MainModel (as an observer)
  * used for:        Saving data to the "database" (json files).
@@ -97,13 +97,13 @@ public class JsonSaver implements IDataSaver, ModelObserver {
      * Saves the Users in the model by writing them to usersPath
      */
     public void saveUsers() {
-        writeUsers(new ArrayList<User>(model.getUsers().values()));
+        writeUsers(new ArrayList<>(model.getUsers().values()));
     }
 
     /**
      * Saves the Conversations in the model by writing them to conversationsPath
      */
     public void saveConversations() {
-        writeConversations(new ArrayList<Conversation>(model.getConversations().values()));
+        writeConversations(new ArrayList<>(model.getConversations().values()));
     }
 }

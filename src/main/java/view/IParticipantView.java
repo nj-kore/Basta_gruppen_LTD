@@ -8,16 +8,10 @@ import java.util.Iterator;
 
 public interface IParticipantView {
     void showSearch(Iterator<User> usersToShow);
-
     String getSearchString();
-
-    void addOrRemoveFromConversation();
     void closeView();
     void update();
-
     void moveUsers();
-
     Iterator<User> getParticipantsToAddOrRemove();
-
     Conversation getConversation();
 }

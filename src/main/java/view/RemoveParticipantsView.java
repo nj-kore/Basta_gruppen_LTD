@@ -7,7 +7,6 @@ package view;
 
 import controller.IControllerFactory;
 import controller.IRemoveParticipantsController;
-import controller.RemoveParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,7 +23,6 @@ import model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class RemoveParticipantsView extends AnchorPane implements IParticipantView {
 
@@ -96,10 +94,6 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
 
 
 
-    @Override
-    public void addOrRemoveFromConversation() {
-
-    }
 
     @Override
     @FXML

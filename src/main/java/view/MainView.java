@@ -177,11 +177,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
             }
         });
 
-        //chatView.startTiming();
-
-        //Don't really know if this is the way to do it, casting makes it unreplacable, but otherwise this goes into
-        //the interface? which seems wrong.
-
     }
 
     public MainView(MainModel mainModel, IControllerFactory factory) {
@@ -227,14 +222,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 break;
             case USER_INFO:
                 updateUserInfoTextFields();
-                //updateCurrentUserInfo();
                 userToolbar.updateCurrentUserInfo();
                 break;
             default:
                 break;
         }
         userToolbar.setCurrentUserImageView();
-        //currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
     }
 
     private void updateUserInfoTextFields() {
@@ -317,7 +310,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         createConvoHBox.getChildren().add(createConvoView);
         createConvoView.updateCreateConversationLists();
         createConvoView.setMinWidth(mainViewAnchorPane.getWidth());
-        //createConvoView.prefHeightProperty().bind(mainViewAnchorPane.heightProperty());
     }
 
     @Override
@@ -397,7 +389,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         displayMainView();
     }
 
-    public void logout() {
+    void logout() {
         userToolbar.statusMenu.getItems().clear();
         mainModel.setActiveUser(null);
         displayLoginPage();
@@ -405,7 +397,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         chatView.createUserButtonInVisible();
     }
 
-    public void loadDetailView(User user) {
+    void loadDetailView(User user) {
         detailedUser = user;
         this.contactDetailViewNameLabel.setText(user.getFullName());
         Image profileImage = new Image(user.getProfileImagePath());
