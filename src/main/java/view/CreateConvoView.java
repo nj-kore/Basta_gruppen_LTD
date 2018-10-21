@@ -77,12 +77,6 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
                 createConvoController.onCloseButtonClicked();
             }
         });
-        /*saveNameButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                createConvoController.onSaveNameButtonClicked();
-            }
-        });*/
 
     }
 
@@ -137,16 +131,6 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
         return selectedUsers;
     }
 
-    /*@Override
-    public void setDisableCreateConvoButton(boolean bool) {
-        createConvoButton.setDisable(bool);
-    }*/
-
-    /*@Override
-    public void saveNameFailed() {
-        saveNameLabel.setText("Conversation needs to have a name");
-        saveNameLabel.setStyle("-fx-background-color: #FF0000");
-    }*/
 
     public FlowPane getContactPane() {
         return contactPane;

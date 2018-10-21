@@ -55,11 +55,11 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
         this.mainModel = mainModel;
         this.mainView = mainView;
 
-        ICreateUserViewController c = factory.getCreateUserViewController(mainModel, mainView, this);
+        ICreateUserViewController controller = factory.getCreateUserViewController(mainModel, mainView, this);
         cancelCreateUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                c.cancelCreateUser();
+                controller.cancelCreateUser();
             }
         });
         createUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -74,7 +74,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
                 }else if(checkText(passwordText.getText(), passwordText.getText())){
                     inputHintLabel.setVisible(true);
                 }else {
-                    c.createUser();
+                    controller.createUser();
                     inputHintLabel.setVisible(false);
                     userNameText.clear();
                     firstNameText.clear();

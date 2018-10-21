@@ -52,18 +52,18 @@ public class LoginView extends AnchorPane implements ILoginView {
 
 
         //The following lines creates a controller that we can temporarily use to assign functions to
-        ILoginController c = factory.getLoginController(this, mainModel);
+        ILoginController controller = factory.getLoginController(this, mainModel);
 
         logInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                c.onLoginButtonClicked();
+                controller.onLoginButtonClicked();
             }
         });
         loginAnchorPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                c.onKeyPressed(event);
+                controller.onKeyPressed(event);
             }
         });
         //userNameTextField.requestFocus(); //Gives focus to userNameTextField

@@ -81,12 +81,12 @@ public class UserPageView extends AnchorPane {
         this.parent = parentView;
         this.mainModel = mainModel;
 
-        IUserPageController c = factory.getUserPageController(mainModel);
+        IUserPageController controller = factory.getUserPageController(mainModel);
 
         saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                c.saveUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), imagePath);
+                controller.saveUserInfo(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), imagePath);
                 enableInfoTextFields(false);
 
                 changePictureButton.setVisible(false);
@@ -102,7 +102,7 @@ public class UserPageView extends AnchorPane {
                 if(oldPasswordField.getText().equals(mainModel.getActiveUser().getPassword())){
                     wrongPasswordLabel.setVisible(false);
                     if(!newPasswordField.getText().equals("")) {
-                        c.changePassword(newPasswordField.getText());
+                        controller.changePassword(newPasswordField.getText());
                         passwordChangedLabel.setVisible(true);
                     }
                 } else {
@@ -120,8 +120,6 @@ public class UserPageView extends AnchorPane {
                 File selectedFile = fileChooser.showOpenDialog(null);
                 if(selectedFile != null){
                     imagePath = selectedFile.toURI().toString();
-                    //c.changeProfilePicture(selectedFile.toURI().toString());
-                    //Is it cleaner to have the controller tell the view to update pic rather then the view calling the model as below?
                     profilePicImageView.setImage(new Image(selectedFile.toURI().toString()));       //View changes itself, not based on model
                 }
             }
