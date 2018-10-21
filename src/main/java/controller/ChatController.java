@@ -3,8 +3,10 @@ package controller;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
-import view.ConversationListItem;
+import model.User;
 import view.IChatView;
+
+import java.util.ArrayList;
 
 /**
  * The controller class that handles all the inputs from the ChatView
@@ -63,7 +65,9 @@ public class ChatController implements IChatController {
 
     @Override
     public void onLeaveChatClicked() {
-        mainModel.getConversations().remove(mainModel.getActiveConversation().getId());
+        ArrayList<User> userIterator = new ArrayList<>();
+        userIterator.add(mainModel.getActiveUser());
+        mainModel.removeParticipants(userIterator.iterator(), mainModel.getActiveConversation());
         chatView.setDefaultConversation();
     }
 

@@ -6,10 +6,10 @@ public interface IMainView {
     void displayChat();
     void displayUserPage();
     void displayMainView();
+    void setDefaultConversation();
     void displayLoginPage();
     void displayCreateConvoPage();
     void displayCurrentUser();
-    void setDefaultConversation();
     void displayCreateUserView();
     void createConvoViewToBack();
     void updateConversationsList();
