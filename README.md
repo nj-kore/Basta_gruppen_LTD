@@ -25,6 +25,14 @@ gradlew test jacocoTestReport
 The report can be found in its entirety under build/reports/jacoco/test/html/index.html \
 You can also view reports for individual classes in their respective folders in build/reports/jacoco/test/html or by simply navigating to them in the index.html.
 
+## Pmd
+Can be run with
+
+```
+gradlew pmdMain
+```
+The report can be found in build/reports/pmd. Note that if pmd discovers an issue, building the project will fail.
+
 ## Javadoc
 Can be generated with
 
