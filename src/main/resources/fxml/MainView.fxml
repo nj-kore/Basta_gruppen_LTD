@@ -16,32 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane id="background-lightbox" fx:id="contactDetailView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="200.0">
-               <children>
-                  <ImageView fx:id="contactDetailViewProfilemageView" fitHeight="200.0" fitWidth="200.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../pics/lukasmaly.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="contactDetailViewNameLabel" layoutX="223.0" layoutY="36.0" styleClass="detailViewBigText" text="Mattegud, Jesus" />
-                  <ImageView fx:id="contactDetailViewStatusImageView" fitHeight="17.0" fitWidth="15.0" layoutX="223.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/activeStatus.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="contactDetailViewStatusLabel" layoutX="257.0" layoutY="142.0" styleClass="detailViewMediumText" text="Active" />
-                  <Button layoutX="332.0" layoutY="244.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCreateConvoButtonClicked" styleClass="detailViewMediumText" text="Create new conversation" />
-                  <Button layoutX="654.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#contactDetailViewCloseButtonClicked" styleClass="boldText" text="X" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
       <StackPane fx:id="mainViewStackPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <HBox fx:id="detailViewHBox" prefHeight="100.0" prefWidth="200.0" />
             <HBox fx:id="loginHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="mainViewHBox" />
             <HBox fx:id="createConvoHBox" alignment="CENTER" />
             <HBox fx:id="mainViewHBox" styleClass="mainViewHBox">

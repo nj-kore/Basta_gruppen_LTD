@@ -1,9 +1,7 @@
 package view;
 
-import controller.ControllerFactory;
 import controller.IControllerFactory;
 import controller.IMainController;
-import controller.MainController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,29 +44,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     private User detailedUser;
     private UserToolbar userToolbar;
     private CreateUserView createUserView;
+    private ContactDetailView contactDetailView;
     private IControllerFactory factory;
-
-    //contactDetailView
-    @FXML
-    private
-    AnchorPane contactDetailView;
-
-    @FXML
-    private
-    ImageView contactDetailViewProfilemageView;
-
-    @FXML
-    private
-    ImageView contactDetailViewStatusImageView;
-
-    @FXML
-    private
-    Label contactDetailViewStatusLabel;
-
-    @FXML
-    private
-    Label contactDetailViewNameLabel;
-
 
     //mainView
     @FXML
@@ -94,6 +71,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     @FXML
     private
     HBox createConvoHBox;
+
+    @FXML
+    private
+    HBox detailViewHBox;
 
     @FXML
     StackPane mainViewStackPane;
@@ -189,6 +170,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         this.userPage = new UserPageView(this, mainModel, factory);
         this.createUserView = new CreateUserView(this, mainModel, factory);
         this.userToolbar = new UserToolbar(this, mainModel, factory);
+        this.contactDetailView = new ContactDetailView(this, mainModel, factory);
        this.factory=factory;
     }
 
@@ -316,6 +298,15 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     @Override
+    public void displayContactDetailView(User user) {
+        detailViewHBox.getChildren().clear();
+        detailViewHBox.getChildren().add(contactDetailView);
+        contactDetailView.setDetailedUser(user);
+        detailViewHBox.setMinWidth(mainViewAnchorPane.getWidth());
+        detailViewHBox.toFront();
+    }
+
+    @Override
     public void displayChat() {
         mainViewAnchorPane.getChildren().add(chatView);
     }
@@ -391,17 +382,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         displayLoginPage();
         loginView.clearTextFields();
         chatView.createUserButtonInVisible();
-    }
-
-    @Override
-    public void loadDetailView(User user) {
-        detailedUser = user;
-        this.contactDetailViewNameLabel.setText(user.getFullName());
-        Image profileImage = new Image(user.getProfileImagePath());
-        this.contactDetailViewProfilemageView.setImage(profileImage);
-        this.contactDetailViewStatusImageView.setImage(new Image(user.getStatusImagePath()));
-        this.contactDetailViewStatusLabel.setText(user.getStatus().toString());
-        contactDetailView.toFront();
     }
 
     @FXML

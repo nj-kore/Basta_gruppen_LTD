@@ -41,5 +41,8 @@ public class ControllerFactory implements IControllerFactory {
         return mainController;
     }
 
+    public IContactDetailViewController getContactDetailViewController(MainModel mainModel, MainView mainView) {
+        return new ContactDetailViewController(mainModel, mainView);
+    }
 
 }
