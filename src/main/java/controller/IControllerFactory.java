@@ -22,4 +22,6 @@ public interface IControllerFactory {
     IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
 
     IMainController getMainController(MainModel mainModel, IMainView mainView);
+
+    IContactDetailViewController getContactDetailViewController(MainModel mainModel, MainView mainView);
 }
