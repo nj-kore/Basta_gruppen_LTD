@@ -33,8 +33,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
-    private RemoveParticipantsView removeParticipantsView;
-    private AddParticipantsView addParticipantsView;
+    private AbstractParticipantView removeParticipantsView;
+    private AbstractParticipantView addParticipantsView;
     private IMainView mainView;
 
 

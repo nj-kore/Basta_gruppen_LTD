@@ -7,6 +7,7 @@ import model.MainModel;
 import view.*;
 import view.chat.AddParticipantsView;
 import view.chat.IChatView;
+import view.chat.IParticipantView;
 import view.chat.RemoveParticipantsView;
 
 public class ControllerFactory implements IControllerFactory {
@@ -35,11 +36,11 @@ public class ControllerFactory implements IControllerFactory {
         return new UserToolbarController(mainModel, mainView);
     }
 
-    public IParticipantsController createRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel){
+    public IParticipantsController createRemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel){
         return new RemoveParticipantsController(removeParticipantsView, mainModel);
     }
 
-    public IParticipantsController createAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
+    public IParticipantsController createAddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel){
         return new AddParticipantsController(addParticipantsView, mainModel);
     }
     public IMainController createMainController(MainModel mainModel, IMainView mainView){
