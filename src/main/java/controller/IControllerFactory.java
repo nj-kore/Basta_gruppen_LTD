@@ -9,21 +9,23 @@ import view.chat.RemoveParticipantsView;
 
 public interface IControllerFactory {
 
-    IChatController getChatController(IChatView chatView, MainModel mainModel);
+    IChatController createChatController(IChatView chatView, MainModel mainModel);
 
-    ILoginController getLoginController(ILoginView loginView, MainModel mainModel);
+    ILoginController createLoginController(ILoginView loginView, MainModel mainModel);
 
-    ICreateConvoController getCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel);
+    ICreateConvoController createCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel);
 
-    IUserPageController getUserPageController(MainModel mainModel);
+    IUserPageController createUserPageController(MainModel mainModel);
 
-    ICreateUserViewController getCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView);
+    ICreateUserViewController createCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView);
 
-    IUserToolbarController getUserToolBarController(MainModel mainModel, IMainView mainView);
+    IUserToolbarController createUserToolBarController(MainModel mainModel, IMainView mainView);
 
-    IParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
+    IParticipantsController createRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
 
-    IParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
+    IParticipantsController createAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
 
-    IMainController getMainController(MainModel mainModel, IMainView mainView);
+    IMainController createMainController(MainModel mainModel, IMainView mainView);
+
+    IContactDetailViewController createContactDetailViewController(MainModel mainModel, IMainView mainView);
 }

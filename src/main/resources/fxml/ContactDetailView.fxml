@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root id="background-lightbox" fx:id="contactDetailView" prefHeight="698.0" prefWidth="1593.0" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <ImageView fx:id="profileImageView" fitHeight="200.0" fitWidth="200.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true" />
+            <Label fx:id="nameLabel" layoutX="257.0" layoutY="36.0" styleClass="detailViewBigText" text="Mattegud, Jesus" />
+            <ImageView fx:id="statusImageView" fitHeight="17.0" fitWidth="15.0" layoutX="257.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pics/activeStatus.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="statusLabel" layoutX="291.0" layoutY="149.0" styleClass="detailViewMediumText" text="Active" />
+            <Button fx:id="createConvoButton" layoutX="332.0" layoutY="244.0" mnemonicParsing="false" styleClass="detailViewMediumText" text="Create new conversation" />
+            <Button fx:id="closeButton" layoutX="654.0" layoutY="2.0" mnemonicParsing="false" styleClass="boldText" text="X" />
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

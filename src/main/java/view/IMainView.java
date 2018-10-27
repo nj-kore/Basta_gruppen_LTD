@@ -11,6 +11,7 @@ public interface IMainView {
     void setDefaultConversation();
     void displayLoginPage();
     void displayCreateConvoPage();
+    void displayContactDetailView(User user);
     void displayCurrentUser();
     void displayCreateUserView();
     void createConvoViewToBack();
@@ -19,7 +20,5 @@ public interface IMainView {
     void updateContactList(Iterator<User> iterator);
     String getConversationSearchString();
     void setActiveConversation(int id);
-
-    void loadDetailView(User user);
     void logout();
 }

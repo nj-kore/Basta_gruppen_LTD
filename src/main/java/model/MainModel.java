@@ -337,12 +337,10 @@ public class MainModel extends ModelObservable {
     public boolean login(String username, String password) {
 
         for (User u : users.values()) {
-            if (u.getUsername().equals(username)) {
-                if (u.getPassword().equals(password)) {
-                    setActiveUser(u);
-                    notifyObservers(UpdateType.INIT);
-                    return true;
-                }
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                setActiveUser(u);
+                notifyObservers(UpdateType.INIT);
+                return true;
             }
         }
         return false;
@@ -379,10 +377,8 @@ public class MainModel extends ModelObservable {
                 }
             }
 
-            if (!conversationFound) {
-                if (next.getName().toLowerCase(new Locale("sv-SE")).contains(conversationSearchString.toLowerCase(new Locale("sv-SE")))) {
-                    conversationsToShow.add(next);
-                }
+            if (!conversationFound & next.getName().toLowerCase(new Locale("sv-SE")).contains(conversationSearchString.toLowerCase(new Locale("sv-SE")))) {
+                conversationsToShow.add(next);
             }
         }
         return conversationsToShow.iterator();

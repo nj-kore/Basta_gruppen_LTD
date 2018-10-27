@@ -11,41 +11,44 @@ import view.chat.RemoveParticipantsView;
 
 public class ControllerFactory implements IControllerFactory {
 
-    public IChatController getChatController(IChatView chatView, MainModel mainModel){
+    public IChatController createChatController(IChatView chatView, MainModel mainModel){
         return new ChatController(chatView, mainModel);
     }
 
-    public ILoginController getLoginController(ILoginView loginView, MainModel mainModel){
+    public ILoginController createLoginController(ILoginView loginView, MainModel mainModel){
         return new LoginController(loginView, mainModel);
     }
 
-    public ICreateConvoController getCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel){
+    public ICreateConvoController createCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel){
         return new CreateConvoController(mainView, createConvoView, mainModel);
     }
 
-    public IUserPageController getUserPageController(MainModel mainModel){
+    public IUserPageController createUserPageController(MainModel mainModel){
         return new UserPageController(mainModel);
     }
 
-    public ICreateUserViewController getCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView){
+    public ICreateUserViewController createCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView){
      return new CreateUserViewController(mainModel, mainView, createUserView);
     }
 
-    public IUserToolbarController getUserToolBarController(MainModel mainModel, IMainView mainView){
+    public IUserToolbarController createUserToolBarController(MainModel mainModel, IMainView mainView){
         return new UserToolbarController(mainModel, mainView);
     }
 
-    public IParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel){
+    public IParticipantsController createRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel){
         return new RemoveParticipantsController(removeParticipantsView, mainModel);
     }
 
-    public IParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
+    public IParticipantsController createAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
         return new AddParticipantsController(addParticipantsView, mainModel);
     }
-    public IMainController getMainController(MainModel mainModel, IMainView mainView){
+    public IMainController createMainController(MainModel mainModel, IMainView mainView){
         IMainController mainController=new MainController(mainView, mainModel);
         return mainController;
     }
 
+    public IContactDetailViewController createContactDetailViewController(MainModel mainModel, IMainView mainView) {
+        return new ContactDetailViewController(mainModel, mainView);
+    }
 
 }

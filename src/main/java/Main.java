@@ -14,6 +14,7 @@
 
 import controller.ControllerFactory;
 import controller.IControllerFactory;
+import controller.IMainController;
 import infrastructure.IDataLoader;
 import infrastructure.JsonSaver;
 import infrastructure.JsonLoader;
@@ -52,7 +53,7 @@ public class Main extends Application {
         ModelObserver dataSaver = new JsonSaver(mainModel, usersPath,conversationsPath);
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel, factory);
-
+        IMainController mainController =factory.createMainController(mainModel, mainView);
         //adds datasaver to mainmodels observers
         mainModel.addObserver(dataSaver);
         //adds mainView to mainmodels observers
@@ -75,6 +76,7 @@ public class Main extends Application {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        ((MainView) mainView).bindController(mainController);
     }
 
     public static void main(String[] args) {

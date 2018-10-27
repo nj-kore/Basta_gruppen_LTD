@@ -2,8 +2,6 @@ package view;
 
 import controller.IControllerFactory;
 import controller.IUserPageController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +79,7 @@ public class UserPageView extends AnchorPane {
     private
     Button changePasswordButton;
 
-    UserPageView(IMainView parentView, MainModel mainModel, IControllerFactory factory) {
+    UserPageView(IMainView parentView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -95,8 +93,10 @@ public class UserPageView extends AnchorPane {
         this.parent = parentView;
         this.mainModel = mainModel;
 
-        IUserPageController controller = factory.getUserPageController(mainModel);
 
+    }
+
+    protected void bindController(IUserPageController controller){
         saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -138,8 +138,6 @@ public class UserPageView extends AnchorPane {
                 }
             }
         });
-
-
     }
 
     void updateUserInfoTextFields() {

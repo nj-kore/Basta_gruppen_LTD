@@ -8,8 +8,10 @@ package view.chat;
  * @author Gustaf Spjut
  */
 
+import controller.IAddParticipantsController;
 import controller.IChatController;
 import controller.IControllerFactory;
+import controller.IRemoveParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -35,6 +37,9 @@ public class ChatView extends AnchorPane implements IChatView {
     private RemoveParticipantsView removeParticipantsView;
     private AddParticipantsView addParticipantsView;
     private IMainView mainView;
+    private IChatController controller;
+    private IRemoveParticipantsController removeParticipantsController;
+    private IAddParticipantsController addParticipantsController;
 
 
     @FXML
@@ -91,7 +96,6 @@ public class ChatView extends AnchorPane implements IChatView {
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      * @param mainView The parent MainView of the ChatView.
-     * @param factory The ControllerFactory which is responsible for creating controllers.
      */
     public ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
@@ -106,35 +110,19 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
         this.mainModel = mainModel;
-        removeParticipantsView = new RemoveParticipantsView(mainModel, this, factory);
-        addParticipantsView = new AddParticipantsView(mainModel, this, factory);
+        removeParticipantsView = new RemoveParticipantsView(mainModel, this);
+        IRemoveParticipantsController removeParticipantsController=factory.createRemoveParticipantsController(removeParticipantsView, mainModel);
+        removeParticipantsView.bindController(removeParticipantsController);
+        addParticipantsView = new AddParticipantsView(mainModel, this);
+        IAddParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
+        addParticipantsView.bindController(addParticipantsController);
         this.mainView = mainView;
-
-        IChatController chatController = factory.getChatController(this, mainModel);
-
-        createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
-
-        sendButton.setOnAction(event -> chatController.onSendButtonClicked());
-
-        chatTextArea.setOnKeyPressed(chatController::onChatAreaKeyPressed);
-
-        chatNameTextField.setOnMouseClicked(event -> chatController.onChangeChatNameClicked());
-
-        chatNameTextField.setOnKeyPressed(chatController::onChatNameKeyPressed);
-
-        changeChatNameMenuItem.setOnAction(event -> chatController.onChangeChatNameClicked());
-
-        leaveChatMenuItem.setOnAction(event -> chatController.onLeaveChatClicked());
-
-        acceptImageView.setOnMouseClicked(event -> chatController.onChatNameAccept());
-
-        declineImageView.setOnMouseClicked(event -> chatController.onChatNameDecline());
 
 
         //I dont really know if this should go into the controller or not
         chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
-                chatController.onChatNameDecline();
+                controller.onChatNameDecline();
             }
         });
     }
@@ -143,6 +131,25 @@ public class ChatView extends AnchorPane implements IChatView {
      * Loads the messages from the model and displays them as MessageItems
      */
 
+    public void bindController(IChatController controller){
+        createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
+
+        sendButton.setOnAction(event -> controller.onSendButtonClicked());
+
+        chatTextArea.setOnKeyPressed(controller::onChatAreaKeyPressed);
+
+        chatNameTextField.setOnMouseClicked(event -> controller.onChangeChatNameClicked());
+
+        chatNameTextField.setOnKeyPressed(controller::onChatNameKeyPressed);
+
+        changeChatNameMenuItem.setOnAction(event -> controller.onChangeChatNameClicked());
+
+        leaveChatMenuItem.setOnAction(event -> controller.onLeaveChatClicked());
+
+        acceptImageView.setOnMouseClicked(event -> controller.onChatNameAccept());
+
+        declineImageView.setOnMouseClicked(event -> controller.onChatNameDecline());
+    }
     private void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();

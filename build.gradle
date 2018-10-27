@@ -13,6 +13,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
+    id 'pmd'
 }
 
 apply plugin: 'javafx-gradle-plugin'
