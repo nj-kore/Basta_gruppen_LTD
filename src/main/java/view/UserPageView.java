@@ -28,6 +28,7 @@ public class UserPageView extends AnchorPane {
     private IMainView parent;
     MainModel mainModel;
     private String imagePath;
+    private IUserPageController controller;
 
 
 
@@ -79,7 +80,7 @@ public class UserPageView extends AnchorPane {
     private
     Button changePasswordButton;
 
-    UserPageView(IMainView parentView, MainModel mainModel, IControllerFactory factory) {
+    UserPageView(IMainView parentView, MainModel mainModel, IUserPageController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserPage.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -92,9 +93,7 @@ public class UserPageView extends AnchorPane {
 
         this.parent = parentView;
         this.mainModel = mainModel;
-
-        IUserPageController controller = factory.getUserPageController(mainModel);
-
+        this.controller=controller;
         saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

@@ -29,6 +29,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     MainModel mainModel;
     private IChatView chatView;
     private Conversation conversation;
+    private IAddParticipantsController controller;
 
     @FXML
     private FlowPane nonParticipantsFlowPane;
@@ -49,7 +50,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     private Button addParticipantsButton;
 
 
-    AddParticipantsView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
+    AddParticipantsView(MainModel mainModel, IChatView chatView, IAddParticipantsController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -63,8 +64,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         this.mainModel = mainModel;
         this.chatView = chatView;
         this.conversation = mainModel.getActiveConversation();
-
-        IAddParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
+        this.controller = controller;
 
         searchNonParticipantsImageView.setOnMouseClicked(event -> controller.searchNonParticipants());
         searchNonParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
@@ -77,18 +77,18 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         nonParticipantsFlowPane.getChildren().clear();
         User userToShow;
 
-        if(!usersToShow.hasNext()) {
+        if (!usersToShow.hasNext()) {
             nonParticipantsFlowPane.getChildren().add(noMatchingNonParticipantsLabel);
         }
 
-        while(usersToShow.hasNext()){
+        while (usersToShow.hasNext()) {
             userToShow = usersToShow.next();
             nonParticipantsFlowPane.getChildren().add(new ParticipantItem(userToShow, this));
         }
     }
 
     @Override
-    public String getSearchString(){
+    public String getSearchString() {
         return searchNonParticipantsTextField.getText();
     }
 
@@ -107,7 +107,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         contactsToAddFlowPane.getChildren().clear();
         User nonParticipant;
 
-        while (usersToShow.hasNext()){
+        while (usersToShow.hasNext()) {
             nonParticipant = usersToShow.next();
             nonParticipantsFlowPane.getChildren().add(new ParticipantItem(nonParticipant, this));
         }
@@ -130,7 +130,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
 
                     nonParticipantsFlowPane.getChildren().remove(node);
                     contactsToAddFlowPane.getChildren().add(node);
-                } else if(contactsToAddFlowPane.getChildren().contains(node)){
+                } else if (contactsToAddFlowPane.getChildren().contains(node)) {
 
                     nonParticipantsFlowPane.getChildren().add(node);
                     contactsToAddFlowPane.getChildren().remove(node);
@@ -146,7 +146,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     public Iterator<User> getParticipantsToAddOrRemove() {
         ArrayList<User> usersToAdd = new ArrayList<>();
 
-        for(Node userNode : contactsToAddFlowPane.getChildren()){
+        for (Node userNode : contactsToAddFlowPane.getChildren()) {
             ParticipantItem userParticipantItem = (ParticipantItem) userNode;
             usersToAdd.add(userParticipantItem.getUser());
         }
@@ -158,5 +158,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         return conversation;
     }
 
+    public void showSearchResult(Iterator<User> iterator){
 
+    }
 }

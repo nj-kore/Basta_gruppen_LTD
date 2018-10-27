@@ -43,8 +43,9 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
     private Label saveNameLabel;
 
     private MainModel mainModel;
+    private ICreateConvoController controller;
 
-    CreateConvoView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
+    CreateConvoView(MainModel mainModel, IMainView mainView, ICreateConvoController controller) {
         this.mainModel = mainModel;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateConvoView.fxml"));
@@ -57,12 +58,11 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
             throw new RuntimeException(exception);
         }
 
-        ICreateConvoController createConvoController = factory.getCreateConvoController(mainView, this, mainModel);
-
+        this.controller=controller;
         createConvoButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                createConvoController.onCreateConversationButtonClicked();
+                controller.onCreateConversationButtonClicked();
             }
         });
         moveUsersButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -74,7 +74,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
         closeButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                createConvoController.onCloseButtonClicked();
+                controller.onCloseButtonClicked();
             }
         });
 

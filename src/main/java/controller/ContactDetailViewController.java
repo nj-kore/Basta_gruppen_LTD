@@ -2,6 +2,7 @@ package controller;
 
 import model.MainModel;
 import model.User;
+import view.IMainView;
 import view.MainView;
 
 import java.util.ArrayList;
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 public class ContactDetailViewController implements IContactDetailViewController {
 
     MainModel mainModel;
-    MainView mainView;
-    public ContactDetailViewController(MainModel mainModel, MainView mainView) {
+    IMainView mainView;
+    public ContactDetailViewController(MainModel mainModel, IMainView mainView) {
         this.mainModel = mainModel;
         this.mainView = mainView;
     }

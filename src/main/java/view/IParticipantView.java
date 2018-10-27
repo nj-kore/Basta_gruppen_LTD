@@ -14,4 +14,5 @@ public interface IParticipantView {
     void moveUsers();
     Iterator<User> getParticipantsToAddOrRemove();
     Conversation getConversation();
+    void showSearchResult(Iterator<User> iterator);
 }

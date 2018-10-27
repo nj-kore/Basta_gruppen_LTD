@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import model.User;
+import view.IParticipantView;
 import view.RemoveParticipantsView;
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RemoveParticipantsController implements IRemoveParticipantsController {
-    private RemoveParticipantsView removeParticipantsView;
+    private IParticipantView removeParticipantsView;
     private MainModel mainModel;
 
-    public RemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel) {
+    public RemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel) {
         this.removeParticipantsView = removeParticipantsView;
         this.mainModel = mainModel;
     }
