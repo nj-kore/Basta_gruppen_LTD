@@ -16,7 +16,6 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
 
     private IMainView mainView;
     MainModel mainModel;
-    private ICreateUserViewController controller;
 
     @FXML
     private TextField userNameText;
@@ -42,7 +41,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
     @FXML
     private Label inputHintLabel;
 
-    CreateUserView(IMainView mainView, MainModel mainModel, ICreateUserViewController controller) {
+    CreateUserView(IMainView mainView, MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -54,7 +53,10 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
         }
         this.mainModel = mainModel;
         this.mainView = mainView;
-        this.controller=controller;
+
+    }
+
+    protected void bindController(ICreateUserViewController controller){
         cancelCreateUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -83,7 +85,6 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
                 }
             }
         });
-
     }
 
     private Boolean checkText(String isnull, String trim){

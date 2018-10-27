@@ -29,7 +29,6 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     MainModel mainModel;
     private IChatView chatView;
     private Conversation conversation;
-    private IRemoveParticipantsController controller;
 
     @FXML
     private FlowPane participantsFlowPane;
@@ -49,7 +48,7 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
     @FXML
     private Button removeParticipantsButton;
 
-    public RemoveParticipantsView(MainModel mainModel, IChatView chatView, IRemoveParticipantsController controller) {
+    public RemoveParticipantsView(MainModel mainModel, IChatView chatView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantList.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -63,8 +62,10 @@ public class RemoveParticipantsView extends AnchorPane implements IParticipantVi
         this.mainModel = mainModel;
         this.chatView = chatView;
         this.conversation = mainModel.getActiveConversation();
-        this.controller=controller;
 
+
+    }
+    public void bindController(IRemoveParticipantsController controller){
         searchParticipantsImageView.setOnMouseClicked(event -> controller.searchParticipants());
         searchParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
         removeParticipantsButton.setOnAction(event -> controller.removeParticipants());

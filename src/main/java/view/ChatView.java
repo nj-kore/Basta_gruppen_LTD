@@ -95,9 +95,8 @@ public class ChatView extends AnchorPane implements IChatView {
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      * @param mainView The parent MainView of the ChatView.
-     * @param controller The controller for this view.
      */
-    ChatView(MainModel mainModel, IMainView mainView, IChatController controller, IAddParticipantsController addParticipantsController, IRemoveParticipantsController removeParticipantsController) {
+    ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -109,14 +108,29 @@ public class ChatView extends AnchorPane implements IChatView {
         }
 
 
-        this.controller=controller;
         this.mainModel = mainModel;
-        removeParticipantsView = new RemoveParticipantsView(mainModel, this, removeParticipantsController);
-        addParticipantsView = new AddParticipantsView(mainModel, this, addParticipantsController);
+        removeParticipantsView = new RemoveParticipantsView(mainModel, this);
+        IRemoveParticipantsController removeParticipantsController=factory.getRemoveParticipantsController(removeParticipantsView, mainModel);
+        removeParticipantsView.bindController(removeParticipantsController);
+        addParticipantsView = new AddParticipantsView(mainModel, this);
+        IAddParticipantsController addParticipantsController=factory.getAddParticipantsController(addParticipantsView, mainModel);
+        addParticipantsView.bindController(addParticipantsController);
         this.mainView = mainView;
 
-        //IChatController chatController = factory.getChatController(this, mainModel);
 
+        //I dont really know if this should go into the controller or not
+        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                controller.onChatNameDecline();
+            }
+        });
+    }
+
+    /**
+     * Loads the messages from the model and displays them as MessageItems
+     */
+
+    public void bindController(IChatController controller){
         createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
 
         sendButton.setOnAction(event -> controller.onSendButtonClicked());
@@ -134,20 +148,7 @@ public class ChatView extends AnchorPane implements IChatView {
         acceptImageView.setOnMouseClicked(event -> controller.onChatNameAccept());
 
         declineImageView.setOnMouseClicked(event -> controller.onChatNameDecline());
-
-
-        //I dont really know if this should go into the controller or not
-        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                controller.onChatNameDecline();
-            }
-        });
     }
-
-    /**
-     * Loads the messages from the model and displays them as MessageItems
-     */
-
     private void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();

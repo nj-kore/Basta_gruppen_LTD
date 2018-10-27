@@ -45,9 +45,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     private CreateUserView createUserView;
     private ContactDetailView contactDetailView;
     private IControllerFactory factory;
-    private IParticipantView addParticipantsView;
-    private IParticipantView removeParticipantView;
-    //mainView
+
     @FXML
     private
     AnchorPane mainViewAnchorPane;
@@ -128,10 +126,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
      * Proceeds to show the loginpage to the user
      * Finally it adds itself as an observer to the model
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        displayLoginPage();
-        IMainController controller = factory.getMainController(mainModel, this);
+    public void bindController(IMainController controller){
         searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -159,31 +154,37 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 controller.onSearchConversationsEnterKeyPressed(event);
             }
         });
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        displayLoginPage();
+
 
     }
 
     public MainView(MainModel mainModel, IControllerFactory factory) {
         this.factory = factory;
         this.mainModel = mainModel;
+        this.chatView = new ChatView(mainModel, this, factory);
+        this.loginView = new LoginView();
+        this.createConvoView = new CreateConvoView(mainModel);
+        this.userPage = new UserPageView(this, mainModel);
+        this.createUserView = new CreateUserView(this, mainModel);
+        this.userToolbar = new UserToolbar(this, mainModel);
+        this.contactDetailView = new ContactDetailView(this, mainModel);
         IChatController chatController = factory.getChatController(chatView, mainModel);
         ILoginController loginController = factory.getLoginController(loginView, mainModel);
+        IContactDetailViewController contactDetailViewController = factory.getContactDetailViewController(mainModel, this);
         ICreateConvoController convoController = factory.getCreateConvoController(this, createConvoView, mainModel);
         IUserPageController userPageController = factory.getUserPageController(mainModel);
         ICreateUserViewController createUserViewController = factory.getCreateUserViewController(mainModel, this, createUserView);
-        IUserToolbarController userToolbarController = factory.getUserToolBarController(mainModel, this);
-        IContactDetailViewController contactDetailViewController = factory.getContactDetailViewController(mainModel, this);
-        IAddParticipantsController addParticipantsController = factory.getAddParticipantsController(addParticipantsView, mainModel);
-        IRemoveParticipantsController removeParticipantsController = factory.getRemoveParticipantsController(removeParticipantView, mainModel);
-        this.chatView = new ChatView(mainModel, this, chatController, addParticipantsController, removeParticipantsController);
-        this.loginView = new LoginView(mainModel, loginController);
-        this.createConvoView = new CreateConvoView(mainModel, this, convoController);
-        this.userPage = new UserPageView(this, mainModel, userPageController);
-        this.createUserView = new CreateUserView(this, mainModel, createUserViewController);
-        this.userToolbar = new UserToolbar(this, mainModel, userToolbarController);
-        this.contactDetailView = new ContactDetailView(this, mainModel, contactDetailViewController);
+        chatView.bindController(chatController);
+        loginView.bindController(loginController);
+        createConvoView.bindController(convoController);
+        userPage.bindController(userPageController);
+        createUserView.bindController(createUserViewController);
+        contactDetailView.bindController(contactDetailViewController);
     }
-
-
     /**
      * This method is called whenever the any ModelObservable object calls the method 'notifyObservers'.
      * The method will use a switch case to call the relevant update method(s) in the application.
@@ -208,7 +209,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 displayChat();
                 updateContactsList();
                 updateConversationsList();
-                userToolbar.init();
+                IUserToolbarController userToolbarController=factory.getUserToolBarController(mainModel, this);
+                userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
                 setDefaultConversation();
                 chatView.init();

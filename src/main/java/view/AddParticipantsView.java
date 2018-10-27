@@ -29,7 +29,6 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     MainModel mainModel;
     private IChatView chatView;
     private Conversation conversation;
-    private IAddParticipantsController controller;
 
     @FXML
     private FlowPane nonParticipantsFlowPane;
@@ -50,7 +49,7 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
     private Button addParticipantsButton;
 
 
-    AddParticipantsView(MainModel mainModel, IChatView chatView, IAddParticipantsController controller) {
+    AddParticipantsView(MainModel mainModel, IChatView chatView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -64,14 +63,15 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         this.mainModel = mainModel;
         this.chatView = chatView;
         this.conversation = mainModel.getActiveConversation();
-        this.controller = controller;
 
+
+    }
+
+    void bindController(IAddParticipantsController controller){
         searchNonParticipantsImageView.setOnMouseClicked(event -> controller.searchNonParticipants());
         searchNonParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
         addParticipantsButton.setOnAction(event -> controller.addParticipants());
     }
-
-
     @Override
     public void showSearch(Iterator<User> usersToShow) {
         nonParticipantsFlowPane.getChildren().clear();

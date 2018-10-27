@@ -30,10 +30,9 @@ public class ContactDetailView extends AnchorPane {
     Button closeButton;
 
     User user;
-    private IContactDetailViewController controller;
 
 
-    public ContactDetailView(MainView mainView, MainModel mainModel, IContactDetailViewController controller) {
+    public ContactDetailView(MainView mainView, MainModel mainModel) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ContactDetailView.fxml"));
         fxmlLoader.setRoot(this);
@@ -45,12 +44,13 @@ public class ContactDetailView extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.controller=controller;
 
+    }
+
+    protected void bindController(IContactDetailViewController controller) {
         createConvoButton.setOnMouseClicked(event -> controller.onCreateConvoClicked(user));
 
         closeButton.setOnMouseClicked(event -> controller.onCloseButtonClicked());
-
     }
 
     public void setDetailedUser(User user) {
