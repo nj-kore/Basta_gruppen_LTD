@@ -33,7 +33,6 @@ public class AddContactController extends ModelObservable implements IAddContact
         addContactView.setConfirmationLabelVisibility(true);
         onSearchButtonClicked("");
         notifyObservers(MainModel.UpdateTypes.CONTACTS);
-        System.out.println("har uppdaterat");
     }
 
     @Override
@@ -52,34 +51,11 @@ public class AddContactController extends ModelObservable implements IAddContact
 
         while (searchedUsersIterator.hasNext()) {
             User next = searchedUsersIterator.next();
-            System.out.println(next.getFirstName());
             if ((!mainModel.userIsContact(next)) && (next.getId() != mainModel.getActiveUser().getId())) {
                 users.add(next);
             }
         }
 
-/*
-        while (searchedUsersIterator.hasNext()) {
-
-            User next = searchedUsersIterator.next();
-            System.out.println(next.getFirstName());
-
-            if (!(next.getId() == mainModel.getActiveUser().getId())) {
-
-                Iterator<User> userContactsIterator = mainModel.getContacts();
-
-                if (!userContactsIterator.hasNext()) {
-                    users.add(next);
-                } else {
-        while (userContactsIterator.hasNext()) {
-            if (userContactsIterator.next() != next) {
-                users.add(next);
-            }
-        }
-    }
-}
-        }
-                */
         return users.iterator();
     }
 

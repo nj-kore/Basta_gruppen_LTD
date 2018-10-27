@@ -142,7 +142,6 @@ public class MainModel extends ModelObservable {
      * @return a boolean representing the result
      */
     public boolean userIsContact(User user) {
-        System.out.println(activeUser.getContacts());
         if (activeUser.getContacts().contains(user.getId())) {
             return true;
         } else {
