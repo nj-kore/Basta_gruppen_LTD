@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The view class for adding a users to the contact list
+ * @author Filip Andréasson
+ */
+
 public class AddContactView extends AnchorPane implements IAddContactView {
 
     @FXML
@@ -62,6 +67,10 @@ public class AddContactView extends AnchorPane implements IAddContactView {
 
     }
 
+    /**
+     * Binds a controller to the class
+     * @param controller specifies what controller gets bound
+     */
     protected void bindController(IAddContactController controller) {
         addButton.setOnMouseClicked(event -> controller.onAddUserButtonClicked());
 
@@ -72,13 +81,20 @@ public class AddContactView extends AnchorPane implements IAddContactView {
         searchTextField.setOnKeyPressed(event -> controller.onSearchTextFieldEnterKeyPressed(event, searchTextField.getText()));
     }
 
-    public void updateUserPane(Iterator<User> users) {
+    /**
+     * Updates the flow pane to hold items for the specified users
+     * @param users specifies what users to be added to the pane
+     */
+    public void updateUserList(Iterator<User> users) {
         userPane.getChildren().clear();
         while (users.hasNext()) {
             userPane.getChildren().add(new SmallContactListItem(users.next()));
         }
     }
 
+    /**
+     * @return the users that were clicked in the flowpane
+     */
     public Iterator<User> getClickedUsers() {
         Iterator<Node> nodeIterator = userPane.getChildren().iterator();
         List<User> userIterator = new ArrayList<>();
@@ -91,6 +107,10 @@ public class AddContactView extends AnchorPane implements IAddContactView {
         return userIterator.iterator();
     }
 
+    /**
+     * Sets whether or not the confirmation label is visible or not
+     * @param bool specifies what boolean value should be handled
+     */
     @Override
     public void setConfirmationLabelVisibility(boolean bool) {
         confirmationLabel.setVisible(bool);

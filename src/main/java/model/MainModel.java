@@ -397,6 +397,24 @@ public class MainModel extends ModelObservable {
         return usersToShow.iterator();
     }
 
+    /**
+     * Removes the active user and users that are contacts to the active user from a collection
+     * @param userIterator specifies what collection that should be cleansed from the active users contacts
+     * @return a collection free from contacts to the active user
+     */
+    public Iterator<User> checkIteratorOfContacts(Iterator<User> userIterator) {
+        List<User> users = new ArrayList<>();
+
+        while (userIterator.hasNext()) {
+            User next = userIterator.next();
+            if ((!userIsContact(next)) && (next.getId() != activeUser.getId())) {
+                users.add(next);
+            }
+        }
+
+        return users.iterator();
+    }
+
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
         Iterator<Conversation> iterator = getConversations().values().iterator();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();

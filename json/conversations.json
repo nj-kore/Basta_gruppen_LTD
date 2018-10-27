@@ -37,24 +37,6 @@
             "nano": 377000000
           }
         }
-      },
-      "2": {
-        "id": 2,
-        "text": "Hejsan hoppsan",
-        "senderId": 0,
-        "time": {
-          "date": {
-            "year": 2018,
-            "month": 10,
-            "day": 27
-          },
-          "time": {
-            "hour": 17,
-            "minute": 16,
-            "second": 4,
-            "nano": 510000000
-          }
-        }
       }
     },
     "participants": [
@@ -322,5 +304,6 @@
         "isManager": false
       }
     ],
+    "name": "olle"
   }
 ]

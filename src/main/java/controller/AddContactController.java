@@ -4,14 +4,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import model.User;
-import model.observerpattern.ModelObservable;
 import view.IAddContactView;
 import view.IMainView;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
+/**
+ * Controller class for the AddContactView
+ * @author Filip Andréasson
+ */
 public class AddContactController implements IAddContactController {
 
     IMainView mainView;
@@ -24,6 +25,9 @@ public class AddContactController implements IAddContactController {
         this.addContactView = addContactView;
     }
 
+    /**
+     * Adds the clicked user to the active users contact list
+     */
     @Override
     public void onAddUserButtonClicked() {
         Iterator<User> iterator = addContactView.getClickedUsers();
@@ -34,30 +38,29 @@ public class AddContactController implements IAddContactController {
         onSearchButtonClicked("");
     }
 
+    /**
+     * Closes the view by moving the main view in front
+     */
     @Override
     public void onDoneButtonClicked() {
         mainView.displayMainView();
     }
 
+    /**
+     * Updates the user pane with users that are not in the active users contact list
+     * @param input specifies what the active user entered in the text field
+     */
     @Override
     public void onSearchButtonClicked(String input) {
         Iterator<User> searchedUsers = mainModel.searchUsers(input);
-        addContactView.updateUserPane(checkIteratorOfContacts(searchedUsers));
+        addContactView.updateUserList(mainModel.checkIteratorOfContacts(searchedUsers));
     }
 
-    private Iterator<User> checkIteratorOfContacts(Iterator<User> searchedUsersIterator) {
-        List<User> users = new ArrayList<>();
-
-        while (searchedUsersIterator.hasNext()) {
-            User next = searchedUsersIterator.next();
-            if ((!mainModel.userIsContact(next)) && (next.getId() != mainModel.getActiveUser().getId())) {
-                users.add(next);
-            }
-        }
-
-        return users.iterator();
-    }
-
+    /**
+     * Notices if the user pressed the enter button. Calls the method onSearchButtonClicked
+     * @param event specifies what key was pressed
+     * @param input specifies what the active user entered in the text field
+     */
     @Override
     public void onSearchTextFieldEnterKeyPressed(KeyEvent event, String input) {
         if (event.getCode().equals(KeyCode.ENTER)) {

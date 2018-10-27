@@ -4,8 +4,11 @@ import model.User;
 
 import java.util.Iterator;
 
+/**
+ * The interface for the AddContactView class
+ */
 public interface IAddContactView {
-    void updateUserPane(Iterator<User> users);
+    void updateUserList(Iterator<User> users);
     Iterator<User> getClickedUsers();
     void setConfirmationLabelVisibility(boolean bool);
 }
