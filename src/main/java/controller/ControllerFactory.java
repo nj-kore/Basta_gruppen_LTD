@@ -1,6 +1,7 @@
 package controller;
 
 import model.MainModel;
+import sun.applet.Main;
 import view.*;
 
 public class ControllerFactory implements IControllerFactory {
@@ -45,4 +46,7 @@ public class ControllerFactory implements IControllerFactory {
         return new ContactDetailViewController(mainModel, mainView);
     }
 
+    public IAddContactController createAddContactController(MainModel mainModel,IMainView mainView, IAddContactView addContactView) {
+        return new AddContactController(mainView, mainModel, addContactView);
+    }
 }

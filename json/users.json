@@ -5,7 +5,9 @@
     "username": "admin",
     "contacts": [
       1,
-      2
+      2,
+      3,
+      4
     ],
     "firstName": "Admin",
     "lastName": "Boy",
@@ -46,6 +48,23 @@
     "email": null,
     "status": "Available",
     "profileImagePath": "pics/steve.jpg",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": false
+  },
+  {
+    "id": 3,
+    "password": "123",
+    "username": "filio",
+    "contacts": [],
+    "firstName": "Filip",
+    "lastName": "Andréasson",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/userIcon.png",
     "statusPaths": [
       "pics/statusGreen.png",
       "pics/statusOrange.png",

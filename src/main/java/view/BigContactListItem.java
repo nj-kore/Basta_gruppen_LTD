@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import model.User;
 import java.io.IOException;
 
-public class ContactListItem extends AnchorPane {
+public class BigContactListItem extends AnchorPane {
 
 
     @FXML
@@ -25,7 +25,7 @@ public class ContactListItem extends AnchorPane {
     private User user;
 
 
-    public ContactListItem(User user, IMainView mainView) {
+    public BigContactListItem(User user, IMainView mainView) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ContactListItemView.fxml"));
         fxmlLoader.setRoot(this);

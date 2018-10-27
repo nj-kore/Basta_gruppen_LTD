@@ -136,6 +136,20 @@ public class MainModel extends ModelObservable {
         return list.iterator();
     }
 
+    /**
+     * Checks if a user exists in the active users contact list
+     * @param user the user that gets checked if it exists
+     * @return a boolean representing the result
+     */
+    public boolean userIsContact(User user) {
+        System.out.println(activeUser.getContacts());
+        if (activeUser.getContacts().contains(user.getId())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * @param userId the Id of the desired user
@@ -357,6 +371,20 @@ public class MainModel extends ModelObservable {
             }
         }
         return contactsToShow.iterator();
+    }
+
+    public Iterator<User> searchUsers(String input) {
+        Iterator<User> iterator = getUsers().values().iterator();
+        ArrayList<User> usersToShow = new ArrayList<>();
+        User next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getFullName().toLowerCase(new Locale("sv-SE")).contains(input.toLowerCase(new Locale("sv-SE")))) {
+                usersToShow.add(next);
+            }
+        }
+        return usersToShow.iterator();
     }
 
     public Iterator<Conversation> searchConversations(String conversationSearchString) {

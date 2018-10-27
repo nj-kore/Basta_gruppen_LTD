@@ -1,7 +1,5 @@
 package view;
 
-import controller.CreateConvoController;
-import controller.IControllerFactory;
 import controller.ICreateConvoController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -85,7 +83,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
         convoPane.getChildren().clear();
         Iterator<User> itr = mainModel.getContacts();
         while (itr.hasNext()) {
-            NewConvoContactListItem newConvoContact = new NewConvoContactListItem(itr.next());
+            SmallContactListItem newConvoContact = new SmallContactListItem(itr.next());
             contactPane.getChildren().add(newConvoContact);
         }
     }
@@ -98,21 +96,21 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
 
         for (Node node : paneList) {
 
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
+            SmallContactListItem smallContactListItem = (SmallContactListItem) node;
 
-            if (newConvoContactListItem.isClicked()) {
+            if (smallContactListItem.isClicked()) {
 
                 if (this.getContactPane().getChildren().contains(node)) {
 
                     this.getContactPane().getChildren().remove(node);
-                    this.getConvoPane().getChildren().add(newConvoContactListItem);
+                    this.getConvoPane().getChildren().add(smallContactListItem);
                 } else {
 
                     this.getConvoPane().getChildren().remove(node);
-                    this.getContactPane().getChildren().add(newConvoContactListItem);
+                    this.getContactPane().getChildren().add(smallContactListItem);
                 }
-                newConvoContactListItem.setClicked(false);
-                newConvoContactListItem.setStyle("-fx-background-color: none");
+                smallContactListItem.setClicked(false);
+                smallContactListItem.setStyle("-fx-background-color: none");
             }
         }
     }
@@ -124,8 +122,8 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
 
         for (Node node : convoPane.getChildren())
         {
-            NewConvoContactListItem newConvoContactListItem = (NewConvoContactListItem) node;
-            selectedUsers.add(newConvoContactListItem.getUser());
+            SmallContactListItem smallContactListItem = (SmallContactListItem) node;
+            selectedUsers.add(smallContactListItem.getUser());
         }
         return selectedUsers;
     }

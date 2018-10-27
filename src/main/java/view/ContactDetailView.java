@@ -14,7 +14,7 @@ import model.User;
 
 import java.io.IOException;
 
-public class ContactDetailView extends AnchorPane {
+public class ContactDetailView extends AnchorPane implements IContactDetailView {
 
     @FXML
     Label nameLabel;
@@ -53,6 +53,7 @@ public class ContactDetailView extends AnchorPane {
         closeButton.setOnMouseClicked(event -> controller.onCloseButtonClicked());
     }
 
+    @Override
     public void setDetailedUser(User user) {
         this.user = user;
         profileImageView.setImage(new Image(user.getProfileImagePath()));

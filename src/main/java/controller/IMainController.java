@@ -20,6 +20,8 @@ public interface IMainController {
 
     void onSearchConversationsEnterKeyPressed(KeyEvent event);
 
+    void onAddNewContactsButtonClicked();
+
     void setActiveConversation (int id);
 
     void createConversation(List<User> users, String name);
