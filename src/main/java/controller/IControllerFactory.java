@@ -17,11 +17,11 @@ public interface IControllerFactory {
 
     IUserToolbarController getUserToolBarController(MainModel mainModel, IMainView mainView);
 
-    IRemoveParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
+    IRemoveParticipantsController getRemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel);
 
-    IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
+    IAddParticipantsController getAddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel);
 
     IMainController getMainController(MainModel mainModel, IMainView mainView);
 
-    IContactDetailViewController getContactDetailViewController(MainModel mainModel, MainView mainView);
+    IContactDetailViewController getContactDetailViewController(MainModel mainModel, IMainView mainView);
 }

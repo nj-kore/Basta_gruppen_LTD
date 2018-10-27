@@ -9,14 +9,15 @@ import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import model.User;
 import view.AddParticipantsView;
+import view.IParticipantView;
 
 import java.util.Iterator;
 
 public class AddParticipantsController implements IAddParticipantsController {
-    private AddParticipantsView addParticipantsView;
+    private IParticipantView addParticipantsView;
     private MainModel mainModel;
 
-    public AddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel) {
+    public AddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel) {
         this.addParticipantsView = addParticipantsView;
         this.mainModel = mainModel;
     }

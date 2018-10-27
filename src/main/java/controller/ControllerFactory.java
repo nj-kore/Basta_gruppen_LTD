@@ -29,11 +29,11 @@ public class ControllerFactory implements IControllerFactory {
         return new UserToolbarController(mainModel, mainView);
     }
 
-    public IRemoveParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel){
+    public IRemoveParticipantsController getRemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel){
         return new RemoveParticipantsController(removeParticipantsView, mainModel);
     }
 
-    public IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel){
+    public IAddParticipantsController getAddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel){
         return new AddParticipantsController(addParticipantsView, mainModel);
     }
     public IMainController getMainController(MainModel mainModel, IMainView mainView){
@@ -41,7 +41,7 @@ public class ControllerFactory implements IControllerFactory {
         return mainController;
     }
 
-    public IContactDetailViewController getContactDetailViewController(MainModel mainModel, MainView mainView) {
+    public IContactDetailViewController getContactDetailViewController(MainModel mainModel, IMainView mainView) {
         return new ContactDetailViewController(mainModel, mainView);
     }
 
