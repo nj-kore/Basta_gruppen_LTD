@@ -15,4 +15,10 @@ public class AddParticipantsView extends AbstractParticipantView{
         setButtonText("Add Participants");
         setNoMatchText("No matching non-participating contacts found");
     }
+
+    @Override
+    public void update() {
+        super.update();
+        showSearch(mainModel.getNonParticipants(conversation));
+    }
 }

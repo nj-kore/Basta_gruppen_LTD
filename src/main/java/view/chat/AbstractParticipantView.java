@@ -38,9 +38,9 @@ abstract class AbstractParticipantView extends AnchorPane implements IParticipan
     private Label titleLabel;
 
 
-    private MainModel mainModel;
+    MainModel mainModel;
     private IChatView chatView;
-    private Conversation conversation;
+    Conversation conversation;
 
 
     AbstractParticipantView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
@@ -93,15 +93,8 @@ abstract class AbstractParticipantView extends AnchorPane implements IParticipan
     @Override
     public void update() {
         this.conversation = mainModel.getActiveConversation();
-        Iterator<User> usersToShow = mainModel.getNonParticipants(conversation);
         selectFlowPane.getChildren().clear();
         selectedFlowPane.getChildren().clear();
-        User nonParticipant;
-
-        while (usersToShow.hasNext()){
-            nonParticipant = usersToShow.next();
-            selectFlowPane.getChildren().add(new ParticipantItem(nonParticipant, this));
-        }
     }
 
     @Override

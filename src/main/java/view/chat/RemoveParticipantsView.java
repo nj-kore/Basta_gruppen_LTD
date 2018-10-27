@@ -18,4 +18,10 @@ public class RemoveParticipantsView extends AbstractParticipantView {
         setButtonText("Remove Participants");
         setNoMatchText("No matching participating contacts found");
     }
+
+    @Override
+    public void update() {
+        super.update();
+        showSearch(mainModel.getParticipants(conversation));
+    }
 }
