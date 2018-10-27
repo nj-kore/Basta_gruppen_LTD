@@ -1,4 +1,4 @@
-package view;
+package view.chat;
 
 /**
  * @author Jonathan Köre
@@ -8,10 +8,9 @@ package view;
  * @author Gustaf Spjut
  */
 
-import controller.IAddParticipantsController;
 import controller.IChatController;
 import controller.IControllerFactory;
-import controller.IRemoveParticipantsController;
+import controller.participants.IParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -21,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.MainModel;
 import model.Message;
+import view.*;
 
 
 import java.io.IOException;
@@ -33,12 +33,9 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     private MainModel mainModel;
-    private RemoveParticipantsView removeParticipantsView;
-    private AddParticipantsView addParticipantsView;
+    private AbstractParticipantView removeParticipantsView;
+    private AbstractParticipantView addParticipantsView;
     private IMainView mainView;
-    private IChatController controller;
-    private IRemoveParticipantsController removeParticipantsController;
-    private IAddParticipantsController addParticipantsController;
 
 
     @FXML
@@ -96,7 +93,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
      * @param mainView The parent MainView of the ChatView.
      */
-    ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
+    public ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -110,20 +107,13 @@ public class ChatView extends AnchorPane implements IChatView {
 
         this.mainModel = mainModel;
         removeParticipantsView = new RemoveParticipantsView(mainModel, this);
-        IRemoveParticipantsController removeParticipantsController=factory.createRemoveParticipantsController(removeParticipantsView, mainModel);
+        IParticipantsController removeParticipantsController=factory.createRemoveParticipantsController(removeParticipantsView, mainModel);
         removeParticipantsView.bindController(removeParticipantsController);
         addParticipantsView = new AddParticipantsView(mainModel, this);
-        IAddParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
+        IParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
         addParticipantsView.bindController(addParticipantsController);
         this.mainView = mainView;
 
-
-        //I dont really know if this should go into the controller or not
-        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                controller.onChatNameDecline();
-            }
-        });
     }
 
     /**
@@ -148,6 +138,12 @@ public class ChatView extends AnchorPane implements IChatView {
         acceptImageView.setOnMouseClicked(event -> controller.onChatNameAccept());
 
         declineImageView.setOnMouseClicked(event -> controller.onChatNameDecline());
+
+        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                controller.onChatNameDecline();
+            }
+        });
     }
     private void loadMessages() {
         chatFlowPane.getChildren().clear();
@@ -176,7 +172,7 @@ public class ChatView extends AnchorPane implements IChatView {
         loadParticipants();
     }
 
-    void init() {
+    public void init() {
         if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
         }
@@ -242,12 +238,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     @Override
-    public void closeRemoveParticipants(){
-        participantsAnchorPane.toBack();
-    }
-
-    @Override
-    public void closeAddParticipants() {
+    public void closeParticipantsView() {
         participantsAnchorPane.toBack();
     }
 

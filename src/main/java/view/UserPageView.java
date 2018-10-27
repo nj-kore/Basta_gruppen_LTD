@@ -157,7 +157,7 @@ public class UserPageView extends AnchorPane {
         wrongPasswordLabel.setVisible(false);
         newPasswordField.clear();
         oldPasswordField.clear();
-        parent.backToChat();
+        parent.displayChat();
     }
 
     /**

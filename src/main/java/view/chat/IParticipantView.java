@@ -1,4 +1,4 @@
-package view;
+package view.chat;
 
 
 import model.Conversation;
@@ -14,5 +14,4 @@ public interface IParticipantView {
     void moveUsers();
     Iterator<User> getParticipantsToAddOrRemove();
     Conversation getConversation();
-    void showSearchResult(Iterator<User> iterator);
 }

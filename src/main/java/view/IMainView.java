@@ -16,7 +16,6 @@ public interface IMainView {
     void displayCreateUserView();
     void createConvoViewToBack();
     void updateConversationsList();
-    void backToChat();
     String getContactSearchString();
     void updateContactList(Iterator<User> iterator);
     String getConversationSearchString();

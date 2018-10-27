@@ -12,7 +12,7 @@ package model;
 
 
 import model.observerpattern.ModelObservable;
-
+import model.observerpattern.UpdateType;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -24,13 +24,7 @@ public class MainModel extends ModelObservable {
     private User activeUser;
     private Conversation activeConversation;
 
-    /**
-     * enumeration for the different updates that can be done in the program.
-     */
-    public enum UpdateTypes {
-        ACTIVE_CONVERSATION, CONTACTS, CONVERSATIONS, INIT, USER_INFO
 
-    }
 
     /**
      * Maps of all the conversations that the model currently knows of. They are stored in a Map to be
@@ -69,7 +63,7 @@ public class MainModel extends ModelObservable {
 
             Message messageToSend = new Message(newMessageId, activeUser.getId(), text, LocalDateTime.now());
             activeConversation.addMessage(messageToSend);
-            notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
+            notifyObservers(UpdateType.ACTIVE_CONVERSATION);
         }
 
     }
@@ -88,7 +82,7 @@ public class MainModel extends ModelObservable {
         if(picURL != null){
             activeUser.setProfileImagePath(picURL);
         }
-        notifyObservers(UpdateTypes.USER_INFO);
+        notifyObservers(UpdateType.USER_INFO);
     }
 
     /**
@@ -97,7 +91,7 @@ public class MainModel extends ModelObservable {
      */
     public void changePassword(String newPassword){
         activeUser.setPassword(newPassword);
-        notifyObservers(UpdateTypes.USER_INFO);
+        notifyObservers(UpdateType.USER_INFO);
     }
 
     /**
@@ -166,7 +160,14 @@ public class MainModel extends ModelObservable {
      */
     public void setActiveConversation(int conversationId) {
         this.activeConversation = conversations.get(conversationId);
-        notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
+        notifyObservers(UpdateType.ACTIVE_CONVERSATION);
+    }
+
+    private void setDefaultConversation() {
+        Iterator<Conversation> itr = getUsersConversations();
+        if(itr.hasNext()) {
+            setActiveConversation(itr.next().getId());
+        }
     }
 
     /**
@@ -184,7 +185,7 @@ public class MainModel extends ModelObservable {
         Conversation conversation = new Conversation(newConversationId, name, users);
         conversations.put(conversation.getId(), conversation);
         setActiveConversation(conversation.getId());
-        notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
+        notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
     //Exists for testing purposes
@@ -205,8 +206,8 @@ public class MainModel extends ModelObservable {
                 activeConversation.setName(""); //This forces the placeholder to be enforced when loading the conversation
             }
 
-            notifyObservers(UpdateTypes.ACTIVE_CONVERSATION);
-            notifyObservers(UpdateTypes.CONVERSATIONS);
+            notifyObservers(UpdateType.ACTIVE_CONVERSATION);
+            notifyObservers(UpdateType.CONVERSATIONS);
 
 
     }
@@ -290,7 +291,7 @@ public class MainModel extends ModelObservable {
      */
     public void setStatus(StatusType s) {
         activeUser.setStatus(s);
-        notifyObservers(UpdateTypes.USER_INFO);
+        notifyObservers(UpdateType.USER_INFO);
     }
 
     /**
@@ -304,7 +305,7 @@ public class MainModel extends ModelObservable {
     public void createUser(String u, String pw, String fn, String ln, Boolean a){
         int id = getNewUserId();
         User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
-        notifyObservers(UpdateTypes.CONTACTS);
+        notifyObservers(UpdateType.CONTACTS);
         users.put(user.getId(), user);
         if (getActiveUser()==null){
             setActiveUser(user.getId());
@@ -313,7 +314,7 @@ public class MainModel extends ModelObservable {
             getActiveUser().addContact(id);
         }
 
-        notifyObservers(UpdateTypes.CONTACTS);
+        notifyObservers(UpdateType.CONTACTS);
     }
 
     public User getActiveUser() {
@@ -338,7 +339,7 @@ public class MainModel extends ModelObservable {
         for (User u : users.values()) {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 setActiveUser(u);
-                notifyObservers(UpdateTypes.INIT);
+                notifyObservers(UpdateType.INIT);
                 return true;
             }
         }
@@ -401,6 +402,10 @@ public class MainModel extends ModelObservable {
     }
 
     public Iterator<User> getNonParticipants(Conversation conversation) {
+        return getNonParticipantsAsList(conversation).iterator();
+    }
+
+    private List<User> getNonParticipantsAsList(Conversation conversation) {
         ArrayList<User> usersNotInConversation = new ArrayList<>();
         Iterator<User> contacts = getContacts();
         User contact;
@@ -411,7 +416,7 @@ public class MainModel extends ModelObservable {
                 usersNotInConversation.add(contact);
             }
         }
-        return usersNotInConversation.iterator();
+        return usersNotInConversation;
     }
 
     /**
@@ -419,31 +424,44 @@ public class MainModel extends ModelObservable {
      * @return Participants of a conversation WITHOUT current activeUser.
      */
     public Iterator<User> getParticipants(Conversation conversation) {
+        return getParticipantsAsList(conversation).iterator();
+    }
+
+    private List<User> getParticipantsAsList(Conversation conversation) {
         List<User> participants = new ArrayList<>(conversation.getParticipants());
         participants.remove(getActiveUser());
-        return participants.iterator();
+        return participants;
     }
 
 
     public Iterator<User> searchNonParticipants(String searchInput, Conversation conversation){
-        Iterator<User> nonParticipants = getNonParticipants(conversation);
-        ArrayList<User> matchingUsers = new ArrayList<>();
-        User nonParticipant;
+        List<User> matchingUsers = searchUserList(getNonParticipantsAsList(conversation), searchInput);
 
-        while(nonParticipants.hasNext()){
-            nonParticipant = nonParticipants.next();
-            if(nonParticipant.getFullName().contains(searchInput)){
-                matchingUsers.add(nonParticipant);
-            }
-        }
         return matchingUsers.iterator();
     }
+
+    public Iterator<User> searchParticipants(String searchInput, Conversation conversation){
+        List<User> matchingUsers = searchUserList(getParticipantsAsList(conversation), searchInput);
+        return matchingUsers.iterator();
+    }
+
+    private List<User> searchUserList(List<User> users, String searchInput) {
+        List<User> matchingUsers = new ArrayList<>();
+        for (User user : users) {
+            if(user.getFullName().contains(searchInput)){
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
+    }
+
 
     public void addParticipants(Iterator<User> participantsToAdd, Conversation conversation) {
         while (participantsToAdd.hasNext()){
             conversation.addParticipant(participantsToAdd.next());
         }
         setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.CONVERSATIONS);
     }
 
     public void removeParticipants(Iterator<User> participantsToRemove, Conversation conversation) {
@@ -451,6 +469,7 @@ public class MainModel extends ModelObservable {
             conversation.removeParticipant(participantsToRemove.next());
         }
         setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.CONVERSATIONS);
     }
 
 }

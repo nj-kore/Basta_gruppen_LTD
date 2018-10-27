@@ -1,7 +1,5 @@
 package model.observerpattern;
 
-import model.MainModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +34,7 @@ public class ModelObservable {
      *
      * @param   updateType  is the type of task the update method will perform
      */
-    public void notifyObservers(MainModel.UpdateTypes updateType) {
+    public void notifyObservers(UpdateType updateType) {
 
         for (ModelObserver modelObserver : observerList) {
             modelObserver.update(updateType);
