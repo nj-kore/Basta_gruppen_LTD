@@ -18,7 +18,7 @@ public class CreateUserViewController implements ICreateUserViewController {
     }
 
     public void cancelCreateUser() {
-        mainView.backToChat();
+        mainView.displayChat();
     }
 
 
@@ -30,7 +30,7 @@ public class CreateUserViewController implements ICreateUserViewController {
         String password = createUserView.getPassword();
         Boolean isAdmin = createUserView.getAdminCheckBox();
         mainModel.createUser(userName, password, firstName, surname, isAdmin);
-        mainView.backToChat();
+        mainView.displayChat();
 
     }
 

@@ -1,7 +1,5 @@
 package model.observerpattern;
 
-import model.MainModel;
-
 /**
  * This is the applications equivalent of the java.util.Observer interface
  *
@@ -18,5 +16,5 @@ public interface ModelObserver {
      *
      * @param   updateType     is the type of task the update method will perform
      */
-    void update(MainModel.UpdateTypes updateType);
+    void update(UpdateType updateType);
 }

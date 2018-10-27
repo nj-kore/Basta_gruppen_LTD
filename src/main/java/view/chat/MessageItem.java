@@ -1,4 +1,4 @@
-package view;
+package view.chat;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The class that is used as a visual representation for the message in the chat.
  */
-class MessageItem extends AnchorPane {
+public class MessageItem extends AnchorPane {
 
     @FXML
     private Label messageUserNameLabel;

@@ -15,6 +15,7 @@ import model.Conversation;
 import model.MainModel;
 import model.User;
 import model.observerpattern.ModelObserver;
+import model.observerpattern.UpdateType;
 
 import java.io.*;
 import java.util.*;
@@ -81,7 +82,7 @@ public class JsonSaver implements IDataSaver, ModelObserver {
      */
 
     @Override
-    public void update(MainModel.UpdateTypes updateType) {
+    public void update(UpdateType updateType) {
         saveModel();
     }
 
