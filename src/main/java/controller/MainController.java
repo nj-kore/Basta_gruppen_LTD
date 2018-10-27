@@ -16,8 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MainController implements IMainController {
-    IMainView mainView;
-    MainModel mainModel;
+    private IMainView mainView;
+    private MainModel mainModel;
 
     public MainController(IMainView mainView, MainModel mainModel){
         this.mainView = mainView;

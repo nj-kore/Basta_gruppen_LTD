@@ -1,4 +1,4 @@
-package view;
+package view.chat;
 
 
 import model.Conversation;

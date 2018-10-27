@@ -1,4 +1,4 @@
-package view;
+package view.chat;
 
 /**
  * @author Jonathan Köre
@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.MainModel;
 import model.Message;
+import view.*;
 
 
 import java.io.IOException;
@@ -92,7 +93,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainView The parent MainView of the ChatView.
      * @param factory The ControllerFactory which is responsible for creating controllers.
      */
-    ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
+    public ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -169,7 +170,7 @@ public class ChatView extends AnchorPane implements IChatView {
         loadParticipants();
     }
 
-    void init() {
+    public void init() {
         if(mainModel.getActiveUser().getIsManager()){
             createUserButton.setVisible(true);
         }
@@ -235,12 +236,7 @@ public class ChatView extends AnchorPane implements IChatView {
 
 
     @Override
-    public void closeRemoveParticipants(){
-        participantsAnchorPane.toBack();
-    }
-
-    @Override
-    public void closeAddParticipants() {
+    public void closeParticipantsView() {
         participantsAnchorPane.toBack();
     }
 

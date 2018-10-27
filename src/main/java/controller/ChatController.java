@@ -4,7 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
 import model.User;
-import view.IChatView;
+import view.chat.IChatView;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,6 @@ public class ChatController implements IChatController {
         ArrayList<User> userIterator = new ArrayList<>();
         userIterator.add(mainModel.getActiveUser());
         mainModel.removeParticipants(userIterator.iterator(), mainModel.getActiveConversation());
-        chatView.setDefaultConversation();
     }
 
     /**

@@ -2,6 +2,8 @@ package view;
 
 import controller.IControllerFactory;
 import controller.IUserPageController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -137,6 +139,7 @@ public class UserPageView extends AnchorPane {
             }
         });
 
+
     }
 
     void updateUserInfoTextFields() {
@@ -156,7 +159,7 @@ public class UserPageView extends AnchorPane {
         wrongPasswordLabel.setVisible(false);
         newPasswordField.clear();
         oldPasswordField.clear();
-        parent.backToChat();
+        parent.displayChat();
     }
 
     /**

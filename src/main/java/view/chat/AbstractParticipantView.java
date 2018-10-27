@@ -1,11 +1,5 @@
-package view;
+package view.chat;
 
-/**
- * @author Benjamin Vinnerholt
- * @since 2018-10-15
- */
-
-import controller.IAddParticipantsController;
 import controller.IControllerFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,33 +18,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AddParticipantsView extends AnchorPane implements IParticipantView {
+abstract class AbstractParticipantView extends AnchorPane implements IParticipantView {
 
-    MainModel mainModel;
+    @FXML
+    private FlowPane selectFlowPane;
+    @FXML
+    private FlowPane selectedFlowPane;
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private ImageView searchImageView;
+    @FXML
+    private Label noMatchLabel;
+    @FXML
+    private Button changeParticipantsButton;
+    @FXML
+    private Label titleLabel;
+
+
+    private MainModel mainModel;
     private IChatView chatView;
     private Conversation conversation;
 
-    @FXML
-    private FlowPane nonParticipantsFlowPane;
 
-    @FXML
-    private TextField searchNonParticipantsTextField;
-
-    @FXML
-    private ImageView searchNonParticipantsImageView;
-
-    @FXML
-    private Label noMatchingNonParticipantsLabel;
-
-    @FXML
-    private FlowPane contactsToAddFlowPane;
-
-    @FXML
-    private Button addParticipantsButton;
-
-
-    AddParticipantsView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddParticipantsView.fxml"));
+    AbstractParticipantView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -64,61 +58,57 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         this.chatView = chatView;
         this.conversation = mainModel.getActiveConversation();
 
-        IAddParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
+        //IParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
 
-        searchNonParticipantsImageView.setOnMouseClicked(event -> controller.searchNonParticipants());
-        searchNonParticipantsTextField.setOnKeyPressed(controller::isEnterPressed);
-        addParticipantsButton.setOnAction(event -> controller.addParticipants());
+        /*searchImageView.setOnMouseClicked(event -> controller.search());
+        searchField.setOnKeyPressed(controller::isEnterPressed);
+        changeParticipantsButton.setOnAction(event -> controller.changeParticipants());*/
     }
-
 
     @Override
     public void showSearch(Iterator<User> usersToShow) {
-        nonParticipantsFlowPane.getChildren().clear();
+        selectFlowPane.getChildren().clear();
         User userToShow;
 
         if(!usersToShow.hasNext()) {
-            nonParticipantsFlowPane.getChildren().add(noMatchingNonParticipantsLabel);
+            selectFlowPane.getChildren().add(noMatchLabel);
         }
 
         while(usersToShow.hasNext()){
             userToShow = usersToShow.next();
-            nonParticipantsFlowPane.getChildren().add(new ParticipantItem(userToShow, this));
+            selectFlowPane.getChildren().add(new ParticipantItem(userToShow, this));
         }
     }
 
     @Override
-    public String getSearchString(){
-        return searchNonParticipantsTextField.getText();
+    public String getSearchString() {
+        return searchField.getText();
     }
 
-
     @Override
-    @FXML
     public void closeView() {
-        chatView.closeAddParticipants();
+        chatView.closeParticipantsView();
     }
 
     @Override
     public void update() {
         this.conversation = mainModel.getActiveConversation();
         Iterator<User> usersToShow = mainModel.getNonParticipants(conversation);
-        nonParticipantsFlowPane.getChildren().clear();
-        contactsToAddFlowPane.getChildren().clear();
+        selectFlowPane.getChildren().clear();
+        selectedFlowPane.getChildren().clear();
         User nonParticipant;
 
         while (usersToShow.hasNext()){
             nonParticipant = usersToShow.next();
-            nonParticipantsFlowPane.getChildren().add(new ParticipantItem(nonParticipant, this));
+            selectFlowPane.getChildren().add(new ParticipantItem(nonParticipant, this));
         }
     }
 
     @Override
-    @FXML
     public void moveUsers() {
         ArrayList<Node> paneList = new ArrayList<>();
-        paneList.addAll(nonParticipantsFlowPane.getChildren());
-        paneList.addAll(contactsToAddFlowPane.getChildren());
+        paneList.addAll(selectFlowPane.getChildren());
+        paneList.addAll(selectedFlowPane.getChildren());
 
         for (Node node : paneList) {
 
@@ -126,27 +116,26 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
 
             if (participantItem.getIsClicked()) {
 
-                if (nonParticipantsFlowPane.getChildren().contains(node)) {
+                if (selectFlowPane.getChildren().contains(node)) {
 
-                    nonParticipantsFlowPane.getChildren().remove(node);
-                    contactsToAddFlowPane.getChildren().add(node);
-                } else if(contactsToAddFlowPane.getChildren().contains(node)){
+                    selectFlowPane.getChildren().remove(node);
+                    selectedFlowPane.getChildren().add(node);
+                } else if(selectedFlowPane.getChildren().contains(node)){
 
-                    nonParticipantsFlowPane.getChildren().add(node);
-                    contactsToAddFlowPane.getChildren().remove(node);
+                    selectFlowPane.getChildren().add(node);
+                    selectedFlowPane.getChildren().remove(node);
                 }
                 participantItem.setClicked(false);
                 participantItem.setClickedColour();
             }
         }
-
     }
 
     @Override
     public Iterator<User> getParticipantsToAddOrRemove() {
         ArrayList<User> usersToAdd = new ArrayList<>();
 
-        for(Node userNode : contactsToAddFlowPane.getChildren()){
+        for(Node userNode : selectedFlowPane.getChildren()){
             ParticipantItem userParticipantItem = (ParticipantItem) userNode;
             usersToAdd.add(userParticipantItem.getUser());
         }
@@ -158,5 +147,13 @@ public class AddParticipantsView extends AnchorPane implements IParticipantView 
         return conversation;
     }
 
-
+    public void setTitle(String title) {
+        titleLabel.setText(title);
+    }
+    public void setButtonText(String text) {
+        changeParticipantsButton.setText(text);
+    }
+    public void setNoMatchText(String text) {
+        noMatchLabel.setText(text);
+    }
 }

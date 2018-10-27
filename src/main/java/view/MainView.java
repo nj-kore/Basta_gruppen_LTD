@@ -1,9 +1,7 @@
 package view;
 
-import controller.ControllerFactory;
 import controller.IControllerFactory;
 import controller.IMainController;
-import controller.MainController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +17,8 @@ import javafx.scene.layout.StackPane;
 import model.Conversation;
 import model.MainModel;
 import model.User;
-import model.observerpattern.ModelObserver;
+import model.observerpattern.*;
+import view.chat.ChatView;
 
 import java.net.URL;
 import java.util.*;
@@ -192,7 +191,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
        this.factory=factory;
     }
 
-
     /**
      * This method is called whenever the any ModelObservable object calls the method 'notifyObservers'.
      * The method will use a switch case to call the relevant update method(s) in the application.
@@ -200,7 +198,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
      * @param updateType is the type of task the update method will perform
      */
     @Override
-    public void update(MainModel.UpdateTypes updateType) {
+    public void update(UpdateType updateType) {
         switch (updateType) {
             case ACTIVE_CONVERSATION:
                 chatView.update();
@@ -340,12 +338,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     @Override
     public void displayMainView() {
         mainViewHBox.toFront();
-    }
-
-
-    public void backToChat() {
-        mainViewAnchorPane.getChildren().clear();
-        mainViewAnchorPane.getChildren().add(chatView);
     }
 
 

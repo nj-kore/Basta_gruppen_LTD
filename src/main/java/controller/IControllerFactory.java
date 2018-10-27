@@ -1,7 +1,11 @@
 package controller;
 
+import controller.participants.IParticipantsController;
 import model.MainModel;
 import view.*;
+import view.chat.AddParticipantsView;
+import view.chat.IChatView;
+import view.chat.RemoveParticipantsView;
 
 public interface IControllerFactory {
 
@@ -17,9 +21,9 @@ public interface IControllerFactory {
 
     IUserToolbarController getUserToolBarController(MainModel mainModel, IMainView mainView);
 
-    IRemoveParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
+    IParticipantsController getRemoveParticipantsController(RemoveParticipantsView removeParticipantsView, MainModel mainModel);
 
-    IAddParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
+    IParticipantsController getAddParticipantsController(AddParticipantsView addParticipantsView, MainModel mainModel);
 
     IMainController getMainController(MainModel mainModel, IMainView mainView);
 }
