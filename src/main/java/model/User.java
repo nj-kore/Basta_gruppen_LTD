@@ -98,31 +98,27 @@ public class User {
     }
 
     //Setters
-    //Todo make proctected when possible
-    public void setPassword(String password) {
+    void setPassword(String password) {
         this.password = password;
     }
 
-    //Todo make proctected when possible
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
-    //Todo make proctected when possible
-    public void setFirstName(String firstName) {
+    void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    //Todo make proctected when possible
-    public void setLastName(String lastName) {
+    void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setStatus(StatusType status){
+    void setStatus(StatusType status){
         this.status = status;
     }
 
-    public void setProfileImagePath(String profileImagePath){
+    void setProfileImagePath(String profileImagePath){
         this.profileImagePath = profileImagePath;
     }
 
@@ -131,7 +127,15 @@ public class User {
      * adds userToAdd to contacts.
      * @param idOfUserToAdd The id of the user that is to be added to contacts
      */
-    public void addContact(int idOfUserToAdd){contacts.add(idOfUserToAdd);}
+    void addContact(int idOfUserToAdd){contacts.add(idOfUserToAdd);}
+
+    /**
+     * removes userToRemove from contacts.
+     * @param idOfUserToRemove The id of the user that is to be removed from contacts
+     */
+    void removeContact(int idOfUserToRemove) {
+        contacts.remove(idOfUserToRemove);
+    }
 
     @Override
     public boolean equals(Object o) {

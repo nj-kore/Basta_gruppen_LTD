@@ -222,7 +222,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     /**
-     * Clears the contactFlowPane and fills it with new ContactListItems corresponding to different Users
+     * Clears the contactFlowPane and fills it with new BigContactListItems corresponding to different users
      */
     public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
@@ -232,6 +232,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         }
     }
 
+    /**
+     * Clears the contactFlowPane and fills it with new BigContactListItems corresponding to different users
+     * from the specified collection of users
+     * @param iterator the specified collection of users that are to be added to the contactFlowPane
+     */
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
@@ -258,6 +263,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     }
 
+    /**
+     * Clears the conversationsFlowPane and fills it with new ConversationListItems corresponding to different
+     * conversation from the specified collection of conversations
+     * @param iterator the specified collection of conversations that are to be added to the conversationsFlowPane
+     */
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
@@ -349,13 +359,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     public void backToChat() {
         mainViewAnchorPane.getChildren().clear();
         mainViewAnchorPane.getChildren().add(chatView);
-    }
-
-    //TODO try to delete?
-    public void updateCurrentUserInfo() {
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
-        statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));
-        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
     }
 
     @Override

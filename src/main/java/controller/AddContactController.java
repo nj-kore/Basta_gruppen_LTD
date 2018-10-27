@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AddContactController extends ModelObservable implements IAddContactController {
+public class AddContactController implements IAddContactController {
 
     IMainView mainView;
     MainModel mainModel;
@@ -28,11 +28,10 @@ public class AddContactController extends ModelObservable implements IAddContact
     public void onAddUserButtonClicked() {
         Iterator<User> iterator = addContactView.getClickedUsers();
         while (iterator.hasNext()) {
-            mainModel.getActiveUser().addContact(iterator.next().getId());
+            mainModel.addContact(iterator.next().getId());
         }
         addContactView.setConfirmationLabelVisibility(true);
         onSearchButtonClicked("");
-        notifyObservers(MainModel.UpdateTypes.CONTACTS);
     }
 
     @Override

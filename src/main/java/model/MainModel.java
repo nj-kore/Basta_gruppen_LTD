@@ -120,8 +120,18 @@ public class MainModel extends ModelObservable {
      * Adds a contact to the activeUsers contact list
      * @param userId The id of the user which is to be added
      */
-    void addContact(int userId) {
+    public void addContact(int userId) {
         activeUser.addContact(userId);
+        notifyObservers(UpdateTypes.CONTACTS);
+    }
+
+    /**
+     * Removes a contact from the activeUsers contact list
+     * @param userId The id of the user which is to be removed
+     */
+    public void removeContact(int userId) {
+        activeUser.removeContact(userId);
+        notifyObservers(UpdateTypes.CONTACTS);
     }
 
     /**
@@ -466,6 +476,11 @@ public class MainModel extends ModelObservable {
         return matchingUsers.iterator();
     }
 
+    /**
+     * Adds participants to the conversation
+     * @param participantsToAdd specifies what participants will be added
+     * @param conversation specifies what conversation the participants shall be added to
+     */
     public void addParticipants(Iterator<User> participantsToAdd, Conversation conversation) {
         while (participantsToAdd.hasNext()){
             conversation.addParticipant(participantsToAdd.next());
@@ -473,6 +488,11 @@ public class MainModel extends ModelObservable {
         setActiveConversation(conversation.getId());
     }
 
+    /**
+     * Removes participants from the conversation
+     * @param participantsToRemove specifies what participants will be removed
+     * @param conversation specifies what conversation the participants shall be removed from
+     */
     public void removeParticipants(Iterator<User> participantsToRemove, Conversation conversation) {
         while (participantsToRemove.hasNext()){
             conversation.removeParticipant(participantsToRemove.next());
