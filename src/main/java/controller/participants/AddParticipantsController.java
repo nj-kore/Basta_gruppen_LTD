@@ -2,6 +2,8 @@ package controller.participants;
 
 /**
  * @author Benjamin Vinnerholt
+ * @author Jonathan Köre
+ *
  */
 import model.MainModel;
 import model.User;

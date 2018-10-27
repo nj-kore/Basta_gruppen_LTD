@@ -2,6 +2,7 @@ package view.chat;
 
 /**
  * @author Benjamin Vinnerholt
+ * @author Jonathan Köre
  * @since 2018-10-15
  */
 
@@ -12,8 +13,8 @@ import model.MainModel;
 public class RemoveParticipantsView extends AbstractParticipantView {
 
 
-    RemoveParticipantsView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
-        super(mainModel, chatView, factory);
+    RemoveParticipantsView(MainModel mainModel, IChatView chatView) {
+        super(mainModel, chatView);
         setTitle("Remove Participants");
         setButtonText("Remove Participants");
         setNoMatchText("No matching participating contacts found");

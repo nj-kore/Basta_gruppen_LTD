@@ -8,10 +8,9 @@ package view.chat;
  * @author Gustaf Spjut
  */
 
-import controller.IAddParticipantsController;
 import controller.IChatController;
 import controller.IControllerFactory;
-import controller.IRemoveParticipantsController;
+import controller.participants.IParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -37,9 +36,6 @@ public class ChatView extends AnchorPane implements IChatView {
     private RemoveParticipantsView removeParticipantsView;
     private AddParticipantsView addParticipantsView;
     private IMainView mainView;
-    private IChatController controller;
-    private IRemoveParticipantsController removeParticipantsController;
-    private IAddParticipantsController addParticipantsController;
 
 
     @FXML
@@ -111,20 +107,13 @@ public class ChatView extends AnchorPane implements IChatView {
 
         this.mainModel = mainModel;
         removeParticipantsView = new RemoveParticipantsView(mainModel, this);
-        IRemoveParticipantsController removeParticipantsController=factory.createRemoveParticipantsController(removeParticipantsView, mainModel);
+        IParticipantsController removeParticipantsController=factory.createRemoveParticipantsController(removeParticipantsView, mainModel);
         removeParticipantsView.bindController(removeParticipantsController);
         addParticipantsView = new AddParticipantsView(mainModel, this);
-        IAddParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
+        IParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
         addParticipantsView.bindController(addParticipantsController);
         this.mainView = mainView;
 
-
-        //I dont really know if this should go into the controller or not
-        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                controller.onChatNameDecline();
-            }
-        });
     }
 
     /**
@@ -149,6 +138,12 @@ public class ChatView extends AnchorPane implements IChatView {
         acceptImageView.setOnMouseClicked(event -> controller.onChatNameAccept());
 
         declineImageView.setOnMouseClicked(event -> controller.onChatNameDecline());
+
+        chatNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                controller.onChatNameDecline();
+            }
+        });
     }
     private void loadMessages() {
         chatFlowPane.getChildren().clear();

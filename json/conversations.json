@@ -258,23 +258,6 @@
           "pics/statusRed.png"
         ],
         "isManager": true
-      },
-      {
-        "id": 1,
-        "password": "222",
-        "username": "contact",
-        "contacts": [],
-        "firstName": "olle",
-        "lastName": "innebandysson",
-        "email": null,
-        "status": "Available",
-        "profileImagePath": "pics/bill.jpg",
-        "statusPaths": [
-          "pics/statusGreen.png",
-          "pics/statusOrange.png",
-          "pics/statusRed.png"
-        ],
-        "isManager": false
       }
     ],
     "name": ""
@@ -302,8 +285,25 @@
           "pics/statusRed.png"
         ],
         "isManager": true
+      },
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
       }
     ],
-    "name": ""
+    "name": "olle"
   }
 ]

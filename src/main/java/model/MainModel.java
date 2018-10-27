@@ -461,6 +461,7 @@ public class MainModel extends ModelObservable {
             conversation.addParticipant(participantsToAdd.next());
         }
         setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.CONVERSATIONS);
     }
 
     public void removeParticipants(Iterator<User> participantsToRemove, Conversation conversation) {
@@ -468,6 +469,7 @@ public class MainModel extends ModelObservable {
             conversation.removeParticipant(participantsToRemove.next());
         }
         setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.CONVERSATIONS);
     }
 
 }

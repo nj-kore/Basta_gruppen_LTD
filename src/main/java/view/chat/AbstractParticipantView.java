@@ -1,6 +1,6 @@
 package view.chat;
 
-import controller.IControllerFactory;
+import controller.participants.IParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +17,11 @@ import model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+/**
+ * @author Benjamin Vinnerholt
+ * @author Jonathan Köre
+ */
 
 abstract class AbstractParticipantView extends AnchorPane implements IParticipantView {
 
@@ -43,7 +48,7 @@ abstract class AbstractParticipantView extends AnchorPane implements IParticipan
     Conversation conversation;
 
 
-    AbstractParticipantView(MainModel mainModel, IChatView chatView, IControllerFactory factory) {
+    AbstractParticipantView(MainModel mainModel, IChatView chatView) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantsView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -57,12 +62,12 @@ abstract class AbstractParticipantView extends AnchorPane implements IParticipan
         this.mainModel = mainModel;
         this.chatView = chatView;
         this.conversation = mainModel.getActiveConversation();
+    }
 
-        //IParticipantsController controller = factory.getAddParticipantsController(this, mainModel);
-
-        /*searchImageView.setOnMouseClicked(event -> controller.search());
+    protected void bindController(IParticipantsController controller) {
+        searchImageView.setOnMouseClicked(event -> controller.search());
         searchField.setOnKeyPressed(controller::isEnterPressed);
-        changeParticipantsButton.setOnAction(event -> controller.changeParticipants());*/
+        changeParticipantsButton.setOnAction(event -> controller.changeParticipants());
     }
 
     @Override
