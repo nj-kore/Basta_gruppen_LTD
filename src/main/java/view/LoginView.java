@@ -32,6 +32,7 @@ public class LoginView extends AnchorPane implements ILoginView {
     private Button logInButton;
     @FXML
     private Label wrongPasswordLabel;
+    private ILoginController controller;
 
     /**
      * Loads the fxml document and assigns the ILoginController to handle the relevant input from the user
@@ -39,7 +40,7 @@ public class LoginView extends AnchorPane implements ILoginView {
      *                  on the creation of the LoginController
      * @param factory   The factory which creates the ILoginController on which the LoginView is dependant
      */
-    public LoginView(MainModel mainModel, IControllerFactory factory) {
+    public LoginView(MainModel mainModel, ILoginController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -52,7 +53,7 @@ public class LoginView extends AnchorPane implements ILoginView {
 
 
         //The following lines creates a controller that we can temporarily use to assign functions to
-        ILoginController controller = factory.getLoginController(this, mainModel);
+        this.controller=controller;
 
         logInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -22,7 +22,7 @@ class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
     private IMainView mainView;
-    private IControllerFactory factory;
+    private IUserToolbarController controller;
 
     @FXML
     private
@@ -43,7 +43,7 @@ class UserToolbar extends AnchorPane {
     private
     Label currentUserNameLabel;
 
-    UserToolbar(IMainView mainView, MainModel mainModel, IControllerFactory factory) {
+    UserToolbar(IMainView mainView, MainModel mainModel, IUserToolbarController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -55,17 +55,16 @@ class UserToolbar extends AnchorPane {
         }
         this.mainModel = mainModel;
         this.mainView = mainView;
-        this.factory = factory;
+        this.controller=controller;
     }
 
     void init(){
-        IUserToolbarController toolBarController = factory.getUserToolBarController(mainModel, mainView);
-        addPremadeStatuses(toolBarController);
+        addPremadeStatuses(controller);
         currentUserNameLabel.setText(mainModel.getActiveUser().getUsername());
         optionsImage.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                toolBarController.onOptionsButtonClicked();
+                controller.onOptionsButtonClicked();
             }
         });
         updateCurrentUserInfo();
