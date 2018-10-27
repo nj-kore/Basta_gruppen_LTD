@@ -45,7 +45,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     private CreateUserView createUserView;
     private ContactDetailView contactDetailView;
     private IControllerFactory factory;
-
+    private IParticipantView addParticipantsView;
+    private IParticipantView removeParticipantView;
     //mainView
     @FXML
     private
@@ -130,7 +131,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayLoginPage();
-        IMainController controller=factory.getMainController(mainModel, this);
+        IMainController controller = factory.getMainController(mainModel, this);
         searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -162,7 +163,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     public MainView(MainModel mainModel, IControllerFactory factory) {
-        this.factory=factory;
+        this.factory = factory;
         this.mainModel = mainModel;
         IChatController chatController = factory.getChatController(chatView, mainModel);
         ILoginController loginController = factory.getLoginController(loginView, mainModel);
@@ -171,7 +172,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         ICreateUserViewController createUserViewController = factory.getCreateUserViewController(mainModel, this, createUserView);
         IUserToolbarController userToolbarController = factory.getUserToolBarController(mainModel, this);
         IContactDetailViewController contactDetailViewController = factory.getContactDetailViewController(mainModel, this);
-        this.chatView = new ChatView(mainModel,this, chatController);
+        IAddParticipantsController addParticipantsController = factory.getAddParticipantsController(addParticipantsView, mainModel);
+        IRemoveParticipantsController removeParticipantsController = factory.getRemoveParticipantsController(removeParticipantView, mainModel);
+        this.chatView = new ChatView(mainModel, this, chatController, addParticipantsController, removeParticipantsController);
         this.loginView = new LoginView(mainModel, loginController);
         this.createConvoView = new CreateConvoView(mainModel, this, convoController);
         this.userPage = new UserPageView(this, mainModel, userPageController);
@@ -274,7 +277,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @Override
     public void setDefaultConversation() {
-        IMainController controller=factory.getMainController(mainModel, this);
+        IMainController controller = factory.getMainController(mainModel, this);
         updateConversationsList();
         if (!conversationsFlowPane.getChildren().isEmpty()) {
             controller.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
@@ -370,7 +373,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @FXML
     public void contactDetailViewCreateConvoButtonClicked() {
-        IMainController controller=factory.getMainController(mainModel, this);
+        IMainController controller = factory.getMainController(mainModel, this);
         ArrayList<User> users = new ArrayList<>();
         users.add(detailedUser);
         users.add(mainModel.getActiveUser());
@@ -382,7 +385,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @Override
     public void logout() {
-        IMainController controller=factory.getMainController(mainModel, this);
+        IMainController controller = factory.getMainController(mainModel, this);
         userToolbar.statusMenu.getItems().clear();
         controller.logout();
         displayLoginPage();
@@ -408,8 +411,8 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         createConvoHBox.toBack();
     }
 
-    public void setActiveConversation(int id){
-        IMainController controller=factory.getMainController(mainModel, this);
+    public void setActiveConversation(int id) {
+        IMainController controller = factory.getMainController(mainModel, this);
         controller.setActiveConversation(id);
     }
 }

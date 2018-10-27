@@ -8,8 +8,10 @@ package view;
  * @author Gustaf Spjut
  */
 
+import controller.IAddParticipantsController;
 import controller.IChatController;
 import controller.IControllerFactory;
+import controller.IRemoveParticipantsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -35,6 +37,8 @@ public class ChatView extends AnchorPane implements IChatView {
     private AddParticipantsView addParticipantsView;
     private IMainView mainView;
     private IChatController controller;
+    private IRemoveParticipantsController removeParticipantsController;
+    private IAddParticipantsController addParticipantsController;
 
 
     @FXML
@@ -93,7 +97,7 @@ public class ChatView extends AnchorPane implements IChatView {
      * @param mainView The parent MainView of the ChatView.
      * @param controller The controller for this view.
      */
-    ChatView(MainModel mainModel, IMainView mainView, IChatController controller) {
+    ChatView(MainModel mainModel, IMainView mainView, IChatController controller, IAddParticipantsController addParticipantsController, IRemoveParticipantsController removeParticipantsController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -107,8 +111,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
         this.controller=controller;
         this.mainModel = mainModel;
-        removeParticipantsView = new RemoveParticipantsView(mainModel, this, factory);
-        addParticipantsView = new AddParticipantsView(mainModel, this, factory);
+        removeParticipantsView = new RemoveParticipantsView(mainModel, this, removeParticipantsController);
+        addParticipantsView = new AddParticipantsView(mainModel, this, addParticipantsController);
         this.mainView = mainView;
 
         //IChatController chatController = factory.getChatController(this, mainModel);
