@@ -11,7 +11,7 @@ import model.User;
 import java.io.IOException;
 
 
-public class NewConvoContactListItem extends AnchorPane {
+public class SmallContactListItem extends AnchorPane {
 
 
     @FXML
@@ -25,7 +25,7 @@ public class NewConvoContactListItem extends AnchorPane {
     private User user;
 
 
-    NewConvoContactListItem(User user) {
+    SmallContactListItem(User user) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/NewConvoContactListItemView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

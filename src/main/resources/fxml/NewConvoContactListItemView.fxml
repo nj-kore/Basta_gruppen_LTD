@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#newConvoContactClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f7efef;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#newConvoContactClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f7efef;" styleClass="text16" stylesheets="@style.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="newConvoContactProfileImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="newConvoContactNameLabel" layoutX="56.0" layoutY="14.0" text="HÅGER, Göstav">
          <font>
-            <Font name="Comic Sans MS" size="16.0" />
+            <Font size="16.0" />
          </font>
       </Label>
    </children>

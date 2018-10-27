@@ -1,14 +1,11 @@
 package view;
 
 import controller.*;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -41,10 +38,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     private LoginView loginView;
     private CreateConvoView createConvoView;
     private UserPageView userPage;
-    private User detailedUser;
     private UserToolbar userToolbar;
     private CreateUserView createUserView;
     private ContactDetailView contactDetailView;
+    private AddContactView addContactView;
     private IControllerFactory factory;
 
     @FXML
@@ -76,6 +73,10 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     HBox detailViewHBox;
 
     @FXML
+    private
+    HBox addContactHBox;
+
+    @FXML
     StackPane mainViewStackPane;
 
     @FXML
@@ -91,7 +92,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     MenuButton statusMenu;
 
     @FXML
+    private
     Button newConvoButton;
+
+    @FXML
+    private
+    Button addNewContactsButton;
 
     @FXML
     private
@@ -128,34 +134,17 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
      * Finally it adds itself as an observer to the model
      */
     public void bindController(IMainController controller){
-        searchContactsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                controller.searchContactsClicked();
-            }
-        });
+        searchContactsImageView.setOnMouseClicked(event -> controller.searchContactsClicked());
 
-        searchContactsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                controller.onSearchContactsTextFieldKeyPressed(event);
-            }
-        });
+        searchContactsTextField.setOnKeyPressed(controller::onSearchContactsTextFieldKeyPressed);
 
-        searchConversationsImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                controller.searchConversationsClicked();
-            }
-        });
+        searchConversationsImageView.setOnMouseClicked(event -> controller.searchConversationsClicked());
 
-        searchConversationsTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                controller.onSearchConversationsEnterKeyPressed(event);
-            }
-        });
+        searchConversationsTextField.setOnKeyPressed(controller::onSearchConversationsEnterKeyPressed);
+
+        addNewContactsButton.setOnMouseClicked(event -> controller.onAddNewContactsButtonClicked());
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayLoginPage();
@@ -173,18 +162,21 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         this.createUserView = new CreateUserView(this, mainModel);
         this.userToolbar = new UserToolbar(this, mainModel);
         this.contactDetailView = new ContactDetailView(this, mainModel);
+        this.addContactView = new AddContactView(this, mainModel);
         IChatController chatController = factory.createChatController(chatView, mainModel);
         ILoginController loginController = factory.createLoginController(loginView, mainModel);
         IContactDetailViewController contactDetailViewController = factory.createContactDetailViewController(mainModel, this);
         ICreateConvoController convoController = factory.createCreateConvoController(this, createConvoView, mainModel);
         IUserPageController userPageController = factory.createUserPageController(mainModel);
         ICreateUserViewController createUserViewController = factory.createCreateUserViewController(mainModel, this, createUserView);
+        IAddContactController addContactController = factory.createAddContactController(mainModel, this, addContactView);
         chatView.bindController(chatController);
         loginView.bindController(loginController);
         createConvoView.bindController(convoController);
         userPage.bindController(userPageController);
         createUserView.bindController(createUserViewController);
         contactDetailView.bindController(contactDetailViewController);
+        addContactView.bindController(addContactController);
     }
 
 
@@ -233,16 +225,21 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     /**
-     * Clears the contactFlowPane and fills it with new ContactListItems corresponding to different Users
+     * Clears the contactFlowPane and fills it with new BigContactListItems corresponding to different users
      */
-    private void updateContactsList() {
+    public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
         while (iterator.hasNext()) {
-            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+            contactsFlowPane.getChildren().add(new BigContactListItem(iterator.next(), this));
         }
     }
 
+    /**
+     * Clears the contactFlowPane and fills it with new BigContactListItems corresponding to different users
+     * from the specified collection of users
+     * @param iterator the specified collection of users that are to be added to the contactFlowPane
+     */
     public void updateContactList(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
@@ -250,7 +247,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         }
 
         while (iterator.hasNext()) {
-            contactsFlowPane.getChildren().add(new ContactListItem(iterator.next(), this));
+            contactsFlowPane.getChildren().add(new BigContactListItem(iterator.next(), this));
         }
     }
 
@@ -269,6 +266,11 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     }
 
+    /**
+     * Clears the conversationsFlowPane and fills it with new ConversationListItems corresponding to different
+     * conversation from the specified collection of conversations
+     * @param iterator the specified collection of conversations that are to be added to the conversationsFlowPane
+     */
     public void updateConversationsList(Iterator<Conversation> iterator) {
         conversationsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
@@ -321,6 +323,15 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     @Override
+    public void displayAddContactView() {
+        addContactHBox.getChildren().clear();
+        addContactHBox.getChildren().add(addContactView);
+        addContactHBox.setMinWidth(mainViewAnchorPane.getWidth());
+        addContactView.setConfirmationLabelVisibility(false);
+        addContactHBox.toFront();
+    }
+
+    @Override
     public void displayChat() {
         mainViewAnchorPane.getChildren().add(chatView);
     }
@@ -347,39 +358,9 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         mainViewHBox.toFront();
     }
 
-
-    public void updateContactsList(List<User> contacts) {
-        contactsFlowPane.getChildren().clear();
-        for (User user : contacts) {
-            ContactListItem contactListItemView = new ContactListItem(user, this);
-            contactsFlowPane.getChildren().add(contactListItemView);
-        }
-    }
-
-    //TODO try to delete?
-    public void updateCurrentUserInfo() {
-        currentUserImageView.setImage(new Image(mainModel.getActiveUser().getProfileImagePath()));
-        statusImageView.setImage(new Image(mainModel.getActiveUser().getStatusImagePath()));
-        statusMenu.setText(mainModel.getActiveUser().getStatus().toString());
-    }
-
-
-    //contactDetailView functionality
-    @FXML
-    public void contactDetailViewCloseButtonClicked() {
-        contactDetailView.toBack();
-    }
-
-    @FXML
-    public void contactDetailViewCreateConvoButtonClicked() {
-        IMainController controller = factory.createMainController(mainModel, this);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(detailedUser);
-        users.add(mainModel.getActiveUser());
-        controller.createConversation(users, detailedUser.getFullName());
-        contactDetailView.toBack();
-        updateConversationsList();
-        displayMainView();
+    public void backToChat() {
+        mainViewAnchorPane.getChildren().clear();
+        mainViewAnchorPane.getChildren().add(chatView);
     }
 
     @Override

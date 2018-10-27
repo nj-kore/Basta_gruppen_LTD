@@ -14,20 +14,29 @@ import model.User;
 
 import java.io.IOException;
 
-public class ContactDetailView extends AnchorPane {
+public class ContactDetailView extends AnchorPane implements IContactDetailView {
 
     @FXML
+    private
     Label nameLabel;
     @FXML
+    private
     ImageView profileImageView;
     @FXML
+    private
     ImageView statusImageView;
     @FXML
+    private
     Label statusLabel;
     @FXML
+    private
     Button createConvoButton;
     @FXML
+    private
     Button closeButton;
+    @FXML
+    private
+    Button removeContactButton;
 
     User user;
 
@@ -51,8 +60,11 @@ public class ContactDetailView extends AnchorPane {
         createConvoButton.setOnMouseClicked(event -> controller.onCreateConvoClicked(user));
 
         closeButton.setOnMouseClicked(event -> controller.onCloseButtonClicked());
+
+        removeContactButton.setOnMouseClicked(event -> controller.onRemoveContactButtonClicked(user));
     }
 
+    @Override
     public void setDetailedUser(User user) {
         this.user = user;
         profileImageView.setImage(new Image(user.getProfileImagePath()));

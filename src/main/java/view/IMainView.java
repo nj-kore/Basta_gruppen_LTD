@@ -14,9 +14,11 @@ public interface IMainView {
     void displayContactDetailView(User user);
     void displayCurrentUser();
     void displayCreateUserView();
+    void displayAddContactView();
     void createConvoViewToBack();
     void updateConversationsList();
     String getContactSearchString();
+    void updateContactsList();
     void updateContactList(Iterator<User> iterator);
     String getConversationSearchString();
     void setActiveConversation(int id);

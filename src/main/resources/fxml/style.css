@@ -104,6 +104,11 @@
     -fx-font-size: 14px;
 }
 
+.confirmationText{
+    -fx-text-fill: rgba(70,255,70,0.8);
+    -fx-font-size: 20px;
+}
+
 .redText12{
     -fx-text-fill: rgba(255,70,70, 0.8);
     -fx-font-size: 12px;
@@ -145,6 +150,10 @@
     -fx-background-color: rgb(200,200,200);
     -fx-border-color: gray;
     -fx-border-radius: 5px;
+}
+
+.listItem16{
+    -fx-text-size :16px;
 }
 
 #messageUserName{

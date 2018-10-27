@@ -19,7 +19,7 @@ public class MainController implements IMainController {
     private IMainView mainView;
     private MainModel mainModel;
 
-    public MainController(IMainView mainView, MainModel mainModel){
+    public MainController(IMainView mainView, MainModel mainModel) {
         this.mainView = mainView;
         this.mainModel = mainModel;
 
@@ -27,19 +27,15 @@ public class MainController implements IMainController {
     }
 
 
-
-
     @Override
     public void searchContactsClicked() {
         Iterator<User> contacts = mainModel.searchContacts(mainView.getContactSearchString());
         mainView.updateContactList(contacts);
-
-
     }
 
     @Override
     public void onSearchContactsTextFieldKeyPressed(KeyEvent event) {
-        if(event.getCode().equals(KeyCode.ENTER)){
+        if (event.getCode().equals(KeyCode.ENTER)) {
             searchContactsClicked();
             event.consume();
         }
@@ -53,21 +49,26 @@ public class MainController implements IMainController {
 
     @Override
     public void onSearchConversationsEnterKeyPressed(KeyEvent event) {
-        if(event.getCode().equals(KeyCode.ENTER)) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
             searchConversationsClicked();
             event.consume();
         }
     }
 
-    public void setActiveConversation (int id){
-    mainModel.setActiveConversation(id);
+    @Override
+    public void onAddNewContactsButtonClicked() {
+        mainView.displayAddContactView();
     }
 
-    public void createConversation (List<User> users, String name){
+    public void setActiveConversation(int id) {
+        mainModel.setActiveConversation(id);
+    }
+
+    public void createConversation(List<User> users, String name) {
         mainModel.createConversation(users, name);
     }
 
-    public void logout(){
+    public void logout() {
         mainModel.setActiveUser(null);
     }
 }

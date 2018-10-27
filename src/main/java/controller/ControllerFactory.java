@@ -4,6 +4,7 @@ import controller.participants.AddParticipantsController;
 import controller.participants.IParticipantsController;
 import controller.participants.RemoveParticipantsController;
 import model.MainModel;
+import sun.applet.Main;
 import view.*;
 import view.chat.AddParticipantsView;
 import view.chat.IChatView;
@@ -52,4 +53,7 @@ public class ControllerFactory implements IControllerFactory {
         return new ContactDetailViewController(mainModel, mainView);
     }
 
+    public IAddContactController createAddContactController(MainModel mainModel,IMainView mainView, IAddContactView addContactView) {
+        return new AddContactController(mainView, mainModel, addContactView);
+    }
 }

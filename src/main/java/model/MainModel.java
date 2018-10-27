@@ -114,8 +114,18 @@ public class MainModel extends ModelObservable {
      * Adds a contact to the activeUsers contact list
      * @param userId The id of the user which is to be added
      */
-    void addContact(int userId) {
+    public void addContact(int userId) {
         activeUser.addContact(userId);
+        notifyObservers(UpdateType.CONTACTS);
+    }
+
+    /**
+     * Removes a contact from the activeUsers contact list
+     * @param userId The id of the user which is to be removed
+     */
+    public void removeContact(int userId) {
+        activeUser.removeContact(userId);
+        notifyObservers(UpdateType.CONTACTS);
     }
 
     /**
@@ -128,6 +138,19 @@ public class MainModel extends ModelObservable {
             list.add(getUser(id));
         }
         return list.iterator();
+    }
+
+    /**
+     * Checks if a user exists in the active users contact list
+     * @param user the user that gets checked if it exists
+     * @return a boolean representing the result
+     */
+    public boolean userIsContact(User user) {
+        if (activeUser.getContacts().contains(user.getId())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -360,6 +383,38 @@ public class MainModel extends ModelObservable {
         return contactsToShow.iterator();
     }
 
+    public Iterator<User> searchUsers(String input) {
+        Iterator<User> iterator = getUsers().values().iterator();
+        ArrayList<User> usersToShow = new ArrayList<>();
+        User next;
+
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (next.getFullName().toLowerCase(new Locale("sv-SE")).contains(input.toLowerCase(new Locale("sv-SE")))) {
+                usersToShow.add(next);
+            }
+        }
+        return usersToShow.iterator();
+    }
+
+    /**
+     * Removes the active user and users that are contacts to the active user from a collection
+     * @param userIterator specifies what collection that should be cleansed from the active users contacts
+     * @return a collection free from contacts to the active user
+     */
+    public Iterator<User> checkIteratorOfContacts(Iterator<User> userIterator) {
+        List<User> users = new ArrayList<>();
+
+        while (userIterator.hasNext()) {
+            User next = userIterator.next();
+            if ((!userIsContact(next)) && (next.getId() != activeUser.getId())) {
+                users.add(next);
+            }
+        }
+
+        return users.iterator();
+    }
+
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
         Iterator<Conversation> iterator = getConversations().values().iterator();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
@@ -455,7 +510,11 @@ public class MainModel extends ModelObservable {
         return matchingUsers;
     }
 
-
+    /**
+     * Adds participants to the conversation
+     * @param participantsToAdd specifies what participants will be added
+     * @param conversation specifies what conversation the participants shall be added to
+     */
     public void addParticipants(Iterator<User> participantsToAdd, Conversation conversation) {
         while (participantsToAdd.hasNext()){
             conversation.addParticipant(participantsToAdd.next());
@@ -464,6 +523,11 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateType.CONVERSATIONS);
     }
 
+    /**
+     * Removes participants from the conversation
+     * @param participantsToRemove specifies what participants will be removed
+     * @param conversation specifies what conversation the participants shall be removed from
+     */
     public void removeParticipants(Iterator<User> participantsToRemove, Conversation conversation) {
         while (participantsToRemove.hasNext()){
             conversation.removeParticipant(participantsToRemove.next());

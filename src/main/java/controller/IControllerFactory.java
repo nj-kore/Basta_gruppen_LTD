@@ -2,6 +2,7 @@ package controller;
 
 import controller.participants.IParticipantsController;
 import model.MainModel;
+import sun.applet.Main;
 import view.*;
 import view.chat.AddParticipantsView;
 import view.chat.IChatView;
@@ -29,4 +30,6 @@ public interface IControllerFactory {
     IMainController createMainController(MainModel mainModel, IMainView mainView);
 
     IContactDetailViewController createContactDetailViewController(MainModel mainModel, IMainView mainView);
+
+    IAddContactController createAddContactController(MainModel mainModel,IMainView mainView, IAddContactView addContactView);
 }
