@@ -53,7 +53,7 @@ public class Main extends Application {
         ModelObserver dataSaver = new JsonSaver(mainModel, usersPath,conversationsPath);
         //tries to log in as user with username admin and password 123
         IMainView mainView = new MainView(mainModel, factory);
-        IMainController mainController =factory.getMainController(mainModel, mainView);
+        IMainController mainController =factory.createMainController(mainModel, mainView);
         //adds datasaver to mainmodels observers
         mainModel.addObserver(dataSaver);
         //adds mainView to mainmodels observers

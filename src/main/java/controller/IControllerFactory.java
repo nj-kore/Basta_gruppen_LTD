@@ -5,23 +5,23 @@ import view.*;
 
 public interface IControllerFactory {
 
-    IChatController getChatController(IChatView chatView, MainModel mainModel);
+    IChatController createChatController(IChatView chatView, MainModel mainModel);
 
-    ILoginController getLoginController(ILoginView loginView, MainModel mainModel);
+    ILoginController createLoginController(ILoginView loginView, MainModel mainModel);
 
-    ICreateConvoController getCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel);
+    ICreateConvoController createCreateConvoController(IMainView mainView, ICreateConvoView createConvoView, MainModel mainModel);
 
-    IUserPageController getUserPageController(MainModel mainModel);
+    IUserPageController createUserPageController(MainModel mainModel);
 
-    ICreateUserViewController getCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView);
+    ICreateUserViewController createCreateUserViewController(MainModel mainModel, IMainView mainView, ICreateUserView createUserView);
 
-    IUserToolbarController getUserToolBarController(MainModel mainModel, IMainView mainView);
+    IUserToolbarController createUserToolBarController(MainModel mainModel, IMainView mainView);
 
-    IRemoveParticipantsController getRemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel);
+    IRemoveParticipantsController createRemoveParticipantsController(IParticipantView removeParticipantsView, MainModel mainModel);
 
-    IAddParticipantsController getAddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel);
+    IAddParticipantsController createAddParticipantsController(IParticipantView addParticipantsView, MainModel mainModel);
 
-    IMainController getMainController(MainModel mainModel, IMainView mainView);
+    IMainController createMainController(MainModel mainModel, IMainView mainView);
 
-    IContactDetailViewController getContactDetailViewController(MainModel mainModel, IMainView mainView);
+    IContactDetailViewController createContactDetailViewController(MainModel mainModel, IMainView mainView);
 }

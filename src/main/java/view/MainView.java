@@ -172,12 +172,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         this.createUserView = new CreateUserView(this, mainModel);
         this.userToolbar = new UserToolbar(this, mainModel);
         this.contactDetailView = new ContactDetailView(this, mainModel);
-        IChatController chatController = factory.getChatController(chatView, mainModel);
-        ILoginController loginController = factory.getLoginController(loginView, mainModel);
-        IContactDetailViewController contactDetailViewController = factory.getContactDetailViewController(mainModel, this);
-        ICreateConvoController convoController = factory.getCreateConvoController(this, createConvoView, mainModel);
-        IUserPageController userPageController = factory.getUserPageController(mainModel);
-        ICreateUserViewController createUserViewController = factory.getCreateUserViewController(mainModel, this, createUserView);
+        IChatController chatController = factory.createChatController(chatView, mainModel);
+        ILoginController loginController = factory.createLoginController(loginView, mainModel);
+        IContactDetailViewController contactDetailViewController = factory.createContactDetailViewController(mainModel, this);
+        ICreateConvoController convoController = factory.createCreateConvoController(this, createConvoView, mainModel);
+        IUserPageController userPageController = factory.createUserPageController(mainModel);
+        ICreateUserViewController createUserViewController = factory.createCreateUserViewController(mainModel, this, createUserView);
         chatView.bindController(chatController);
         loginView.bindController(loginController);
         createConvoView.bindController(convoController);
@@ -209,7 +209,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 displayChat();
                 updateContactsList();
                 updateConversationsList();
-                IUserToolbarController userToolbarController=factory.getUserToolBarController(mainModel, this);
+                IUserToolbarController userToolbarController=factory.createUserToolBarController(mainModel, this);
                 userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
                 setDefaultConversation();
@@ -279,7 +279,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @Override
     public void setDefaultConversation() {
-        IMainController controller = factory.getMainController(mainModel, this);
+        IMainController controller = factory.createMainController(mainModel, this);
         updateConversationsList();
         if (!conversationsFlowPane.getChildren().isEmpty()) {
             controller.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
@@ -375,7 +375,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @FXML
     public void contactDetailViewCreateConvoButtonClicked() {
-        IMainController controller = factory.getMainController(mainModel, this);
+        IMainController controller = factory.createMainController(mainModel, this);
         ArrayList<User> users = new ArrayList<>();
         users.add(detailedUser);
         users.add(mainModel.getActiveUser());
@@ -387,7 +387,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     @Override
     public void logout() {
-        IMainController controller = factory.getMainController(mainModel, this);
+        IMainController controller = factory.createMainController(mainModel, this);
         userToolbar.statusMenu.getItems().clear();
         controller.logout();
         displayLoginPage();
@@ -414,7 +414,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     public void setActiveConversation(int id) {
-        IMainController controller = factory.getMainController(mainModel, this);
+        IMainController controller = factory.createMainController(mainModel, this);
         controller.setActiveConversation(id);
     }
 }
