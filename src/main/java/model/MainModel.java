@@ -116,7 +116,7 @@ public class MainModel extends ModelObservable {
      */
     public void addContact(int userId) {
         activeUser.addContact(userId);
-        notifyObservers(UpdateTypes.CONTACTS);
+        notifyObservers(UpdateType.CONTACTS);
     }
 
     /**
@@ -125,7 +125,7 @@ public class MainModel extends ModelObservable {
      */
     public void removeContact(int userId) {
         activeUser.removeContact(userId);
-        notifyObservers(UpdateTypes.CONTACTS);
+        notifyObservers(UpdateType.CONTACTS);
     }
 
     /**
