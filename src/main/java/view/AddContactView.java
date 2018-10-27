@@ -64,7 +64,6 @@ public class AddContactView extends AnchorPane implements IAddContactView {
 
             throw new RuntimeException(exception);
         }
-
     }
 
     /**

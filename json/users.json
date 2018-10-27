@@ -23,7 +23,9 @@
     "id": 1,
     "password": "222",
     "username": "contact",
-    "contacts": [],
+    "contacts": [
+      0
+    ],
     "firstName": "olle",
     "lastName": "innebandysson",
     "email": null,
