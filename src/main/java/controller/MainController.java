@@ -29,7 +29,7 @@ public class MainController implements IMainController {
     @Override
     public void searchContactsClicked() {
         Iterator<User> contacts = mainModel.searchContacts(mainView.getContactSearchString());
-        mainView.updateContactList(contacts);
+        mainView.updateContactLists(contacts);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MainController implements IMainController {
     @Override
     public void searchConversationsClicked() {
         Iterator<Conversation> conversations = mainModel.searchConversations(mainView.getConversationSearchString());
-        mainView.updateConversationsList();
+        mainView.updateConversationsList(conversations);
     }
 
     @Override
