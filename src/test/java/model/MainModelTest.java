@@ -536,6 +536,27 @@ public class MainModelTest {
     }
 
     @Test
+    public void setUserInfo() {
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+
+        User user1 = new User(1, "bengan", "123", "bengt", "testsson", StatusType.Available, true);
+        userMap.put(user1.getId(), user1);
+        mainModel.setActiveUser(user1);
+
+        mainModel.setUserInfo("Janne", "Jannesson", "jannesson@janne.se", "URL");
+
+        assertEquals(user1.getFirstName(), "Janne");
+        assertEquals(user1.getLastName(), "Jannesson");
+        assertEquals(user1.getEmail(), "jannesson@janne.se");
+        assertEquals(user1.getProfileImagePath(), "URL");
+
+        mainModel.setUserInfo("Janne", "Jannesson", "janneson@janne.se", null);
+        assertEquals(user1.getProfileImagePath(), "URL");
+    }
+
+    @Test
     public void removeContact(){
         User user1 = new User(1, "bengan", "123", "bengt", "testsson", StatusType.Available, true);
         User user2 = new User(2, "madde", "123", "madeleine", "testsson", StatusType.Available, false);
