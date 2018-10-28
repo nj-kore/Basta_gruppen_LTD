@@ -70,7 +70,7 @@ class UserToolbar extends AnchorPane {
 
     }
 
-    private void addPremadeStatuses(IUserToolbarController u){
+    void addPremadeStatuses(IUserToolbarController u){
         for (StatusType status : StatusType.values()){
             MenuItem menuItem;
             if(status == StatusType.Available){

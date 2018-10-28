@@ -96,7 +96,7 @@ public class UserPageView extends AnchorPane {
 
     }
 
-    protected void bindController(IUserPageController controller){
+    void bindController(IUserPageController controller){
         saveChangesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

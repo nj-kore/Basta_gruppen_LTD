@@ -56,7 +56,7 @@ public class ContactDetailView extends AnchorPane implements IContactDetailView 
 
     }
 
-    protected void bindController(IContactDetailViewController controller) {
+    void bindController(IContactDetailViewController controller) {
         createConvoButton.setOnMouseClicked(event -> controller.onCreateConvoClicked(user));
 
         closeButton.setOnMouseClicked(event -> controller.onCloseButtonClicked());

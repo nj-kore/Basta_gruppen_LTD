@@ -56,7 +56,7 @@ public class LoginView extends AnchorPane implements ILoginView {
 
     }
 
-    public void bindController(ILoginController controller){
+    void bindController(ILoginController controller){
         logInButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

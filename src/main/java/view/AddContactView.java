@@ -70,7 +70,7 @@ public class AddContactView extends AnchorPane implements IAddContactView {
      * Binds a controller to the class
      * @param controller specifies what controller gets bound
      */
-    protected void bindController(IAddContactController controller) {
+    void bindController(IAddContactController controller) {
         addButton.setOnMouseClicked(event -> controller.onAddUserButtonClicked());
 
         doneButton.setOnMouseClicked(event -> controller.onDoneButtonClicked());

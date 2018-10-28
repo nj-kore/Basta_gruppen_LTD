@@ -56,7 +56,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
 
     }
 
-    protected void bindController(ICreateUserViewController controller){
+    void bindController(ICreateUserViewController controller){
         cancelCreateUser.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

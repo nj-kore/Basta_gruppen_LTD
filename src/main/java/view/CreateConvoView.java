@@ -56,7 +56,7 @@ public class CreateConvoView extends AnchorPane implements ICreateConvoView{
         }
     }
 
-    protected void bindController(ICreateConvoController controller){
+    void bindController(ICreateConvoController controller){
         createConvoButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
