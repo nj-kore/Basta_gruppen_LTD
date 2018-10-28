@@ -37,6 +37,9 @@ public class MainModelTest {
         assertEquals(model.loadMessagesInConversation().hasNext(), false);
         model.sendMessage("hejsan");
         assertEquals(model.loadMessagesInConversation().hasNext(), true);
+        model.sendMessage("hejsan2");
+        assertEquals(model.loadMessagesInConversation().hasNext(), true);
+
 
     }
 
