@@ -189,6 +189,34 @@ public class MainModelTest {
     }
 
     @Test
+    public void joinValidConversation() {
+        Map<Integer, User> userMap = getFillerUsers(4);
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel model = new MainModel(userMap, conversationMap);
+        model.setActiveUser(1);
+        List<User> participants = new ArrayList<>();
+        participants.add(model.getUser(1));
+        System.out.println(model.getActiveUser());
+        participants.add(model.getUser(1));
+        List<User> participants2 = new ArrayList<>();
+        participants2.add(model.getUser(2));
+
+        model.createConversation(participants2, "1");
+        model.createConversation(participants, "2");
+        model.createConversation(participants, "3");
+
+        model.joinValidConversation();
+        assertEquals("2", model.getActiveConversation().getName());
+
+        //The user with id 3 has no valid conversations, therefore it should join the defaultConversation with id -1
+        model.setActiveUser(3);
+        model.joinValidConversation();
+        assertEquals(-1, model.getActiveConversation().getId());
+    }
+
+
+
+    @Test
     public void generatePlaceholderName() {
 
         HashMap<Integer, User> userMap = new HashMap<>();
@@ -226,7 +254,8 @@ public class MainModelTest {
         assertEquals(model.generatePlaceholderName(model.getActiveConversation()), model.getUser(20).getFirstName());
 
         model.createConversation(null, "");
-
+        assertEquals("", model.generatePlaceholderName(model.getActiveConversation()));
+        model.createConversation(new ArrayList<>(), "");
         assertEquals("", model.generatePlaceholderName(model.getActiveConversation()));
     }
 
@@ -270,7 +299,20 @@ public class MainModelTest {
     }
 
     @Test
-    public void createUserForController() {
+    public void searchUsers() {
+        Map<Integer, User> userMap = getFillerUsers(4);
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel model = new MainModel(userMap, conversationMap);
+        model.setActiveUser(1);
+        Iterator<User> itr = model.searchUsers("son");
+        assertEquals("Dickinsson", itr.next().getLastName());
+        assertEquals("Johnson", itr.next().getLastName());
+        assertEquals("Petterson", itr.next().getLastName());
+        assertFalse(itr.hasNext());
+
+        itr = model.searchUsers("sson");
+        assertEquals("Dickinsson", itr.next().getLastName());
+        assertFalse(itr.hasNext());
     }
 
     @Test
