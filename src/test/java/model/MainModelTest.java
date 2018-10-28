@@ -347,15 +347,21 @@ public class MainModelTest {
         HashMap<Integer, Conversation> conversationMap = new HashMap<>();
         MainModel mainModel = new MainModel(userMap, conversationMap);
 
+        User active = new User(mainModel.getNewUserId(), "test", "test", "test", "test", StatusType.Available, false );
+        userMap.put(active.getId(), active);
+        mainModel.setActiveUser(active);
         Map<Integer, User> users1m = getFillerUsers(8);
         ArrayList<User> users1 = new ArrayList<User>();
         users1.addAll(users1m.values());
+        users1.add(active);
 
         ArrayList<User> users2 = new ArrayList<User>();
         User u = new User(2, "Big beast 12", "aj58dhjj", "Kalle", "Johnson", StatusType.Available, true);
         users2.add(u);
+        users2.add(active);
         userMap.putAll(users1m);
         userMap.put(u.getId(), u);
+
 
         Conversation c1 = new Conversation(1, "conv1", users1);
         conversationMap.put(c1.getId(), c1);
