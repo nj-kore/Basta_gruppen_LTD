@@ -5,7 +5,9 @@
     "username": "admin",
     "contacts": [
       1,
-      2
+      2,
+      4,
+      3
     ],
     "firstName": "Admin123",
     "lastName": "Boy",

@@ -322,11 +322,20 @@ public class MainModel extends ModelObservable {
     public Iterator<Conversation> getUsersConversations() {
         List<Conversation> userConversations = new ArrayList<>();
         for(Conversation c : conversations.values()) {
-            if(c.getParticipants().contains(activeUser)) {
+            if(isParticipant(activeUser, c)) {
                 userConversations.add(c);
             }
         }
         return userConversations.iterator();
+    }
+
+    private boolean isParticipant(User user, Conversation conversation) {
+        for(User u : conversation.getParticipants()) {
+            if(u.getId() == user.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
