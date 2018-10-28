@@ -1,56 +1,261 @@
 [
   {
     "id": 0,
-    "password": "123",
-    "username": "admin",
-    "contacts": [
-      1,
-      2
+    "messages": {
+      "0": {
+        "id": 0,
+        "text": "Hello!",
+        "senderId": 0,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 14,
+            "minute": 11,
+            "second": 58,
+            "nano": 917000000
+          }
+        }
+      },
+      "1": {
+        "id": 1,
+        "text": "Hello!",
+        "senderId": 1,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 14,
+            "minute": 12,
+            "second": 21,
+            "nano": 377000000
+          }
+        }
+      }
+    },
+    "participants": [
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
     ],
-    "firstName": "Admin",
-    "lastName": "Boy",
-    "email": null,
-    "status": "Available",
-    "profileImagePath": "pics/userIcon.png",
-    "statusPaths": [
-      "pics/statusGreen.png",
-      "pics/statusOrange.png",
-      "pics/statusRed.png"
-    ],
-    "isManager": true
+    "name": "olle innebandysson"
   },
   {
     "id": 1,
-    "password": "222",
-    "username": "contact",
-    "contacts": [],
-    "firstName": "olle",
-    "lastName": "innebandysson",
-    "email": null,
-    "status": "Available",
-    "profileImagePath": "pics/bill.jpg",
-    "statusPaths": [
-      "pics/statusGreen.png",
-      "pics/statusOrange.png",
-      "pics/statusRed.png"
+    "messages": {
+      "0": {
+        "id": 0,
+        "text": "Hello guys!",
+        "senderId": 0,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 14,
+            "minute": 12,
+            "second": 4,
+            "nano": 885000000
+          }
+        }
+      },
+      "1": {
+        "id": 1,
+        "text": "Hello guys",
+        "senderId": 1,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 14,
+            "minute": 12,
+            "second": 28,
+            "nano": 512000000
+          }
+        }
+      },
+      "2": {
+        "id": 2,
+        "text": "Wow this new technology that I just invented is amazing!",
+        "senderId": 2,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 14,
+            "minute": 12,
+            "second": 57,
+            "nano": 264000000
+          }
+        }
+      },
+      "3": {
+        "id": 3,
+        "text": "Wow yes very innovative!",
+        "senderId": 0,
+        "time": {
+          "date": {
+            "year": 2018,
+            "month": 10,
+            "day": 20
+          },
+          "time": {
+            "hour": 15,
+            "minute": 55,
+            "second": 10,
+            "nano": 289000000
+          }
+        }
+      }
+    },
+    "participants": [
+      {
+        "id": 1,
+        "password": "222",
+        "username": "contact",
+        "contacts": [],
+        "firstName": "olle",
+        "lastName": "innebandysson",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/bill.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 2,
+        "password": "222",
+        "username": "contact2",
+        "contacts": [],
+        "firstName": "kalle",
+        "lastName": "kuling",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/steve.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
     ],
-    "isManager": false
+    "name": "group conversation"
   },
   {
     "id": 2,
-    "password": "222",
-    "username": "contact2",
-    "contacts": [],
-    "firstName": "kalle",
-    "lastName": "kuling",
-    "email": null,
-    "status": "Available",
-    "profileImagePath": "pics/steve.jpg",
-    "statusPaths": [
-      "pics/statusGreen.png",
-      "pics/statusOrange.png",
-      "pics/statusRed.png"
+    "messages": {},
+    "participants": [
+      {
+        "id": 2,
+        "password": "222",
+        "username": "contact2",
+        "contacts": [],
+        "firstName": "kalle",
+        "lastName": "kuling",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/steve.jpg",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": false
+      },
+      {
+        "id": 0,
+        "password": "123",
+        "username": "admin",
+        "contacts": [
+          1,
+          2
+        ],
+        "firstName": "Admin",
+        "lastName": "Boy",
+        "email": null,
+        "status": "Available",
+        "profileImagePath": "pics/userIcon.png",
+        "statusPaths": [
+          "pics/statusGreen.png",
+          "pics/statusOrange.png",
+          "pics/statusRed.png"
+        ],
+        "isManager": true
+      }
     ],
-    "isManager": false
+    "name": "Test"
   }
 ] 
