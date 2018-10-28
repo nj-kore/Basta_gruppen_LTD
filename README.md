@@ -41,5 +41,5 @@ gradlew javadoc
 ```
 
 It is then found in build/docs/javadoc.
-## SDD, RAD, Meeting protocols etc
+## Final report, UML diagrams, Meeting protocols etc
 Can be found in Documents.
