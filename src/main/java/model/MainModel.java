@@ -191,11 +191,20 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
+    /**
+     * Sets conversation to be the active conversation
+     * @param conversation Conversation to be set active
+     */
     private void setActiveConversation(Conversation conversation) {
         activeConversation = conversation;
         notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
+    /**
+     * If the active user is part of a conversation, sets default conversation on start up
+     * to the first conversation in their conversation list.
+     * Else sets
+     */
     public void setDefaultConversation() {
         Iterator<Conversation> itr = getUsersConversations();
         if(itr.hasNext()) {
@@ -428,7 +437,7 @@ public class MainModel extends ModelObservable {
     }
 
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
-        Iterator<Conversation> iterator = getConversations().values().iterator();
+        Iterator<Conversation> iterator = getUsersConversations();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
         Conversation next;
         boolean conversationFound;

@@ -238,7 +238,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
      * from the specified collection of users
      * @param iterator the specified collection of users that are to be added to the contactFlowPane
      */
-    public void updateContactList(Iterator<User> iterator) {
+    public void updateContactLists(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
             contactsFlowPane.getChildren().add(noContactsFoundLabel);
