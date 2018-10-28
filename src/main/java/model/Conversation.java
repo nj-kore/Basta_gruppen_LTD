@@ -87,8 +87,10 @@ public class Conversation {
     }
 
     void removeParticipant(User userToRemove) {
-        if(participants.contains(userToRemove)){
-            participants.remove(userToRemove);
+        for (User participant : participants){
+            if (participant.getId() == userToRemove.getId()){
+                participants.remove(participant);
+            }
         }
     }
 }

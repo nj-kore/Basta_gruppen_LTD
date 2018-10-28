@@ -201,7 +201,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 displayChat();
                 updateContactsList();
                 updateConversationsList();
-                IUserToolbarController userToolbarController=factory.createUserToolBarController(mainModel, this);
+                IUserToolbarController userToolbarController = factory.createUserToolBarController(mainModel, this);
                 userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
                 mainModel.joinValidConversation();
@@ -227,8 +227,12 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     public void updateContactsList() {
         contactsFlowPane.getChildren().clear();
         Iterator<User> iterator = mainModel.getContacts();
+        User user;
         while (iterator.hasNext()) {
-            contactsFlowPane.getChildren().add(new BigContactListItem(iterator.next(), this));
+            user = iterator.next();
+            if(user != null){
+                contactsFlowPane.getChildren().add(new BigContactListItem(user, this));
+            }
         }
     }
 
