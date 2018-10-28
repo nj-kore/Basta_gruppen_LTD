@@ -419,7 +419,7 @@ public class MainModel extends ModelObservable {
     /**
      * Searches for conversations that activeUser is part of with regard to an entered search string.
      *
-     * @param conversationSearchString
+     * @param conversationSearchString What the user enters into the search box
      * @return an iterator with matched conversations. The iterator contains conversations
      * whose name contains the conversationSearchString and conversations in which a participating users
      * name contains conversationSearchString.
@@ -470,7 +470,7 @@ public class MainModel extends ModelObservable {
     }
 
     /**
-     * @param conversation
+     * @param conversation Conversation in which current participants should not be included in returned List.
      * @return a List containíng all contacts of activeUser that are not in this particular conversation.
      */
     private List<User> getNonParticipantsAsList(Conversation conversation) {
@@ -496,7 +496,7 @@ public class MainModel extends ModelObservable {
     }
 
     /**
-     * @param conversation
+     * @param conversation Conversation to get participants of.
      * @return Participants of a conversation WITHOUT current activeUser.
      */
     private List<User> getParticipantsAsList(Conversation conversation) {
