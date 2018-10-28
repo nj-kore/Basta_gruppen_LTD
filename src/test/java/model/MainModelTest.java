@@ -483,6 +483,7 @@ public class MainModelTest {
         ArrayList<User> participantsToAdd = new ArrayList<>();
         participantsToAdd.add(userMap.remove(2));
         mainModel.addParticipants(participantsToAdd.iterator(), conversation);
+        mainModel.setActiveUser(userMap.get(1));
         searchIterator=mainModel.getParticipants(conversation);
         assertEquals(searchIterator.hasNext(), true);
     }
@@ -587,8 +588,7 @@ public class MainModelTest {
         assertEquals(mainModel.searchParticipants("admin", conversation).hasNext(), false);
         userMap.putAll(getFillerUsers(3));
         conversation.addParticipant(userMap.get(1));
+        mainModel.setActiveUser(userMap.get(2));
         assertEquals(mainModel.searchParticipants("eva", conversation).hasNext(), true);
-
-
     }
 }
