@@ -4,7 +4,6 @@ import controller.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -205,7 +204,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 IUserToolbarController userToolbarController=factory.createUserToolBarController(mainModel, this);
                 userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
-                mainModel.setDefaultConversation();
+                mainModel.joinValidConversation();
                 chatView.init();
                 break;
             case USER_INFO:
@@ -238,7 +237,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
      * from the specified collection of users
      * @param iterator the specified collection of users that are to be added to the contactFlowPane
      */
-    public void updateContactList(Iterator<User> iterator) {
+    public void updateContactLists(Iterator<User> iterator) {
         contactsFlowPane.getChildren().clear();
         if (!iterator.hasNext()) {
             contactsFlowPane.getChildren().add(noContactsFoundLabel);

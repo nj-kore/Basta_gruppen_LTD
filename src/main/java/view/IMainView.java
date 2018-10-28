@@ -1,5 +1,6 @@
 package view;
 
+import model.Conversation;
 import model.User;
 
 import java.util.Iterator;
@@ -16,9 +17,10 @@ public interface IMainView {
     void displayAddContactView();
     void createConvoViewToBack();
     void updateConversationsList();
+    void updateConversationsList(Iterator<Conversation> conversationsToShow);
     String getContactSearchString();
     void updateContactsList();
-    void updateContactList(Iterator<User> iterator);
+    void updateContactLists(Iterator<User> contactsToShow);
     String getConversationSearchString();
     void setActiveConversation(int id);
     void logout();

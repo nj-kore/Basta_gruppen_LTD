@@ -138,11 +138,15 @@ public class MainModel extends ModelObservable {
      * @return An iterator of the activeUsers contacts
      */
     public Iterator<User> getContacts() {
+        return getContactsAsList().iterator();
+    }
+
+    private List<User> getContactsAsList() {
         List<User> list = new ArrayList<>();
         for (int id : activeUser.getContacts()) {
             list.add(getUser(id));
         }
-        return list.iterator();
+        return list;
     }
 
     /**
@@ -191,12 +195,22 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
+    /**
+     * Sets conversation to be the active conversation
+     * @param conversation Conversation to be set active
+     */
     private void setActiveConversation(Conversation conversation) {
         activeConversation = conversation;
         notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
-    public void setDefaultConversation() {
+    /**
+     * Sets the activeConversation to a conversation in which the activeUser is a participant in
+     *
+     * If the user is currently not a participant in any conversation, the defaultConversation is displayed instead
+     */
+
+    public void joinValidConversation() {
         Iterator<Conversation> itr = getUsersConversations();
         if(itr.hasNext()) {
             setActiveConversation(itr.next().getId());
@@ -382,31 +396,11 @@ public class MainModel extends ModelObservable {
     }
 
     public Iterator<User> searchContacts(String input) {
-        Iterator<User> iterator = getContacts();
-        ArrayList<User> contactsToShow = new ArrayList<>();
-        User next;
-
-        while (iterator.hasNext()) {
-            next = iterator.next();
-            if (next.getFullName().toLowerCase(new Locale("sv-SE")).contains(input.toLowerCase(new Locale("sv-SE")))) {
-                contactsToShow.add(next);
-            }
-        }
-        return contactsToShow.iterator();
+        return searchUserList(getContactsAsList(), input).iterator();
     }
 
     public Iterator<User> searchUsers(String input) {
-        Iterator<User> iterator = getUsers().values().iterator();
-        ArrayList<User> usersToShow = new ArrayList<>();
-        User next;
-
-        while (iterator.hasNext()) {
-            next = iterator.next();
-            if (next.getFullName().toLowerCase(new Locale("sv-SE")).contains(input.toLowerCase(new Locale("sv-SE")))) {
-                usersToShow.add(next);
-            }
-        }
-        return usersToShow.iterator();
+        return searchUserList(new ArrayList<>(getUsers().values()), input).iterator();
     }
 
     /**
@@ -428,7 +422,7 @@ public class MainModel extends ModelObservable {
     }
 
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
-        Iterator<Conversation> iterator = getConversations().values().iterator();
+        Iterator<Conversation> iterator = getUsersConversations();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
         Conversation next;
         boolean conversationFound;
@@ -515,7 +509,7 @@ public class MainModel extends ModelObservable {
     private List<User> searchUserList(List<User> users, String searchInput) {
         List<User> matchingUsers = new ArrayList<>();
         for (User user : users) {
-            if(user.getFullName().contains(searchInput)){
+            if(user.getFullName().toLowerCase(new Locale("sv-SE")).contains(searchInput.toLowerCase(new Locale("sv-SE")))){
                 matchingUsers.add(user);
             }
         }
