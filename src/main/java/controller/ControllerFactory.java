@@ -4,12 +4,9 @@ import controller.participants.AddParticipantsController;
 import controller.participants.IParticipantsController;
 import controller.participants.RemoveParticipantsController;
 import model.MainModel;
-import sun.applet.Main;
 import view.*;
-import view.chat.AddParticipantsView;
 import view.chat.IChatView;
 import view.chat.IParticipantView;
-import view.chat.RemoveParticipantsView;
 
 public class ControllerFactory implements IControllerFactory {
 
