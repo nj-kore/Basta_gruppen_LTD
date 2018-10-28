@@ -510,7 +510,16 @@ public class MainModel extends ModelObservable {
      */
     private List<User> getParticipantsAsList(Conversation conversation) {
         List<User> participants = new ArrayList<>(conversation.getParticipants());
-        participants.remove(getActiveUser());
+        int activeUserIndex = -1;
+        for(User participant : participants){
+            if (participant.getId() == activeUser.getId()){
+                activeUserIndex = participants.indexOf(participant);
+            }
+        }
+        if (activeUserIndex != -1){
+            participants.remove(activeUserIndex);
+        }
+
         return participants;
     }
 
