@@ -127,13 +127,13 @@ public class User {
      * adds userToAdd to contacts.
      * @param idOfUserToAdd The id of the user that is to be added to contacts
      */
-    void addContact(int idOfUserToAdd){contacts.add(idOfUserToAdd);}
+    void addContact(Integer idOfUserToAdd){contacts.add(idOfUserToAdd);}
 
     /**
      * removes userToRemove from contacts.
      * @param idOfUserToRemove The id of the user that is to be removed from contacts
      */
-    void removeContact(int idOfUserToRemove) {
+    void removeContact(Integer idOfUserToRemove) {
         contacts.remove(idOfUserToRemove);
     }
 

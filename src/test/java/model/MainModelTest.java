@@ -457,4 +457,31 @@ public class MainModelTest {
         assertEquals(conversation.getParticipants().size(), 0);
 
     }
+
+    @Test
+    public void checkIteratorOfContacts() {
+        User user1 = new User(1, "bengan", "123", "bengt", "testsson", StatusType.Available, true);
+        User user2 = new User(2, "madde", "123", "madeleine", "testsson", StatusType.Available, false);
+        User user3 = new User(3, "pelle", "123", "peter", "testsson", StatusType.Available, false);
+
+        HashMap<Integer, User> userMap = new HashMap<>();
+        userMap.put(1,user1);
+        userMap.put(2,user2);
+        userMap.put(3,user3);
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+
+        MainModel model = new MainModel(userMap, conversationMap);
+
+        model.setActiveUser(1);
+
+        user1.addContact(2);
+        user1.addContact(3);
+        Iterator<User> iterator = model.checkIteratorOfContacts(model.getUsers().values().iterator());
+        assertFalse(iterator.hasNext());
+
+        user1.removeContact(3);
+        Iterator<User> iterator2 = model.checkIteratorOfContacts(model.getUsers().values().iterator());
+        assertTrue(iterator2.hasNext());
+
+    }
 }
