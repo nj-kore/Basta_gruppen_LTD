@@ -151,11 +151,7 @@ public class MainModel extends ModelObservable {
      * @return a boolean representing the result
      */
     public boolean userIsContact(User user) {
-        if (activeUser.getContacts().contains(user.getId())) {
-            return true;
-        } else {
-            return false;
-        }
+        return activeUser.getContacts().contains(user.getId());
     }
 
 
@@ -423,7 +419,6 @@ public class MainModel extends ModelObservable {
                 users.add(next);
             }
         }
-
         return users.iterator();
     }
 
@@ -437,7 +432,7 @@ public class MainModel extends ModelObservable {
             conversationFound = false;
             next = iterator.next();
             for (User u : next.getParticipants()) {
-                if (u.getFullName().toLowerCase().contains(conversationSearchString.toLowerCase())) {
+                if (u.getFullName().toLowerCase(new Locale("sv-SE")).contains(conversationSearchString.toLowerCase(new Locale("sv-SE")))) {
                     conversationsToShow.add(next);
                     conversationFound = true;
                     break;

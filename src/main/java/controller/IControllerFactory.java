@@ -2,12 +2,9 @@ package controller;
 
 import controller.participants.IParticipantsController;
 import model.MainModel;
-import sun.applet.Main;
 import view.*;
-import view.chat.AddParticipantsView;
 import view.chat.IChatView;
 import view.chat.IParticipantView;
-import view.chat.RemoveParticipantsView;
 
 public interface IControllerFactory {
 

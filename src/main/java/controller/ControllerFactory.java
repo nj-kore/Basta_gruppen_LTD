@@ -42,8 +42,7 @@ public class ControllerFactory implements IControllerFactory {
         return new AddParticipantsController(addParticipantsView, mainModel);
     }
     public IMainController createMainController(MainModel mainModel, IMainView mainView){
-        IMainController mainController=new MainController(mainView, mainModel);
-        return mainController;
+        return new MainController(mainView, mainModel);
     }
 
     public IContactDetailViewController createContactDetailViewController(MainModel mainModel, IMainView mainView) {

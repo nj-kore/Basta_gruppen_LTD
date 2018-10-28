@@ -6,7 +6,6 @@ package view.chat;
  * @since 2018-10-15
  */
 
-import controller.IControllerFactory;
 import model.MainModel;
 
 public class AddParticipantsView extends AbstractParticipantView{

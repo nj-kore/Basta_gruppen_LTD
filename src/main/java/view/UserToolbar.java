@@ -1,6 +1,5 @@
 package view;
 
-import controller.IControllerFactory;
 import controller.IUserToolbarController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +20,6 @@ import java.io.IOException;
 class UserToolbar extends AnchorPane {
 
     private MainModel mainModel;
-    private IMainView mainView;
 
     @FXML
     private
@@ -42,7 +40,7 @@ class UserToolbar extends AnchorPane {
     private
     Label currentUserNameLabel;
 
-    UserToolbar(IMainView mainView, MainModel mainModel) {
+    UserToolbar(MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/UserToolbar.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -53,7 +51,6 @@ class UserToolbar extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.mainModel = mainModel;
-        this.mainView = mainView;
     }
 
 

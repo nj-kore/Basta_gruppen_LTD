@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 public class ConversationListItem extends AnchorPane {
 
-    private MainModel mainModel;
     private Conversation conversation;
     private IMainView mainView;
 
@@ -45,7 +44,6 @@ public class ConversationListItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.mainModel = mainModel;
         this.conversation = conversation;
         this.mainView=mainView;
         String name = conversation.getName();
@@ -68,7 +66,6 @@ public class ConversationListItem extends AnchorPane {
     @FXML
     public void conversationListItemClicked() {
         mainView.setActiveConversation(this.conversation.getId());
-        //mainModel.setActiveConversation(this.conversation.getId()); //TODO lägg till i MainController
     }
 
     public Conversation getConversation() {

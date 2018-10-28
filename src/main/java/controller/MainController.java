@@ -10,7 +10,6 @@ import model.Conversation;
 import model.MainModel;
 import model.User;
 import view.IMainView;
-import view.MainView;
 
 import java.util.Iterator;
 import java.util.List;

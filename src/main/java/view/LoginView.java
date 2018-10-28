@@ -1,6 +1,5 @@
 package view;
 
-import controller.IControllerFactory;
 import controller.ILoginController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import model.MainModel;
 
 import java.io.IOException;
 

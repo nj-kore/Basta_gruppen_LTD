@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import model.MainModel;
 import model.User;
 
 import java.io.IOException;
@@ -49,10 +48,7 @@ public class AddContactView extends AnchorPane implements IAddContactView {
     Label confirmationLabel;
 
 
-    MainModel mainModel;
-    MainView mainView;
-
-    public AddContactView(MainView mainView, MainModel mainModel) {
+    public AddContactView() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddContactView.fxml"));
         fxmlLoader.setRoot(this);

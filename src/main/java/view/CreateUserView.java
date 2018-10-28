@@ -1,6 +1,5 @@
 package view;
 
-import controller.IControllerFactory;
 import controller.ICreateUserViewController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,8 +13,7 @@ import java.io.IOException;
 
 public class CreateUserView extends AnchorPane implements ICreateUserView {
 
-    private IMainView mainView;
-    MainModel mainModel;
+    private MainModel mainModel;
 
     @FXML
     private TextField userNameText;
@@ -41,7 +39,7 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
     @FXML
     private Label inputHintLabel;
 
-    CreateUserView(IMainView mainView, MainModel mainModel) {
+    CreateUserView(MainModel mainModel) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CreateUserView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -52,7 +50,6 @@ public class CreateUserView extends AnchorPane implements ICreateUserView {
             throw new RuntimeException(exception);
         }
         this.mainModel = mainModel;
-        this.mainView = mainView;
 
     }
 

@@ -1,7 +1,6 @@
 package view;
 
 import controller.IContactDetailViewController;
-import controller.IControllerFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import model.MainModel;
 import model.User;
 
 import java.io.IOException;

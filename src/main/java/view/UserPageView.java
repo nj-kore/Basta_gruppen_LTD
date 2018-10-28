@@ -1,6 +1,5 @@
 package view;
 
-import controller.IControllerFactory;
 import controller.IUserPageController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

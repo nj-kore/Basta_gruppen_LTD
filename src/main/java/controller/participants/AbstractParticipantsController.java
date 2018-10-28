@@ -3,12 +3,8 @@ package controller.participants;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.MainModel;
-import model.User;
 import view.chat.IParticipantView;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Benjamin Vinnerholt
