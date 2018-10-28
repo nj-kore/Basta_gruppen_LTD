@@ -81,7 +81,7 @@ abstract class AbstractParticipantView extends AnchorPane implements IParticipan
 
         while(usersToShow.hasNext()){
             userToShow = usersToShow.next();
-            selectFlowPane.getChildren().add(new ParticipantItem(userToShow, this));
+            selectFlowPane.getChildren().add(new ParticipantItem(userToShow));
         }
     }
 

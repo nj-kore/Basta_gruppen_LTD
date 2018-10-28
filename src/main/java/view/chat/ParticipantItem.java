@@ -32,7 +32,7 @@ public class ParticipantItem extends AnchorPane {
     @FXML
     private Label statusLabel;
 
-    public ParticipantItem(User user, IParticipantView participantView) {
+    public ParticipantItem(User user) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ParticipantListItem.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -43,7 +43,6 @@ public class ParticipantItem extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        this.participantView = participantView;
         this.user = user;
 
         nameLabel.setText(user.getFullName());
