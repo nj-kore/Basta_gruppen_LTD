@@ -41,7 +41,7 @@ public class ContactDetailView extends AnchorPane implements IContactDetailView 
     User user;
 
 
-    public ContactDetailView(MainView mainView, MainModel mainModel) {
+    public ContactDetailView() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ContactDetailView.fxml"));
         fxmlLoader.setRoot(this);

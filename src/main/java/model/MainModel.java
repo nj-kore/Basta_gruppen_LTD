@@ -24,6 +24,11 @@ public class MainModel extends ModelObservable {
     private User activeUser;
     private Conversation activeConversation;
 
+    /**
+     * defaultConversation acting as the active conversation when the User is currently not in any conversation
+     */
+    private Conversation defaultConversation = new Conversation(-1, "", null);
+
 
 
     /**
@@ -44,7 +49,7 @@ public class MainModel extends ModelObservable {
     public MainModel(Map<Integer, User> users, Map<Integer, Conversation> conversations) {
         this.users = users;
         this.conversations = conversations;
-        activeConversation = new Conversation(-1, "", null);
+        activeConversation = defaultConversation;
     }
 
     /**
@@ -186,10 +191,17 @@ public class MainModel extends ModelObservable {
         notifyObservers(UpdateType.ACTIVE_CONVERSATION);
     }
 
-    private void setDefaultConversation() {
+    private void setActiveConversation(Conversation conversation) {
+        activeConversation = conversation;
+        notifyObservers(UpdateType.ACTIVE_CONVERSATION);
+    }
+
+    public void setDefaultConversation() {
         Iterator<Conversation> itr = getUsersConversations();
         if(itr.hasNext()) {
             setActiveConversation(itr.next().getId());
+        } else {
+            setActiveConversation(defaultConversation);
         }
     }
 
@@ -257,8 +269,8 @@ public class MainModel extends ModelObservable {
      */
     public String generatePlaceholderName(Conversation c) {
         //Return Placeholder if a conversation slips through that has no participants
-        if (c.getParticipants() == null){
-            return "Placeholder";
+        if (c.getParticipants() == null || c.getParticipants().isEmpty()){
+            return "";
         }
         StringBuilder placeholderName = new StringBuilder();
         Stack<User> userStack = new Stack<>();
@@ -519,7 +531,7 @@ public class MainModel extends ModelObservable {
         while (participantsToAdd.hasNext()){
             conversation.addParticipant(participantsToAdd.next());
         }
-        setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.ACTIVE_CONVERSATION);
         notifyObservers(UpdateType.CONVERSATIONS);
     }
 
@@ -532,7 +544,7 @@ public class MainModel extends ModelObservable {
         while (participantsToRemove.hasNext()){
             conversation.removeParticipant(participantsToRemove.next());
         }
-        setActiveConversation(conversation.getId());
+        notifyObservers(UpdateType.ACTIVE_CONVERSATION);
         notifyObservers(UpdateType.CONVERSATIONS);
     }
 

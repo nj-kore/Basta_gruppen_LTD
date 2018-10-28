@@ -5,7 +5,9 @@
     "username": "admin",
     "contacts": [
       1,
-      2
+      3,
+      2,
+      4
     ],
     "firstName": "Admin",
     "lastName": "Boy",
@@ -48,6 +50,40 @@
     "email": null,
     "status": "Available",
     "profileImagePath": "pics/steve.jpg",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": false
+  },
+  {
+    "id": 3,
+    "password": "1234",
+    "username": "BigBen",
+    "contacts": [],
+    "firstName": "Flynn",
+    "lastName": "McMahon",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/userIcon.png",
+    "statusPaths": [
+      "pics/statusGreen.png",
+      "pics/statusOrange.png",
+      "pics/statusRed.png"
+    ],
+    "isManager": false
+  },
+  {
+    "id": 4,
+    "password": "w",
+    "username": "q",
+    "contacts": [],
+    "firstName": "w",
+    "lastName": "w",
+    "email": null,
+    "status": "Available",
+    "profileImagePath": "pics/userIcon.png",
     "statusPaths": [
       "pics/statusGreen.png",
       "pics/statusOrange.png",

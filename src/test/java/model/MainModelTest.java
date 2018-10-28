@@ -227,7 +227,7 @@ public class MainModelTest {
 
         model.createConversation(null, "");
 
-        assertEquals("Placeholder", model.generatePlaceholderName(model.getActiveConversation()));
+        assertEquals("", model.generatePlaceholderName(model.getActiveConversation()));
     }
 
     @Test

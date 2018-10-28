@@ -8,7 +8,6 @@ public interface IMainView {
     void displayChat();
     void displayUserPage();
     void displayMainView();
-    void setDefaultConversation();
     void displayLoginPage();
     void displayCreateConvoPage();
     void displayContactDetailView(User user);

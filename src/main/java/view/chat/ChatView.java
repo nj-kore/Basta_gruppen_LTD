@@ -35,7 +35,6 @@ public class ChatView extends AnchorPane implements IChatView {
     private MainModel mainModel;
     private AbstractParticipantView removeParticipantsView;
     private AbstractParticipantView addParticipantsView;
-    private IMainView mainView;
 
 
     @FXML
@@ -91,9 +90,8 @@ public class ChatView extends AnchorPane implements IChatView {
 
     /**
      * @param mainModel Initialises the ChatViews components and links all the controlling input to an IChatController
-     * @param mainView The parent MainView of the ChatView.
      */
-    public ChatView(MainModel mainModel, IMainView mainView, IControllerFactory factory) {
+    public ChatView(MainModel mainModel, IControllerFactory factory) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ChatView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -112,15 +110,12 @@ public class ChatView extends AnchorPane implements IChatView {
         addParticipantsView = new AddParticipantsView(mainModel, this);
         IParticipantsController addParticipantsController=factory.createAddParticipantsController(addParticipantsView, mainModel);
         addParticipantsView.bindController(addParticipantsController);
-        this.mainView = mainView;
 
     }
 
-    /**
-     * Loads the messages from the model and displays them as MessageItems
-     */
 
-    public void bindController(IChatController controller){
+
+    public void bindController(IChatController controller, IMainView mainView){
         createUserButton.setOnMouseClicked(event -> mainView.displayCreateUserView());
 
         sendButton.setOnAction(event -> controller.onSendButtonClicked());
@@ -145,6 +140,10 @@ public class ChatView extends AnchorPane implements IChatView {
             }
         });
     }
+
+    /**
+     * Loads the messages from the model and displays them as MessageItems
+     */
     private void loadMessages() {
         chatFlowPane.getChildren().clear();
         Iterator<Message> itr = mainModel.loadMessagesInConversation();
@@ -197,10 +196,6 @@ public class ChatView extends AnchorPane implements IChatView {
         }
     }
 
-
-    public void setDefaultConversation() {
-        mainView.setDefaultConversation();
-    }
 
 
 

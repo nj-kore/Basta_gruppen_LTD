@@ -28,7 +28,7 @@ public class ContactDetailViewController implements IContactDetailViewController
         ArrayList<User> arrayList = new ArrayList<>();
         arrayList.add(user);
         arrayList.add(mainModel.getActiveUser());
-        mainModel.createConversation(arrayList, user.getFirstName());
+        mainModel.createConversation(arrayList, "");
         mainView.updateConversationsList();
         onCloseButtonClicked();
     }

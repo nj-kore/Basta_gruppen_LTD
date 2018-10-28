@@ -128,11 +128,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     Label noConversationsFoundLabel;
 
 
-    /**
-     * Initializes the class and loads the views that makes out the complete mainView.
-     * Proceeds to show the loginpage to the user
-     * Finally it adds itself as an observer to the model
-     */
+
     public void bindController(IMainController controller){
         searchContactsImageView.setOnMouseClicked(event -> controller.searchContactsClicked());
 
@@ -152,16 +148,18 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
 
     }
 
+
+
     public MainView(MainModel mainModel, IControllerFactory factory) {
         this.factory = factory;
         this.mainModel = mainModel;
-        this.chatView = new ChatView(mainModel, this, factory);
+        this.chatView = new ChatView(mainModel, factory);
         this.loginView = new LoginView();
         this.createConvoView = new CreateConvoView(mainModel);
         this.userPage = new UserPageView(this, mainModel);
         this.createUserView = new CreateUserView(this, mainModel);
         this.userToolbar = new UserToolbar(this, mainModel);
-        this.contactDetailView = new ContactDetailView(this, mainModel);
+        this.contactDetailView = new ContactDetailView();
         this.addContactView = new AddContactView(this, mainModel);
         IChatController chatController = factory.createChatController(chatView, mainModel);
         ILoginController loginController = factory.createLoginController(loginView, mainModel);
@@ -170,7 +168,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         IUserPageController userPageController = factory.createUserPageController(mainModel);
         ICreateUserViewController createUserViewController = factory.createCreateUserViewController(mainModel, this, createUserView);
         IAddContactController addContactController = factory.createAddContactController(mainModel, this, addContactView);
-        chatView.bindController(chatController);
+        chatView.bindController(chatController, this);
         loginView.bindController(loginController);
         createConvoView.bindController(convoController);
         userPage.bindController(userPageController);
@@ -207,7 +205,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 IUserToolbarController userToolbarController=factory.createUserToolBarController(mainModel, this);
                 userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
-                setDefaultConversation();
+                mainModel.setDefaultConversation();
                 chatView.init();
                 break;
             case USER_INFO:
@@ -283,15 +281,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
     }
 
     @Override
-    public void setDefaultConversation() {
-        IMainController controller = factory.createMainController(mainModel, this);
-        updateConversationsList();
-        if (!conversationsFlowPane.getChildren().isEmpty()) {
-            controller.setActiveConversation(((ConversationListItem) conversationsFlowPane.getChildren().get(0)).getConversation().getId());
-        }
-    }
-
-    @Override
     public void displayLoginPage() {
         mainViewHBox.toBack();
         loginHBox.toFront();
@@ -358,10 +347,6 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
         mainViewHBox.toFront();
     }
 
-    public void backToChat() {
-        mainViewAnchorPane.getChildren().clear();
-        mainViewAnchorPane.getChildren().add(chatView);
-    }
 
     @Override
     public void logout() {
