@@ -17,7 +17,6 @@ import java.io.IOException;
 
 public class ParticipantItem extends AnchorPane {
 
-    IParticipantView participantView;
     private User user;
     private boolean isClicked = false;
 
