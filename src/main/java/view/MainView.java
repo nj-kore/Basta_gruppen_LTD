@@ -4,7 +4,6 @@ import controller.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -205,7 +204,7 @@ public class MainView extends AnchorPane implements Initializable, IMainView, Mo
                 IUserToolbarController userToolbarController=factory.createUserToolBarController(mainModel, this);
                 userToolbar.bindController(userToolbarController);
                 displayCurrentUser();
-                mainModel.setDefaultConversation();
+                mainModel.joinValidConversation();
                 chatView.init();
                 break;
             case USER_INFO:
