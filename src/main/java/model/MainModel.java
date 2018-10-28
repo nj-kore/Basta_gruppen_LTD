@@ -154,7 +154,7 @@ public class MainModel extends ModelObservable {
      * @param user the user that gets checked if it exists
      * @return a boolean representing the result
      */
-    public boolean userIsContact(User user) {
+    private boolean userIsContact(User user) {
         return activeUser.getContacts().contains(user.getId());
     }
 
@@ -178,7 +178,7 @@ public class MainModel extends ModelObservable {
      * Set the active user using an id
      * @param id The id of the user which is to be set as activeUser
      */
-    public void setActiveUser(int id) {
+    void setActiveUser(int id) {
         activeUser = users.get(id);
     }
 
@@ -234,7 +234,7 @@ public class MainModel extends ModelObservable {
     }
 
     //Exists for testing purposes
-    public void addConversation(Conversation c) {
+    void addConversation(Conversation c) {
         conversations.put(c.getId(), c);
     }
 
@@ -416,6 +416,14 @@ public class MainModel extends ModelObservable {
         return users.iterator();
     }
 
+    /**
+     * Searches for conversations that activeUser is part of with regard to an entered search string.
+     *
+     * @param conversationSearchString
+     * @return an iterator with matched conversations. The iterator contains conversations
+     * whose name contains the conversationSearchString and conversations in which a participating users
+     * name contains conversationSearchString.
+     */
     public Iterator<Conversation> searchConversations(String conversationSearchString) {
         Iterator<Conversation> iterator = getUsersConversations();
         ArrayList<Conversation> conversationsToShow = new ArrayList<>();
@@ -444,7 +452,7 @@ public class MainModel extends ModelObservable {
      * Will give higher and higher user id as we add more users even if we remove users in between
      * @return a user id that is one higher then the previously highest
      */
-    public int getNewUserId(){
+    int getNewUserId(){
         int highest =0;
         if (users.isEmpty()){
             return 0;
@@ -461,6 +469,10 @@ public class MainModel extends ModelObservable {
         return getNonParticipantsAsList(conversation).iterator();
     }
 
+    /**
+     * @param conversation
+     * @return a List containíng all contacts of activeUser that are not in this particular conversation.
+     */
     private List<User> getNonParticipantsAsList(Conversation conversation) {
         ArrayList<User> usersNotInConversation = new ArrayList<>();
         Iterator<User> contacts = getContacts();
@@ -483,6 +495,10 @@ public class MainModel extends ModelObservable {
         return getParticipantsAsList(conversation).iterator();
     }
 
+    /**
+     * @param conversation
+     * @return Participants of a conversation WITHOUT current activeUser.
+     */
     private List<User> getParticipantsAsList(Conversation conversation) {
         List<User> participants = new ArrayList<>(conversation.getParticipants());
         participants.remove(getActiveUser());
