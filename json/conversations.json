@@ -149,7 +149,7 @@
         "lastName": "Boy",
         "email": null,
         "status": "Available",
-        "profileImagePath": null,
+        "profileImagePath": "pics/userIcon.png",
         "statusPaths": [
           "pics/statusGreen.png",
           "pics/statusOrange.png",
@@ -952,7 +952,7 @@
         "lastName": "Boy",
         "email": null,
         "status": "Available",
-        "profileImagePath": null,
+        "profileImagePath": "pics/userIcon.png",
         "statusPaths": [
           "pics/statusGreen.png",
           "pics/statusOrange.png",
@@ -1090,7 +1090,7 @@
         "lastName": "Boy",
         "email": null,
         "status": "Available",
-        "profileImagePath": null,
+        "profileImagePath": "pics/userIcon.png",
         "statusPaths": [
           "pics/statusGreen.png",
           "pics/statusOrange.png",
