@@ -87,10 +87,14 @@ public class Conversation {
     }
 
     void removeParticipant(User userToRemove) {
+        int indexToRemove = -1;
         for (User participant : participants){
             if (participant.getId() == userToRemove.getId()){
-                participants.remove(participant);
+                indexToRemove = participants.indexOf(participant);
             }
+        }
+        if(indexToRemove != -1){
+            participants.remove(indexToRemove);
         }
     }
 }
