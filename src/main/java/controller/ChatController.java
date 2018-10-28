@@ -68,7 +68,7 @@ public class ChatController implements IChatController {
         ArrayList<User> userIterator = new ArrayList<>();
         userIterator.add(mainModel.getActiveUser());
         mainModel.removeParticipants(userIterator.iterator(), mainModel.getActiveConversation());
-        mainModel.setDefaultConversation();
+        mainModel.joinValidConversation();
     }
 
     /**
