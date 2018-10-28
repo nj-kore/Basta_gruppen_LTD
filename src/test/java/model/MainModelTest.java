@@ -34,8 +34,10 @@ public class MainModelTest {
         model.addConversation(c);
         model.setActiveUser(user1);
         model.setActiveConversation(1);
-
+        assertEquals(model.loadMessagesInConversation().hasNext(), false);
         model.sendMessage("hejsan");
+        assertEquals(model.loadMessagesInConversation().hasNext(), true);
+
     }
 
     @Test
@@ -530,6 +532,39 @@ public class MainModelTest {
         user1.removeContact(3);
         Iterator<User> iterator2 = model.checkIteratorOfContacts(model.getUsers().values().iterator());
         assertTrue(iterator2.hasNext());
+
+    }
+
+    @Test
+    public void removeContact(){
+        User user1 = new User(1, "bengan", "123", "bengt", "testsson", StatusType.Available, true);
+        User user2 = new User(2, "madde", "123", "madeleine", "testsson", StatusType.Available, false);
+        HashMap<Integer, User> userMap = new HashMap<>();
+        userMap.put(1,user1);
+        userMap.put(2,user2);
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+
+        MainModel model = new MainModel(userMap, conversationMap);
+
+        model.setActiveUser(1);
+        user1.addContact(2);
+        assertEquals(user1.getContacts().iterator().hasNext(), true);
+        user1.removeContact(2);
+        assertFalse(user1.getContacts().iterator().hasNext());
+    }
+
+    @Test
+    public void searchParticipants(){
+        HashMap<Integer, User> userMap = new HashMap<>();
+        HashMap<Integer, Conversation> conversationMap = new HashMap<>();
+        MainModel mainModel = new MainModel(userMap, conversationMap);
+        ArrayList<User> participants = new ArrayList<>();
+        Conversation conversation = new Conversation(1, "t", participants);
+        assertEquals(mainModel.searchParticipants("admin", conversation).hasNext(), false);
+        userMap.putAll(getFillerUsers(3));
+        conversation.addParticipant(userMap.get(1));
+        assertEquals(mainModel.searchParticipants("eva", conversation).hasNext(), true);
+
 
     }
 }
