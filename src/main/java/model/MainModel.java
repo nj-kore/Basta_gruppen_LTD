@@ -347,9 +347,9 @@ public class MainModel extends ModelObservable {
     }
 
 
-    public void createUser(String u, String pw, String fn, String ln, Boolean a){
+    public void createUser(String username, String password, String firstName, String surname, Boolean isAdministrator){
         int id = getNewUserId();
-        User user = new User(id, u, pw, fn, ln, StatusType.Available, a);
+        User user = new User(id, username, password, firstName, surname, StatusType.Available, isAdministrator);
         notifyObservers(UpdateType.CONTACTS);
         users.put(user.getId(), user);
         if (getActiveUser()==null){
